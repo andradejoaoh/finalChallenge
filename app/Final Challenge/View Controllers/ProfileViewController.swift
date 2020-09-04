@@ -7,24 +7,35 @@
 //
 
 import UIKit
+import FirebaseStorage
+import Firebase
 
 class ProfileViewController: UIViewController {
-
+    @IBOutlet weak var profileImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func getProfileImage() {
+        let storage = Storage.storage(url: HardConstants.Database.storageURL)
+        let storageReference = storage.reference()
+        guard let user = Auth.auth().currentUser else { return }
+        let profileImageReference = storageReference.child("profilePictures/\(user.uid)")
+        var imageData: UIImage?
+        profileImageReference.getData(maxSize: 1*1024*1024) { (data, error) in
+            if error != nil {
+                print(error)
+                //Show error message while downloading picture
+            } else {
+                imageData = UIImage(data: data!)
+                self.profileImageView.image = imageData
+            }
+        }
     }
-    */
-
 }

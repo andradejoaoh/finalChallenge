@@ -13,4 +13,8 @@ struct HardConstants {
         static let profileViewController = "profileViewController"
     }
     
+    struct Database {
+        static let storageURL = "gs://macro-f324b.appspot.com"
+    }
+    
 }
