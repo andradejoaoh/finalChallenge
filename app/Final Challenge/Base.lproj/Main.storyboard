@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3jV-FP-w61">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3jV-FP-w61">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -68,18 +68,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="184" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="AnnoucementName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hol-fF-eaC">
-                                                    <rect key="frame" x="16" y="54" width="152" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDt-qk-jYG">
+                                                    <rect key="frame" x="24" y="24" width="136" height="80"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="VDt-qk-jYG" secondAttribute="bottom" constant="24" id="Rfe-KI-nGl"/>
+                                                <constraint firstAttribute="trailing" secondItem="VDt-qk-jYG" secondAttribute="trailing" constant="24" id="YGZ-L2-T6v"/>
+                                                <constraint firstItem="VDt-qk-jYG" firstAttribute="top" secondItem="y09-1X-CaS" secondAttribute="top" constant="24" id="i8p-N3-vJJ"/>
+                                                <constraint firstItem="VDt-qk-jYG" firstAttribute="leading" secondItem="y09-1X-CaS" secondAttribute="leading" constant="24" id="yZh-YX-Wni"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="184" height="128"/>
                                         <connections>
-                                            <outlet property="annoucementNameLabel" destination="Hol-fF-eaC" id="LQr-TW-Rcy"/>
+                                            <outlet property="annoucementNameLabel" destination="VDt-qk-jYG" id="3Wv-Jp-bLt"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -97,6 +102,7 @@
                     <tabBarItem key="tabBarItem" title="Feed" image="doc.text.fill" catalog="system" id="QIJ-Fc-V4B"/>
                     <connections>
                         <outlet property="feedCollectionView" destination="vlq-MG-U75" id="jnu-3L-PJl"/>
+                        <segue destination="gyI-RA-dZL" kind="show" identifier="editAnnoucement" id="Zzs-kA-Hbs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gXo-TZ-8KN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -157,17 +163,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Nome" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7ki-qr-AjU">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nome" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7ki-qr-AjU">
                                 <rect key="frame" x="12" y="24" width="390" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Local" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Swk-IX-B0I">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Local" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Swk-IX-B0I">
                                 <rect key="frame" x="12" y="82" width="390" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Descrição" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gGz-eB-9Qo">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Descrição" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gGz-eB-9Qo">
                                 <rect key="frame" x="12" y="140" width="390" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -201,13 +207,86 @@
                     <connections>
                         <outlet property="annoucementDescriptionTextField" destination="gGz-eB-9Qo" id="mCQ-bm-vkN"/>
                         <outlet property="annoucementLocationTextField" destination="Swk-IX-B0I" id="R47-3o-uDZ"/>
-                        <outlet property="annoucementNameTextField" destination="gGz-eB-9Qo" id="ut4-VY-QAg"/>
+                        <outlet property="annoucementNameTextField" destination="7ki-qr-AjU" id="ePh-yf-hZe"/>
                         <outlet property="announceButton" destination="jP8-eu-SnY" id="eYI-d9-ogF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jBC-ld-pTR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3666" y="110"/>
+        </scene>
+        <!--Edit Annoucement View Controller-->
+        <scene sceneID="LqG-Sh-OAq">
+            <objects>
+                <viewController id="gyI-RA-dZL" customClass="EditAnnoucementViewController" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yxw-FA-x7e">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A0F-oR-vOP">
+                                <rect key="frame" x="24" y="68" width="366" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MU4-ja-Dii">
+                                <rect key="frame" x="24" y="126" width="366" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h9F-4d-zbi">
+                                <rect key="frame" x="24" y="184" width="366" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVy-I1-gZb">
+                                <rect key="frame" x="24" y="242" width="366" height="30"/>
+                                <state key="normal" title="Editar"/>
+                                <connections>
+                                    <action selector="editAction:" destination="gyI-RA-dZL" eventType="touchUpInside" id="jkt-M3-wa6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="llg-tU-l0I">
+                                <rect key="frame" x="24" y="296" width="366" height="30"/>
+                                <state key="normal" title="Deletar">
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteAction:" destination="gyI-RA-dZL" eventType="touchUpInside" id="mnJ-Qb-PS8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="h9F-4d-zbi" firstAttribute="leading" secondItem="YtX-h7-6jV" secondAttribute="leading" constant="24" id="2Jv-bf-gLt"/>
+                            <constraint firstItem="YtX-h7-6jV" firstAttribute="trailing" secondItem="A0F-oR-vOP" secondAttribute="trailing" constant="24" id="8XM-N7-eaO"/>
+                            <constraint firstItem="llg-tU-l0I" firstAttribute="top" secondItem="SVy-I1-gZb" secondAttribute="bottom" constant="24" id="BxI-ea-y4q"/>
+                            <constraint firstItem="llg-tU-l0I" firstAttribute="leading" secondItem="YtX-h7-6jV" secondAttribute="leading" constant="24" id="HmY-QY-T6U"/>
+                            <constraint firstItem="h9F-4d-zbi" firstAttribute="top" secondItem="MU4-ja-Dii" secondAttribute="bottom" constant="24" id="IeS-3R-c4G"/>
+                            <constraint firstItem="YtX-h7-6jV" firstAttribute="trailing" secondItem="llg-tU-l0I" secondAttribute="trailing" constant="24" id="JzM-ry-Pyy"/>
+                            <constraint firstItem="A0F-oR-vOP" firstAttribute="top" secondItem="YtX-h7-6jV" secondAttribute="top" constant="24" id="SLT-MK-beW"/>
+                            <constraint firstItem="MU4-ja-Dii" firstAttribute="leading" secondItem="YtX-h7-6jV" secondAttribute="leading" constant="24" id="U6M-Jd-FJm"/>
+                            <constraint firstItem="SVy-I1-gZb" firstAttribute="top" secondItem="h9F-4d-zbi" secondAttribute="bottom" constant="24" id="ayr-5u-tcl"/>
+                            <constraint firstItem="A0F-oR-vOP" firstAttribute="leading" secondItem="YtX-h7-6jV" secondAttribute="leading" constant="24" id="bo6-Tp-LZs"/>
+                            <constraint firstItem="SVy-I1-gZb" firstAttribute="leading" secondItem="YtX-h7-6jV" secondAttribute="leading" constant="24" id="nc1-PE-8Nt"/>
+                            <constraint firstItem="YtX-h7-6jV" firstAttribute="trailing" secondItem="h9F-4d-zbi" secondAttribute="trailing" constant="24" id="pDc-ha-ATS"/>
+                            <constraint firstItem="MU4-ja-Dii" firstAttribute="top" secondItem="A0F-oR-vOP" secondAttribute="bottom" constant="24" id="s7d-qu-WPN"/>
+                            <constraint firstItem="YtX-h7-6jV" firstAttribute="trailing" secondItem="MU4-ja-Dii" secondAttribute="trailing" constant="24" id="tiB-Qn-JeJ"/>
+                            <constraint firstItem="YtX-h7-6jV" firstAttribute="trailing" secondItem="SVy-I1-gZb" secondAttribute="trailing" constant="24" id="zum-Qf-1Mu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="YtX-h7-6jV"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0os-EU-5iS"/>
+                    <connections>
+                        <outlet property="deleteButton" destination="llg-tU-l0I" id="Pyf-i5-Z77"/>
+                        <outlet property="descriptionTextField" destination="MU4-ja-Dii" id="kWA-u7-Avg"/>
+                        <outlet property="editButton" destination="SVy-I1-gZb" id="PXD-tZ-Z8Q"/>
+                        <outlet property="locationTextField" destination="h9F-4d-zbi" id="Kg6-bd-7Pp"/>
+                        <outlet property="nameTextField" destination="A0F-oR-vOP" id="yW8-Hr-C4b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n0t-2R-egG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4445" y="110"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="OHe-Wg-IZ0">

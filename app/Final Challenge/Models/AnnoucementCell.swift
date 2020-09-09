@@ -11,4 +11,7 @@ import UIKit
 class AnnoucementCell: UICollectionViewCell {
     @IBOutlet weak var annoucementNameLabel: UILabel!
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
 }

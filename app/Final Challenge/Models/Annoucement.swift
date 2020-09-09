@@ -7,14 +7,15 @@
 //
 
 import Foundation
-struct Annoucement: Codable {
-    let imageURL: String
+struct Annoucement {
+    let annoucementName: String
+//    let imageURL: String
     let userID: String
     let description: String
     let annoucementID: String
     let location: String
-    let optionDelivery: Bool
-    let productType: String
-    let userContact: String
-    let expirationDate: String
+//    let optionDelivery: Bool
+//    let productType: String
+//    let userContact: String
+//    let expirationDate: String
 }

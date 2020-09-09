@@ -22,6 +22,7 @@
 		61BF923124FD8F1400A8A8BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61BF922F24FD8F1400A8A8BE /* Main.storyboard */; };
 		61BF923324FD8F1600A8A8BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61BF923224FD8F1600A8A8BE /* Assets.xcassets */; };
 		61BF923624FD8F1600A8A8BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61BF923424FD8F1600A8A8BE /* LaunchScreen.storyboard */; };
+		61FEB07D250954F70092626A /* EditAnnoucementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FEB07C250954F70092626A /* EditAnnoucementViewController.swift */; };
 		EA1068CF5385B8C601EEEBA6 /* Pods_Final_Challenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB69623477CE06EEF87814D3 /* Pods_Final_Challenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		61BF923224FD8F1600A8A8BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61BF923524FD8F1600A8A8BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61BF923724FD8F1600A8A8BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61FEB07C250954F70092626A /* EditAnnoucementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnoucementViewController.swift; sourceTree = "<group>"; };
 		A64C65BE450A56694F9B8320 /* Pods-Final Challenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Challenge.release.xcconfig"; path = "Target Support Files/Pods-Final Challenge/Pods-Final Challenge.release.xcconfig"; sourceTree = "<group>"; };
 		CB42A5C477F254EBC34B7555 /* Pods-Final Challenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Challenge.debug.xcconfig"; path = "Target Support Files/Pods-Final Challenge/Pods-Final Challenge.debug.xcconfig"; sourceTree = "<group>"; };
 		DB69623477CE06EEF87814D3 /* Pods_Final_Challenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Final_Challenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,12 +74,13 @@
 		612E82F9250160D1002C4435 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				614A3E7725081B1F003A24F1 /* FeedViewController.swift */,
 				61BF922D24FD8F1400A8A8BE /* HomeProfileViewController.swift */,
 				612E82F325016091002C4435 /* SignUpViewController.swift */,
 				612E82F52501609F002C4435 /* LoginViewController.swift */,
 				612E82F7250160B7002C4435 /* ProfileViewController.swift */,
 				614A3E75250812B3003A24F1 /* CreatAnnoucementViewController.swift */,
-				614A3E7725081B1F003A24F1 /* FeedViewController.swift */,
+				61FEB07C250954F70092626A /* EditAnnoucementViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				612E82F62501609F002C4435 /* LoginViewController.swift in Sources */,
 				614A3E7A25081C12003A24F1 /* AnnoucementCell.swift in Sources */,
 				61BF922C24FD8F1400A8A8BE /* SceneDelegate.swift in Sources */,
+				61FEB07D250954F70092626A /* EditAnnoucementViewController.swift in Sources */,
 				61B6F30925017FE800C65B1F /* HardConstants.swift in Sources */,
 				612E82F8250160B7002C4435 /* ProfileViewController.swift in Sources */,
 				614A3E76250812B3003A24F1 /* CreatAnnoucementViewController.swift in Sources */,

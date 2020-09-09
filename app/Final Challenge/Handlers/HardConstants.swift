@@ -11,6 +11,7 @@ struct HardConstants {
     
     struct Storyboard {
         static let profileViewController = "profileViewController"
+        static let editSegue = "editAnnoucement"
     }
     
     struct Database {
