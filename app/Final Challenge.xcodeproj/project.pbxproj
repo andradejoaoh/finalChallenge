@@ -11,6 +11,10 @@
 		612E82F62501609F002C4435 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612E82F52501609F002C4435 /* LoginViewController.swift */; };
 		612E82F8250160B7002C4435 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612E82F7250160B7002C4435 /* ProfileViewController.swift */; };
 		612E82FB2501679F002C4435 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 612E82FA2501679F002C4435 /* GoogleService-Info.plist */; };
+		614A3E7425080FFC003A24F1 /* Annoucement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614A3E7325080FFC003A24F1 /* Annoucement.swift */; };
+		614A3E76250812B3003A24F1 /* CreatAnnoucementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614A3E75250812B3003A24F1 /* CreatAnnoucementViewController.swift */; };
+		614A3E7825081B1F003A24F1 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614A3E7725081B1F003A24F1 /* FeedViewController.swift */; };
+		614A3E7A25081C12003A24F1 /* AnnoucementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614A3E7925081C12003A24F1 /* AnnoucementCell.swift */; };
 		61B6F30925017FE800C65B1F /* HardConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B6F30825017FE800C65B1F /* HardConstants.swift */; };
 		61BF922A24FD8F1400A8A8BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF922924FD8F1400A8A8BE /* AppDelegate.swift */; };
 		61BF922C24FD8F1400A8A8BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF922B24FD8F1400A8A8BE /* SceneDelegate.swift */; };
@@ -26,6 +30,10 @@
 		612E82F52501609F002C4435 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		612E82F7250160B7002C4435 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		612E82FA2501679F002C4435 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		614A3E7325080FFC003A24F1 /* Annoucement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annoucement.swift; sourceTree = "<group>"; };
+		614A3E75250812B3003A24F1 /* CreatAnnoucementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatAnnoucementViewController.swift; sourceTree = "<group>"; };
+		614A3E7725081B1F003A24F1 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		614A3E7925081C12003A24F1 /* AnnoucementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnoucementCell.swift; sourceTree = "<group>"; };
 		61B6F30825017FE800C65B1F /* HardConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardConstants.swift; sourceTree = "<group>"; };
 		61BF922624FD8F1400A8A8BE /* Final Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Final Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61BF922924FD8F1400A8A8BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,8 +76,19 @@
 				612E82F325016091002C4435 /* SignUpViewController.swift */,
 				612E82F52501609F002C4435 /* LoginViewController.swift */,
 				612E82F7250160B7002C4435 /* ProfileViewController.swift */,
+				614A3E75250812B3003A24F1 /* CreatAnnoucementViewController.swift */,
+				614A3E7725081B1F003A24F1 /* FeedViewController.swift */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		614A3E7225080FBF003A24F1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				614A3E7325080FFC003A24F1 /* Annoucement.swift */,
+				614A3E7925081C12003A24F1 /* AnnoucementCell.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		61B6F30725017FAC00C65B1F /* Handlers */ = {
@@ -101,6 +120,7 @@
 		61BF922824FD8F1400A8A8BE /* Final Challenge */ = {
 			isa = PBXGroup;
 			children = (
+				614A3E7225080FBF003A24F1 /* Models */,
 				612E82F9250160D1002C4435 /* View Controllers */,
 				61B6F30725017FAC00C65B1F /* Handlers */,
 				61BF922924FD8F1400A8A8BE /* AppDelegate.swift */,
@@ -239,12 +259,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				61BF922E24FD8F1400A8A8BE /* HomeProfileViewController.swift in Sources */,
+				614A3E7425080FFC003A24F1 /* Annoucement.swift in Sources */,
+				614A3E7825081B1F003A24F1 /* FeedViewController.swift in Sources */,
 				61BF922A24FD8F1400A8A8BE /* AppDelegate.swift in Sources */,
 				612E82F425016091002C4435 /* SignUpViewController.swift in Sources */,
 				612E82F62501609F002C4435 /* LoginViewController.swift in Sources */,
+				614A3E7A25081C12003A24F1 /* AnnoucementCell.swift in Sources */,
 				61BF922C24FD8F1400A8A8BE /* SceneDelegate.swift in Sources */,
 				61B6F30925017FE800C65B1F /* HardConstants.swift in Sources */,
 				612E82F8250160B7002C4435 /* ProfileViewController.swift in Sources */,
+				614A3E76250812B3003A24F1 /* CreatAnnoucementViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

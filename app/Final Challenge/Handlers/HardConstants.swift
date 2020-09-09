@@ -17,4 +17,8 @@ struct HardConstants {
         static let storageURL = "gs://macro-f324b.appspot.com"
     }
     
+    struct CollectionView {
+        static let annoucementCell = "annoucementCell"
+    }
+    
 }
