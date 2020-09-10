@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import FirebaseFirestore
-import FirebaseAuth
-import FirebaseCore
 
 class CreateAnnoucementViewController: UIViewController{
     @IBOutlet weak var announceButton: UIButton!
@@ -27,25 +24,21 @@ class CreateAnnoucementViewController: UIViewController{
             //Show fill all fields error
         } else {
             
-            let database = Firestore.firestore()
             let annoucementName = annoucementNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let annoucementDescription = annoucementDescriptionTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let annoucementLocation = annoucementLocationTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard let userAuth = FirebaseAuth.Auth.auth().currentUser else { return }
-            let annoucementDocument = database.collection("annoucements").document()
-            
-            annoucementDocument.setData(["annoucement_name":annoucementName,
-                                         "annoucement_description":annoucementDescription,
-                                         "annoucement_location":annoucementLocation,
-                                         "annoucement_id":annoucementDocument.documentID,
-                                         "annoucement_user_id":userAuth.uid]) { (error) in
-                if error != nil {
-                    //Show error message
+            DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation) { (result) in
+                switch result {
+                case let .failure(error):
+                    print(error)
+                case .success:
+                    break
                 }
             }
         }
         self.dismiss(animated: true, completion: nil)
     }
+    
     
        func validateFields() -> String? {
         //Check if fields are filled in

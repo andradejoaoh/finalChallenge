@@ -7,45 +7,34 @@
 //
 
 import UIKit
-import FirebaseFirestore
-import FirebaseCore
-import FirebaseStorage
 
 class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var feedCollectionView: UICollectionView!
     
-    var annoucements: [Annoucement] = []
+    var annoucements: [Annoucement] = []{
+        didSet{
+            feedCollectionView.reloadData()
+        }
+    }
+    
     var selectedAnnoucement:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         feedCollectionView.dataSource = self
         feedCollectionView.delegate = self
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let database = Firestore.firestore()
-        database.collection("annoucements").getDocuments { (snapshot, error) in
-            if error != nil {
-                //Show error while getting annoucements
-            } else {
-                guard let snapshot = snapshot else { return }
-                self.annoucements = []
-                for element in snapshot.documents {
-                    let data = element.data()
-                    guard let annoucementName = data["annoucement_name"] as? String else { return }
-                    guard let annoucementID = data["annoucement_id"] as? String else { return }
-                    guard let annoucementDescription = data["annoucement_description"] as? String else { return }
-                    guard let annoucementLocation = data["annoucement_location"] as? String else { return }
-                    guard let annoucementUserID = data["annoucement_user_id"] as? String else { return }
-                    let annoucement = Annoucement(annoucementName: annoucementName, userID: annoucementUserID, description: annoucementDescription, annoucementID: annoucementID, location: annoucementLocation)
-                    self.annoucements.append(annoucement)
-                }
+        DatabaseHandler.readAnnoucements { (result) in
+            switch result {
+            case let .failure(error):
+                //Show error while updating feed
+                print(error)
+            case let .success(annoucements):
+                self.annoucements = annoucements
             }
-            self.feedCollectionView.reloadData()
         }
     }
     

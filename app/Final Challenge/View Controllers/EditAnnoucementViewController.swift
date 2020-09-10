@@ -7,12 +7,9 @@
 //
 
 import UIKit
-import FirebaseFirestore
-import FirebaseCore
 
 class EditAnnoucementViewController: UIViewController {
     var annoucement: Annoucement?
-    let database = Firestore.firestore()
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
@@ -31,10 +28,12 @@ class EditAnnoucementViewController: UIViewController {
     
     @IBAction func deleteAction(_ sender: Any) {
         guard let annoucement = annoucement else { return }
-        database.collection("annoucements").document(annoucement.annoucementID).delete { (error) in
-            if error != nil {
-                //Show error while deleting file
-            } else {
+        DatabaseHandler.deleteAnnoucement(annoucementID: annoucement.annoucementID) { (result) in
+            switch result {
+            case let .failure(error):
+                //Error while deleting annoucement
+                print(error)
+            case .success:
                 self.navigationController?.popViewController(animated: true)
             }
         }
@@ -47,15 +46,14 @@ class EditAnnoucementViewController: UIViewController {
         guard let description = descriptionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard let location = locationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         
-        database.collection("annoucements").document(annoucement.annoucementID).updateData(
-            ["annoucement_name":name,
-             "annoucement_location":location,
-             "annoucement_description":description]) { (error) in
-                if error != nil {
-                    //Show error while updating annoucement
-                } else {
-                    self.navigationController?.popViewController(animated: true)
-                }
+        DatabaseHandler.editAnnoucement(annoucementID: annoucement.annoucementID, annoucementName: name, annoucementLocation: location, annoucementDescription: description) { (result) in
+            switch result {
+            case let .failure(error):
+                //Error while updating annoucement
+                print(error)
+            case .success:
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
 }

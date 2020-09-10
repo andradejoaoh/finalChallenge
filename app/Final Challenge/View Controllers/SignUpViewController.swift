@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
-import FirebaseStorage
 
 class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var fullNameTextField: UITextField!
@@ -40,47 +37,17 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             let email = self.emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = self.passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let adress = self.adressTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard let imageData = profileImageView.image?.jpegData(compressionQuality: 0.5) else { return }
+
             // Create the user
-            Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-                if let error = error {
-                    // There was an error
+            DatabaseHandler.signUpWithEmail(email: email, password: password, adress: adress, fullname: fullname, imageData: imageData) { (result) in
+                switch result {
+                case let .failure(error):
                     print(error)
-                } else {
-                    // User created sucessfully
-                    // Upload User Profile Picture
-                    let storage = Storage.storage(url: HardConstants.Database.storageURL)
-                    let storageReference = storage.reference()
-                    let profileImageReference = storageReference.child("profilePictures/\(result!.user.uid)")
-                    guard let profileImageData = self.profileImageView.image?.jpegData(compressionQuality: 0.5) else { return }
-                    
-                    let uploadTask = profileImageReference.putData(profileImageData, metadata: nil) { (metadata, error) in
-                        if error != nil {
-                            //Show Error while uploading image
-                        }
-                        profileImageReference.downloadURL { (url, error) in
-                            if error != nil {
-                                //Show error while downloading image
-                                return
-                            }
-                            if let url = url {
-                                let database = Firestore.firestore()
-                                database.collection("users").addDocument(data: ["full_name":fullname,
-                                                                                "adress":adress,
-                                                                                "uid":result!.user.uid,
-                                                                                "profile_image_url":url.absoluteString]) { (error) in
-                                                                                    if error != nil {
-                                                                                        // Show error message
-                                                                                    }
-                                                                                    
-                                }
-                            }
-                        }
-                    }
-                    uploadTask.resume()
+                case .success:
+                    self.transitionToProfile()
                 }
             }
-            // Transition to the profile screen
-            transitionToProfile()
         }
     }
     
@@ -101,10 +68,10 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         if fullNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            adressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+            adressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            profileImageView.image == nil {
             return "Preencha todos os campos."
         }
-        
         return nil
     }
     

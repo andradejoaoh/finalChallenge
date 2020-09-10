@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
@@ -31,14 +30,18 @@ class LoginViewController: UIViewController {
             let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             //SignIn with user credentials
-            Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-                if error != nil {
-                    // Show error - Couldn't login
-                } else {
+            DatabaseHandler.loginWithEmail(email: email, password: password) { (result) in
+                switch result {
+                case let .failure(error):
+                    //Show error while logging in
+                    print(error)
+                case .success:
                     self.transitionToProfile()
                 }
             }
         }
+        
+
     }
     
     func validateFields() -> String? {
