@@ -9,12 +9,19 @@
 import UIKit
 
 class HomeProfileViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        if DatabaseHandler.isUserLoggedIn() {
+            transitionToProfile()
+        }
     }
-
-
+    
+    
+    func transitionToProfile(){
+        let profileViewController = storyboard?.instantiateViewController(identifier: HardConstants.Storyboard.profileViewController) as? ProfileViewController
+        view.window?.rootViewController = profileViewController
+        view.window?.makeKeyAndVisible()
+    }
 }
 

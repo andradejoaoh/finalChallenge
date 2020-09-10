@@ -38,4 +38,10 @@ class ProfileViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func signOutAction(_ sender: Any) {
+        DatabaseHandler.signOut()
+        navigationController?.popViewController(animated: true)
+    }
+    
 }
