@@ -8,12 +8,13 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     @IBOutlet weak var fullNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var adressTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var selectPictureButton: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
     
     let imagePicker = UIImagePickerController()
@@ -21,8 +22,13 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
+        self.fullNameTextField.delegate = self
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        self.adressTextField.delegate = self
+        self.hideKeyboardWhenTappedAround()
         imagePicker.delegate = self
+        setupStyleForElements()
     }
     
     @IBAction func signUpAction(_ sender: Any) {
@@ -79,5 +85,42 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         let profileViewController = storyboard?.instantiateViewController(identifier: HardConstants.Storyboard.profileViewController) as? ProfileViewController
         view.window?.rootViewController = profileViewController
         view.window?.makeKeyAndVisible()
+    }
+    
+    func setupStyleForElements(){
+        StyleElements.styleTextField(fullNameTextField)
+        StyleElements.styleTextField(emailTextField)
+        StyleElements.styleTextField(passwordTextField)
+        StyleElements.styleTextField(adressTextField)
+        StyleElements.styleFilledButton(signUpButton)
+        StyleElements.styleHollowButton(selectPictureButton)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == fullNameTextField {
+            textField.resignFirstResponder()
+            emailTextField.becomeFirstResponder()
+        } else if textField == emailTextField {
+            textField.resignFirstResponder()
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            textField.resignFirstResponder()
+            adressTextField.becomeFirstResponder()
+        } else if textField == adressTextField {
+            textField.resignFirstResponder()
+         }
+        return true
+    }
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
