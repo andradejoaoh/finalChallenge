@@ -54,8 +54,9 @@ class LoginViewController: UIViewController {
     }
     
     func transitionToProfile(){
-        let profileViewController = storyboard?.instantiateViewController(identifier: HardConstants.Storyboard.profileViewController) as? ProfileViewController
-        view.window?.rootViewController = profileViewController
-        view.window?.makeKeyAndVisible()
+        performSegue(withIdentifier: "profileSegue", sender: nil)
+//        let profileViewController = storyboard?.instantiateViewController(identifier: HardConstants.Storyboard.profileViewController) as? ProfileViewController
+//        view.window?.rootViewController = profileViewController
+//        view.window?.makeKeyAndVisible()
     }
 }
