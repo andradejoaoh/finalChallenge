@@ -87,6 +87,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         view.window?.makeKeyAndVisible()
     }
     
+    //style for elements
     func setupStyleForElements(){
         StyleElements.styleTextField(fullNameTextField)
         StyleElements.styleTextField(emailTextField)
@@ -96,6 +97,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         StyleElements.styleHollowButton(selectPictureButton)
     }
     
+    //hide keyboard function
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == fullNameTextField {
             textField.resignFirstResponder()
@@ -113,14 +115,3 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
 }
 
-extension UIViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}

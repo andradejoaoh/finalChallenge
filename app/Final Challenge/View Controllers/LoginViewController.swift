@@ -8,14 +8,17 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        self.hideKeyboardWhenTappedAround()
+        setupStyleElements()
         // Do any additional setup after loading the view.
     }
     
@@ -57,5 +60,22 @@ class LoginViewController: UIViewController {
         let profileViewController = storyboard?.instantiateViewController(identifier: HardConstants.Storyboard.profileViewController) as? ProfileViewController
         view.window?.rootViewController = profileViewController
         view.window?.makeKeyAndVisible()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField {
+            textField.resignFirstResponder()
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+    
+    func setupStyleElements(){
+        StyleElements.styleTextField(emailTextField)
+        StyleElements.styleTextField(passwordTextField)
+        StyleElements.styleFilledButton(loginButton)
     }
 }
