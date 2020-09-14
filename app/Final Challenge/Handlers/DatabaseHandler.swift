@@ -73,25 +73,51 @@ class DatabaseHandler {
         let database = Firestore.firestore()
         guard let userAuth = FirebaseAuth.Auth.auth().currentUser else { return }
         let annoucementDocument = database.collection("annoucements").document()
-        
-        annoucementDocument.setData(["annoucement_name":annoucementName,
-                                     "annoucement_description":annoucementDescription,
-                                     "annoucement_location":annoucementLocation,
-                                     "annoucement_id":annoucementDocument.documentID,
-                                     "annoucement_user_id":userAuth.uid]) { (error) in
-                                        if error != nil {
-                                            return completion(.failure(error!))
-                                        }
-                                        completion(.success("Created annoucement sucessfully"))
+        let storage = Storage.storage(url: HardConstants.Database.storageURL)
+        let storageReference = storage.reference()
+        let annoucementImageReference = storageReference.child("annoucementPictures/\(annoucementDocument.documentID)")
+        let annoucementImageData = Data()
+        let uploadTask = annoucementImageReference.putData(annoucementImageData, metadata: nil) { (metadata, error) in
+            guard error == nil else {
+                return completion(.failure(error!))
+                //Show error wihle uploading annoucement Image
+            }
+            annoucementImageReference.downloadURL { (url, error) in
+                guard error == nil else {
+                    return completion(.failure(error!))
+                }
+                if let url = url {
+                    annoucementDocument.setData(["annoucement_name":annoucementName,
+                                                 "annoucement_description":annoucementDescription,
+                                                 "annoucement_location":annoucementLocation,
+                                                 "annoucement_id":annoucementDocument.documentID,
+                                                 "annoucement_image_url":url,
+                                                 "annoucement_user_id":userAuth.uid]) { (error) in
+                                                    if error != nil {
+                                                        return completion(.failure(error!))
+                                                    }
+                                                    completion(.success("Created annoucement sucessfully"))
+                    }
+                }
+            }
         }
+        uploadTask.resume()
+        completion(.success("Uploaded annoucement sucessfully"))
     }
     
     static func deleteAnnoucement(annoucementID: String, completion: @escaping (Result<String,Error>) -> Void) {
         let database = Firestore.firestore()
+        let storageReference = Storage.storage(url: HardConstants.Database.storageURL).reference()
+        let annoucementImageReference = storageReference.child("annoucementPictures/\(annoucementID)")
         database.collection("annoucements").document(annoucementID).delete { (error) in
             if error != nil {
                 //Show error while deleting file
                 completion(.failure(error!))
+            }
+            annoucementImageReference.delete { (error) in
+                if error != nil {
+                    //Show error while deleting annoucement picture from storage
+                }
             }
             completion(.success("Deleted  annoucement sucessfully."))
         }
