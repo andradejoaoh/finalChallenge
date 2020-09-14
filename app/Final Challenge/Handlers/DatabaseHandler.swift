@@ -133,6 +133,20 @@ class DatabaseHandler {
             completion(.success(annoucements))
         }
     }
+    static func isUserLoggedIn() -> Bool {
+        if Auth.auth().currentUser == nil {
+            return false
+        }
+        return true
+    }
+    
+    static func signOut() -> Void {
+        do {
+            try Auth.auth().signOut()
+        } catch let error as NSError {
+            print("Error signing out: %@", error)
+        }
+    }
 }
 
 

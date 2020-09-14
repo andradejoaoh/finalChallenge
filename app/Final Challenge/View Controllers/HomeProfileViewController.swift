@@ -15,12 +15,21 @@ class HomeProfileViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupStyleElements()
+        if DatabaseHandler.isUserLoggedIn() {
+            transitionToProfile()
+        }
     }
 
     func setupStyleElements(){
         StyleElements.styleFilledButton(loginButton)
         StyleElements.styleFilledButton(signUpButton)
     }
-
+    
+    
+    func transitionToProfile(){
+        let profileViewController = storyboard?.instantiateViewController(identifier: HardConstants.Storyboard.profileViewController) as? ProfileViewController
+        view.window?.rootViewController = profileViewController
+        view.window?.makeKeyAndVisible()
+    }
 }
 
