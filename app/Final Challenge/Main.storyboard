@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7XR-EW-au1">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -54,7 +54,6 @@
                     <connections>
                         <outlet property="loginButton" destination="NOy-CV-52I" id="YSL-xj-djj"/>
                         <outlet property="signUpButton" destination="hQ8-Fe-kyR" id="7eS-D4-N9O"/>
-                        <segue destination="bxg-Er-exs" kind="show" id="X98-oF-BNo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -135,9 +134,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Deu Certo!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iT6-RE-Dad">
-                                <rect key="frame" x="165" y="438" width="84" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deu Certo!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iT6-RE-Dad">
+                                <rect key="frame" x="12" y="264" width="390" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -148,20 +146,37 @@
                                     <constraint firstAttribute="height" constant="128" id="hJw-89-hve"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I0I-bc-bZe">
-                                <rect key="frame" x="177" y="583" width="61" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I0I-bc-bZe">
+                                <rect key="frame" x="12" y="309" width="390" height="30"/>
                                 <state key="normal" title="Anunciar"/>
                                 <connections>
                                     <segue destination="Eyz-d1-qOs" kind="show" id="XM6-SA-gvu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1G-rB-ull">
+                                <rect key="frame" x="12" y="363" width="390" height="30"/>
+                                <state key="normal" title="Sair">
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="signOutAction:" destination="bxg-Er-exs" eventType="touchUpInside" id="xyn-uu-oc8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="I0I-bc-bZe" firstAttribute="leading" secondItem="YQu-An-jBy" secondAttribute="leading" constant="12" id="706-cx-jhA"/>
+                            <constraint firstItem="e1G-rB-ull" firstAttribute="top" secondItem="I0I-bc-bZe" secondAttribute="bottom" constant="24" id="EqR-Qy-Aad"/>
                             <constraint firstItem="YQu-An-jBy" firstAttribute="trailing" secondItem="rju-Od-lvL" secondAttribute="trailing" constant="24" id="FTe-IQ-cal"/>
                             <constraint firstItem="rju-Od-lvL" firstAttribute="top" secondItem="YQu-An-jBy" secondAttribute="top" constant="24" id="QKQ-AQ-cQ6"/>
+                            <constraint firstItem="iT6-RE-Dad" firstAttribute="top" secondItem="rju-Od-lvL" secondAttribute="bottom" constant="24" id="T1X-0M-k2L"/>
+                            <constraint firstItem="YQu-An-jBy" firstAttribute="trailing" secondItem="I0I-bc-bZe" secondAttribute="trailing" constant="12" id="Vkp-MD-olZ"/>
                             <constraint firstItem="rju-Od-lvL" firstAttribute="leading" secondItem="YQu-An-jBy" secondAttribute="leading" constant="24" id="Zoc-Y7-4ra"/>
+                            <constraint firstItem="e1G-rB-ull" firstAttribute="leading" secondItem="YQu-An-jBy" secondAttribute="leading" constant="12" id="a9T-tD-33X"/>
+                            <constraint firstItem="YQu-An-jBy" firstAttribute="trailing" secondItem="iT6-RE-Dad" secondAttribute="trailing" constant="12" id="deV-iq-gf3"/>
+                            <constraint firstItem="I0I-bc-bZe" firstAttribute="top" secondItem="iT6-RE-Dad" secondAttribute="bottom" constant="24" id="gV6-ZO-Sio"/>
+                            <constraint firstItem="YQu-An-jBy" firstAttribute="trailing" secondItem="e1G-rB-ull" secondAttribute="trailing" constant="12" id="mca-al-3Ae"/>
+                            <constraint firstItem="iT6-RE-Dad" firstAttribute="leading" secondItem="YQu-An-jBy" secondAttribute="leading" constant="12" id="urx-eZ-YP3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YQu-An-jBy"/>
                     </view>
@@ -363,6 +378,7 @@
                         <outlet property="emailTextField" destination="Xh2-dG-pUf" id="Iag-hm-gR7"/>
                         <outlet property="loginButton" destination="onw-Fu-fq4" id="VSR-eu-GV1"/>
                         <outlet property="passwordTextField" destination="M8l-qW-zka" id="qCw-fg-vGn"/>
+                        <segue destination="bxg-Er-exs" kind="show" identifier="profileSegue" id="NhS-sg-KF7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqD-0l-8BC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -518,6 +534,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="7XR-EW-au1" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QQR-c9-zMd">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
