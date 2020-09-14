@@ -11,6 +11,10 @@ import UIKit
 class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var feedCollectionView: UICollectionView!
+    //annoucementCell
+    
+    @IBOutlet weak var announcementsCollectionView: UICollectionView!
+    //otherAnnouncementCell
     
     var annoucements: [Annoucement] = []{
         didSet{

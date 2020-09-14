@@ -25,6 +25,7 @@
 		61FEB07D250954F70092626A /* EditAnnoucementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FEB07C250954F70092626A /* EditAnnoucementViewController.swift */; };
 		6D8A66FB250BF17F0093F889 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D8A66FA250BF17F0093F889 /* GoogleService-Info.plist */; };
 		6D8A66FD250C06EF0093F889 /* StyleElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A66FC250C06EF0093F889 /* StyleElements.swift */; };
+		6D8A66FF25100C8E0093F889 /* OtherAnnoucementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A66FE25100C8E0093F889 /* OtherAnnoucementCell.swift */; };
 		EA1068CF5385B8C601EEEBA6 /* Pods_Final_Challenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB69623477CE06EEF87814D3 /* Pods_Final_Challenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		61FEB07C250954F70092626A /* EditAnnoucementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnoucementViewController.swift; sourceTree = "<group>"; };
 		6D8A66FA250BF17F0093F889 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6D8A66FC250C06EF0093F889 /* StyleElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleElements.swift; sourceTree = "<group>"; };
+		6D8A66FE25100C8E0093F889 /* OtherAnnoucementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherAnnoucementCell.swift; sourceTree = "<group>"; };
 		A64C65BE450A56694F9B8320 /* Pods-Final Challenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Challenge.release.xcconfig"; path = "Target Support Files/Pods-Final Challenge/Pods-Final Challenge.release.xcconfig"; sourceTree = "<group>"; };
 		CB42A5C477F254EBC34B7555 /* Pods-Final Challenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Challenge.debug.xcconfig"; path = "Target Support Files/Pods-Final Challenge/Pods-Final Challenge.debug.xcconfig"; sourceTree = "<group>"; };
 		DB69623477CE06EEF87814D3 /* Pods_Final_Challenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Final_Challenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +96,7 @@
 			children = (
 				614A3E7325080FFC003A24F1 /* Annoucement.swift */,
 				614A3E7925081C12003A24F1 /* AnnoucementCell.swift */,
+				6D8A66FE25100C8E0093F889 /* OtherAnnoucementCell.swift */,
 				6D8A66FC250C06EF0093F889 /* StyleElements.swift */,
 			);
 			path = Models;
@@ -278,6 +281,7 @@
 				61FEB07D250954F70092626A /* EditAnnoucementViewController.swift in Sources */,
 				61B6F30925017FE800C65B1F /* HardConstants.swift in Sources */,
 				6199162F25096C9C005ABCFE /* DatabaseHandler.swift in Sources */,
+				6D8A66FF25100C8E0093F889 /* OtherAnnoucementCell.swift in Sources */,
 				612E82F8250160B7002C4435 /* ProfileViewController.swift in Sources */,
 				6D8A66FD250C06EF0093F889 /* StyleElements.swift in Sources */,
 				614A3E76250812B3003A24F1 /* CreatAnnoucementViewController.swift in Sources */,
