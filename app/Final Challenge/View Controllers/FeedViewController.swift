@@ -13,12 +13,14 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var feedCollectionView: UICollectionView!
     //annoucementCell
     
-    @IBOutlet weak var announcementsCollectionView: UICollectionView!
+    @IBOutlet weak var otherCollectionView: UICollectionView!
     //otherAnnouncementCell
+
     
     var annoucements: [Annoucement] = []{
         didSet{
             feedCollectionView.reloadData()
+            otherCollectionView.reloadData()
         }
     }
     
@@ -28,6 +30,8 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewDidLoad()
         feedCollectionView.dataSource = self
         feedCollectionView.delegate = self
+        otherCollectionView.dataSource = self
+        otherCollectionView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,18 +47,36 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == self.feedCollectionView {
+            return annoucements.count
+        } 
         return annoucements.count
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCell, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
         
-        cell.backgroundColor = .red
-        cell.annoucementNameLabel.text = annoucements[indexPath.item].annoucementName
         
-        return cell
+        if collectionView == otherCollectionView {
+            guard let othercell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.otherAnnouncementCell, for: indexPath) as? OtherAnnoucementCell else { return UICollectionViewCell()}
+         
+            
+            othercell.backgroundColor = .blue
+            othercell.otherAnnouncementNameLabel.text = annoucements[indexPath.item].annoucementName
+            return othercell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCell, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
+            
+            cell.backgroundColor = .red
+            cell.annoucementNameLabel.text = annoucements[indexPath.item].annoucementName
+            return cell
+        }
         
+        
+        
+   
     }
+
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedAnnoucement = indexPath.item
@@ -71,10 +93,20 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
 extension FeedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.width - 12)/2, height: collectionView.frame.height/4)
+        if collectionView == feedCollectionView {
+            return CGSize(width: (collectionView.frame.width), height: collectionView.frame.height)
+        }
+        return CGSize(width: (collectionView.frame.width)/2, height: (collectionView.frame.height)/4)
+        
+        
+        //return CGSize(width: (collectionView.frame.width - 12)/2, height: collectionView.frame.height/4)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView == feedCollectionView {
+            return 24
+        }
         return 24
+        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         12
