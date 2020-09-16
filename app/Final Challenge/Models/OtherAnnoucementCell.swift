@@ -9,6 +9,8 @@
 import UIKit
 
 class OtherAnnoucementCell: UICollectionViewCell {
+   
+    @IBOutlet weak var otherAnnoucementImages: UIImageView!
     @IBOutlet weak var otherAnnouncementNameLabel: UILabel!
     
     override func layoutSubviews() {

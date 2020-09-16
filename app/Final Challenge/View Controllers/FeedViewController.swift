@@ -16,6 +16,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var otherCollectionView: UICollectionView!
     //otherAnnouncementCell
 
+    var otherAnnoucemmentCell = OtherAnnoucementCell()
     
     var annoucements: [Annoucement] = []{
         didSet{
@@ -23,6 +24,8 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             otherCollectionView.reloadData()
         }
     }
+    
+    var image = "placeholder.png"
     
     var selectedAnnoucement:Int?
     
@@ -49,27 +52,29 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.feedCollectionView {
             return annoucements.count
-        } 
-        return annoucements.count
+        } else {
+            return annoucements.count
+        }
+        
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         
-        if collectionView == otherCollectionView {
-            guard let othercell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.otherAnnouncementCell, for: indexPath) as? OtherAnnoucementCell else { return UICollectionViewCell()}
-         
-            
-            othercell.backgroundColor = .blue
-            othercell.otherAnnouncementNameLabel.text = annoucements[indexPath.item].annoucementName
-            return othercell
-        } else {
+        if collectionView == feedCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCell, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
             
             cell.backgroundColor = .red
             cell.annoucementNameLabel.text = annoucements[indexPath.item].annoucementName
             return cell
+        } else {
+            guard let othercell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.otherAnnouncementCell, for: indexPath) as? OtherAnnoucementCell else { return UICollectionViewCell()}
+            
+            
+               othercell.backgroundColor = .blue
+               othercell.otherAnnouncementNameLabel.text = annoucements[indexPath.item].annoucementName
+               return othercell
         }
         
         
@@ -93,13 +98,14 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
 extension FeedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == feedCollectionView {
-            return CGSize(width: (collectionView.frame.width), height: collectionView.frame.height)
+        if collectionView == otherCollectionView {
+            let padding: CGFloat =  20
+            let collectionViewSize = collectionView.frame.size.width - padding
+            
+            return CGSize(width: collectionViewSize/2, height: collectionViewSize/2)
+        } else {
+            return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height))
         }
-        return CGSize(width: (collectionView.frame.width)/2, height: (collectionView.frame.height)/4)
-        
-        
-        //return CGSize(width: (collectionView.frame.width - 12)/2, height: collectionView.frame.height/4)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView == feedCollectionView {
