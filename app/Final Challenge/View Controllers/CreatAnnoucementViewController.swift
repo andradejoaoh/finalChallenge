@@ -35,8 +35,8 @@ class CreateAnnoucementViewController: UIViewController{
                     break
                 }
             }
+            self.navigationController?.popViewController(animated: true)
         }
-        self.dismiss(animated: true, completion: nil)
     }
     
     
