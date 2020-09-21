@@ -8,15 +8,21 @@
 
 import UIKit
 
-class CreateAnnoucementViewController: UIViewController{
+class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var announceButton: UIButton!
+    
     @IBOutlet weak var annoucementNameTextField: UITextField!
     @IBOutlet weak var annoucementDescriptionTextField: UITextField!
     @IBOutlet weak var annoucementLocationTextField: UITextField!
     
+    @IBOutlet weak var selectPictureButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.annoucementNameTextField.delegate = self
+        self.annoucementDescriptionTextField.delegate = self
+        setupStyleForElements()
+        self.hideKeyboardWhenTappedAround()
         
     }
     @IBAction func annouceAction(_ sender: Any) {
@@ -49,4 +55,13 @@ class CreateAnnoucementViewController: UIViewController{
         }
         return nil
     }
+    
+    func setupStyleForElements(){
+        StyleElements.styleFilledButton(announceButton)
+        StyleElements.styleFilledButton(selectPictureButton)
+        StyleElements.styleTextField(annoucementNameTextField)
+        StyleElements.styleTextField(annoucementDescriptionTextField)
+    }
+    
+    
 }
