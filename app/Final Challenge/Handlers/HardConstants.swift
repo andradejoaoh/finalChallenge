@@ -21,6 +21,7 @@ struct HardConstants {
     
     struct CollectionView {
         static let annoucementCell = "annoucementCell"
+        static let otherAnnouncementCell = "otherAnnouncementCell"
     }
     
 }

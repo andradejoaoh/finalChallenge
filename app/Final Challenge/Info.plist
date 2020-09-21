@@ -64,5 +64,7 @@
 	<string>O aplicativo precisa de acesso à sua galeria</string>
 	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 </dict>
 </plist>
