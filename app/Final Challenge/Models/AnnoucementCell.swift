@@ -10,8 +10,8 @@ import UIKit
 
 class AnnoucementCell: UICollectionViewCell {
     @IBOutlet weak var annoucementNameLabel: UILabel!
-    
     @IBOutlet weak var annoucementImages: UIImageView!
+    
     override func layoutSubviews() {
         super.layoutSubviews()
     }

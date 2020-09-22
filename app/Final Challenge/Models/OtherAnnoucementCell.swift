@@ -9,16 +9,9 @@
 import UIKit
 
 class OtherAnnoucementCell: UICollectionViewCell {
-   
-    @IBOutlet weak var otherAnnoucementImages: UIImageView!
-    @IBOutlet weak var otherAnnouncementNameLabel: UILabel!
-    var img = UIImage(named: "placeholder")
+    
     
     override func layoutSubviews() {
-        //otherAnnoucementImages = UIImageView(image: img)
-        //img = UIImage(named: "placeholder")!
         super.layoutSubviews()
     }
-    
-    
 }
