@@ -13,10 +13,13 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var adressTextField: UITextField!
-    @IBOutlet weak var bioTextField: UITextField!
-    @IBOutlet weak var siteTextField: UITextField!
     @IBOutlet weak var storeNameTextField: UITextField!
-    @IBOutlet weak var FacebookTextField: UITextField!
+    
+    @IBOutlet weak var siteTextField: UITextField!
+    @IBOutlet weak var telefoneTextField: UITextField!
+    @IBOutlet weak var biografiaTextField: UITextField!
+    @IBOutlet weak var redesSociaisTextField: UITextField!
+    
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var selectPictureButton: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
@@ -30,6 +33,12 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
         self.adressTextField.delegate = self
+        
+        self.siteTextField.delegate = self
+        self.telefoneTextField.delegate = self
+        self.biografiaTextField.delegate = self
+        self.redesSociaisTextField.delegate = self
+        
         self.hideKeyboardWhenTappedAround()
         imagePicker.delegate = self
         setupStyleForElements()
@@ -102,6 +111,12 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         StyleElements.styleTextField(emailTextField)
         StyleElements.styleTextField(passwordTextField)
         StyleElements.styleTextField(adressTextField)
+        
+        StyleElements.styleTextField(siteTextField)
+        StyleElements.styleTextField(telefoneTextField)
+        StyleElements.styleTextField(biografiaTextField)
+        StyleElements.styleTextField(redesSociaisTextField)
+        
         StyleElements.styleFilledButton(signUpButton)
         StyleElements.styleHollowButton(selectPictureButton)
     }
@@ -119,7 +134,19 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             adressTextField.becomeFirstResponder()
         } else if textField == adressTextField {
             textField.resignFirstResponder()
-         }
+            siteTextField.becomeFirstResponder()
+        } else if textField == siteTextField {
+            textField.resignFirstResponder()
+            telefoneTextField.becomeFirstResponder()
+        } else if textField == telefoneTextField {
+            textField.resignFirstResponder()
+            biografiaTextField.becomeFirstResponder()
+        } else if textField == biografiaTextField{
+            textField.resignFirstResponder()
+            redesSociaisTextField.becomeFirstResponder()
+        } else if textField == redesSociaisTextField {
+            textField.resignFirstResponder()
+        }
         return true
     }
 }
