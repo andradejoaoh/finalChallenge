@@ -17,8 +17,8 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBOutlet weak var siteTextField: UITextField!
     @IBOutlet weak var telefoneTextField: UITextField!
-    @IBOutlet weak var biografiaTextField: UITextField!
-    @IBOutlet weak var redesSociaisTextField: UITextField!
+    @IBOutlet weak var bioTextField: UITextField!
+    @IBOutlet weak var facebookTextField: UITextField!
     
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var selectPictureButton: UIButton!
@@ -36,8 +36,8 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         self.siteTextField.delegate = self
         self.telefoneTextField.delegate = self
-        self.biografiaTextField.delegate = self
-        self.redesSociaisTextField.delegate = self
+        self.bioTextField.delegate = self
+        self.facebookTextField.delegate = self
         
         self.hideKeyboardWhenTappedAround()
         imagePicker.delegate = self
@@ -58,12 +58,12 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             let adress = self.adressTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let bio = self.bioTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let site = self.siteTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let facebook = self.FacebookTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let facebook = self.facebookTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let storeName = self.storeNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             guard let imageData = profileImageView.image?.jpegData(compressionQuality: 0.5) else { return }
 
             // Create the user
-            DatabaseHandler.signUpWithEmail(email: email, password: password, adress: adress, fullname: fullname, bio: bio, facebook: facebook, site: site, imageData: imageData) { (result) in
+            DatabaseHandler.signUpWithEmail(email: email, password: password, adress: adress, fullname: fullname, bio: bio, facebook: facebook, site: site, storeName: storeName, imageData: imageData) { (result) in
                 switch result {
                 case let .failure(error):
                     print(error)
@@ -114,8 +114,8 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         StyleElements.styleTextField(siteTextField)
         StyleElements.styleTextField(telefoneTextField)
-        StyleElements.styleTextField(biografiaTextField)
-        StyleElements.styleTextField(redesSociaisTextField)
+        StyleElements.styleTextField(bioTextField)
+        StyleElements.styleTextField(facebookTextField)
         
         StyleElements.styleFilledButton(signUpButton)
         StyleElements.styleHollowButton(selectPictureButton)
@@ -140,11 +140,11 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             telefoneTextField.becomeFirstResponder()
         } else if textField == telefoneTextField {
             textField.resignFirstResponder()
-            biografiaTextField.becomeFirstResponder()
-        } else if textField == biografiaTextField{
+            bioTextField.becomeFirstResponder()
+        } else if textField == bioTextField{
             textField.resignFirstResponder()
-            redesSociaisTextField.becomeFirstResponder()
-        } else if textField == redesSociaisTextField {
+            facebookTextField.becomeFirstResponder()
+        } else if textField == facebookTextField {
             textField.resignFirstResponder()
         }
         return true
