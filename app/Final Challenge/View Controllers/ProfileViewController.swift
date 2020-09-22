@@ -13,12 +13,14 @@ import Firebase
 class ProfileViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     
+    var userProfile: User?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getProfileImage()
         // Do any additional setup after loading the view.
-        
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
     }

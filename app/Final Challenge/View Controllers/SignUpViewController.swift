@@ -13,6 +13,10 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var adressTextField: UITextField!
+    @IBOutlet weak var bioTextField: UITextField!
+    @IBOutlet weak var siteTextField: UITextField!
+    @IBOutlet weak var storeNameTextField: UITextField!
+    @IBOutlet weak var FacebookTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var selectPictureButton: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
@@ -43,10 +47,14 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             let email = self.emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = self.passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let adress = self.adressTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let bio = self.bioTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let site = self.siteTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let facebook = self.FacebookTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let storeName = self.storeNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             guard let imageData = profileImageView.image?.jpegData(compressionQuality: 0.5) else { return }
 
             // Create the user
-            DatabaseHandler.signUpWithEmail(email: email, password: password, adress: adress, fullname: fullname, imageData: imageData) { (result) in
+            DatabaseHandler.signUpWithEmail(email: email, password: password, adress: adress, fullname: fullname, bio: bio, facebook: facebook, site: site, imageData: imageData) { (result) in
                 switch result {
                 case let .failure(error):
                     print(error)
@@ -75,6 +83,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             adressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            bioTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || 
             profileImageView.image == nil {
             return "Preencha todos os campos."
         }
