@@ -22,12 +22,16 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.annoucementNameTextField.delegate = self
         self.annoucementDescriptionTextField.delegate = self
+        self.productTypePicker.delegate = self
+        self.productTypePicker.dataSource = self
+        
         setupStyleForElements()
         self.hideKeyboardWhenTappedAround()
-        
     }
+    
     @IBAction func annouceAction(_ sender: Any) {
         if validateFields() != nil {
             //Show fill all fields error
@@ -69,6 +73,19 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
         StyleElements.styleTextField(annoucementNameTextField)
         StyleElements.styleTextField(annoucementDescriptionTextField)
     }
+}
+
+extension CreateAnnoucementViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        HardConstants.PickerView.productType.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        HardConstants.PickerView.productType[row]
+    }
     
 }

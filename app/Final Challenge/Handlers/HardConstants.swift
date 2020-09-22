@@ -11,6 +11,7 @@ struct HardConstants {
     
     struct Storyboard {
         static let profileViewController = "profileViewController"
+        static let homeProfileViewController = "homeProfileViewController"
         static let editSegue = "editAnnoucement"
         static let profileSegue = "profileSegue"
     }
@@ -22,6 +23,10 @@ struct HardConstants {
     struct CollectionView {
         static let annoucementCell = "annoucementCell"
         static let otherAnnouncementCell = "otherAnnouncementCell"
+    }
+    
+    struct PickerView {
+        static let productType = ["Comida", "Artesanato", "Pintura"]
     }
     
 }

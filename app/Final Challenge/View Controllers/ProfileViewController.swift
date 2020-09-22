@@ -24,7 +24,7 @@ class ProfileViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
     }
-    
+
     func getProfileImage() {
         let storage = Storage.storage(url: HardConstants.Database.storageURL)
         let storageReference = storage.reference()
@@ -33,7 +33,7 @@ class ProfileViewController: UIViewController {
         var imageData: UIImage?
         profileImageReference.getData(maxSize: 1*1024*1024) { (data, error) in
             if error != nil {
-                print(error)
+                print(error as Any)
                 //Show error message while downloading picture
             } else {
                 imageData = UIImage(data: data!)
@@ -45,6 +45,8 @@ class ProfileViewController: UIViewController {
 
     @IBAction func signOutAction(_ sender: Any) {
         DatabaseHandler.signOut()
-        navigationController?.popViewController(animated: true)
+        if let homeProfileViewController = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.homeProfileViewController), let navigationController = self.navigationController{
+            navigationController.setViewControllers([homeProfileViewController], animated: true)
+        }
     }    
 }

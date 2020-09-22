@@ -16,9 +16,14 @@ class EditAnnoucementViewController: UIViewController {
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var productTypePicker: UIPickerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        productTypePicker.delegate = self
+        productTypePicker.dataSource = self
+        
         if let annoucement = annoucement {
             nameTextField.text = annoucement.annoucementName
             descriptionTextField.text = annoucement.description
@@ -55,5 +60,19 @@ class EditAnnoucementViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
+    }
+}
+
+extension EditAnnoucementViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        HardConstants.PickerView.productType.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        HardConstants.PickerView.productType[row]
     }
 }

@@ -57,7 +57,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func transitionToProfile(){
-        performSegue(withIdentifier: "profileSegue", sender: nil)
+        if let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.profileViewController), let navigationController = self.navigationController{
+            navigationController.setViewControllers([profileViewController], animated: true)
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

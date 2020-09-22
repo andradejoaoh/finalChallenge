@@ -168,6 +168,27 @@ class DatabaseHandler {
         }
     }
     
+    static func getUserData(userID: String, completion: @escaping (Result<User,Error>) -> Void){
+        let database = Firestore.firestore()
+        database.collection("users").document(userID).getDocument { (snapshot, error) in
+            guard error == nil else {
+                //Show error while loading document
+                return completion(.failure(error!))
+            }
+            guard let snapshot = snapshot else { return }
+            guard let data = snapshot.data() else { return }
+            guard let storeName = data["store_name"] as? String else { return }
+            guard let bio = data["bio"] as? String else { return }
+            guard let site = data["site"] as? String else { return }
+            guard let facebook = data["facebook"] as? String else { return }
+            guard let email = data["email"] as? String else { return }
+            guard let userName = data["full_name"] as? String else { return }
+            
+            let user = User(userName: userName, userEmail: email, userID: userID, userFacebook: facebook, userBio: bio, userSite: site, userStoreName: storeName)
+            completion(.success(user))
+        }
+    }
+    
     static func isUserLoggedIn() -> Bool {
         if Auth.auth().currentUser == nil {
             return false

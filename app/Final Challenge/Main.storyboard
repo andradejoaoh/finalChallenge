@@ -11,7 +11,7 @@
         <!--Home Profile View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeProfileViewController" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="homeProfileViewController" id="BYZ-38-t0r" customClass="HomeProfileViewController" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -608,7 +608,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBS-hb-4B2">
-                                <rect key="frame" x="50" y="501" width="500" height="40"/>
+                                <rect key="frame" x="50" y="763" width="314" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="rFk-Tr-PEL"/>
                                 </constraints>
@@ -618,7 +618,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="st4-KA-o4R">
-                                <rect key="frame" x="50" y="446" width="500" height="40"/>
+                                <rect key="frame" x="50" y="708" width="314" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="35w-Xy-V7y"/>
                                 </constraints>
@@ -628,10 +628,10 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="f7R-i7-mOV">
-                                <rect key="frame" x="40" y="54" width="520" height="352"/>
+                                <rect key="frame" x="40" y="98" width="334" height="385"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nome Completo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7yS-fK-XS1">
-                                        <rect key="frame" x="0.0" y="0.0" width="520" height="35"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="mmw-bq-NeG"/>
                                         </constraints>
@@ -639,7 +639,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ajF-RU-J4P">
-                                        <rect key="frame" x="0.0" y="50" width="520" height="35"/>
+                                        <rect key="frame" x="0.0" y="50" width="334" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="5yM-PP-SvL"/>
                                         </constraints>
@@ -647,7 +647,7 @@
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Senha" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6iZ-6c-oto">
-                                        <rect key="frame" x="0.0" y="100" width="520" height="35"/>
+                                        <rect key="frame" x="0.0" y="100" width="334" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="qww-DE-X4R"/>
                                         </constraints>
@@ -655,7 +655,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Endereço" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sfG-rH-bXE">
-                                        <rect key="frame" x="0.0" y="150" width="520" height="35"/>
+                                        <rect key="frame" x="0.0" y="150" width="334" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="cYE-0x-zJU"/>
                                         </constraints>
@@ -666,7 +666,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Site" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w2O-Jc-dah">
-                                        <rect key="frame" x="0.0" y="200" width="520" height="35"/>
+                                        <rect key="frame" x="0.0" y="200" width="334" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="zSt-6h-hO9"/>
                                         </constraints>
@@ -674,7 +674,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Telefone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DvD-il-fes">
-                                        <rect key="frame" x="0.0" y="250" width="520" height="35"/>
+                                        <rect key="frame" x="0.0" y="250" width="334" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="2tD-tM-tnn"/>
                                         </constraints>
@@ -682,7 +682,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Biografia" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x6Q-SI-Juc">
-                                        <rect key="frame" x="0.0" y="300" width="520" height="35"/>
+                                        <rect key="frame" x="0.0" y="300" width="334" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="P2f-7f-Qzw"/>
                                         </constraints>
@@ -690,7 +690,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Facebook" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qqR-tL-B6O">
-                                        <rect key="frame" x="0.0" y="350" width="520" height="2"/>
+                                        <rect key="frame" x="0.0" y="350" width="334" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="nJE-pf-fOZ"/>
                                         </constraints>
@@ -700,7 +700,7 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="klv-0P-pYR">
-                                <rect key="frame" x="136" y="426" width="328" height="0.0"/>
+                                <rect key="frame" x="136" y="503" width="142" height="185"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
