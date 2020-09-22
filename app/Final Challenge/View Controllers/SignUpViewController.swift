@@ -29,15 +29,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.fullNameTextField.delegate = self
-        self.emailTextField.delegate = self
-        self.passwordTextField.delegate = self
-        self.adressTextField.delegate = self
-        
-        self.siteTextField.delegate = self
-        self.telefoneTextField.delegate = self
-        self.bioTextField.delegate = self
-        self.facebookTextField.delegate = self
+        setDelegateForTextFields()
         
         self.hideKeyboardWhenTappedAround()
         imagePicker.delegate = self
@@ -104,9 +96,22 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         view.window?.rootViewController = profileViewController
         view.window?.makeKeyAndVisible()
     }
+    func setDelegateForTextFields(){
+        self.storeNameTextField.delegate = self
+        self.fullNameTextField.delegate = self
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        self.adressTextField.delegate = self
+        
+        self.siteTextField.delegate = self
+        self.telefoneTextField.delegate = self
+        self.bioTextField.delegate = self
+        self.facebookTextField.delegate = self
+    }
     
     //style for elements
     func setupStyleForElements(){
+        StyleElements.styleTextField(storeNameTextField)
         StyleElements.styleTextField(fullNameTextField)
         StyleElements.styleTextField(emailTextField)
         StyleElements.styleTextField(passwordTextField)
@@ -123,7 +128,10 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     //hide keyboard function
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == fullNameTextField {
+        if textField == storeNameTextField {
+            textField.resignFirstResponder()
+            fullNameTextField.becomeFirstResponder()
+        } else if textField == fullNameTextField {
             textField.resignFirstResponder()
             emailTextField.becomeFirstResponder()
         } else if textField == emailTextField {
