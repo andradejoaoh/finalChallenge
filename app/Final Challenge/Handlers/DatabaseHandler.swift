@@ -25,7 +25,7 @@ class DatabaseHandler {
     }
     
     //Create account using email in Firebase
-    static func signUpWithEmail(email: String, password: String, adress: String, fullname: String, imageData: Data, completion: @escaping (Result<String,Error>) -> Void){
+    static func signUpWithEmail(email: String, password: String, adress: String, fullname: String, bio: String, facebook: String, site: String, storeName: String, imageData: Data, completion: @escaping (Result<String,Error>) -> Void){
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 // There was an error while creating user
@@ -52,7 +52,12 @@ class DatabaseHandler {
                             let database = Firestore.firestore()
                             database.collection("users").addDocument(data:
                                 ["full_name":fullname,
+                                 "store_name":storeName,
                                  "adress":adress,
+                                 "bio":bio,
+                                 "site":site,
+                                 "facebook":facebook,
+                                 "email": email,
                                  "uid":result!.user.uid,
                                  "profile_image_url":url.absoluteString]) { (error) in
                                     if error != nil {
@@ -69,7 +74,7 @@ class DatabaseHandler {
         }
     }
     
-    static func createAnnoucement(annoucementName: String, annoucementDescription: String, annoucementLocation: String, completion: @escaping (Result<String,Error>) -> Void){
+    static func createAnnoucement(annoucementName: String, annoucementDescription: String, annoucementLocation: String, deliveryOption: Bool, productType: String, completion: @escaping (Result<String,Error>) -> Void){
         let database = Firestore.firestore()
         guard let userAuth = FirebaseAuth.Auth.auth().currentUser else { return }
         let annoucementDocument = database.collection("annoucements").document()
@@ -92,6 +97,8 @@ class DatabaseHandler {
                                                  "annoucement_location":annoucementLocation,
                                                  "annoucement_id":annoucementDocument.documentID,
                                                  "annoucement_image_url":url,
+                                                 "delivery_option": deliveryOption,
+                                                 "product_type": productType,
                                                  "annoucement_user_id":userAuth.uid]) { (error) in
                                                     if error != nil {
                                                         return completion(.failure(error!))
@@ -133,7 +140,6 @@ class DatabaseHandler {
                     completion(.failure(error!))
                 }
                 completion(.success("Uptaded annoucement sucessfully"))
-                
         }
     }
     
@@ -152,13 +158,16 @@ class DatabaseHandler {
                     guard let annoucementDescription = data["annoucement_description"] as? String else { return }
                     guard let annoucementLocation = data["annoucement_location"] as? String else { return }
                     guard let annoucementUserID = data["annoucement_user_id"] as? String else { return }
-                    let annoucement = Annoucement(annoucementName: annoucementName, userID: annoucementUserID, description: annoucementDescription, annoucementID: annoucementID, location: annoucementLocation)
+                    guard let deliveryOption = data["delivery_option"] as? Bool else { return }
+                    guard let productType = data["product_type"] as? String else { return }
+                    let annoucement = Annoucement(annoucementName: annoucementName, userID: annoucementUserID, description: annoucementDescription, annoucementID: annoucementID, location: annoucementLocation, optionDelivery: deliveryOption, productType: productType)
                     annoucements.append(annoucement)
                 }
             }
             completion(.success(annoucements))
         }
     }
+    
     static func isUserLoggedIn() -> Bool {
         if Auth.auth().currentUser == nil {
             return false

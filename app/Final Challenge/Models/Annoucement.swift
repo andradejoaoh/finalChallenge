@@ -14,8 +14,7 @@ struct Annoucement {
     let description: String
     let annoucementID: String
     let location: String
-//    let optionDelivery: Bool
-//    let productType: String
-//    let userContact: String
+    let optionDelivery: Bool
+    let productType: String
 //    let expirationDate: String
 }

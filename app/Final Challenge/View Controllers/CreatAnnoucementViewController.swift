@@ -14,6 +14,9 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var annoucementNameTextField: UITextField!
     @IBOutlet weak var annoucementDescriptionTextField: UITextField!
     @IBOutlet weak var annoucementLocationTextField: UITextField!
+
+    @IBOutlet weak var deliveryOptionSwitch: UISwitch!
+    @IBOutlet weak var productTypePicker: UIPickerView!
     
     @IBOutlet weak var selectPictureButton: UIButton!
     
@@ -33,9 +36,13 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
             let annoucementName = annoucementNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let annoucementDescription = annoucementDescriptionTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let annoucementLocation = annoucementLocationTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation) { (result) in
+            let deliveryOption = deliveryOptionSwitch.isOn
+            let productType = "Comida"
+            
+            DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation, deliveryOption:  deliveryOption, productType: productType) { (result) in
                 switch result {
                 case let .failure(error):
+                    //Show error while creating annoucement.
                     print(error)
                 case .success:
                     break
