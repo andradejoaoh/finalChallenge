@@ -13,6 +13,8 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var bio: UILabel!
+    @IBOutlet weak var signOutButton: UIButton!
+    @IBOutlet weak var annouceButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()

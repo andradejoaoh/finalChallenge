@@ -33,4 +33,9 @@ class AnnoucementViewController: UIViewController {
             
         }
     }
+    
+    @IBAction func optionsAction(_ sender: Any) {
+        
+    }
+    
 }

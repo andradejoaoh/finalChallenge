@@ -14,6 +14,7 @@ struct HardConstants {
         static let homeProfileViewController = "homeProfileViewController"
         static let editSegue = "editAnnoucement"
         static let profileSegue = "profileSegue"
+        static let annoucementSegue = "annoucementSegue"
     }
     
     struct Database {
