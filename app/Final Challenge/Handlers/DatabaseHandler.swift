@@ -14,10 +14,11 @@ import FirebaseFirestore
 
 class DatabaseHandler {
     
-    //Login function using Firebase
+    //Login function using Firebase, with email and password
     static func loginWithEmail(email: String, password: String, completion: @escaping (Result<String, Error>) -> Void){
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             guard error == nil else{
+                //Show error during login
                 return completion(.failure(error!))
             }
             completion(.success(""))
@@ -165,6 +166,21 @@ class DatabaseHandler {
                 }
             }
             completion(.success(annoucements))
+        }
+    }
+    
+    static func getProfileImage(userID: String, completion: @escaping (Result<Data,Error>) -> Void) {
+        let storage = Storage.storage(url: HardConstants.Database.storageURL)
+        let storageReference = storage.reference()
+        let profileImageReference = storageReference.child("profilePictures/\(userID)")
+        profileImageReference.getData(maxSize: 1*1024*1024) { (data, error) in
+            if error != nil {
+                completion(.failure(error!))
+                //Show error message while downloading picture
+            } else {
+                guard let imageData = data else { return }
+                completion(.success(imageData))
+            }
         }
     }
     

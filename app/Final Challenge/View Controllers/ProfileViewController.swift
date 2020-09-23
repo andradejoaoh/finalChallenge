@@ -7,46 +7,41 @@
 //
 
 import UIKit
-import FirebaseStorage
-import Firebase
 
 class ProfileViewController: UIViewController {
-    @IBOutlet weak var profileImageView: UIImageView!
-    
     var userProfile: User?
+
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var bio: UILabel!
+    @IBOutlet weak var signOutButton: UIButton!
+    @IBOutlet weak var annouceButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getProfileImage()
-        // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setupView()
     }
-
-    func getProfileImage() {
-        let storage = Storage.storage(url: HardConstants.Database.storageURL)
-        let storageReference = storage.reference()
-        guard let user = Auth.auth().currentUser else { return }
-        let profileImageReference = storageReference.child("profilePictures/\(user.uid)")
-        var imageData: UIImage?
-        profileImageReference.getData(maxSize: 1*1024*1024) { (data, error) in
-            if error != nil {
-                print(error as Any)
-                //Show error message while downloading picture
-            } else {
-                imageData = UIImage(data: data!)
-                self.profileImageView.image = imageData
-            }
-        }
-    }
-    
 
     @IBAction func signOutAction(_ sender: Any) {
         DatabaseHandler.signOut()
         if let homeProfileViewController = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.homeProfileViewController), let navigationController = self.navigationController{
             navigationController.setViewControllers([homeProfileViewController], animated: true)
         }
-    }    
+    }
+    
+    func setupView() {
+        if let user = self.userProfile {
+            DatabaseHandler.getProfileImage(userID: user.userID) { result in
+                switch result {
+                case let .success(data):
+                    self.profileImageView.image = UIImage(data: data)
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    }
 }

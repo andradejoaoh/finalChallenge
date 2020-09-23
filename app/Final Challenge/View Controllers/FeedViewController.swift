@@ -74,7 +74,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedAnnoucement = indexPath.item
-        performSegue(withIdentifier: HardConstants.Storyboard.editSegue, sender: self)
+        performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) ->  CGSize{
@@ -102,8 +102,8 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let editViewController = segue.destination as? EditAnnoucementViewController {
-            editViewController.annoucement = annoucements[selectedAnnoucement ?? 0]
+        if let annoucementViewController = segue.destination as? AnnoucementViewController {
+            annoucementViewController.annoucement = annoucements[selectedAnnoucement ?? 0]
         }
     }
     
