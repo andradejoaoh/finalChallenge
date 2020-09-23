@@ -74,6 +74,13 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         performSegue(withIdentifier: HardConstants.Storyboard.editSegue, sender: self)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if section == 1{
+            return UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
+        }
+        return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let editViewController = segue.destination as? EditAnnoucementViewController {
             editViewController.annoucement = annoucements[selectedAnnoucement ?? 0]
