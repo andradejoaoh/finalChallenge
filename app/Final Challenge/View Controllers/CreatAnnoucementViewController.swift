@@ -14,9 +14,10 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var annoucementNameTextField: UITextField!
     @IBOutlet weak var annoucementDescriptionTextField: UITextField!
     @IBOutlet weak var annoucementLocationTextField: UITextField!
-
+    
     @IBOutlet weak var deliveryOptionSwitch: UISwitch!
     @IBOutlet weak var productTypePicker: UIPickerView!
+    @IBOutlet weak var annoucementTimePicker: UIPickerView!
     
     @IBOutlet weak var selectPictureButton: UIButton!
     
@@ -27,6 +28,9 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
         self.annoucementDescriptionTextField.delegate = self
         self.productTypePicker.delegate = self
         self.productTypePicker.dataSource = self
+        
+        productTypePicker.tag = 1
+        annoucementTimePicker.tag = 2
         
         setupStyleForElements()
         self.hideKeyboardWhenTappedAround()
@@ -56,8 +60,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
         }
     }
     
-    
-       func validateFields() -> String? {
+    func validateFields() -> String? {
         //Check if fields are filled in
         if annoucementNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             annoucementLocationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
@@ -75,17 +78,32 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
     }
 }
 
+/**
+ `UIPickerView protocols` used by two of the same.
+
+ `HardConstants.swift` contains the data.
+
+ - Author:
+   João Henrique Andrade
+*/
 extension CreateAnnoucementViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        HardConstants.PickerView.productType.count
+        if pickerView.tag == 1 {
+            return HardConstants.PickerView.productType.count
+        } else {
+            return HardConstants.PickerView.annoucementTime.count
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        HardConstants.PickerView.productType[row]
+        if pickerView.tag == 1 {
+            return HardConstants.PickerView.productType[row]
+        } else {
+            return HardConstants.PickerView.annoucementTime[row]
+        }
     }
-    
 }

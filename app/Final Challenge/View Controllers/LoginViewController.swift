@@ -15,11 +15,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
         self.hideKeyboardWhenTappedAround()
         setupStyleElements()
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func loginAction(_ sender: Any) {
@@ -43,8 +43,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
-        
-
     }
     
     func validateFields() -> String? {
