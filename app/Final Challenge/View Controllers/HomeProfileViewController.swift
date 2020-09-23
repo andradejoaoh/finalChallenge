@@ -19,6 +19,15 @@ class HomeProfileViewController: UIViewController {
             transitionToProfile()
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if DatabaseHandler.isUserLoggedIn() {
+            if let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.profileViewController), let navigationController = self.navigationController{
+                navigationController.setViewControllers([profileViewController], animated: true)
+            }
+        }
+    }
 
     func setupStyleElements(){
         StyleElements.styleFilledButton(loginButton)

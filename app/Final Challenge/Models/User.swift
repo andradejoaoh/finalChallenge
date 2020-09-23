@@ -14,4 +14,5 @@ struct User {
     let userFacebook: String?
     let userBio: String
     let userSite: String?
+    let userStoreName: String
 }
