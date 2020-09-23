@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OtherAnnoucementCell: UICollectionViewCell {
+class PaidAnnoucementCell: UICollectionViewCell {
     
     
     override func layoutSubviews() {
