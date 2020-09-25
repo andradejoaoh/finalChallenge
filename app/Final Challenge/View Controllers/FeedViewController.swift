@@ -8,10 +8,13 @@
 
 import UIKit
 
-class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CollectionViewCellDelegate {
     
-    //@IBOutlet weak var feedCollectionView: UICollectionView!
-    //annoucementCell
+    
+    
+    var comeFromPaid: Bool = false
+    var selectedAnnoucement:Int?
+    
     
     let feedCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -37,7 +40,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         feedCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         feedCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         feedCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        
     }
     
     
@@ -48,7 +50,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-    var selectedAnnoucement:Int?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +58,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.comeFromPaid = false
         DatabaseHandler.readAnnoucements { (result) in
             switch result {
             case let .failure(error):
@@ -75,7 +78,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if section == 1 {//ANNOUCEMENT
             return annoucements.count
         } else {//PAID
-            return annoucements.count
+            return 1
         }
     }
     
@@ -88,28 +91,36 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             return cell
         } else {
             guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementCell else { return UICollectionViewCell()}
-            //paidCell.backgroundColor = .blue
+            paidCell.delegate = self
             return paidCell
         }
         
     }
-
-
+    
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedAnnoucement = indexPath.item
-        performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
+        if indexPath.section == 1 {
+            selectedAnnoucement = indexPath.item
+            performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) ->  CGSize{
         
-        if indexPath.section == 1{//ANNOUNCEMENT
-            return CGSize(width:  (view.frame.width/2.5), height: 100)
+        
+        if indexPath.section == 1 {//ANNOUNCEMENT
+            let numberOfColumns: CGFloat =  2
+            let width = collectionView.frame.size.width
+            let xInsets: CGFloat = 10
+            let cellSpacing: CGFloat = 5
+            return CGSize(width: (width/numberOfColumns) - (xInsets + cellSpacing), height: (width/numberOfColumns) - (xInsets + cellSpacing))
         } else {//PAID
-            return CGSize(width:  (view.frame.width/2.5), height: 225)
+            return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height/3))
         }
         
         
-
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -118,13 +129,25 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         } else {//PAID
             return UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         }
-       
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let annoucementViewController = segue.destination as? AnnoucementViewController {
-            annoucementViewController.annoucement = annoucements[selectedAnnoucement ?? 0]
+            if comeFromPaid{
+                annoucementViewController.annoucement = annoucements[selectedAnnoucement ?? 0]
+                //TODO - mudar para paid annoucements
+            } else {
+                annoucementViewController.annoucement = annoucements[selectedAnnoucement ?? 0]
+            }
+            
         }
+    }
+    
+    func collectionViewCell(_ annoucementNumber: Int) {
+        self.selectedAnnoucement = annoucementNumber
+        self.comeFromPaid = true
+        performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
     }
     
 }
@@ -135,36 +158,8 @@ extension UIViewController {
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 }
-
-
-
-
-
-// PINTEREST CELL
-//        if indexPath.section == 1 {
-//            let numberOfColumns: CGFloat =  2
-//            let width = collectionView.frame.size.width
-//            let xInsets: CGFloat = 10
-//            let cellSpacing: CGFloat = 5
-//            return CGSize(width: (width/numberOfColumns) - (xInsets + cellSpacing), height: (width/numberOfColumns) - (xInsets + cellSpacing))
-//        } else {
-//            return CGSize(width: (collectionView.frame.width/2), height: (collectionView.frame.height/3))
-//        }
-//        return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height))
-
-
-
-
-
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 20
-//    }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        0
-//    }
-//}
