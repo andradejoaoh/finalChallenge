@@ -24,6 +24,10 @@ class EditAnnoucementViewController: UIViewController {
         productTypePicker.delegate = self
         productTypePicker.dataSource = self
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         if let annoucement = annoucement {
             nameTextField.text = annoucement.annoucementName
             descriptionTextField.text = annoucement.description
@@ -32,16 +36,7 @@ class EditAnnoucementViewController: UIViewController {
     }
     
     @IBAction func deleteAction(_ sender: Any) {
-        guard let annoucement = annoucement else { return }
-        DatabaseHandler.deleteAnnoucement(annoucementID: annoucement.annoucementID) { (result) in
-            switch result {
-            case let .failure(error):
-                //Error while deleting annoucement
-                print(error)
-            case .success:
-                self.navigationController?.popViewController(animated: true)
-            }
-        }
+
     }
     
     @IBAction func editAction(_ sender: Any) {
@@ -51,7 +46,7 @@ class EditAnnoucementViewController: UIViewController {
         guard let description = descriptionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard let location = locationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         
-        DatabaseHandler.editAnnoucement(annoucementID: annoucement.annoucementID, annoucementName: name, annoucementLocation: location, annoucementDescription: description) { (result) in
+        DatabaseHandler.editAnnoucement(annoucementID: annoucement.annoucementID, annoucementName: name, annoucementLocation: location, annoucementDescription: description, deliveryOption: false, productType: "Comida") { (result) in
             switch result {
             case let .failure(error):
                 //Error while updating annoucement

@@ -97,7 +97,7 @@ class DatabaseHandler {
                                                  "annoucement_description":annoucementDescription,
                                                  "annoucement_location":annoucementLocation,
                                                  "annoucement_id":annoucementDocument.documentID,
-                                                 "annoucement_image_url":url,
+//                                                 "annoucement_image_url":url,
                                                  "delivery_option": deliveryOption,
                                                  "product_type": productType,
                                                  "annoucement_user_id":userAuth.uid]) { (error) in
@@ -131,12 +131,14 @@ class DatabaseHandler {
         }
     }
     
-    static func editAnnoucement(annoucementID: String, annoucementName: String, annoucementLocation: String, annoucementDescription: String, completion: @escaping (Result<String,Error>) -> Void){
+    static func editAnnoucement(annoucementID: String, annoucementName: String, annoucementLocation: String, annoucementDescription: String, deliveryOption: Bool, productType: String, completion: @escaping (Result<String,Error>) -> Void){
         let database = Firestore.firestore()
         database.collection("annoucements").document(annoucementID).updateData(
             ["annoucement_name":annoucementName,
              "annoucement_location":annoucementLocation,
-             "annoucement_description":annoucementDescription]) { (error) in
+             "annoucement_description":annoucementDescription,
+             "delivery_option":deliveryOption,
+             "product_type": productType]) { (error) in
                 if error != nil {
                     completion(.failure(error!))
                 }
@@ -210,6 +212,10 @@ class DatabaseHandler {
             return false
         }
         return true
+    }
+    
+    static func getCurrentUser() -> String? {
+        return Auth.auth().currentUser?.uid
     }
     
     static func signOut() -> Void {

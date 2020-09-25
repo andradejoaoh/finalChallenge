@@ -29,11 +29,17 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
         self.productTypePicker.delegate = self
         self.productTypePicker.dataSource = self
         
-        productTypePicker.tag = 1
-        annoucementTimePicker.tag = 2
-        
+        self.annoucementTimePicker.delegate = self
+        self.annoucementTimePicker.dataSource = self
+                
         setupStyleForElements()
         self.hideKeyboardWhenTappedAround()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.productTypePicker.tag = 1
+        self.annoucementTimePicker.tag = 2
     }
     
     @IBAction func annouceAction(_ sender: Any) {
@@ -45,7 +51,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
             let annoucementDescription = annoucementDescriptionTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let annoucementLocation = annoucementLocationTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let deliveryOption = deliveryOptionSwitch.isOn
-            let productType = "Comida"
+            let productType = HardConstants.PickerView.productType[productTypePicker.selectedRow(inComponent: 0)]
             
             DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation, deliveryOption:  deliveryOption, productType: productType) { (result) in
                 switch result {

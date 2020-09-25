@@ -26,10 +26,15 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction func signOutAction(_ sender: Any) {
-        DatabaseHandler.signOut()
-        if let homeProfileViewController = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.homeProfileViewController), let navigationController = self.navigationController{
-            navigationController.setViewControllers([homeProfileViewController], animated: true)
-        }
+        let signOutAlert = UIAlertController(title: "Deseja Sair?", message: "Você poderá fazer login quando quiser novamente", preferredStyle: .alert)
+        signOutAlert.addAction(UIAlertAction(title: "Cancelar", style: .default, handler: nil))
+        signOutAlert.addAction(UIAlertAction(title: "Sair", style: .destructive, handler: { (UIAlertAction) in
+            DatabaseHandler.signOut()
+            if let homeProfileViewController = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.homeProfileViewController), let navigationController = self.navigationController{
+                navigationController.setViewControllers([homeProfileViewController], animated: true)
+            }
+        }))
+        self.present(signOutAlert, animated: true, completion: nil)
     }
     
     func setupView() {
