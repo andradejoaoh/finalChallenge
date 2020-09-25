@@ -25,10 +25,34 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cv
     }()
     
-    func setup(){
+    let paidAnnoucementLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Anúncios em destaque:"
+        label.font = UIFont.systemFont(ofSize: 16)
+        return label
+    }()
+    
+    let annoucementLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Anúncios"
+        label.font = UIFont.systemFont(ofSize: 16)
+        return label
+    }()
+    
+    let imagePaidAnnoucements: UIImageView = {
+        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder"))
+        image.layer.cornerRadius = (image.frame.width/1.25)
+        image.clipsToBounds = true
+        image.contentMode = .scaleAspectFill
+        return image
+    }()
+    
+    
+    func setupViews(){
         feedCollectionView.dataSource = self
         feedCollectionView.delegate = self
         view.addSubview(feedCollectionView)
+        
         
         feedCollectionView.register(AnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.annoucementCell)
         feedCollectionView.register(PaidAnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell)
@@ -54,7 +78,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        setupViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
