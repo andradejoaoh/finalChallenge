@@ -14,7 +14,7 @@ struct HardConstants {
         static let homeProfileViewController = "homeProfileViewController"
         static let editSegue = "editAnnoucement"
         static let profileSegue = "profileSegue"
-        static let annoucementSegue = "annoucementSegue"
+        static let annoucementSegue = "showAnnoucement"
     }
     
     struct Database {
@@ -23,7 +23,9 @@ struct HardConstants {
     
     struct CollectionView {
         static let annoucementCell = "annoucementCell"
-        static let otherAnnouncementCell = "otherAnnouncementCell"
+        static let paidAnnouncementCell = "paidAnnouncementCell"
+        static let annoucementCellSection = "annoucementCellSection"
+        static let paidAnnoucementCellSection = "paidAnnouncementCellSection"
     }
     
     struct PickerView {

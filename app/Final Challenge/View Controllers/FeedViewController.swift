@@ -10,10 +10,36 @@ import UIKit
 
 class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    @IBOutlet weak var feedCollectionView: UICollectionView!
+    //@IBOutlet weak var feedCollectionView: UICollectionView!
     //annoucementCell
-    let AnnoucementCellID = "annoucementCell"
-    let otherAnnoucementCellID = "otherAnnoucementCell"
+    
+    let feedCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 16
+        layout.scrollDirection = .vertical
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = .clear
+        return cv
+    }()
+    
+    func setup(){
+        feedCollectionView.dataSource = self
+        feedCollectionView.delegate = self
+        view.addSubview(feedCollectionView)
+        
+        feedCollectionView.register(AnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.annoucementCell)
+        feedCollectionView.register(PaidAnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell)
+        
+        feedCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        feedCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        feedCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        feedCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        feedCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        feedCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        feedCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        
+    }
+    
     
     
     var annoucements: [Annoucement] = []{
@@ -26,11 +52,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        feedCollectionView.register(AnnoucementCell.self, forCellWithReuseIdentifier: AnnoucementCellID)
-        feedCollectionView.register(OtherAnnouncementCell.self, forCellWithReuseIdentifier: otherAnnoucementCellID)
-        feedCollectionView.dataSource = self
-        feedCollectionView.delegate = self
-      
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,25 +72,26 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 1 {
+        if section == 1 {//ANNOUCEMENT
+            return annoucements.count
+        } else {//PAID
             return annoucements.count
         }
-        return annoucements.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 1 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AnnoucementCellID, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
-            cell.backgroundColor = .red
-            
-            
+        if indexPath.section == 1 {//ANNOUCEMENT
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCell, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
+            //cell.backgroundColor = .red
             //cell.annoucementNameLabel.text = annoucements[indexPath.item].annoucementName
             return cell
+        } else {
+            guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementCell else { return UICollectionViewCell()}
+            //paidCell.backgroundColor = .blue
+            return paidCell
         }
-        guard let otherCell = collectionView.dequeueReusableCell(withReuseIdentifier: otherAnnoucementCellID, for: indexPath) as? OtherAnnouncementCell else { return UICollectionViewCell()}
-        otherCell.backgroundColor = .blue
-        return otherCell
+        
     }
 
 
@@ -78,27 +101,24 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) ->  CGSize{
-//        if indexPath.section == 1{
-//            return CGSize(width: (view.frame.width / 3) - 16, height: 100)
-//        }
-//        return CGSize(width: (view.frame.width / 2) , height: 200)
-        if indexPath.section == 1 {
-            let numberOfColumns: CGFloat =  2
-            let width = collectionView.frame.size.width
-            let xInsets: CGFloat = 10
-            let cellSpacing: CGFloat = 5
-            return CGSize(width: (width/numberOfColumns) - (xInsets + cellSpacing), height: (width/numberOfColumns) - (xInsets + cellSpacing))
-        } else {
-            return CGSize(width: (collectionView.frame.width/2), height: (collectionView.frame.height/3))
+        
+        if indexPath.section == 1{//ANNOUNCEMENT
+            return CGSize(width:  (view.frame.width/2.5), height: 100)
+        } else {//PAID
+            return CGSize(width:  (view.frame.width/2.5), height: 225)
         }
-        return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height))
+        
+        
+
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if section == 1{
+        if section == 1{//ANNOUCEMENT
             return UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
+        } else {//PAID
+            return UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         }
-        return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+       
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -108,118 +128,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
 }
-
-
-
-
-
-
-
-
-class AnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    var feedViewControler = FeedViewController()
-    var annoucements: [Annoucement] = []{
-        didSet{
-            feedViewControler.feedCollectionView.reloadData()
-        }
-    }
-    
-    
-    let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 30
-        layout.scrollDirection = .horizontal
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .clear
-        return cv
-    }()
-    
-    let cellID = "cellId"
-    
-    override init(frame: CGRect){
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    func setupViews(){
-        backgroundColor = .green
-        addSubview(collectionView)
-        
-      // collectionView.setAnchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(CellPrincipalAnnoucements.self, forCellWithReuseIdentifier: cellID)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return annoucements.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as? CellPrincipalAnnoucements else { return UICollectionViewCell()}
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: frame.height - 20)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
-    private class CellPrincipalAnnoucements: UICollectionViewCell {
-        override init(frame: CGRect){
-            super.init(frame: frame)
-            backgroundColor = .green
-        
-        }
-        
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-    }
-    
-}
- 
-
-
-
-
-
-
-
-class OtherAnnouncementCell: UICollectionViewCell {
-    
-    override init(frame: CGRect){
-        super.init(frame: frame)
-        backgroundColor = .blue
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
-}
-
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 20
-//    }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        0
-//    }
-//}
 
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
@@ -235,3 +143,28 @@ extension UIViewController {
 
 
 
+
+
+// PINTEREST CELL
+//        if indexPath.section == 1 {
+//            let numberOfColumns: CGFloat =  2
+//            let width = collectionView.frame.size.width
+//            let xInsets: CGFloat = 10
+//            let cellSpacing: CGFloat = 5
+//            return CGSize(width: (width/numberOfColumns) - (xInsets + cellSpacing), height: (width/numberOfColumns) - (xInsets + cellSpacing))
+//        } else {
+//            return CGSize(width: (collectionView.frame.width/2), height: (collectionView.frame.height/3))
+//        }
+//        return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height))
+
+
+
+
+
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 20
+//    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        0
+//    }
+//}
