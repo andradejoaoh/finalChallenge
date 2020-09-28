@@ -15,9 +15,10 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var comeFromPaid: Bool = false
     var selectedAnnoucement:Int?
     
-    
+
     let feedCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.headerReferenceSize = CGSize(width: 100 , height: 30)
         layout.minimumLineSpacing = 16
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -49,6 +50,8 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     func setupViews(){
+        
+        
         feedCollectionView.dataSource = self
         feedCollectionView.delegate = self
         view.addSubview(feedCollectionView)
@@ -56,6 +59,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         feedCollectionView.register(AnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.annoucementCell)
         feedCollectionView.register(PaidAnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell)
+        feedCollectionView.register(HeaderFeedCollectionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView")
         
         feedCollectionView.translatesAutoresizingMaskIntoConstraints = false
         feedCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -78,6 +82,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupViews()
     }
     
@@ -141,9 +146,24 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         } else {//PAID
             return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height/3))
         }
-        
-        
-        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath) as! HeaderFeedCollectionView
+            switch indexPath.section{
+            case 0:
+                headerView.labelHeader.text = "Anúncios em destaque:"
+            case 1:
+                headerView.labelHeader.text = "Anúncios"
+            default:
+                headerView.labelHeader.text = "Header Unknown"
+            }
+            return headerView
+        default:
+            preconditionFailure("Invalid supplementary view type for this collection view")
+        }
         
     }
     
