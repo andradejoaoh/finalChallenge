@@ -23,7 +23,9 @@ struct HardConstants {
     
     struct CollectionView {
         static let annoucementCell = "annoucementCell"
-        static let otherAnnouncementCell = "otherAnnouncementCell"
+        static let paidAnnouncementCell = "paidAnnouncementCell"
+        static let annoucementCellSection = "annoucementCellSection"
+        static let paidAnnoucementCellSection = "paidAnnouncementCellSection"
     }
     
     struct PickerView {
