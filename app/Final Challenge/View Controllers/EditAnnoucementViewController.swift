@@ -15,8 +15,8 @@ class EditAnnoucementViewController: UIViewController {
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var productTypePicker: UIPickerView!
+    @IBOutlet weak var deliveryOption: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +33,6 @@ class EditAnnoucementViewController: UIViewController {
             descriptionTextField.text = annoucement.description
             locationTextField.text = annoucement.location
         }
-    }
-    
-    @IBAction func deleteAction(_ sender: Any) {
-
     }
     
     @IBAction func editAction(_ sender: Any) {
