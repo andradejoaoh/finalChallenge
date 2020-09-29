@@ -20,7 +20,7 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     
     var imageArray: [String] = ["placeholder","placeholder2", "placeholder"]
     
-    var images: [String]? {
+    var imagesPaid: [String]? {
         didSet{
             annoucementCollectionView.reloadData()
         }
@@ -32,8 +32,6 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     
     override init (frame: CGRect){
         super.init(frame: frame)
-        backgroundColor = .red
-        
         setup()
     }
     
@@ -45,7 +43,7 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     
     let annoucementCollectionView: UICollectionView = {
         let annoucemnetLayout = UICollectionViewFlowLayout()
-        annoucemnetLayout.minimumLineSpacing = 30
+        annoucemnetLayout.minimumLineSpacing = 10
         annoucemnetLayout.scrollDirection = .horizontal
         let announcementCV = UICollectionView(frame: .zero, collectionViewLayout: annoucemnetLayout)
         announcementCV.backgroundColor = .clear
@@ -61,10 +59,10 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
         annoucementCollectionView.dataSource = self
         
         annoucementCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        annoucementCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-        annoucementCollectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
+        annoucementCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        annoucementCollectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
         annoucementCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-        annoucementCollectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
+        annoucementCollectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
         
         
         
@@ -88,7 +86,7 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCellSection, for: indexPath) as? annoucementCellForSection else { return UICollectionViewCell()}
         
-        if let imageName = images?[indexPath.item] {
+        if let imageName = imagesPaid?[indexPath.item] {
             cell.imagePaidAnnoucements.image = UIImage(named: imageName)
         }
         
@@ -105,7 +103,7 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (frame.width/3), height: (frame.height)*0.9)
+        return CGSize(width: (frame.width)*0.6, height: (frame.height))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

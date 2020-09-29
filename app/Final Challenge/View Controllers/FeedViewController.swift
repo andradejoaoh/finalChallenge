@@ -15,7 +15,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var comeFromPaid: Bool = false
     var selectedAnnoucement:Int?
     
-    var imageArray: [String] = ["placeholder","placeholder2", "placeholder"]
 
     var placeholder: UIImage = #imageLiteral(resourceName: "placeholder")
     
@@ -30,14 +29,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cv
     }()
     
-    let imagePaidAnnoucements: UIImageView = {
-        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder"))
-        image.layer.cornerRadius = 10
-        image.clipsToBounds = true
-        image.contentMode = .scaleAspectFill
-        return image
-    }()
-    
     
     func setupViews(){
         
@@ -45,7 +36,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         feedCollectionView.dataSource = self
         feedCollectionView.delegate = self
         view.addSubview(feedCollectionView)
-        
         
         feedCollectionView.register(AnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.annoucementCell)
         feedCollectionView.register(PaidAnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell)
@@ -63,6 +53,14 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     var annoucements: [Annoucement] = []{
+        didSet{
+            feedCollectionView.reloadData()
+        }
+    }
+    
+    var imageArray: [String] = ["placeholder","placeholder2", "placeholder"]
+
+    var imagesAnnounced: [String]? {
         didSet{
             feedCollectionView.reloadData()
         }
@@ -106,11 +104,14 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if indexPath.section == 1 {//ANNOUCEMENT
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCell, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
             cell.layer.cornerRadius = 10
+            if let imageName = imagesAnnounced?[indexPath.item] {
+                cell.imageAnnoucements.image = UIImage(named: imageName)
+            }
             return cell
         } else {
             guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementCell else { return UICollectionViewCell()}
             paidCell.delegate = self
-            paidCell.images = imageArray
+            
             return paidCell
         }
         
@@ -128,13 +129,13 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         
         if indexPath.section == 1 {//ANNOUNCEMENT
-            let numberOfColumns: CGFloat =  2
+            let numberOfColumns: CGFloat =  2.2
             let width = collectionView.frame.size.width
-            let xInsets: CGFloat = 10
-            let cellSpacing: CGFloat = 5
+            let xInsets: CGFloat = 2.5
+            let cellSpacing: CGFloat = 2.5
             return CGSize(width: (width/numberOfColumns) - (xInsets + cellSpacing), height: (width/numberOfColumns) - (xInsets + cellSpacing))
         } else {//PAID
-            return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height/3))
+            return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height)*0.3)
         }
     }
     
@@ -159,9 +160,9 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if section == 1{//ANNOUCEMENT
-            return UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
+            return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         } else {//PAID
-            return UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+            return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         }
         
     }

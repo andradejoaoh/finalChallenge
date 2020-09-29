@@ -9,9 +9,29 @@
 import UIKit
 
 class AnnoucementCell: UICollectionViewCell{
+    
+    let imageAnnoucements: UIImageView = {
+        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder"))
+        image.layer.cornerRadius = 10
+        image.clipsToBounds = true
+        image.contentMode = .scaleAspectFill
+        return image
+    }()
+    
     override init (frame: CGRect){
         super.init(frame: frame)
-        backgroundColor = .blue
+        setupView()
+        //backgroundColor = .blue
+    }
+    func setupView(){
+        addSubview(imageAnnoucements)
+        
+        imageAnnoucements.translatesAutoresizingMaskIntoConstraints = false
+        imageAnnoucements.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        imageAnnoucements.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        imageAnnoucements.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        imageAnnoucements.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+
     }
     
     required init?(coder: NSCoder) {
