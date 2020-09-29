@@ -15,6 +15,10 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var comeFromPaid: Bool = false
     var selectedAnnoucement:Int?
     
+    var imageArray: [String] = ["placeholder","placeholder2", "placeholder"]
+
+    var placeholder: UIImage = #imageLiteral(resourceName: "placeholder")
+    
 
     let feedCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -26,23 +30,9 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cv
     }()
     
-    let paidAnnoucementLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Anúncios em destaque:"
-        label.font = UIFont.systemFont(ofSize: 16)
-        return label
-    }()
-    
-    let annoucementLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Anúncios"
-        label.font = UIFont.systemFont(ofSize: 16)
-        return label
-    }()
-    
     let imagePaidAnnoucements: UIImageView = {
         let image = UIImageView(image: #imageLiteral(resourceName: "placeholder"))
-        image.layer.cornerRadius = (image.frame.width/1.25)
+        image.layer.cornerRadius = 10
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
         return image
@@ -115,12 +105,12 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 1 {//ANNOUCEMENT
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCell, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
-            //cell.backgroundColor = .red
-            //cell.annoucementNameLabel.text = annoucements[indexPath.item].annoucementName
+            cell.layer.cornerRadius = 10
             return cell
         } else {
             guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementCell else { return UICollectionViewCell()}
             paidCell.delegate = self
+            paidCell.images = imageArray
             return paidCell
         }
         
