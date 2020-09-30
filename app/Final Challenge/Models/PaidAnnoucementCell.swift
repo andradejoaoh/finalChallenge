@@ -89,7 +89,6 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
         let imageName = imageArray[indexPath.item]
         cell.imagePaidAnnoucements.image = UIImage(named: imageName)
         
-        
         cell.layer.cornerRadius = 10
         return cell
     }
@@ -107,7 +106,7 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     private class annoucementCellForSection: UICollectionViewCell {

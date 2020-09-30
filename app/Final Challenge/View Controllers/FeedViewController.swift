@@ -14,9 +14,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var selectedAnnoucement:Int?
     
 
-    var placeholder: UIImage = #imageLiteral(resourceName: "placeholder1")
-    
-
 //    let feedCollectionViewTest: UICollectionView = {
 //        let layout = UICollectionViewFlowLayout()
 //        layout.headerReferenceSize = CGSize(width: 100 , height: 30)
@@ -32,10 +29,18 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumLineSpacing = 16
         layout.minimumInteritemSpacing = 8.0
-        layout.headerHeight = 30.0
+        layout.headerHeight = 20.0
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         return cv
+    }()
+    
+    let imageAnnoucements: UIImageView = {
+        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))
+        image.layer.cornerRadius = 10
+        image.clipsToBounds = true
+        image.contentMode = .scaleAspectFill
+        return image
     }()
     
     
@@ -82,6 +87,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     var imageLiteralArray = [#imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1")]
+    var imageArray: [String] = ["placeholder1","placeholder2", "placeholder3", "placeholder4","placeholder1","placeholder1","placeholder1"]
 
     var imagesAnnounced: [String]? {
         didSet{
@@ -126,9 +132,8 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if indexPath.section == 1 {//ANNOUCEMENT
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCell, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
             cell.layer.cornerRadius = 10
-//            if let imageName = imagesAnnounced?[indexPath.item] {
-//                cell.imageAnnoucements.image = UIImage(named: imageName)
-//            }
+            let imageName = imageArray[indexPath.item]
+            cell.imageAnnoucements.image = UIImage(named: imageName)
             return cell
         } else {
             guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementCell else { return UICollectionViewCell()}
@@ -146,16 +151,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
         }
     }
-  
-    
-    
-    
-    
-//    let image = imageLiteralArray[indexPath.item]
-//    let height = image.size.height
-    // TODO WATERFALL HERE
-    
-    
     
     
     
