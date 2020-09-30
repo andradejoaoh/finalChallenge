@@ -29,9 +29,9 @@
 		6D04A63D25114EB3003C8E9C /* PaidAnnoucementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D04A63C25114EB3003C8E9C /* PaidAnnoucementCell.swift */; };
 		6D3EB414251E801C0065C072 /* CollectionViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3EB413251E801C0065C072 /* CollectionViewCellProtocol.swift */; };
 		6D641758252258FC00C184BA /* HeaderFeedCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D641757252258FC00C184BA /* HeaderFeedCollectionView.swift */; };
-		6D859A6C2514072200AD5298 /* CollectionViewStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D859A6B2514072200AD5298 /* CollectionViewStyles.swift */; };
 		6D8A66FB250BF17F0093F889 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D8A66FA250BF17F0093F889 /* GoogleService-Info.plist */; };
 		6D8A66FD250C06EF0093F889 /* StyleElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A66FC250C06EF0093F889 /* StyleElements.swift */; };
+		6D952B202525103300365772 /* WaterFallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D952B1F2525103300365772 /* WaterFallLayout.swift */; };
 		EA1068CF5385B8C601EEEBA6 /* Pods_Final_Challenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB69623477CE06EEF87814D3 /* Pods_Final_Challenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,9 +60,9 @@
 		6D04A63C25114EB3003C8E9C /* PaidAnnoucementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidAnnoucementCell.swift; sourceTree = "<group>"; };
 		6D3EB413251E801C0065C072 /* CollectionViewCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellProtocol.swift; sourceTree = "<group>"; };
 		6D641757252258FC00C184BA /* HeaderFeedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFeedCollectionView.swift; sourceTree = "<group>"; };
-		6D859A6B2514072200AD5298 /* CollectionViewStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewStyles.swift; sourceTree = "<group>"; };
 		6D8A66FA250BF17F0093F889 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6D8A66FC250C06EF0093F889 /* StyleElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleElements.swift; sourceTree = "<group>"; };
+		6D952B1F2525103300365772 /* WaterFallLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterFallLayout.swift; sourceTree = "<group>"; };
 		A64C65BE450A56694F9B8320 /* Pods-Final Challenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Challenge.release.xcconfig"; path = "Target Support Files/Pods-Final Challenge/Pods-Final Challenge.release.xcconfig"; sourceTree = "<group>"; };
 		CB42A5C477F254EBC34B7555 /* Pods-Final Challenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Challenge.debug.xcconfig"; path = "Target Support Files/Pods-Final Challenge/Pods-Final Challenge.debug.xcconfig"; sourceTree = "<group>"; };
 		DB69623477CE06EEF87814D3 /* Pods_Final_Challenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Final_Challenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,7 +114,7 @@
 				614A3E7925081C12003A24F1 /* AnnoucementCell.swift */,
 				6D04A63C25114EB3003C8E9C /* PaidAnnoucementCell.swift */,
 				6D8A66FC250C06EF0093F889 /* StyleElements.swift */,
-				6D859A6B2514072200AD5298 /* CollectionViewStyles.swift */,
+				6D952B1F2525103300365772 /* WaterFallLayout.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -288,7 +288,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D859A6C2514072200AD5298 /* CollectionViewStyles.swift in Sources */,
 				61BF922E24FD8F1400A8A8BE /* HomeProfileViewController.swift in Sources */,
 				614A3E7425080FFC003A24F1 /* Annoucement.swift in Sources */,
 				614A3E7825081B1F003A24F1 /* FeedViewController.swift in Sources */,
@@ -298,6 +297,7 @@
 				61545BAB25194B2F00175C84 /* User.swift in Sources */,
 				6D641758252258FC00C184BA /* HeaderFeedCollectionView.swift in Sources */,
 				614A3E7A25081C12003A24F1 /* AnnoucementCell.swift in Sources */,
+				6D952B202525103300365772 /* WaterFallLayout.swift in Sources */,
 				61BF922C24FD8F1400A8A8BE /* SceneDelegate.swift in Sources */,
 				61FEB07D250954F70092626A /* EditAnnoucementViewController.swift in Sources */,
 				61B6F30925017FE800C65B1F /* HardConstants.swift in Sources */,

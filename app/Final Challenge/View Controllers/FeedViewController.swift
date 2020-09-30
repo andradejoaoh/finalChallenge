@@ -8,30 +8,39 @@
 
 import UIKit
 
-class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CollectionViewCellDelegate {
-    
-    
+class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CollectionViewCellDelegate, WaterfallLayoutDelegate {
     
     var comeFromPaid: Bool = false
     var selectedAnnoucement:Int?
     
 
-    var placeholder: UIImage = #imageLiteral(resourceName: "placeholder")
+    var placeholder: UIImage = #imageLiteral(resourceName: "placeholder1")
     
 
+//    let feedCollectionViewTest: UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        layout.headerReferenceSize = CGSize(width: 100 , height: 30)
+//        layout.minimumLineSpacing = 16
+//        layout.scrollDirection = .vertical
+//        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+//        cv.backgroundColor = .clear
+//        return cv
+//    }()
+    
     let feedCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.headerReferenceSize = CGSize(width: 100 , height: 30)
+        let layout = WaterfallLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumLineSpacing = 16
-        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = 8.0
+        layout.headerHeight = 30.0
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         return cv
     }()
     
     
+    
     func setupViews(){
-        
         
         feedCollectionView.dataSource = self
         feedCollectionView.delegate = self
@@ -41,6 +50,8 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         feedCollectionView.register(PaidAnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell)
         feedCollectionView.register(HeaderFeedCollectionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView")
         
+        
+        
         feedCollectionView.translatesAutoresizingMaskIntoConstraints = false
         feedCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         feedCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -48,6 +59,18 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         feedCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         feedCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         feedCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        
+        
+        let layout = WaterfallLayout()
+        layout.delegate = self
+        layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        layout.minimumLineSpacing = 8.0
+        layout.minimumInteritemSpacing = 8.0
+        layout.headerHeight = 50.0
+        feedCollectionView.collectionViewLayout = layout
+        
+        feedCollectionView.dataSource = self
+        
     }
     
     
@@ -58,7 +81,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-    var imageArray: [String] = ["placeholder","placeholder2", "placeholder"]
+    var imageLiteralArray = [#imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1")]
 
     var imagesAnnounced: [String]? {
         didSet{
@@ -70,7 +93,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViews()
     }
     
@@ -104,9 +126,9 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if indexPath.section == 1 {//ANNOUCEMENT
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCell, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
             cell.layer.cornerRadius = 10
-            if let imageName = imagesAnnounced?[indexPath.item] {
-                cell.imageAnnoucements.image = UIImage(named: imageName)
-            }
+//            if let imageName = imagesAnnounced?[indexPath.item] {
+//                cell.imageAnnoucements.image = UIImage(named: imageName)
+//            }
             return cell
         } else {
             guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementCell else { return UICollectionViewCell()}
@@ -124,20 +146,38 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
         }
     }
+  
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) ->  CGSize{
+    
+    
+    
+//    let image = imageLiteralArray[indexPath.item]
+//    let height = image.size.height
+    // TODO WATERFALL HERE
+    
+    
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout: WaterfallLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        
-        if indexPath.section == 1 {//ANNOUNCEMENT
-            let numberOfColumns: CGFloat =  2.2
-            let width = collectionView.frame.size.width
-            let xInsets: CGFloat = 2.5
-            let cellSpacing: CGFloat = 2.5
-            return CGSize(width: (width/numberOfColumns) - (xInsets + cellSpacing), height: (width/numberOfColumns) - (xInsets + cellSpacing))
-        } else {//PAID
+        if indexPath.section == 0 {//PAID
             return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height)*0.3)
+        } else {
+            return CGSize(width: (imageLiteralArray[indexPath.item].size.width), height: (imageLiteralArray[indexPath.item].size.height))
+//                imageLiteralArray[indexPath.item].size
         }
     }
+    
+    func collectionViewLayout(for section: Int) -> WaterfallLayout.Layout {
+        if section == 0{
+            return .flow(column: 1)
+        } else {
+            return .waterfall(column: 2, distributionMethod: .balanced)
+        }
+    }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
@@ -158,14 +198,14 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if section == 1{//ANNOUCEMENT
-            return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        } else {//PAID
-            return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        }
-        
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        if section == 1{//ANNOUCEMENT
+//            return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+//        } else {//PAID
+//            return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+//        }
+//
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let annoucementViewController = segue.destination as? AnnoucementViewController {

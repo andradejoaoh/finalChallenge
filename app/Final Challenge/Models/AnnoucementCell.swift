@@ -11,7 +11,7 @@ import UIKit
 class AnnoucementCell: UICollectionViewCell{
     
     let imageAnnoucements: UIImageView = {
-        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder"))
+        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))
         image.layer.cornerRadius = 10
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill

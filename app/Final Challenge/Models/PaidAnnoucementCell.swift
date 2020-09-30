@@ -18,7 +18,7 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
         }
     }
     
-    var imageArray: [String] = ["placeholder","placeholder2", "placeholder"]
+    var imageArray: [String] = ["placeholder1","placeholder2", "placeholder3", "placeholder4","placeholder1","placeholder1","placeholder1"]
     
     var imagesPaid: [String]? {
         didSet{
@@ -86,9 +86,9 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCellSection, for: indexPath) as? annoucementCellForSection else { return UICollectionViewCell()}
         
-        if let imageName = imagesPaid?[indexPath.item] {
-            cell.imagePaidAnnoucements.image = UIImage(named: imageName)
-        }
+        let imageName = imageArray[indexPath.item]
+        cell.imagePaidAnnoucements.image = UIImage(named: imageName)
+        
         
         cell.layer.cornerRadius = 10
         return cell
@@ -114,7 +114,7 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
         
         
         let imagePaidAnnoucements: UIImageView = {
-            let image = UIImageView(image: #imageLiteral(resourceName: "placeholder"))
+            let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))
             image.layer.cornerRadius = 10
             image.clipsToBounds = true
             image.contentMode = .scaleAspectFill
@@ -123,7 +123,6 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
         
         override init (frame: CGRect){
             super.init(frame: frame)
-            backgroundColor = .green
             setupCell()
         }
         

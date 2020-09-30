@@ -34,9 +34,9 @@ class HeaderFeedCollectionView: UICollectionReusableView{
     func setup(){
         addSubview(labelHeader)
         labelHeader.translatesAutoresizingMaskIntoConstraints = false
-        labelHeader.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
-        labelHeader.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5).isActive = true
-        labelHeader.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-        labelHeader.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        labelHeader.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
+        labelHeader.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
+        labelHeader.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 10).isActive = true
+        labelHeader.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 16).isActive = true
     }
 }
