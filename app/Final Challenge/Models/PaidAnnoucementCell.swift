@@ -18,12 +18,20 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
         }
     }
     
+    var imageArray: [String] = ["placeholder1","placeholder2", "placeholder3", "placeholder4","placeholder1","placeholder1","placeholder1"]
+    
+    var imagesPaid: [String]? {
+        didSet{
+            annoucementCollectionView.reloadData()
+        }
+    }
+    
+    var placeholderString: String = "placeholder"
+    
     var selectedAnnoucement:Int?
     
     override init (frame: CGRect){
         super.init(frame: frame)
-        backgroundColor = .red
-        
         setup()
     }
     
@@ -35,12 +43,14 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     
     let annoucementCollectionView: UICollectionView = {
         let annoucemnetLayout = UICollectionViewFlowLayout()
-        annoucemnetLayout.minimumLineSpacing = 30
+        annoucemnetLayout.minimumLineSpacing = 10
         annoucemnetLayout.scrollDirection = .horizontal
         let announcementCV = UICollectionView(frame: .zero, collectionViewLayout: annoucemnetLayout)
         announcementCV.backgroundColor = .clear
         return announcementCV
     }()
+    
+    
     
     func setup(){
         addSubview(annoucementCollectionView)
@@ -49,10 +59,13 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
         annoucementCollectionView.dataSource = self
         
         annoucementCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        annoucementCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-        annoucementCollectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
+        annoucementCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        annoucementCollectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
         annoucementCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-        annoucementCollectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
+        annoucementCollectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        
+        
+        
         
         DatabaseHandler.readAnnoucements { (result) in
             switch result {
@@ -72,6 +85,11 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCellSection, for: indexPath) as? annoucementCellForSection else { return UICollectionViewCell()}
+        
+        let imageName = imageArray[indexPath.item]
+        cell.imagePaidAnnoucements.image = UIImage(named: imageName)
+        
+        cell.layer.cornerRadius = 10
         return cell
     }
     
@@ -84,17 +102,38 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (frame.width/3), height: (frame.height)*0.9)
+        return CGSize(width: (frame.width)*0.6, height: (frame.height))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     private class annoucementCellForSection: UICollectionViewCell {
+        
+        
+        let imagePaidAnnoucements: UIImageView = {
+            let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))
+            image.layer.cornerRadius = 10
+            image.clipsToBounds = true
+            image.contentMode = .scaleAspectFill
+            return image
+        }()
+        
         override init (frame: CGRect){
             super.init(frame: frame)
-            backgroundColor = .green
+            setupCell()
+        }
+        
+        func setupCell() {
+            
+            addSubview(imagePaidAnnoucements)
+
+            imagePaidAnnoucements.translatesAutoresizingMaskIntoConstraints = false
+            imagePaidAnnoucements.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+            imagePaidAnnoucements.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+            imagePaidAnnoucements.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+            imagePaidAnnoucements.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
         }
         
         required init?(coder: NSCoder) {

@@ -1,11 +1,32 @@
-//
-//  collectionViewStyles.swift
-//  Final Challenge
-//
-//  Created by Luiz Henrique Monteiro de Carvalho on 17/09/20.
-//  Copyright © 2020 João Henrique Andrade. All rights reserved.
-//
-
+/**
+* Copyright (c) 2019 Razeware LLC
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
+* distribute, sublicense, create a derivative work, and/or sell copies of the
+* Software in any work that is designed, intended, or marketed for pedagogical or
+* instructional purposes related to programming, coding, application development,
+* or information technology.  Permission for such use, copying, modification,
+* merger, publication, distribution, sublicensing, creation of derivative works,
+* or sale is expressly withheld.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+* THE SOFTWARE.
+*/
 
 import UIKit
 
@@ -14,17 +35,17 @@ protocol PinterestLayoutDelegate: AnyObject {
 }
 
 class PinterestLayout: UICollectionViewLayout {
-  // 1
+  // 1 Pinterest Layout Delegate
   weak var delegate: PinterestLayoutDelegate?
 
-  // 2
+  // 2 Configurable properties
   private let numberOfColumns = 2
   private let cellPadding: CGFloat = 6
 
-  // 3
+  // 3 Array to keep cache of atributes
   private var cache: [UICollectionViewLayoutAttributes] = []
 
-  // 4
+  // 4 Content height and size
   private var contentHeight: CGFloat = 0
 
   private var contentWidth: CGFloat {
@@ -35,20 +56,20 @@ class PinterestLayout: UICollectionViewLayout {
     return collectionView.bounds.width - (insets.left + insets.right)
   }
 
-  // 5
+  
   override var collectionViewContentSize: CGSize {
     return CGSize(width: contentWidth, height: contentHeight)
   }
   
   override func prepare() {
-    // 1
+    // 1 only calculate once
     guard
       cache.isEmpty == true,
       let collectionView = collectionView
       else {
         return
     }
-    // 2
+    // 2 Pre calculate de X-Offset for every column and adds an array to increment the currently max Y for each column
     let columnWidth = contentWidth / CGFloat(numberOfColumns)
     var xOffset: [CGFloat] = []
     for column in 0..<numberOfColumns {
@@ -57,11 +78,11 @@ class PinterestLayout: UICollectionViewLayout {
     var column = 0
     var yOffset: [CGFloat] = .init(repeating: 0, count: numberOfColumns)
       
-    // 3
+    // 3 Iterates through the list of items of the first section
     for item in 0..<collectionView.numberOfItems(inSection: 0) {
       let indexPath = IndexPath(item: item, section: 0)
         
-      // 4
+      // 4 asks the delegate for the height of the picture and annotation calculates the cell frame
       let photoHeight = delegate?.collectionView(
         collectionView,
         heightForPhotoAtIndexPath: indexPath) ?? 180
@@ -72,12 +93,12 @@ class PinterestLayout: UICollectionViewLayout {
                          height: height)
       let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
         
-      // 5
+      // 5 creates an UICollectionViewLayoutItem with the frame and add it to the cache
       let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
       attributes.frame = insetFrame
       cache.append(attributes)
         
-      // 6
+      // 6 Updates de content view cache
       contentHeight = max(contentHeight, frame.maxY)
       yOffset[column] = yOffset[column] + height
         

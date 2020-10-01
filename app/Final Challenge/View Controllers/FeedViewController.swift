@@ -8,54 +8,54 @@
 
 import UIKit
 
-class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CollectionViewCellDelegate {
-    
-    
+class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CollectionViewCellDelegate, WaterfallLayoutDelegate {
     
     var comeFromPaid: Bool = false
     var selectedAnnoucement:Int?
     
+
+//    let feedCollectionViewTest: UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        layout.headerReferenceSize = CGSize(width: 100 , height: 30)
+//        layout.minimumLineSpacing = 16
+//        layout.scrollDirection = .vertical
+//        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+//        cv.backgroundColor = .clear
+//        return cv
+//    }()
     
     let feedCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
+        let layout = WaterfallLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumLineSpacing = 16
-        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = 8.0
+        layout.headerHeight = 20.0
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         return cv
     }()
     
-    let paidAnnoucementLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Anúncios em destaque:"
-        label.font = UIFont.systemFont(ofSize: 16)
-        return label
-    }()
-    
-    let annoucementLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Anúncios"
-        label.font = UIFont.systemFont(ofSize: 16)
-        return label
-    }()
-    
-    let imagePaidAnnoucements: UIImageView = {
-        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder"))
-        image.layer.cornerRadius = (image.frame.width/1.25)
+    let imageAnnoucements: UIImageView = {
+        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))
+        image.layer.cornerRadius = 10
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
         return image
     }()
     
     
+    
     func setupViews(){
+        
         feedCollectionView.dataSource = self
         feedCollectionView.delegate = self
         view.addSubview(feedCollectionView)
         
-        
         feedCollectionView.register(AnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.annoucementCell)
         feedCollectionView.register(PaidAnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell)
+        feedCollectionView.register(HeaderFeedCollectionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView")
+        
+        
         
         feedCollectionView.translatesAutoresizingMaskIntoConstraints = false
         feedCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -64,11 +64,32 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         feedCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         feedCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         feedCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        
+        
+        let layout = WaterfallLayout()
+        layout.delegate = self
+        layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        layout.minimumLineSpacing = 8.0
+        layout.minimumInteritemSpacing = 8.0
+        layout.headerHeight = 50.0
+        feedCollectionView.collectionViewLayout = layout
+        
+        feedCollectionView.dataSource = self
+        
     }
     
     
     
     var annoucements: [Annoucement] = []{
+        didSet{
+            feedCollectionView.reloadData()
+        }
+    }
+    
+    var imageLiteralArray = [#imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1")]
+    var imageArray: [String] = ["placeholder1","placeholder2", "placeholder3", "placeholder4","placeholder1","placeholder1","placeholder1"]
+
+    var imagesAnnounced: [String]? {
         didSet{
             feedCollectionView.reloadData()
         }
@@ -111,12 +132,14 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 1 {//ANNOUCEMENT
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCell, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
-            //cell.backgroundColor = .red
-            //cell.annoucementNameLabel.text = annoucements[indexPath.item].annoucementName
+            cell.layer.cornerRadius = 10
+            let imageName = imageArray[indexPath.item]
+            cell.imageAnnoucements.image = UIImage(named: imageName)
             return cell
         } else {
             guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementCell else { return UICollectionViewCell()}
             paidCell.delegate = self
+            
             return paidCell
         }
         
@@ -130,32 +153,55 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) ->  CGSize{
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout: WaterfallLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        
-        if indexPath.section == 1 {//ANNOUNCEMENT
-            let numberOfColumns: CGFloat =  2
-            let width = collectionView.frame.size.width
-            let xInsets: CGFloat = 10
-            let cellSpacing: CGFloat = 5
-            return CGSize(width: (width/numberOfColumns) - (xInsets + cellSpacing), height: (width/numberOfColumns) - (xInsets + cellSpacing))
-        } else {//PAID
-            return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height/3))
+        if indexPath.section == 0 {//PAID
+            return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height)*0.3)
+        } else {
+            return CGSize(width: (imageLiteralArray[indexPath.item].size.width), height: (imageLiteralArray[indexPath.item].size.height))
+//                imageLiteralArray[indexPath.item].size
         }
-        
-        
-        
+    }
+    
+    func collectionViewLayout(for section: Int) -> WaterfallLayout.Layout {
+        if section == 0{
+            return .flow(column: 1)
+        } else {
+            return .waterfall(column: 2, distributionMethod: .balanced)
+        }
+    }
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath) as! HeaderFeedCollectionView
+            switch indexPath.section{
+            case 0:
+                headerView.labelHeader.text = "Anúncios em destaque:"
+            case 1:
+                headerView.labelHeader.text = "Anúncios"
+            default:
+                headerView.labelHeader.text = "Header Unknown"
+            }
+            return headerView
+        default:
+            preconditionFailure("Invalid supplementary view type for this collection view")
+        }
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if section == 1{//ANNOUCEMENT
-            return UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
-        } else {//PAID
-            return UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-        }
-        
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        if section == 1{//ANNOUCEMENT
+//            return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+//        } else {//PAID
+//            return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+//        }
+//
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let annoucementViewController = segue.destination as? AnnoucementViewController {
