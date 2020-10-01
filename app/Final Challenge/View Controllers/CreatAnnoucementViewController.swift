@@ -8,7 +8,11 @@
 
 import UIKit
 
-class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
+class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    let imagePicker = UIImagePickerController()
+    var annoucementImage: Data?
+    
     @IBOutlet weak var announceButton: UIButton!
     
     @IBOutlet weak var annoucementNameTextField: UITextField!
@@ -26,12 +30,14 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
         
         self.annoucementNameTextField.delegate = self
         self.annoucementDescriptionTextField.delegate = self
+        
         self.productTypePicker.delegate = self
         self.productTypePicker.dataSource = self
-        
         self.annoucementTimePicker.delegate = self
         self.annoucementTimePicker.dataSource = self
                 
+        self.imagePicker.delegate = self
+        
         setupStyleForElements()
         self.hideKeyboardWhenTappedAround()
     }
@@ -52,8 +58,8 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
             let annoucementLocation = annoucementLocationTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let deliveryOption = deliveryOptionSwitch.isOn
             let productType = HardConstants.PickerView.productType[productTypePicker.selectedRow(inComponent: 0)]
-            
-            DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation, deliveryOption:  deliveryOption, productType: productType) { (result) in
+            guard let imageData = annoucementImage else { return }
+            DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation, annoucementImage: imageData, deliveryOption:  deliveryOption, productType: productType) { (result) in
                 switch result {
                 case let .failure(error):
                     //Show error while creating annoucement.
@@ -81,6 +87,18 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate{
         StyleElements.styleFilledButton(selectPictureButton)
         StyleElements.styleTextField(annoucementNameTextField)
         StyleElements.styleTextField(annoucementDescriptionTextField)
+    }
+    
+    @IBAction func selectImageAction(_ sender: Any) {
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
+        self.annoucementImage = image.jpegData(compressionQuality: 0.8)
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

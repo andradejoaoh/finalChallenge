@@ -30,10 +30,10 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setDelegateForTextFields()
-        
+        setupStyleForElements()
         self.hideKeyboardWhenTappedAround()
         imagePicker.delegate = self
-        setupStyleForElements()
+        profileImageView.isHidden = true
     }
     
     @IBAction func signUpAction(_ sender: Any) {
@@ -75,6 +75,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
         self.profileImageView.image = image
+        self.profileImageView.isHidden = false
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -92,9 +93,9 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func transitionToProfile(){
-        let profileViewController = storyboard?.instantiateViewController(identifier: HardConstants.Storyboard.profileViewController) as? ProfileViewController
-        view.window?.rootViewController = profileViewController
-        view.window?.makeKeyAndVisible()
+        if let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.profileViewController), let navigationController = self.navigationController{
+            navigationController.setViewControllers([profileViewController], animated: true)
+        }
     }
     func setDelegateForTextFields(){
         self.storeNameTextField.delegate = self

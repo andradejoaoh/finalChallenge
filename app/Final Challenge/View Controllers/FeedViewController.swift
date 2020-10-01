@@ -79,10 +79,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.comeFromPaid = false
         DatabaseHandler.readAnnoucements { (result) in
             switch result {
             case let .failure(error):
@@ -92,6 +88,11 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 self.annoucements = annoucements
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.comeFromPaid = false
+        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

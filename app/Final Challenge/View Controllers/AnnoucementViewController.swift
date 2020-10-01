@@ -10,6 +10,7 @@ import UIKit
 
 class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     var annoucement: Annoucement?
+    var user: User?
     
     @IBOutlet weak var annoucementImage: UIImageView!
     @IBOutlet weak var annoucementName: UILabel!
@@ -19,6 +20,7 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        getUserData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,7 +32,7 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
         if let annoucement = self.annoucement {
             annoucementName.text = annoucement.annoucementName
             annoucementDescription.text = annoucement.description
-            
+            annoucementImage.image = UIImage(data: annoucement.imageData ?? Data())
         }
     }
     
@@ -42,6 +44,9 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let editAnnoucementViewController = segue.destination as? EditAnnoucementViewController {
             editAnnoucementViewController.annoucement = self.annoucement
+        }
+        if let profileViewController = segue.destination as? ProfileViewController {
+            profileViewController.userProfile = user
         }
     }
     
@@ -58,7 +63,9 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
             }))
         } else {
             actionSheet.addAction(UIAlertAction(title: "Ver Perfil", style: .default, handler: { (UIAlertAction) in
-                self.performSegue(withIdentifier: HardConstants.Storyboard.profileSegue, sender: self)
+                guard self.user != nil else { return }
+                self.performSegue(withIdentifier: HardConstants.Storyboard.annoucementProfileSegue, sender: self)
+                
             }))
             actionSheet.addAction(UIAlertAction(title: "Denunciar", style: .destructive, handler: { (UIAlertAction) in
                 print("Denunciar")
@@ -83,5 +90,16 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
             }
         }))
         self.present(deleteAlert, animated: true, completion: nil)
+    }
+    func getUserData() {
+        guard let annoucement = self.annoucement else { return }
+        DatabaseHandler.getUserData(userID: annoucement.userID, completion: { (result) in
+            switch result{
+            case let .success(user):
+                self.user = user
+            case let .failure(err):
+                print(err)
+            }
+        })
     }
 }

@@ -23,6 +23,9 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupView()
+        if let user = userProfile {
+            bio.text = user.userBio
+        }
     }
 
     @IBAction func signOutAction(_ sender: Any) {

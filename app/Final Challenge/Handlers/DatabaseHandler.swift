@@ -32,6 +32,7 @@ class DatabaseHandler {
                 // There was an error while creating user
                 return completion(.failure(error))
             } else {
+                guard let user = result?.user else { return }
                 // User created sucessfully
                 // Upload User Profile Picture
                 let storage = Storage.storage(url: HardConstants.Database.storageURL)
@@ -51,21 +52,21 @@ class DatabaseHandler {
                         }
                         if let url = url {
                             let database = Firestore.firestore()
-                            database.collection("users").addDocument(data:
-                                ["full_name":fullname,
-                                 "store_name":storeName,
-                                 "adress":adress,
-                                 "bio":bio,
-                                 "site":site,
-                                 "facebook":facebook,
-                                 "email": email,
-                                 "uid":result!.user.uid,
-                                 "profile_image_url":url.absoluteString]) { (error) in
-                                    if error != nil {
-                                        // Show error message
-                                    }
-                                    
+                            database.collection("users").document(user.uid).setData(["full_name":fullname,
+                                                                                     "store_name":storeName,
+                                                                                     "adress":adress,
+                                                                                     "bio":bio,
+                                                                                     "site":site,
+                                                                                     "facebook":facebook,
+                                                                                     "email": email,
+                                                                                     "uid":result!.user.uid,
+                                                                                     "profile_image_url":url.absoluteString]) { (error) in
+                                if error != nil {
+                                    //Show error while creating user
+                                    completion(.failure(error!))
+                                }
                             }
+                            
                         }
                     }
                 }
@@ -75,14 +76,14 @@ class DatabaseHandler {
         }
     }
     
-    static func createAnnoucement(annoucementName: String, annoucementDescription: String, annoucementLocation: String, deliveryOption: Bool, productType: String, completion: @escaping (Result<String,Error>) -> Void){
+    static func createAnnoucement(annoucementName: String, annoucementDescription: String, annoucementLocation: String, annoucementImage: Data, deliveryOption: Bool, productType: String, completion: @escaping (Result<String,Error>) -> Void){
         let database = Firestore.firestore()
         guard let userAuth = FirebaseAuth.Auth.auth().currentUser else { return }
         let annoucementDocument = database.collection("annoucements").document()
         let storage = Storage.storage(url: HardConstants.Database.storageURL)
         let storageReference = storage.reference()
         let annoucementImageReference = storageReference.child("annoucementPictures/\(annoucementDocument.documentID)")
-        let annoucementImageData = Data()
+        let annoucementImageData = annoucementImage
         let uploadTask = annoucementImageReference.putData(annoucementImageData, metadata: nil) { (metadata, error) in
             guard error == nil else {
                 return completion(.failure(error!))
@@ -97,14 +98,14 @@ class DatabaseHandler {
                                                  "annoucement_description":annoucementDescription,
                                                  "annoucement_location":annoucementLocation,
                                                  "annoucement_id":annoucementDocument.documentID,
-//                                                 "annoucement_image_url":url,
+                                                 //                                                 "annoucement_image_url":url,
                                                  "delivery_option": deliveryOption,
                                                  "product_type": productType,
                                                  "annoucement_user_id":userAuth.uid]) { (error) in
-                                                    if error != nil {
-                                                        return completion(.failure(error!))
-                                                    }
-                                                    completion(.success("Created annoucement sucessfully"))
+                        if error != nil {
+                            return completion(.failure(error!))
+                        }
+                        completion(.success("Created annoucement sucessfully"))
                     }
                 }
             }
@@ -139,37 +140,28 @@ class DatabaseHandler {
              "annoucement_description":annoucementDescription,
              "delivery_option":deliveryOption,
              "product_type": productType]) { (error) in
-                if error != nil {
-                    completion(.failure(error!))
-                }
-                completion(.success("Uptaded annoucement sucessfully"))
+            if error != nil {
+                completion(.failure(error!))
+            }
+            completion(.success("Uptaded annoucement sucessfully"))
         }
     }
     
+    
     static func readAnnoucements(completion: @escaping (Result<[Annoucement],Error>) -> Void){
         let database = Firestore.firestore()
-        var annoucements: [Annoucement] = []
         database.collection("annoucements").getDocuments { (snapshot, error) in
             if error != nil {
                 completion(.failure(error!))
             } else {
                 guard let snapshot = snapshot else { return }
-                for element in snapshot.documents {
-                    let data = element.data()
-                    guard let annoucementName = data["annoucement_name"] as? String else { return }
-                    guard let annoucementID = data["annoucement_id"] as? String else { return }
-                    guard let annoucementDescription = data["annoucement_description"] as? String else { return }
-                    guard let annoucementLocation = data["annoucement_location"] as? String else { return }
-                    guard let annoucementUserID = data["annoucement_user_id"] as? String else { return }
-                    guard let deliveryOption = data["delivery_option"] as? Bool else { return }
-                    guard let productType = data["product_type"] as? String else { return }
-                    let annoucement = Annoucement(annoucementName: annoucementName, userID: annoucementUserID, description: annoucementDescription, annoucementID: annoucementID, location: annoucementLocation, optionDelivery: deliveryOption, productType: productType)
-                    annoucements.append(annoucement)
-                }
+                guard let annocs: [Annoucement] = try? snapshot.toObject() else { return completion(.failure(ErrorTypes.parseError)) }
+                getImage(for: annocs)
+                completion(.success(annocs))
             }
-            completion(.success(annoucements))
         }
     }
+    
     
     static func getProfileImage(userID: String, completion: @escaping (Result<Data,Error>) -> Void) {
         let storage = Storage.storage(url: HardConstants.Database.storageURL)
@@ -225,7 +217,46 @@ class DatabaseHandler {
             print("Error signing out: %@", error)
         }
     }
+    
+    static func getImage(for annoucement: Annoucement){
+        let storage = Storage.storage(url: HardConstants.Database.storageURL)
+        let storageReference = storage.reference()
+        let annoucementImage = storageReference.child("annoucementPictures/\(annoucement.annoucementID)")
+        annoucementImage.getData(maxSize: 1*1024*1024) { (data, error) in
+            weak var annoucement: Annoucement? = annoucement
+            if error != nil {
+                //Show error while getting annoucementImage
+            } else {
+                guard let data = data, let annoucement = annoucement else { return }
+                annoucement.imageData = data
+            }
+        }
+    }
+    
+    static func getImage(for annoucements: [Annoucement]){
+        annoucements.forEach(getImage)
+    }
 }
 
 
 
+extension QuerySnapshot {
+    
+    func toObject<T: Decodable>() throws -> [T] {
+        let objects: [T] = try documents.map({ try $0.toObject() })
+        return objects
+    }
+}
+
+extension QueryDocumentSnapshot {
+    func toObject<T: Decodable>() throws -> T {
+        let jsonData = try JSONSerialization.data(withJSONObject: data(), options: [])
+        let object = try JSONDecoder().decode(T.self, from: jsonData)
+        
+        return object
+    }
+}
+
+enum ErrorTypes: Error{
+    case parseError
+}
