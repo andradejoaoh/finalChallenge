@@ -155,13 +155,24 @@ class DatabaseHandler {
                 completion(.failure(error!))
             } else {
                 guard let snapshot = snapshot else { return }
-                guard let annocs: [Annoucement] = try? snapshot.toObject() else { return completion(.failure(ErrorTypes.parseError)) }
+                guard let annocs: [Annoucement] = try? snapshot.toObject() else { return completion(.failure(ErrorTypes.parseAnnoucementError)) }
                 getImage(for: annocs)
                 completion(.success(annocs))
             }
         }
     }
     
+    static func getData(for userID: String, completion: @escaping (Result<User,Error>) -> Void){
+        let database = Firestore.firestore()
+        database.collection("users").document(userID).getDocument { (snapshot, error) in
+            guard error == nil else {
+                return completion(.failure(error!))
+            }
+            guard let snapshot = snapshot else { return }
+            guard let data = snapshot.data() else { return }
+            data.comp
+        }
+    }
     
     static func getProfileImage(userID: String, completion: @escaping (Result<Data,Error>) -> Void) {
         let storage = Storage.storage(url: HardConstants.Database.storageURL)
@@ -178,26 +189,26 @@ class DatabaseHandler {
         }
     }
     
-    static func getUserData(userID: String, completion: @escaping (Result<User,Error>) -> Void){
-        let database = Firestore.firestore()
-        database.collection("users").document(userID).getDocument { (snapshot, error) in
-            guard error == nil else {
-                //Show error while loading document
-                return completion(.failure(error!))
-            }
-            guard let snapshot = snapshot else { return }
-            guard let data = snapshot.data() else { return }
-            guard let storeName = data["store_name"] as? String else { return }
-            guard let bio = data["bio"] as? String else { return }
-            guard let site = data["site"] as? String else { return }
-            guard let facebook = data["facebook"] as? String else { return }
-            guard let email = data["email"] as? String else { return }
-            guard let userName = data["full_name"] as? String else { return }
-            
-            let user = User(userName: userName, userEmail: email, userID: userID, userFacebook: facebook, userBio: bio, userSite: site, userStoreName: storeName)
-            completion(.success(user))
-        }
-    }
+//    static func getUserData(userID: String, completion: @escaping (Result<User,Error>) -> Void){
+//        let database = Firestore.firestore()
+//        database.collection("users").document(userID).getDocument { (snapshot, error) in
+//            guard error == nil else {
+//                //Show error while loading document
+//                return completion(.failure(error!))
+//            }
+//            guard let snapshot = snapshot else { return }
+//            guard let data = snapshot.data() else { return }
+//            guard let storeName = data["store_name"] as? String else { return }
+//            guard let bio = data["bio"] as? String else { return }
+//            guard let site = data["site"] as? String else { return }
+//            guard let facebook = data["facebook"] as? String else { return }
+//            guard let email = data["email"] as? String else { return }
+//            guard let userName = data["full_name"] as? String else { return }
+//
+//            let user = User(userName: userName, userEmail: email, userID: userID, userFacebook: facebook, userBio: bio, userSite: site, userStoreName: storeName)
+//            completion(.success(user))
+//        }
+//    }
     
     static func isUserLoggedIn() -> Bool {
         if Auth.auth().currentUser == nil {
@@ -238,25 +249,3 @@ class DatabaseHandler {
     }
 }
 
-
-
-extension QuerySnapshot {
-    
-    func toObject<T: Decodable>() throws -> [T] {
-        let objects: [T] = try documents.map({ try $0.toObject() })
-        return objects
-    }
-}
-
-extension QueryDocumentSnapshot {
-    func toObject<T: Decodable>() throws -> T {
-        let jsonData = try JSONSerialization.data(withJSONObject: data(), options: [])
-        let object = try JSONDecoder().decode(T.self, from: jsonData)
-        
-        return object
-    }
-}
-
-enum ErrorTypes: Error{
-    case parseError
-}

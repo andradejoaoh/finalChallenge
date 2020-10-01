@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct User {
+class User: Codable {
     let userName: String
     let userEmail: String
     let userID: String
@@ -15,4 +15,14 @@ struct User {
     let userBio: String
     let userSite: String?
     let userStoreName: String
+    
+    enum CodingKeys: String, CodingKey {
+       case userName = "full_name"
+       case userEmail = "email"
+       case userID = "uid"
+       case userFacebook = "facebook"
+       case userBio = "bio"
+       case userSite = "site"
+       case userStoreName = "store_name"
+    }
 }

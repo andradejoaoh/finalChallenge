@@ -93,7 +93,7 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     }
     func getUserData() {
         guard let annoucement = self.annoucement else { return }
-        DatabaseHandler.getUserData(userID: annoucement.userID, completion: { (result) in
+        DatabaseHandler.getData(for: annoucement.userID, completion: { (result) in
             switch result{
             case let .success(user):
                 self.user = user
