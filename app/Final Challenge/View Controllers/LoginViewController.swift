@@ -15,11 +15,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
         self.hideKeyboardWhenTappedAround()
         setupStyleElements()
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func loginAction(_ sender: Any) {
@@ -43,8 +43,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
-        
-
     }
     
     func validateFields() -> String? {
@@ -57,10 +55,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func transitionToProfile(){
-        performSegue(withIdentifier: "profileSegue", sender: nil)
-//        let profileViewController = storyboard?.instantiateViewController(identifier: HardConstants.Storyboard.profileViewController) as? ProfileViewController
-//        view.window?.rootViewController = profileViewController
-//        view.window?.makeKeyAndVisible()
+        if let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.profileViewController), let navigationController = self.navigationController{
+            navigationController.setViewControllers([profileViewController], animated: true)
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

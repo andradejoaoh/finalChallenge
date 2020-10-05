@@ -15,27 +15,23 @@ class EditAnnoucementViewController: UIViewController {
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var productTypePicker: UIPickerView!
+    @IBOutlet weak var deliveryOption: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        productTypePicker.delegate = self
+        productTypePicker.dataSource = self
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         if let annoucement = annoucement {
             nameTextField.text = annoucement.annoucementName
             descriptionTextField.text = annoucement.description
             locationTextField.text = annoucement.location
-        }
-    }
-    
-    @IBAction func deleteAction(_ sender: Any) {
-        guard let annoucement = annoucement else { return }
-        DatabaseHandler.deleteAnnoucement(annoucementID: annoucement.annoucementID) { (result) in
-            switch result {
-            case let .failure(error):
-                //Error while deleting annoucement
-                print(error)
-            case .success:
-                self.navigationController?.popViewController(animated: true)
-            }
         }
     }
     
@@ -46,7 +42,7 @@ class EditAnnoucementViewController: UIViewController {
         guard let description = descriptionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard let location = locationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         
-        DatabaseHandler.editAnnoucement(annoucementID: annoucement.annoucementID, annoucementName: name, annoucementLocation: location, annoucementDescription: description) { (result) in
+        DatabaseHandler.editAnnoucement(annoucementID: annoucement.annoucementID, annoucementName: name, annoucementLocation: location, annoucementDescription: description, deliveryOption: false, productType: "Comida") { (result) in
             switch result {
             case let .failure(error):
                 //Error while updating annoucement
@@ -55,5 +51,19 @@ class EditAnnoucementViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
+    }
+}
+
+extension EditAnnoucementViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        HardConstants.PickerView.productType.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        HardConstants.PickerView.productType[row]
     }
 }

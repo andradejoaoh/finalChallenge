@@ -7,41 +7,49 @@
 //
 
 import UIKit
-import FirebaseStorage
-import Firebase
 
 class ProfileViewController: UIViewController {
+    var userProfile: User?
+
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var bio: UILabel!
+    @IBOutlet weak var signOutButton: UIButton!
+    @IBOutlet weak var annouceButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
     }
     
-    func getProfileImage() {
-        let storage = Storage.storage(url: HardConstants.Database.storageURL)
-        let storageReference = storage.reference()
-        guard let user = Auth.auth().currentUser else { return }
-        let profileImageReference = storageReference.child("profilePictures/\(user.uid)")
-        var imageData: UIImage?
-        profileImageReference.getData(maxSize: 1*1024*1024) { (data, error) in
-            if error != nil {
-                print(error)
-                //Show error message while downloading picture
-            } else {
-                imageData = UIImage(data: data!)
-                self.profileImageView.image = imageData
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setupView()
+        if let user = userProfile {
+            bio.text = user.userBio
+        }
+    }
+
+    @IBAction func signOutAction(_ sender: Any) {
+        let signOutAlert = UIAlertController(title: "Deseja Sair?", message: "Você poderá fazer login quando quiser novamente", preferredStyle: .alert)
+        signOutAlert.addAction(UIAlertAction(title: "Cancelar", style: .default, handler: nil))
+        signOutAlert.addAction(UIAlertAction(title: "Sair", style: .destructive, handler: { (UIAlertAction) in
+            DatabaseHandler.signOut()
+            if let homeProfileViewController = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.homeProfileViewController), let navigationController = self.navigationController{
+                navigationController.setViewControllers([homeProfileViewController], animated: true)
+            }
+        }))
+        self.present(signOutAlert, animated: true, completion: nil)
+    }
+    
+    func setupView() {
+        if let user = self.userProfile {
+            DatabaseHandler.getProfileImage(userID: user.userID) { result in
+                switch result {
+                case let .success(data):
+                    self.profileImageView.image = UIImage(data: data)
+                case let .failure(error):
+                    print(error)
+                }
             }
         }
     }
-    
-
-    @IBAction func signOutAction(_ sender: Any) {
-        DatabaseHandler.signOut()
-        navigationController?.popViewController(animated: true)
-    }    
 }

@@ -8,17 +8,46 @@
 
 import UIKit
 
-class CreateAnnoucementViewController: UIViewController{
+class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    let imagePicker = UIImagePickerController()
+    var annoucementImage: Data?
+    
     @IBOutlet weak var announceButton: UIButton!
+    
     @IBOutlet weak var annoucementNameTextField: UITextField!
     @IBOutlet weak var annoucementDescriptionTextField: UITextField!
     @IBOutlet weak var annoucementLocationTextField: UITextField!
     
+    @IBOutlet weak var deliveryOptionSwitch: UISwitch!
+    @IBOutlet weak var productTypePicker: UIPickerView!
+    @IBOutlet weak var annoucementTimePicker: UIPickerView!
+    
+    @IBOutlet weak var selectPictureButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.annoucementNameTextField.delegate = self
+        self.annoucementDescriptionTextField.delegate = self
+        
+        self.productTypePicker.delegate = self
+        self.productTypePicker.dataSource = self
+        self.annoucementTimePicker.delegate = self
+        self.annoucementTimePicker.dataSource = self
+                
+        self.imagePicker.delegate = self
+        
+        setupStyleForElements()
+        self.hideKeyboardWhenTappedAround()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.productTypePicker.tag = 1
+        self.annoucementTimePicker.tag = 2
+    }
+    
     @IBAction func annouceAction(_ sender: Any) {
         if validateFields() != nil {
             //Show fill all fields error
@@ -27,20 +56,23 @@ class CreateAnnoucementViewController: UIViewController{
             let annoucementName = annoucementNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let annoucementDescription = annoucementDescriptionTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let annoucementLocation = annoucementLocationTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation) { (result) in
+            let deliveryOption = deliveryOptionSwitch.isOn
+            let productType = HardConstants.PickerView.productType[productTypePicker.selectedRow(inComponent: 0)]
+            guard let imageData = annoucementImage else { return }
+            DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation, annoucementImage: imageData, deliveryOption:  deliveryOption, productType: productType) { (result) in
                 switch result {
                 case let .failure(error):
+                    //Show error while creating annoucement.
                     print(error)
                 case .success:
                     break
                 }
             }
+            self.navigationController?.popViewController(animated: true)
         }
-        self.dismiss(animated: true, completion: nil)
     }
     
-    
-       func validateFields() -> String? {
+    func validateFields() -> String? {
         //Check if fields are filled in
         if annoucementNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             annoucementLocationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
@@ -48,5 +80,54 @@ class CreateAnnoucementViewController: UIViewController{
             return "Preencha todos os campos."
         }
         return nil
+    }
+    
+    func setupStyleForElements(){
+        StyleElements.styleFilledButton(announceButton)
+        StyleElements.styleFilledButton(selectPictureButton)
+        StyleElements.styleTextField(annoucementNameTextField)
+        StyleElements.styleTextField(annoucementDescriptionTextField)
+    }
+    
+    @IBAction func selectImageAction(_ sender: Any) {
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
+        self.annoucementImage = image.jpegData(compressionQuality: 0.8)
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
+/**
+ `UIPickerView protocols` used by two of the same.
+
+ `HardConstants.swift` contains the data.
+
+ - Author:
+   João Henrique Andrade
+*/
+extension CreateAnnoucementViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView.tag == 1 {
+            return HardConstants.PickerView.productType.count
+        } else {
+            return HardConstants.PickerView.annoucementTime.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView.tag == 1 {
+            return HardConstants.PickerView.productType[row]
+        } else {
+            return HardConstants.PickerView.annoucementTime[row]
+        }
     }
 }
