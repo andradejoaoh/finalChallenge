@@ -18,7 +18,9 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
         }
     }
     
-    var imageArray: [String] = ["placeholder1","placeholder2", "placeholder3", "placeholder4","placeholder1","placeholder1","placeholder1"]
+    var imageLiteralArray = [#imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1")]
+    
+    //var imageArray: [String] = ["placeholder1","placeholder2", "placeholder3", "placeholder4","placeholder1","placeholder1","placeholder1"]
     
     var imagesPaid: [String]? {
         didSet{
@@ -86,8 +88,8 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCellSection, for: indexPath) as? annoucementCellForSection else { return UICollectionViewCell()}
         
-        let imageName = imageArray[indexPath.item]
-        cell.imagePaidAnnoucements.image = UIImage(named: imageName)
+        let imageName = imageLiteralArray[indexPath.item]
+        cell.imagePaidAnnoucements.image = imageName
         
         cell.layer.cornerRadius = 10
         return cell

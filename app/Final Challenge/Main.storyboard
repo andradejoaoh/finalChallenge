@@ -73,7 +73,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="EZz-ye-h7R"/>
                     <connections>
-                        <segue destination="0dW-8G-m0F" kind="show" identifier="showAnnoucement" id="OxF-sr-Z0V"/>
+                        <segue destination="0dW-8G-m0F" kind="presentation" identifier="showAnnoucement" id="OxF-sr-Z0V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gXo-TZ-8KN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -85,32 +85,32 @@
             <objects>
                 <viewController id="0dW-8G-m0F" customClass="AnnoucementViewController" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DCE-le-3ny">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XLI-IX-1YZ">
-                                <rect key="frame" x="0.0" y="88" width="414" height="358.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="337"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome do Anúncio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGz-zo-xef">
-                                <rect key="frame" x="24" y="470.5" width="136" height="21"/>
+                                <rect key="frame" x="24" y="361" width="136" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preço" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSA-E2-lhI">
-                                <rect key="frame" x="345.5" y="470.5" width="44.5" height="21"/>
+                                <rect key="frame" x="345.5" y="361" width="44.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descrição" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17j-Jz-dnh">
-                                <rect key="frame" x="24" y="515.5" width="366" height="21"/>
+                                <rect key="frame" x="24" y="406" width="366" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBY-UJ-gnY">
-                                <rect key="frame" x="337" y="759" width="53" height="30"/>
+                                <rect key="frame" x="337" y="754" width="53" height="30"/>
                                 <state key="normal" title="Opções"/>
                                 <connections>
                                     <action selector="optionsAction:" destination="0dW-8G-m0F" eventType="touchUpInside" id="2Un-ZA-PNv"/>
@@ -386,11 +386,11 @@
             <objects>
                 <viewController id="gyI-RA-dZL" customClass="EditAnnoucementViewController" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yxw-FA-x7e">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVy-I1-gZb">
-                                <rect key="frame" x="50" y="597.5" width="314" height="35"/>
+                                <rect key="frame" x="50" y="509.5" width="314" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="X2y-Ui-7A9"/>
                                 </constraints>
@@ -400,7 +400,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="AMg-AB-gu9">
-                                <rect key="frame" x="50" y="108" width="314" height="142"/>
+                                <rect key="frame" x="50" y="20" width="314" height="142"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A0F-oR-vOP">
                                         <rect key="frame" x="0.0" y="0.0" width="314" height="34"/>
@@ -420,22 +420,22 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipo do Produto" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dh2-1O-afP">
-                                <rect key="frame" x="20" y="270" width="122.5" height="20.5"/>
+                                <rect key="frame" x="20" y="182" width="122.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tGN-bC-uNc">
-                                <rect key="frame" x="0.0" y="310.5" width="414" height="216"/>
+                                <rect key="frame" x="0.0" y="222.5" width="414" height="216"/>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xuj-v1-YBA">
-                                <rect key="frame" x="20" y="546.5" width="61.5" height="20.5"/>
+                                <rect key="frame" x="20" y="458.5" width="61.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M53-nM-v36">
-                                <rect key="frame" x="345" y="546.5" width="51" height="31"/>
+                                <rect key="frame" x="345" y="458.5" width="51" height="31"/>
                             </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YtX-h7-6jV"/>

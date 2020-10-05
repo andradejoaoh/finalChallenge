@@ -13,16 +13,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var comeFromPaid: Bool = false
     var selectedAnnoucement:Int?
     
-
-//    let feedCollectionViewTest: UICollectionView = {
-//        let layout = UICollectionViewFlowLayout()
-//        layout.headerReferenceSize = CGSize(width: 100 , height: 30)
-//        layout.minimumLineSpacing = 16
-//        layout.scrollDirection = .vertical
-//        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//        cv.backgroundColor = .clear
-//        return cv
-//    }()
     
     let feedCollectionView: UICollectionView = {
         let layout = WaterfallLayout()
@@ -86,8 +76,8 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-    var imageLiteralArray = [#imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder1")]
-    var imageArray: [String] = ["placeholder1","placeholder2", "placeholder3", "placeholder4","placeholder1","placeholder1","placeholder1"]
+    var imageLiteralArray = [#imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1")]
+    //var imageArray: [String] = ["placeholder1","placeholder2", "placeholder3", "placeholder4","placeholder1","placeholder1","placeholder1"]
 
     var imagesAnnounced: [String]? {
         didSet{
@@ -133,8 +123,8 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if indexPath.section == 1 {//ANNOUCEMENT
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCell, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
             cell.layer.cornerRadius = 10
-            let imageName = imageArray[indexPath.item]
-            cell.imageAnnoucements.image = UIImage(named: imageName)
+            let imageName = imageLiteralArray[indexPath.item]
+            cell.imageAnnoucements.image = imageName
             return cell
         } else {
             guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementCell else { return UICollectionViewCell()}
@@ -161,7 +151,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height)*0.3)
         } else {
             return CGSize(width: (imageLiteralArray[indexPath.item].size.width), height: (imageLiteralArray[indexPath.item].size.height))
-//                imageLiteralArray[indexPath.item].size
         }
     }
     
@@ -194,14 +183,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        if section == 1{//ANNOUCEMENT
-//            return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-//        } else {//PAID
-//            return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-//        }
-//
-//    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let annoucementViewController = segue.destination as? AnnoucementViewController {
