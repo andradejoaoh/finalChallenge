@@ -11,6 +11,7 @@ import FirebaseCore
 import FirebaseAuth
 import FirebaseStorage
 import FirebaseFirestore
+import Firebase
 
 class DatabaseHandler {
     
@@ -168,9 +169,10 @@ class DatabaseHandler {
             guard error == nil else {
                 return completion(.failure(error!))
             }
+            let jsonDecoder = JSONDecoder()
             guard let snapshot = snapshot else { return }
             guard let data = snapshot.data() else { return }
-            data.comp
+            guard let object = try? JSONSerialization.data(withJSONObject: data) else { return }
         }
     }
     
