@@ -46,6 +46,7 @@ class AnnoucementViewController: UIViewController, UITableViewDelegate, UITableV
         
         self.contactPerfilTableView.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
         self.contactPerfilTableView.layer.cornerRadius = 10
+        self.contactPerfilTableView.separatorInset.left = 50
     }
     
     @IBAction func optionsAction(_ sender: Any) {
@@ -124,13 +125,16 @@ class AnnoucementViewController: UIViewController, UITableViewDelegate, UITableV
         guard let cell = contactPerfilTableView.dequeueReusableCell(withIdentifier: HardConstants.TableView.contactPerfilCell, for: indexPath) as? AnnoucementDetailTableViewCell else { return UITableViewCell()}
         cell.labelCell.text = contactPerfilLabelArray[indexPath.row]
         cell.imagesCell.image = contactPerfilImagesArray[indexPath.row]
-        //self.contactPerfilTableView.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
-
         cell.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
         return cell
-        
-        //guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCellSection, for: indexPath) as? annoucementCellForSection else { return UICollectionViewCell()}
-        
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
+        } else if indexPath.row == 1{
+            
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
