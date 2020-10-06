@@ -29,6 +29,10 @@ struct HardConstants {
         static let paidAnnoucementCellSection = "paidAnnouncementCellSection"
     }
     
+    struct TableView {
+        static let contactPerfilCell = "contactPerfilCell"
+    }
+    
     struct PickerView {
         static let productType = ["Comida", "Artesanato", "Pintura"]
         static let annoucementTime = ["1 hora", "2 horas", "4 horas", "6 horas", "8 horas", "12 horas", "16 horas", "1 dia", "2 dias"]
