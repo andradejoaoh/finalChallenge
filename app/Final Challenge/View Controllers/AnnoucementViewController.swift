@@ -128,24 +128,19 @@ class AnnoucementViewController: UIViewController, UITableViewDelegate, UITableV
         cell.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
         return cell
     }
+
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
-        } else if indexPath.row == 1{
-            
+        
+        if indexPath.row == 0 {//contato
+            self.performSegue(withIdentifier: HardConstants.Storyboard.contactModalViewController, sender: self)
         }
+        if indexPath.row == 1{//perfil
+            self.performSegue(withIdentifier: HardConstants.Storyboard.annoucementProfileSegue, sender: self)
+        }
+        
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.row == 0 {
-            
-        }
-        else if indexPath.row == 1 {
-            
-        }
-    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 55.0
