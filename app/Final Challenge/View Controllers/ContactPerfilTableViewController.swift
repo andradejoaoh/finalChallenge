@@ -28,8 +28,14 @@ class ContactPerfilTableViewController: UITableViewController {
         self.contactPerfilTableView.isScrollEnabled = false
         
         self.contactPerfilTableView.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
-        self.contactPerfilTableView.layer.cornerRadius = 10
+        self.contactPerfilTableView.layer.cornerRadius = 15
         self.contactPerfilTableView.separatorInset.left = 50
+        
+        self.contactCell.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
+        self.perfilCell.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
+        self.contactCell.layer.cornerRadius = 15
+        self.perfilCell.layer.cornerRadius = 15
+        
     }
 
     // MARK: - Table view data source

@@ -41,11 +41,9 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
             annoucementDescription.text = annoucement.description
             annoucementImage.image = UIImage(data: annoucement.imageData ?? Data())
         }
-//        self.contactPerfilTableView.isScrollEnabled = false
-//
-//        self.contactPerfilTableView.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
-//        self.contactPerfilTableView.layer.cornerRadius = 10
-//        self.contactPerfilTableView.separatorInset.left = 50
+        annoucementPrice.layer.backgroundColor = #colorLiteral(red: 0.6823529412, green: 0.6823529412, blue: 0.6980392157, alpha: 1)
+        annoucementPrice.layer.cornerRadius = 15
+
     }
     
     @IBAction func optionsAction(_ sender: Any) {
