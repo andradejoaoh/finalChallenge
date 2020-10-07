@@ -220,6 +220,7 @@
         <!--Contact Modal View Controller-->
         <scene sceneID="It2-mf-aC0">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nsZ-XE-2Cf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="contactModalViewController" id="ina-fv-tDM" customClass="ContactModalViewController" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PZK-NK-meZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
@@ -236,11 +237,11 @@
                         <viewLayoutGuide key="safeArea" id="CtN-h6-LLZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="414" height="300"/>
                     <size key="freeformSize" width="414" height="300"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nsZ-XE-2Cf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3801" y="1387"/>
+            <point key="canvasLocation" x="4706" y="1250"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="R70-GJ-Ty3">
@@ -893,7 +894,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTu-Nf-lza">
                                                     <rect key="frame" x="0.0" y="0.0" width="366" height="44"/>
                                                     <connections>
-                                                        <segue destination="ina-fv-tDM" kind="presentation" id="NqN-xY-hvZ"/>
+                                                        <segue destination="ina-fv-tDM" kind="presentation" modalPresentationStyle="automatic" modalTransitionStyle="coverVertical" id="10E-94-QnF"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

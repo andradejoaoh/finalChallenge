@@ -18,7 +18,6 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     @IBOutlet weak var annoucementName: UILabel!
     @IBOutlet weak var annoucementDescription: UILabel!
     @IBOutlet weak var annoucementPrice: UILabel!
-    @IBOutlet weak var contactPerfilTableView: UITableView!
     
     let contactPerfilLabelArray: [String] = ["Contato", "Perfil"]
     let contactPerfilImagesArray: [UIImage] = [#imageLiteral(resourceName: "contactIconPhone"), #imageLiteral(resourceName: "contactIconPhone")]
@@ -115,9 +114,6 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     //self.performSegue(withIdentifier: HardConstants.Storyboard.annoucementProfileSegue, sender: self)
     
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55.0
-    }
     
     @IBAction func dismissButtonAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
