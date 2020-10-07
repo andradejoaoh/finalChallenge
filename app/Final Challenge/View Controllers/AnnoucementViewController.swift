@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AnnoucementViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate {
+class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     
     
     var annoucement: Annoucement?
@@ -25,6 +25,7 @@ class AnnoucementViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
         getUserData()
     }
@@ -40,13 +41,11 @@ class AnnoucementViewController: UIViewController, UITableViewDelegate, UITableV
             annoucementDescription.text = annoucement.description
             annoucementImage.image = UIImage(data: annoucement.imageData ?? Data())
         }
-        self.contactPerfilTableView.delegate = self
-        self.contactPerfilTableView.dataSource = self
-        self.contactPerfilTableView.isScrollEnabled = false
-        
-        self.contactPerfilTableView.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
-        self.contactPerfilTableView.layer.cornerRadius = 10
-        self.contactPerfilTableView.separatorInset.left = 50
+//        self.contactPerfilTableView.isScrollEnabled = false
+//
+//        self.contactPerfilTableView.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
+//        self.contactPerfilTableView.layer.cornerRadius = 10
+//        self.contactPerfilTableView.separatorInset.left = 50
     }
     
     @IBAction func optionsAction(_ sender: Any) {
@@ -115,31 +114,7 @@ class AnnoucementViewController: UIViewController, UITableViewDelegate, UITableV
             }
         })
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = contactPerfilTableView.dequeueReusableCell(withIdentifier: HardConstants.TableView.contactPerfilCell, for: indexPath) as? AnnoucementDetailTableViewCell else { return UITableViewCell()}
-        cell.labelCell.text = contactPerfilLabelArray[indexPath.row]
-        cell.imagesCell.image = contactPerfilImagesArray[indexPath.row]
-        cell.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
-        return cell
-    }
-
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
-        if indexPath.row == 0 {//contato
-            self.performSegue(withIdentifier: HardConstants.Storyboard.contactModalViewController, sender: self)
-        }
-        if indexPath.row == 1{//perfil
-            self.performSegue(withIdentifier: HardConstants.Storyboard.annoucementProfileSegue, sender: self)
-        }
-        
-    }
+    //self.performSegue(withIdentifier: HardConstants.Storyboard.annoucementProfileSegue, sender: self)
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
