@@ -37,6 +37,7 @@
 		6DCB67B2252E358D00154C87 /* ContactPerfilTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCB67B1252E358C00154C87 /* ContactPerfilTableViewController.swift */; };
 		6DCB67B5252E523A00154C87 /* ContactModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCB67B4252E523900154C87 /* ContactModalViewController.swift */; };
 		6DCB67CF252E629900154C87 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCB67CE252E629800154C87 /* PresentationController.swift */; };
+		6DCB67DA252FA43100154C87 /* ContactModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DCB67D9252FA43000154C87 /* ContactModalView.xib */; };
 		EA1068CF5385B8C601EEEBA6 /* Pods_Final_Challenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB69623477CE06EEF87814D3 /* Pods_Final_Challenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		6DCB67B1252E358C00154C87 /* ContactPerfilTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPerfilTableViewController.swift; sourceTree = "<group>"; };
 		6DCB67B4252E523900154C87 /* ContactModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModalViewController.swift; sourceTree = "<group>"; };
 		6DCB67CE252E629800154C87 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		6DCB67D9252FA43000154C87 /* ContactModalView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactModalView.xib; sourceTree = "<group>"; };
 		A64C65BE450A56694F9B8320 /* Pods-Final Challenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Challenge.release.xcconfig"; path = "Target Support Files/Pods-Final Challenge/Pods-Final Challenge.release.xcconfig"; sourceTree = "<group>"; };
 		CB42A5C477F254EBC34B7555 /* Pods-Final Challenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Challenge.debug.xcconfig"; path = "Target Support Files/Pods-Final Challenge/Pods-Final Challenge.debug.xcconfig"; sourceTree = "<group>"; };
 		DB69623477CE06EEF87814D3 /* Pods_Final_Challenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Final_Challenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +173,7 @@
 				61BF922924FD8F1400A8A8BE /* AppDelegate.swift */,
 				61BF922B24FD8F1400A8A8BE /* SceneDelegate.swift */,
 				61BF923224FD8F1600A8A8BE /* Assets.xcassets */,
+				6DCB67D9252FA43000154C87 /* ContactModalView.xib */,
 				619E9434250FE1A0001DF814 /* Main.storyboard */,
 				61BF923424FD8F1600A8A8BE /* LaunchScreen.storyboard */,
 				61BF923724FD8F1600A8A8BE /* Info.plist */,
@@ -249,6 +252,7 @@
 			files = (
 				61BF923624FD8F1600A8A8BE /* LaunchScreen.storyboard in Resources */,
 				6D8A66FB250BF17F0093F889 /* GoogleService-Info.plist in Resources */,
+				6DCB67DA252FA43100154C87 /* ContactModalView.xib in Resources */,
 				61BF923324FD8F1600A8A8BE /* Assets.xcassets in Resources */,
 				619E9435250FE1A0001DF814 /* Main.storyboard in Resources */,
 			);

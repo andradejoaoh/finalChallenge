@@ -45,4 +45,27 @@ class ContactPerfilTableViewController: UITableViewController {
         return 55.0
     }
     
+    
+    
+    
+    
+    
+    @objc func contactShowAction() {
+        let slideContactVC = ContactModalViewController()
+        slideContactVC.modalPresentationStyle = .custom
+        slideContactVC.transitioningDelegate = self
+        self.present(slideContactVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func contactShowAction(_ sender: Any) {
+        contactShowAction()
+    }
+
+}
+
+
+extension ContactPerfilTableViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        PresentationController(presentedViewController: presented, presenting: presenting)
+    }
 }
