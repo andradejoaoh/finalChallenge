@@ -209,6 +209,9 @@
                         <outlet property="annoucementImage" destination="XLI-IX-1YZ" id="rD9-GI-BxW"/>
                         <outlet property="annoucementName" destination="cGz-zo-xef" id="bCh-dl-lIh"/>
                         <outlet property="annoucementPrice" destination="jSA-E2-lhI" id="UT0-T4-UG1"/>
+                        <outlet property="bairroLabel" destination="eja-tJ-LTu" id="0O0-G4-vkZ"/>
+                        <outlet property="categoryLabel" destination="gVw-gx-Y1c" id="CIw-uA-DdA"/>
+                        <outlet property="diponibilityLabel" destination="4gz-IM-sE3" id="plv-5d-rUV"/>
                         <segue destination="gyI-RA-dZL" kind="show" identifier="editAnnoucement" id="xj1-nF-7zF"/>
                         <segue destination="bxg-Er-exs" kind="show" identifier="toProfileSegue" id="riO-UY-M8r"/>
                     </connections>

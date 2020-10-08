@@ -19,8 +19,10 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     @IBOutlet weak var annoucementDescription: UILabel!
     @IBOutlet weak var annoucementPrice: UILabel!
     
-    let contactPerfilLabelArray: [String] = ["Contato", "Perfil"]
-    let contactPerfilImagesArray: [UIImage] = [#imageLiteral(resourceName: "contactIconPhone"), #imageLiteral(resourceName: "contactIconPhone")]
+    @IBOutlet weak var diponibilityLabel: UILabel!
+    
+    @IBOutlet weak var bairroLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,9 +113,6 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
             }
         })
     }
-    //self.performSegue(withIdentifier: HardConstants.Storyboard.annoucementProfileSegue, sender: self)
-    
-    
     
     @IBAction func dismissButtonAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
