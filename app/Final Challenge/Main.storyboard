@@ -867,9 +867,6 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTu-Nf-lza">
                                                     <rect key="frame" x="0.0" y="0.0" width="366" height="44"/>
-                                                    <connections>
-                                                        <action selector="contactShowAction:" destination="Zq0-F9-c8g" eventType="touchUpInside" id="FpK-ep-BNQ"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

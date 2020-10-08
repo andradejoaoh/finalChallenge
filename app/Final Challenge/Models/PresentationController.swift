@@ -23,7 +23,7 @@ class PresentationController: UIPresentationController {
     }
     
     override var frameOfPresentedViewInContainerView: CGRect {
-        CGRect(origin: CGPoint(x: 0, y: self.containerView!.frame.height * 0.4),
+        CGRect(origin: CGPoint(x: 0, y: self.containerView!.frame.height * 0.7),
                size: CGSize(width: self.containerView!.frame.width, height: self.containerView!.frame.height * 0.6))
     }
     
@@ -31,7 +31,7 @@ class PresentationController: UIPresentationController {
         self.blurEffectView.alpha = 0
         self.containerView?.addSubview(blurEffectView)
         self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (UIViewControllerTransitionCoordinatorContext) in
-            self.blurEffectView.alpha = 0.7
+            self.blurEffectView.alpha = 0.2
         }, completion: { (UIViewControllerTransitionCoordinatorContext) in })
     }
     
