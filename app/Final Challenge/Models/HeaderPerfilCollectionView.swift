@@ -1,15 +1,15 @@
 //
-//  HeaderFeedCollectionView.swift
+//  HeaderPerfilCollectionView.swift
 //  Final Challenge
 //
-//  Created by Luiz Henrique Monteiro de Carvalho on 28/09/20.
+//  Created by Luiz Henrique Monteiro de Carvalho on 09/10/20.
 //  Copyright © 2020 João Henrique Andrade. All rights reserved.
 //
 
-import Foundation
+
 import UIKit
 
-class HeaderFeedCollectionView: UICollectionReusableView{
+class HeaderPerfilCollectionView: UICollectionReusableView{
     
     let labelHeader: UILabel = {
         let label = UILabel()
@@ -28,8 +28,6 @@ class HeaderFeedCollectionView: UICollectionReusableView{
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
-
-    
     
     func setup(){
         addSubview(labelHeader)
@@ -40,3 +38,4 @@ class HeaderFeedCollectionView: UICollectionReusableView{
         labelHeader.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 16).isActive = true
     }
 }
+

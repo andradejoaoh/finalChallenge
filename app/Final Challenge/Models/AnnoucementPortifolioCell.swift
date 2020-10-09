@@ -1,14 +1,15 @@
 //
-//  OtherAnnoucementCell.swift
+//  AnnoucementPortifolioCell.swift
 //  Final Challenge
 //
-//  Created by Luiz Henrique Monteiro de Carvalho on 15/09/20.
+//  Created by Luiz Henrique Monteiro de Carvalho on 09/10/20.
 //  Copyright © 2020 João Henrique Andrade. All rights reserved.
 //
 
+
 import UIKit
 
-class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class AnnoucementPortifolioCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     weak var delegate: CollectionViewCellDelegate?
     

@@ -27,8 +27,15 @@ struct HardConstants {
     struct CollectionView {
         static let annoucementCell = "annoucementCell"
         static let paidAnnouncementCell = "paidAnnouncementCell"
-        static let annoucementCellSection = "annoucementCellSection"
         static let paidAnnoucementCellSection = "paidAnnouncementCellSection"
+        static let headerFeedView = "HeaderView"
+        
+        static let annoucementPerfilInfoCell = "annoucementPerfilInfoCell"
+        static let annoucementPerfilCell = "annoucementPerfilCell"
+        static let annoucementPortifolioCell = "annoucementPortifolioCell"
+        static let annoucementPortifolioCellSection = "announcementPortifolioCellSection"
+        static let headerPerfilView = "HeaderPerfilView"
+        
     }
     
     struct TableView {

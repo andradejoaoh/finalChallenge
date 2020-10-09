@@ -43,7 +43,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         feedCollectionView.register(AnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.annoucementCell)
         feedCollectionView.register(PaidAnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell)
-        feedCollectionView.register(HeaderFeedCollectionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView")
+        feedCollectionView.register(HeaderFeedCollectionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HardConstants.CollectionView.headerFeedView)
         
         
         
@@ -63,9 +63,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         layout.minimumInteritemSpacing = 8.0
         layout.headerHeight = 50.0
         feedCollectionView.collectionViewLayout = layout
-        
-        feedCollectionView.dataSource = self
-        
     }
     
     
@@ -77,7 +74,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     var imageLiteralArray = [#imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1")]
-    //var imageArray: [String] = ["placeholder1","placeholder2", "placeholder3", "placeholder4","placeholder1","placeholder1","placeholder1"]
 
     var imagesAnnounced: [String]? {
         didSet{
@@ -126,7 +122,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let imageName = imageLiteralArray[indexPath.item]
             cell.imageAnnoucements.image = imageName
             return cell
-        } else {
+        } else {//PAID
             guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementCell else { return UICollectionViewCell()}
             paidCell.delegate = self
             
@@ -167,7 +163,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath) as! HeaderFeedCollectionView
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HardConstants.CollectionView.headerFeedView, for: indexPath) as! HeaderFeedCollectionView
             switch indexPath.section{
             case 0:
                 headerView.labelHeader.text = "Anúncios em destaque:"
