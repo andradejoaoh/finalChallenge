@@ -19,9 +19,7 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     }
     
     var imageLiteralArray = [#imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1")]
-    
-    //var imageArray: [String] = ["placeholder1","placeholder2", "placeholder3", "placeholder4","placeholder1","placeholder1","placeholder1"]
-    
+        
     var imagesPaid: [String]? {
         didSet{
             annoucementCollectionView.reloadData()
@@ -65,8 +63,6 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
         annoucementCollectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
         annoucementCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         annoucementCollectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
-        
-        
         
         
         DatabaseHandler.readAnnoucements { (result) in

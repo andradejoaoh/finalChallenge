@@ -180,8 +180,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         profileCollectionView.register(HeaderPerfilCollectionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HardConstants.CollectionView.headerPerfilView)
         
-        
-        
         profileCollectionView.translatesAutoresizingMaskIntoConstraints = false
         profileCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         profileCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -190,7 +188,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         profileCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         profileCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         profileCollectionView
-        
         
         let layout = WaterfallLayout()
         layout.delegate = self
@@ -286,7 +283,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HardConstants.CollectionView.headerPerfilView, for: indexPath) as! HeaderFeedCollectionView
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HardConstants.CollectionView.headerPerfilView, for: indexPath) as! HeaderPerfilCollectionView
             switch indexPath.section{
             case 1:
                 headerView.labelHeader.text = "Anúncios"
@@ -318,4 +315,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.comeFromPortifolio = true
         performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
     }
+    
+    
 }
