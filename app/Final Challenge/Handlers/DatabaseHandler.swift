@@ -77,7 +77,7 @@ class DatabaseHandler {
         }
     }
     
-    static func createAnnoucement(annoucementName: String, annoucementDescription: String, annoucementLocation: String, annoucementImage: Data, deliveryOption: Bool, productType: String, completion: @escaping (Result<String,Error>) -> Void){
+    static func createAnnoucement(annoucementName: String, annoucementDescription: String, annoucementLocation: String, annoucementImage: Data, deliveryOption: Bool, expirationDate: Date, productType: String, completion: @escaping (Result<String,Error>) -> Void){
         let database = Firestore.firestore()
         guard let userAuth = FirebaseAuth.Auth.auth().currentUser else { return }
         let annoucementDocument = database.collection("annoucements").document()
@@ -85,6 +85,9 @@ class DatabaseHandler {
         let storageReference = storage.reference()
         let annoucementImageReference = storageReference.child("annoucementPictures/\(annoucementDocument.documentID)")
         let annoucementImageData = annoucementImage
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime]
+        let dateString = dateFormatter.string(from: expirationDate)
         let uploadTask = annoucementImageReference.putData(annoucementImageData, metadata: nil) { (metadata, error) in
             guard error == nil else {
                 return completion(.failure(error!))
@@ -94,12 +97,12 @@ class DatabaseHandler {
                 guard error == nil else {
                     return completion(.failure(error!))
                 }
-                if let url = url {
+                if url != nil {
                     annoucementDocument.setData(["annoucement_name":annoucementName,
                                                  "annoucement_description":annoucementDescription,
                                                  "annoucement_location":annoucementLocation,
                                                  "annoucement_id":annoucementDocument.documentID,
-                                                 //                                                 "annoucement_image_url":url,
+                                                 "expiration_date": dateString,
                                                  "delivery_option": deliveryOption,
                                                  "product_type": productType,
                                                  "annoucement_user_id":userAuth.uid]) { (error) in
@@ -155,9 +158,10 @@ class DatabaseHandler {
             if error != nil {
                 completion(.failure(error!))
             } else {
-                guard let snapshot = snapshot else { return }
-                guard let annocs: [Annoucement] = try? snapshot.toObject() else { return completion(.failure(ErrorTypes.parseAnnoucementError)) }
-                getImage(for: annocs)
+                    guard let snapshot = snapshot else { return }
+                    guard let annocs: [Annoucement] = try? snapshot.toObject() else { return completion(.failure(ErrorTypes.parseAnnoucementError)) }
+                    getUser(for: annocs)
+                    getImage(for: annocs)
                 completion(.success(annocs))
             }
         }
@@ -173,6 +177,8 @@ class DatabaseHandler {
             guard let snapshot = snapshot else { return }
             guard let data = snapshot.data() else { return }
             guard let object = try? JSONSerialization.data(withJSONObject: data) else { return }
+            guard let user = try? jsonDecoder.decode(User.self, from: object) else { return }
+            completion(.success(user))
         }
     }
     
@@ -190,28 +196,7 @@ class DatabaseHandler {
             }
         }
     }
-    
-//    static func getUserData(userID: String, completion: @escaping (Result<User,Error>) -> Void){
-//        let database = Firestore.firestore()
-//        database.collection("users").document(userID).getDocument { (snapshot, error) in
-//            guard error == nil else {
-//                //Show error while loading document
-//                return completion(.failure(error!))
-//            }
-//            guard let snapshot = snapshot else { return }
-//            guard let data = snapshot.data() else { return }
-//            guard let storeName = data["store_name"] as? String else { return }
-//            guard let bio = data["bio"] as? String else { return }
-//            guard let site = data["site"] as? String else { return }
-//            guard let facebook = data["facebook"] as? String else { return }
-//            guard let email = data["email"] as? String else { return }
-//            guard let userName = data["full_name"] as? String else { return }
-//
-//            let user = User(userName: userName, userEmail: email, userID: userID, userFacebook: facebook, userBio: bio, userSite: site, userStoreName: storeName)
-//            completion(.success(user))
-//        }
-//    }
-    
+
     static func isUserLoggedIn() -> Bool {
         if Auth.auth().currentUser == nil {
             return false
@@ -249,5 +234,21 @@ class DatabaseHandler {
     static func getImage(for annoucements: [Annoucement]){
         annoucements.forEach(getImage)
     }
+    
+    static func getUser(for annoucement: Annoucement){
+        getData(for: annoucement.userID) { (result) in
+            switch result {
+            case let .success(user):
+                annoucement.user = user
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    
+    static func getUser(for annoucements: [Annoucement]){
+        annoucements.forEach(getUser)
+    }
+    
 }
 

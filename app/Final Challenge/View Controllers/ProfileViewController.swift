@@ -23,9 +23,6 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupView()
-        if let user = userProfile {
-            bio.text = user.userBio
-        }
     }
 
     @IBAction func signOutAction(_ sender: Any) {
@@ -40,8 +37,23 @@ class ProfileViewController: UIViewController {
         self.present(signOutAlert, animated: true, completion: nil)
     }
     
+    @IBAction func contactAction(_ sender: Any){
+        
+    }
+    
     func setupView() {
         if let user = self.userProfile {
+            
+            bio.text = user.userBio
+            
+            if user.userID != DatabaseHandler.getCurrentUser() {
+                signOutButton.isHidden = true
+                annouceButton.isHidden = true
+            } else {
+                signOutButton.isHidden = false
+                annouceButton.isHidden = false
+            }
+            
             DatabaseHandler.getProfileImage(userID: user.userID) { result in
                 switch result {
                 case let .success(data):
@@ -51,5 +63,25 @@ class ProfileViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func createAlertController() -> UIAlertController {
+        let actionSheet = UIAlertController(title: "Entrar em Contato", message: "Como deseja entrar em contato?", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Telefonar", style: .default, handler: { (UIAlertAction) in
+            if let url = URL(string: "tel://\(String(describing: self.userProfile?.userPhone))"), UIApplication.shared.canOpenURL(url){
+                UIApplication.shared.open(url)
+            }
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Mandar um e-mail", style: .default, handler: { (UIAlertAction) in
+            if let url = URL(string: "mailto:\(self.userProfile?.userEmail)"){
+                if #available(iOS 10.0, *){
+                    UIApplication.shared.open(url)
+                } else {
+                    UIApplication.shared.openURL(url)
+
+                }
+            }
+        }))
+        return actionSheet
     }
 }

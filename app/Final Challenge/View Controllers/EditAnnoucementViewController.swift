@@ -41,13 +41,20 @@ class EditAnnoucementViewController: UIViewController {
         guard let name = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard let description = descriptionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard let location = locationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        let productType: String = HardConstants.PickerView.productType[productTypePicker.selectedRow(inComponent: 0)]
+        let deliveryOpt: Bool = deliveryOption.isOn
         
-        DatabaseHandler.editAnnoucement(annoucementID: annoucement.annoucementID, annoucementName: name, annoucementLocation: location, annoucementDescription: description, deliveryOption: false, productType: "Comida") { (result) in
+        DatabaseHandler.editAnnoucement(annoucementID: annoucement.annoucementID, annoucementName: name, annoucementLocation: location, annoucementDescription: description, deliveryOption: deliveryOpt, productType: productType) { (result) in
             switch result {
             case let .failure(error):
                 //Error while updating annoucement
                 print(error)
             case .success:
+                annoucement.annoucementName = name
+                annoucement.description = description
+                annoucement.location = location
+                annoucement.productType = productType
+                annoucement.deliveryOption = deliveryOpt
                 self.navigationController?.popViewController(animated: true)
             }
         }
