@@ -131,13 +131,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setupViewWillAppear()
-        
-        self.comeFromPortifolio = false//ARRUMAR AS SEGUES DE PORTIFOLIO
-        
-        if let user = userProfile {
-            bio.text = user.userBio
-        }
+        setupView()
+        self.comeFromPortifolio = false//ARRUMAR AS SEGUES DE PORTIFOLIo
     }
 
     @IBAction func signOutAction(_ sender: Any) {
@@ -152,8 +147,25 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.present(signOutAlert, animated: true, completion: nil)
     }
     
-    func setupViewWillAppear() {
+
+    @IBAction func contactAction(_ sender: Any){
+        
+    }
+    
+    func setupView() {
+
         if let user = self.userProfile {
+            
+            bio.text = user.userBio
+            
+            if user.userID != DatabaseHandler.getCurrentUser() {
+                signOutButton.isHidden = true
+                annouceButton.isHidden = true
+            } else {
+                signOutButton.isHidden = false
+                annouceButton.isHidden = false
+            }
+            
             DatabaseHandler.getProfileImage(userID: user.userID) { result in
                 switch result {
                 case let .success(data):
@@ -161,10 +173,30 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 case let .failure(error):
                     print(error)
                 }
-            }
         }
     }
     
+
+    func createAlertController() -> UIAlertController {
+        let actionSheet = UIAlertController(title: "Entrar em Contato", message: "Como deseja entrar em contato?", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Telefonar", style: .default, handler: { (UIAlertAction) in
+            if let url = URL(string: "tel://\(String(describing: self.userProfile?.userPhone))"), UIApplication.shared.canOpenURL(url){
+                UIApplication.shared.open(url)
+            }
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Mandar um e-mail", style: .default, handler: { (UIAlertAction) in
+            if let url = URL(string: "mailto:\(self.userProfile?.userEmail)"){
+                if #available(iOS 10.0, *){
+                    UIApplication.shared.open(url)
+                } else {
+                    UIApplication.shared.openURL(url)
+
+                }
+            }
+        }))
+        return actionSheet
+    }
+
     func setupElementsViewDidLoad(){
         profileCollectionView.dataSource = self
         profileCollectionView.delegate = self
@@ -315,6 +347,4 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.comeFromPortifolio = true
         performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
     }
-    
-    
 }

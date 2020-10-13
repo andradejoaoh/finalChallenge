@@ -13,6 +13,13 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var comeFromPaid: Bool = false
     var selectedAnnoucement:Int?
     
+
+    var annoucements: [Annoucement] = []{
+        didSet{
+            feedCollectionView.reloadData()
+        }
+    }
+
     
     let feedCollectionView: UICollectionView = {
         let layout = WaterfallLayout()
@@ -33,7 +40,25 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return image
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+        configureRefreshControl()
+        DatabaseHandler.readAnnoucements { (result) in
+            switch result {
+            case let .failure(error):
+                //Show error while updating feed
+                print(error)
+            case let .success(annoucements):
+                self.annoucements = annoucements
+            }
+        }
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.comeFromPaid = false
+        
+    }
     
     func setupViews(){
         
@@ -64,43 +89,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         layout.headerHeight = 50.0
         feedCollectionView.collectionViewLayout = layout
     }
-    
-    
-    
-    var annoucements: [Annoucement] = []{
-        didSet{
-            feedCollectionView.reloadData()
-        }
-    }
-    
-    var imageLiteralArray = [#imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1")]
-
-    var imagesAnnounced: [String]? {
-        didSet{
-            feedCollectionView.reloadData()
-        }
-    }
-    
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupViews()
-        DatabaseHandler.readAnnoucements { (result) in
-            switch result {
-            case let .failure(error):
-                //Show error while updating feed
-                print(error)
-            case let .success(annoucements):
-                self.annoucements = annoucements
-            }
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.comeFromPaid = false
-        
-    }
+  
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -119,8 +108,12 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if indexPath.section == 1 {//ANNOUCEMENT
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCell, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
             cell.layer.cornerRadius = 10
-            let imageName = imageLiteralArray[indexPath.item]
-            cell.imageAnnoucements.image = imageName
+            let annoucement = annoucements[indexPath.item]
+            
+            annoucement.didLoadImage = { [weak cell] imageData in
+                cell?.imageAnnoucements.image = UIImage(data: annoucement.imageData ?? Data())
+                cell?.activityIndicator.stopAnimating()
+            }
             return cell
         } else {//PAID
             guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementCell else { return UICollectionViewCell()}
@@ -128,7 +121,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             
             return paidCell
         }
-        
     }
     
     
@@ -146,7 +138,10 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if indexPath.section == 0 {//PAID
             return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height)*0.3)
         } else {
-            return CGSize(width: (imageLiteralArray[indexPath.item].size.width), height: (imageLiteralArray[indexPath.item].size.height))
+            guard let annoucementImage = UIImage(data: annoucements[indexPath.item].imageData ?? Data()) else {
+                return CGSize(width: 200, height: 200)
+            }
+            return CGSize(width: (annoucementImage.size.width), height: (annoucementImage.size.height))
         }
     }
     
@@ -179,6 +174,11 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
     }
     
+    func collectionViewCell(_ annoucementNumber: Int) {
+        self.selectedAnnoucement = annoucementNumber
+        self.comeFromPaid = true
+        performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
+    }
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -193,12 +193,33 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-    func collectionViewCell(_ annoucementNumber: Int) {
-        self.selectedAnnoucement = annoucementNumber
-        self.comeFromPaid = true
-        performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
-    }
     
+    func configureRefreshControl () {
+       // Add the refresh control to your UIScrollView object.
+       feedCollectionView.refreshControl = UIRefreshControl()
+       feedCollectionView.refreshControl?.addTarget(self, action:
+                                          #selector(handleRefreshControl),
+                                          for: .valueChanged)
+    }
+        
+    @objc func handleRefreshControl() {
+       // Update your content…
+        DatabaseHandler.readAnnoucements(completion: { (result) in
+            switch result {
+            case let .failure(error):
+                //Show error while updating feed
+                print(error)
+            case let .success(annoucements):
+                self.annoucements = annoucements
+                self.feedCollectionView.reloadData()
+            }
+        })
+       // Dismiss the refresh control.
+       DispatchQueue.main.async {
+          self.feedCollectionView.refreshControl?.endRefreshing()
+       }
+    }
+
 }
 
 extension UIViewController {

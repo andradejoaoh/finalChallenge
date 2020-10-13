@@ -12,7 +12,6 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     
     
     var annoucement: Annoucement?
-    var user: User?
     
     @IBOutlet weak var annoucementImage: UIImageView!
     @IBOutlet weak var annoucementName: UILabel!
@@ -28,7 +27,6 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        getUserData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +55,7 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
             editAnnoucementViewController.annoucement = self.annoucement
         }
         if let profileViewController = segue.destination as? ProfileViewController {
-            profileViewController.userProfile = user
+            profileViewController.userProfile = annoucement?.user
         }
     }
     
@@ -74,7 +72,7 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
             }))
         } else {
             actionSheet.addAction(UIAlertAction(title: "Ver Perfil", style: .default, handler: { (UIAlertAction) in
-                guard self.user != nil else { return }
+                guard self.annoucement?.user != nil else { return }
                 self.performSegue(withIdentifier: HardConstants.Storyboard.annoucementProfileSegue, sender: self)
                 
             }))
@@ -102,21 +100,4 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
         }))
         self.present(deleteAlert, animated: true, completion: nil)
     }
-    func getUserData() {
-        guard let annoucement = self.annoucement else { return }
-        DatabaseHandler.getData(for: annoucement.userID, completion: { (result) in
-            switch result{
-            case let .success(user):
-                self.user = user
-            case let .failure(err):
-                print(err)
-            }
-        })
-    }
-    
-    @IBAction func dismissButtonAction(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    
 }

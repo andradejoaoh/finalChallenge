@@ -7,16 +7,31 @@
 //
 
 import Foundation
+import FirebaseFirestore
 class Annoucement: Codable {
-    let annoucementName: String
-    var imageData: Data?
+    var annoucementName: String
+    var imageData: Data? {
+        didSet {
+            guard let imageData = imageData, let didLoadImage = didLoadImage else { return }
+            didLoadImage(imageData)
+        }
+    }
     let userID: String
-    let description: String
+    var description: String
     let annoucementID: String
-    let location: String
-    let optionDelivery: Bool
-    let productType: String
-//    let expirationDate: String
+    var location: String
+    var deliveryOption: Bool
+    var productType: String
+    let expirationDate: Date?
+    var user: User?
+    
+    var didLoadImage: ((Data) -> Void)? {
+        didSet {
+            guard let imageData = imageData, let didLoadImage = didLoadImage else { return }
+            didLoadImage(imageData)
+        }
+    }
+    
     
     enum CodingKeys: String, CodingKey {
         case annoucementName = "annoucement_name"
@@ -25,7 +40,9 @@ class Annoucement: Codable {
         case description = "annoucement_description"
         case annoucementID = "annoucement_id"
         case location = "annoucement_location"
-        case optionDelivery = "delivery_option"
+        case deliveryOption = "delivery_option"
         case productType = "product_type"
+        case expirationDate = "expiration_date"
+        case user = "user"
     }
 }
