@@ -9,6 +9,8 @@
 import UIKit
 
 class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
+    
+    
     var annoucement: Annoucement?
     
     @IBOutlet weak var annoucementImage: UIImageView!
@@ -16,8 +18,14 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     @IBOutlet weak var annoucementDescription: UILabel!
     @IBOutlet weak var annoucementPrice: UILabel!
     
+    @IBOutlet weak var diponibilityLabel: UILabel!
+    
+    @IBOutlet weak var bairroLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -32,6 +40,9 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
             annoucementDescription.text = annoucement.description
             annoucementImage.image = UIImage(data: annoucement.imageData ?? Data())
         }
+        annoucementPrice.layer.backgroundColor = #colorLiteral(red: 0.6823529412, green: 0.6823529412, blue: 0.6980392157, alpha: 1)
+        annoucementPrice.layer.cornerRadius = 15
+
     }
     
     @IBAction func optionsAction(_ sender: Any) {

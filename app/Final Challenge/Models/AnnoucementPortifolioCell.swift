@@ -1,34 +1,34 @@
 //
-//  OtherAnnoucementCell.swift
+//  AnnoucementPortifolioCell.swift
 //  Final Challenge
 //
-//  Created by Luiz Henrique Monteiro de Carvalho on 15/09/20.
+//  Created by Luiz Henrique Monteiro de Carvalho on 09/10/20.
 //  Copyright © 2020 João Henrique Andrade. All rights reserved.
 //
 
+
 import UIKit
 
-class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class AnnoucementPortifolioCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     weak var delegate: CollectionViewCellDelegate?
     
     var annoucements: [Annoucement] = []{
         didSet{
-            annoucementCollectionView.reloadData()
+            portifolioCollectionView.reloadData()
         }
     }
     
     var imageLiteralArray = [#imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1")]
-        
-    var imagesPaid: [String]? {
+    
+    
+    var imagesPortifolio: [String]? {
         didSet{
-            annoucementCollectionView.reloadData()
+            portifolioCollectionView.reloadData()
         }
     }
     
-    var placeholderString: String = "placeholder"
-    
-    var selectedAnnoucement:Int?
+    //var selectedAnnoucement:Int?
     
     override init (frame: CGRect){
         super.init(frame: frame)
@@ -41,7 +41,7 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     }
     
     
-    let annoucementCollectionView: UICollectionView = {
+    let portifolioCollectionView: UICollectionView = {
         let annoucemnetLayout = UICollectionViewFlowLayout()
         annoucemnetLayout.minimumLineSpacing = 10
         annoucemnetLayout.scrollDirection = .horizontal
@@ -53,16 +53,18 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     
     
     func setup(){
-        addSubview(annoucementCollectionView)
+        addSubview(portifolioCollectionView)
         
-        annoucementCollectionView.delegate = self
-        annoucementCollectionView.dataSource = self
+        portifolioCollectionView.delegate = self
+        portifolioCollectionView.dataSource = self
         
-        annoucementCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        annoucementCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        annoucementCollectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        annoucementCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-        annoucementCollectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        portifolioCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        portifolioCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        portifolioCollectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        portifolioCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        portifolioCollectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        
+        
         
         
         DatabaseHandler.readAnnoucements { (result) in
@@ -74,7 +76,7 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
                 self.annoucements = annoucements
             }
         }
-        annoucementCollectionView.register(annoucementCellForSection.self, forCellWithReuseIdentifier: HardConstants.CollectionView.paidAnnoucementCellSection)
+        portifolioCollectionView.register(annoucementPortifoliiCellForSection.self, forCellWithReuseIdentifier: HardConstants.CollectionView.annoucementPortifolioCellSection)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -82,10 +84,10 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnoucementCellSection, for: indexPath) as? annoucementCellForSection else { return UICollectionViewCell()}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementPortifolioCellSection, for: indexPath) as? annoucementPortifoliiCellForSection else { return UICollectionViewCell()}
         
         let imageName = imageLiteralArray[indexPath.item]
-        cell.imagePaidAnnoucements.image = imageName
+        cell.imagePortifolioAnnoucements.image = imageName
         
         cell.layer.cornerRadius = 10
         return cell
@@ -100,17 +102,17 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (frame.width)*0.6, height: (frame.height))
+        return CGSize(width: (frame.width)*0.3, height: (frame.height))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
-    private class annoucementCellForSection: UICollectionViewCell {
+    private class annoucementPortifoliiCellForSection: UICollectionViewCell {
         
         
-        let imagePaidAnnoucements: UIImageView = {
+        let imagePortifolioAnnoucements: UIImageView = {
             let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))
             image.layer.cornerRadius = 10
             image.clipsToBounds = true
@@ -125,13 +127,13 @@ class PaidAnnoucementCell: UICollectionViewCell, UICollectionViewDelegate, UICol
         
         func setupCell() {
             
-            addSubview(imagePaidAnnoucements)
+            addSubview(imagePortifolioAnnoucements)
 
-            imagePaidAnnoucements.translatesAutoresizingMaskIntoConstraints = false
-            imagePaidAnnoucements.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-            imagePaidAnnoucements.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-            imagePaidAnnoucements.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-            imagePaidAnnoucements.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+            imagePortifolioAnnoucements.translatesAutoresizingMaskIntoConstraints = false
+            imagePortifolioAnnoucements.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+            imagePortifolioAnnoucements.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+            imagePortifolioAnnoucements.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+            imagePortifolioAnnoucements.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
         }
         
         required init?(coder: NSCoder) {

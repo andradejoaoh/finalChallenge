@@ -13,11 +13,13 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var comeFromPaid: Bool = false
     var selectedAnnoucement:Int?
     
+
     var annoucements: [Annoucement] = []{
         didSet{
             feedCollectionView.reloadData()
         }
     }
+
     
     let feedCollectionView: UICollectionView = {
         let layout = WaterfallLayout()
@@ -66,7 +68,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         feedCollectionView.register(AnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.annoucementCell)
         feedCollectionView.register(PaidAnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell)
-        feedCollectionView.register(HeaderFeedCollectionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView")
+        feedCollectionView.register(HeaderFeedCollectionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HardConstants.CollectionView.headerFeedView)
         
         
         
@@ -86,14 +88,8 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         layout.minimumInteritemSpacing = 8.0
         layout.headerHeight = 50.0
         feedCollectionView.collectionViewLayout = layout
-        
-        feedCollectionView.dataSource = self
-        
     }
-
-    
-    
-
+  
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -119,7 +115,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 cell?.activityIndicator.stopAnimating()
             }
             return cell
-        } else {
+        } else {//PAID
             guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementCell else { return UICollectionViewCell()}
             paidCell.delegate = self
             
@@ -162,7 +158,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath) as! HeaderFeedCollectionView
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HardConstants.CollectionView.headerFeedView, for: indexPath) as! HeaderFeedCollectionView
             switch indexPath.section{
             case 0:
                 headerView.labelHeader.text = "Anúncios em destaque:"
@@ -183,6 +179,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.comeFromPaid = true
         performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
     }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let annoucementViewController = segue.destination as? AnnoucementViewController {
