@@ -10,11 +10,15 @@ import UIKit
 
 class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CollectionViewCellDelegate, WaterfallLayoutDelegate {
     
-    var comeFromPortifolio: Bool = false //ARRUMAR AS SEGUES DE PORTIFOLIO
-    var selectedAnnoucement:Int?
     
     var userProfile: User?
-
+    var annoucements: [Annoucement] = []{
+        didSet{
+            profileCollectionView.reloadData()
+        }
+    }
+    var selectedAnnoucement: Int = 0
+    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var bio: UILabel!
     @IBOutlet weak var signOutButton: UIButton!
@@ -132,9 +136,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupView()
-        self.comeFromPortifolio = false//ARRUMAR AS SEGUES DE PORTIFOLIo
     }
-
+    
     @IBAction func signOutAction(_ sender: Any) {
         let signOutAlert = UIAlertController(title: "Deseja Sair?", message: "Você poderá fazer login quando quiser novamente", preferredStyle: .alert)
         signOutAlert.addAction(UIAlertAction(title: "Cancelar", style: .default, handler: nil))
@@ -147,13 +150,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.present(signOutAlert, animated: true, completion: nil)
     }
     
-
+    
     @IBAction func contactAction(_ sender: Any){
         
     }
     
     func setupView() {
-
+        
         if let user = self.userProfile {
             
             bio.text = user.userBio
@@ -173,10 +176,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 case let .failure(error):
                     print(error)
                 }
+            }
         }
     }
     
-
+    
     func createAlertController() -> UIAlertController {
         let actionSheet = UIAlertController(title: "Entrar em Contato", message: "Como deseja entrar em contato?", preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Telefonar", style: .default, handler: { (UIAlertAction) in
@@ -190,13 +194,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                     UIApplication.shared.open(url)
                 } else {
                     UIApplication.shared.openURL(url)
-
+                    
                 }
             }
         }))
         return actionSheet
     }
-
+    
     func setupElementsViewDidLoad(){
         profileCollectionView.dataSource = self
         profileCollectionView.delegate = self
@@ -231,14 +235,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     
-    var annoucements: [Annoucement] = []{
-        didSet{
-            profileCollectionView.reloadData()
-        }
-    }
     
     var imageLiteralArray = [#imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1"), #imageLiteral(resourceName: "placeholder2"), #imageLiteral(resourceName: "placeholder3"), #imageLiteral(resourceName: "placeholder4"), #imageLiteral(resourceName: "placeholder1")]
-
+    
     var imagesAnnounced: [String]? {
         didSet{
             profileCollectionView.reloadData()
@@ -272,7 +271,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             
         } else if indexPath.section == 1 {//ANNOUCEMENT
             guard let cellPerfilAnnoucement = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementPerfilCell, for: indexPath) as? AnnoucementPerfilCell else { return UICollectionViewCell()}
-           
+            
             let imageName = imageLiteralArray[indexPath.item]
             cellPerfilAnnoucement.imageAnnoucements.image = imageName
             return cellPerfilAnnoucement
@@ -332,19 +331,12 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {//ARRUMAR AS SEGUES DE PORTIFOLIO
         if let annoucementViewController = segue.destination as? AnnoucementViewController {
-            if comeFromPortifolio{
                 annoucementViewController.annoucement = annoucements[selectedAnnoucement ?? 0]
-                //TODO - mudar para paid annoucements
-            } else {
-                annoucementViewController.annoucement = annoucements[selectedAnnoucement ?? 0]
-            }
-            
         }
     }
     
     func collectionViewCell(_ announcementNumber: Int) {
         self.selectedAnnoucement = announcementNumber
-        self.comeFromPortifolio = true
         performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
     }
 }
