@@ -123,7 +123,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7NG-Ar-8Ea">
                                 <rect key="frame" x="24" y="24" width="30" height="30"/>
                                 <connections>
-                                    <action selector="dismissButtonAction:" destination="0dW-8G-m0F" eventType="touchUpInside" id="eWP-aG-p6V"/>
+                                    <action selector="dismissButtonAction:" destination="0dW-8G-m0F" eventType="touchUpInside" id="I0A-l6-Yze"/>
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiB-xU-wVt">
@@ -936,7 +936,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxa-BU-QU0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4636" y="969"/>
+            <point key="canvasLocation" x="4578" y="1021"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

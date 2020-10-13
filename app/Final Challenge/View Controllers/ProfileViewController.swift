@@ -227,7 +227,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         let layout = WaterfallLayout()
         layout.delegate = self
-        layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 10)
         layout.minimumLineSpacing = 8.0
         layout.minimumInteritemSpacing = 8.0
         layout.headerHeight = 50.0
@@ -301,21 +301,44 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
+//    func collectionViewLayout(for section: Int) -> WaterfallLayout.Layout {
+//        if section == 0 {//
+//            return .flow(column: 1)
+//        } else if section == 1{
+//            return .waterfall(column: 2, distributionMethod: .balanced)
+//        } else {
+//            return .flow(column: 1)
+//        }
+//    }
+    
     func collectionViewLayout(for section: Int) -> WaterfallLayout.Layout {
-        if section == 0 {//
-            return .flow(column: 1)
-        } else if section == 1{
+        if section == 1 {//
             return .waterfall(column: 2, distributionMethod: .balanced)
+        } else if section == 2{
+            return .flow(column: 1)
         } else {
             return .flow(column: 1)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout: WaterfallLayout, estimatedSizeForItemAt indexPath: IndexPath) -> CGSize? {
+        let width = profileCollectionView.frame.size.width
+        let height = profileCollectionView.frame.size.height
+        if indexPath.section == 0 {
+            
+            return CGSize(width: width, height: height)
+        }
+        return CGSize(width: width, height: height)
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HardConstants.CollectionView.headerPerfilView, for: indexPath) as! HeaderPerfilCollectionView
             switch indexPath.section{
+            case 0:
+                headerView.frame.size.height = 0
             case 1:
                 headerView.labelHeader.text = "Anúncios"
             case 2:
@@ -327,6 +350,21 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         default:
             preconditionFailure("Invalid supplementary view type for this collection view")
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+
+        let headerHeight: CGFloat
+
+        switch section {
+        case 0:
+            // hide the header
+            headerHeight = CGFloat.leastNonzeroMagnitude
+        default:
+            headerHeight = 21
+        }
+
+        return headerHeight
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {//ARRUMAR AS SEGUES DE PORTIFOLIO
