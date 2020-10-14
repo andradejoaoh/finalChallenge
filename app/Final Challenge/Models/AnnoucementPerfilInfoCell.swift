@@ -146,19 +146,19 @@ class AnnoucementPerfilInfoCell: UICollectionViewCell{
         contactButton.topAnchor.constraint(equalTo: self.imagePerfil.bottomAnchor, constant: 18).isActive = true
         contactButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
         contactButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
-        contactButton.widthAnchor.constraint(equalToConstant: CGFloat(103)).isActive = true
+        contactButton.widthAnchor.constraint(equalToConstant: self.contentView.frame.width/3 * 0.95).isActive = true
         
         siteButton.translatesAutoresizingMaskIntoConstraints = false
         siteButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         siteButton.topAnchor.constraint(equalTo: self.imagePerfil.bottomAnchor, constant: 18).isActive = true
         siteButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
-        siteButton.widthAnchor.constraint(equalToConstant: CGFloat(103)).isActive = true
+        siteButton.widthAnchor.constraint(equalToConstant: self.contentView.frame.width/3 * 0.95).isActive = true
         
         redesSociaisButton.translatesAutoresizingMaskIntoConstraints = false
         redesSociaisButton.topAnchor.constraint(equalTo: self.imagePerfil.bottomAnchor, constant: 18).isActive = true
         redesSociaisButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
         redesSociaisButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
-        redesSociaisButton.widthAnchor.constraint(equalToConstant: CGFloat(103)).isActive = true
+        redesSociaisButton.widthAnchor.constraint(equalToConstant: self.contentView.frame.width/3 * 0.95).isActive = true
         
         
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -171,7 +171,7 @@ class AnnoucementPerfilInfoCell: UICollectionViewCell{
         createAnnoucementButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         createAnnoucementButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         createAnnoucementButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
-        createAnnoucementButton.widthAnchor.constraint(equalToConstant: CGFloat(self.contentView.frame.size.width - 20)).isActive = true
+        createAnnoucementButton.widthAnchor.constraint(equalToConstant: CGFloat(self.contentView.frame.size.width * 0.97)).isActive = true
         
         //createAnnoucementButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
         

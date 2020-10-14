@@ -174,6 +174,12 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout: WaterfallLayout, headerHeightFor section: Int) -> CGFloat? {
+        let headerHeight: CGFloat
+        headerHeight = 40
+        return headerHeight
+    }
+    
     func collectionViewCell(_ annoucementNumber: Int) {
         self.selectedAnnoucement = annoucementNumber
         self.comeFromPaid = true
