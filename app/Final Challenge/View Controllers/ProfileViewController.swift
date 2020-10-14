@@ -34,87 +34,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         cv.backgroundColor = .clear
         return cv
     }()
-    
-    let imageAnnoucements: UIImageView = {
-        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))
-        image.layer.cornerRadius = 10
-        image.clipsToBounds = true
-        image.contentMode = .scaleAspectFill
-        return image
-    }()
-    
-    let imagePerfil: UIImageView = {
-        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))
-        image.frame.size.width = 52
-        image.frame.size.height = 52
-        image.layer.cornerRadius = image.frame.size.width/2
-        image.clipsToBounds = true
-        image.contentMode = .scaleAspectFill
-        return image
-    }()
-    
-    let perfilNameLabel: UILabel = {
-        let perfilNameLabel = UILabel()
-        perfilNameLabel.text = "Nome do perfil placeholder"
-        perfilNameLabel.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.semibold)
-        perfilNameLabel.textColor = .black
-        return perfilNameLabel
-    }()
-    
-    let categoryLabel: UILabel = {
-        let categoryLabel = UILabel()
-        categoryLabel.text = "Categoria placeholder"
-        categoryLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
-        categoryLabel.textColor = .black
-        return categoryLabel
-    }()
-    
-    let bairroLabel: UILabel = {
-        let categoryLabel = UILabel()
-        categoryLabel.text = "Bairro placeholder"
-        categoryLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
-        categoryLabel.textColor = .black
-        return categoryLabel
-    }()
-    
-    let descriptionLabel: UILabel = {
-        let categoryLabel = UILabel()
-        categoryLabel.text = "Descrição - Lorem ipsum dolor sit amet. Ut autem dolores ea quia omnis eos eveniet facilis in possimus dicta"
-        categoryLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
-        categoryLabel.textColor = .black
-        return categoryLabel
-    }()
-    
-    let contactButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.7450980392, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
-        button.setTitle("Contato", for: .normal)
-        button.frame.size.width = 103
-        button.frame.size.height = 30
-        button.layer.cornerRadius = 15
-        return button
-    }()
     //button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-    
-    let siteButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.7450980392, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
-        button.setTitle("Site", for: .normal)
-        button.frame.size.width = 103
-        button.frame.size.height = 30
-        button.layer.cornerRadius = 15
-        return button
-    }()
-    
-    let redesSociaisButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.7450980392, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
-        button.setTitle("Redes Sociais", for: .normal)
-        button.frame.size.width = 103
-        button.frame.size.height = 30
-        button.layer.cornerRadius = 15
-        return button
-    }()
     
     
     override func viewDidLoad() {
@@ -150,6 +70,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         }))
         self.present(signOutAlert, animated: true, completion: nil)
     }
+    
+    
     
     
     @IBAction func contactAction(_ sender: Any){

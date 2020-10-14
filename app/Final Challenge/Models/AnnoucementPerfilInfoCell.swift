@@ -101,12 +101,22 @@ class AnnoucementPerfilInfoCell: UICollectionViewCell{
         return button
     }()
     
+    let sairButtonProvisorio: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 1, green: 0.6547823548, blue: 0.6713048816, alpha: 1)
+        button.setTitle("Sair", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 5
+        
+        return button
+    }()
+    
     
     
     override init (frame: CGRect){
         super.init(frame: frame)
         setupView()
-        //backgroundColor = .blue
+        sairButtonProvisorio.addTarget(self, action: #selector(buttonSairAction), for: .touchUpInside)
     }
     func setupView(){
         addSubview(imagePerfil)
@@ -119,6 +129,7 @@ class AnnoucementPerfilInfoCell: UICollectionViewCell{
         addSubview(siteButton)
         addSubview(redesSociaisButton)
         addSubview(createAnnoucementButton)
+        //addSubview(sairButtonProvisorio)
         
         
         imagePerfil.translatesAutoresizingMaskIntoConstraints = false
@@ -167,23 +178,32 @@ class AnnoucementPerfilInfoCell: UICollectionViewCell{
         descriptionLabel.widthAnchor.constraint(equalToConstant: CGFloat(self.contentView.frame.size.width)).isActive = true
         
         
+//        sairButtonProvisorio.translatesAutoresizingMaskIntoConstraints = false
+//        sairButtonProvisorio.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -30).isActive = true
+//        sairButtonProvisorio.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+//        sairButtonProvisorio.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
+//        sairButtonProvisorio.widthAnchor.constraint(equalToConstant: CGFloat(self.contentView.frame.size.width * 0.97)).isActive = true
+        
         createAnnoucementButton.translatesAutoresizingMaskIntoConstraints = false
         createAnnoucementButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         createAnnoucementButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         createAnnoucementButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
         createAnnoucementButton.widthAnchor.constraint(equalToConstant: CGFloat(self.contentView.frame.size.width * 0.97)).isActive = true
         
-        //createAnnoucementButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
-        
-       
-
+                
     }
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+    }
+    
+    @objc func buttonSairAction(sender: UIButton!) {
+      print("Button tapped")
     }
 }
 
