@@ -51,7 +51,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="riI-Bf-kgX" secondAttribute="bottom" constant="40" id="OG1-11-XJa"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cP5-JQ-yH9"/>
+                    <navigationItem key="navigationItem" id="cP5-JQ-yH9">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="WED-4E-pvk"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="loginButton" destination="NOy-CV-52I" id="YSL-xj-djj"/>
                         <outlet property="signUpButton" destination="hQ8-Fe-kyR" id="7eS-D4-N9O"/>

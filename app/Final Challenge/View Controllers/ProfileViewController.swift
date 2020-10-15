@@ -34,12 +34,111 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         cv.backgroundColor = .clear
         return cv
     }()
+    
+    let imagePerfil: UIImageView = {
+        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder3"))
+        image.frame = CGRect(x: 0, y: 0, width: 52, height: 52)
+        image.layer.cornerRadius = image.frame.size.width/2
+        image.clipsToBounds = true
+        return image
+    }()
+    
+    let perfilNameLabel: UILabel = {
+        let perfilNameLabel = UILabel()
+        perfilNameLabel.text = "Nome do perfil placeholder"
+        perfilNameLabel.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.semibold)
+        perfilNameLabel.textColor = .black
+        return perfilNameLabel
+    }()
+    
+    let categoryLabel: UILabel = {
+        let categoryLabel = UILabel()
+        categoryLabel.text = "Categoria placeholder"
+        categoryLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
+        categoryLabel.textColor = .black
+        return categoryLabel
+    }()
+    
+    let bairroLabel: UILabel = {
+        let categoryLabel = UILabel()
+        categoryLabel.text = "Bairro placeholder"
+        categoryLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
+        categoryLabel.textColor = .black
+        return categoryLabel
+    }()
+    
+    let descriptionLabel: UILabel = {
+        let descriptionLabel = UILabel()
+        descriptionLabel.text = "Descrição - Lorem ipsum dolor sit amet. Ut autem dolores ea quia omnis eos eveniet facilis in possimus dicta"
+        descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
+        descriptionLabel.textColor = .black
+        descriptionLabel.numberOfLines = 0
+        return descriptionLabel
+    }()
+    
+    let contactButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 0.7450980392, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
+        button.setTitle("Contato", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        button.frame.size.width = 103
+        button.frame.size.height = 30
+        button.layer.cornerRadius = 15
+        return button
+    }()
     //button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
     
+    let siteButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 0.7450980392, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
+        button.setTitle("Site", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        button.frame.size.width = 103
+        button.frame.size.height = 30
+        button.layer.cornerRadius = 15
+        return button
+    }()
+    
+    let redesSociaisButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 0.7450980392, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
+        button.setTitle("Redes Sociais", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        button.frame.size.width = 103
+        button.frame.size.height = 30
+        button.layer.cornerRadius = 15
+        return button
+    }()
+    
+    let createAnnoucementButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 0.7450980392, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
+        button.setTitle("Criar Anúncio", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        button.frame.size.width = 103
+        button.frame.size.height = 30
+        button.layer.cornerRadius = 15
+        return button
+    }()
+    
+    let sairButtonProvisorio: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 1, green: 0.6547823548, blue: 0.6713048816, alpha: 1)
+        button.setTitle("Sair", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 15
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Nome do perfil"
         setupElementsViewDidLoad()
+        setupElementsInCollectionView()
         DatabaseHandler.readAnnoucements { (result) in
             switch result {
             case let .failure(error):
@@ -56,26 +155,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupView()
-    }
-    
-    
-    @IBAction func signOutAction(_ sender: Any) {
-        let signOutAlert = UIAlertController(title: "Deseja Sair?", message: "Você poderá fazer login quando quiser novamente", preferredStyle: .alert)
-        signOutAlert.addAction(UIAlertAction(title: "Cancelar", style: .default, handler: nil))
-        signOutAlert.addAction(UIAlertAction(title: "Sair", style: .destructive, handler: { (UIAlertAction) in
-            DatabaseHandler.signOut()
-            if let homeProfileViewController = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.homeProfileViewController), let navigationController = self.navigationController{
-                navigationController.setViewControllers([homeProfileViewController], animated: true)
-            }
-        }))
-        self.present(signOutAlert, animated: true, completion: nil)
-    }
-    
-    
-    
-    
-    @IBAction func contactAction(_ sender: Any){
-        
     }
     
     func setupView() {
@@ -124,6 +203,89 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         return actionSheet
     }
     
+    func setupElementsInCollectionView(){
+        profileCollectionView.addSubview(imagePerfil)
+        profileCollectionView.addSubview(perfilNameLabel)
+        profileCollectionView.addSubview(categoryLabel)
+        profileCollectionView.addSubview(bairroLabel)
+
+        profileCollectionView.addSubview(descriptionLabel)
+        profileCollectionView.addSubview(contactButton)
+        profileCollectionView.addSubview(siteButton)
+        profileCollectionView.addSubview(redesSociaisButton)
+        
+        
+        profileCollectionView.addSubview(createAnnoucementButton)
+        profileCollectionView.addSubview(sairButtonProvisorio)
+        
+        imagePerfil.translatesAutoresizingMaskIntoConstraints = false
+        imagePerfil.topAnchor.constraint(equalTo: self.profileCollectionView.topAnchor, constant: 16).isActive = true
+        imagePerfil.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16).isActive = true
+        imagePerfil.heightAnchor.constraint(equalToConstant: CGFloat(52)).isActive = true
+        imagePerfil.widthAnchor.constraint(equalToConstant: CGFloat(52)).isActive = true
+        
+        perfilNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        perfilNameLabel.topAnchor.constraint(equalTo: self.profileCollectionView.topAnchor, constant: 16).isActive = true
+        perfilNameLabel.leftAnchor.constraint(equalTo: self.imagePerfil.rightAnchor, constant: 10).isActive = true
+        perfilNameLabel.heightAnchor.constraint(equalToConstant: CGFloat(20)).isActive = true
+        
+    
+        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        categoryLabel.topAnchor.constraint(equalTo: self.perfilNameLabel.bottomAnchor, constant: 0).isActive = true
+        categoryLabel.leftAnchor.constraint(equalTo: self.imagePerfil.rightAnchor, constant: 10).isActive = true
+        categoryLabel.heightAnchor.constraint(equalToConstant: CGFloat(20)).isActive = true
+        
+        bairroLabel.translatesAutoresizingMaskIntoConstraints = false
+        bairroLabel.topAnchor.constraint(equalTo: self.categoryLabel.bottomAnchor, constant: 0).isActive = true
+        bairroLabel.leftAnchor.constraint(equalTo: self.imagePerfil.rightAnchor, constant: 10).isActive = true
+        bairroLabel.heightAnchor.constraint(equalToConstant: CGFloat(20)).isActive = true
+        
+        contactButton.translatesAutoresizingMaskIntoConstraints = false
+        contactButton.topAnchor.constraint(equalTo: self.imagePerfil.bottomAnchor, constant: 18).isActive = true
+        contactButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16).isActive = true
+        contactButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
+        contactButton.widthAnchor.constraint(equalToConstant: self.view.frame.width/3 * 0.88).isActive = true
+        
+        siteButton.translatesAutoresizingMaskIntoConstraints = false
+        siteButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        siteButton.topAnchor.constraint(equalTo: self.imagePerfil.bottomAnchor, constant: 18).isActive = true
+        siteButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
+        siteButton.widthAnchor.constraint(equalToConstant: self.view.frame.width/3 * 0.88).isActive = true
+        
+        redesSociaisButton.translatesAutoresizingMaskIntoConstraints = false
+        redesSociaisButton.topAnchor.constraint(equalTo: self.imagePerfil.bottomAnchor, constant: 18).isActive = true
+        redesSociaisButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16).isActive = true
+        redesSociaisButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
+        redesSociaisButton.widthAnchor.constraint(equalToConstant: self.view.frame.width/3 * 0.88).isActive = true
+        
+        
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.topAnchor.constraint(equalTo: self.siteButton.bottomAnchor, constant: 10).isActive = true
+        descriptionLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16).isActive = true
+        descriptionLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16).isActive = true
+        
+        
+        sairButtonProvisorio.translatesAutoresizingMaskIntoConstraints = false
+        sairButtonProvisorio.topAnchor.constraint(equalTo: self.profileCollectionView.topAnchor, constant: self.view.frame.size.height * 0.3).isActive = true
+        sairButtonProvisorio.centerXAnchor.constraint(equalTo: self.profileCollectionView.centerXAnchor, constant: 0).isActive = true
+        sairButtonProvisorio.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
+        sairButtonProvisorio.widthAnchor.constraint(equalToConstant: CGFloat(self.view.frame.size.width * 0.5)).isActive = true
+        
+        createAnnoucementButton.translatesAutoresizingMaskIntoConstraints = false
+        createAnnoucementButton.topAnchor.constraint(equalTo: sairButtonProvisorio.bottomAnchor, constant: 10).isActive = true
+        createAnnoucementButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        createAnnoucementButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
+        createAnnoucementButton.widthAnchor.constraint(equalToConstant: CGFloat(self.view.frame.size.width * 0.90)).isActive = true
+        
+        
+        contactButton.addTarget(self, action: #selector(contactButtonTapped), for: UIControl.Event.touchUpInside)
+        siteButton.addTarget(self, action: #selector(siteButtonTapped), for: UIControl.Event.touchUpInside)
+        redesSociaisButton.addTarget(self, action: #selector(redesSociaisButtonTapped), for: UIControl.Event.touchUpInside)
+        createAnnoucementButton.addTarget(self, action: #selector(createAnnoucementButtonTapped), for: UIControl.Event.touchUpInside)
+        sairButtonProvisorio.addTarget(self, action: #selector(sairButtonActionTapped), for: UIControl.Event.touchUpInside)
+        
+    }
+    
     func setupElementsViewDidLoad(){
         profileCollectionView.dataSource = self
         profileCollectionView.delegate = self
@@ -154,6 +316,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         layout.minimumInteritemSpacing = 8.0
         layout.headerHeight = 50.0
         profileCollectionView.collectionViewLayout = layout
+        
+        profileCollectionView.isUserInteractionEnabled = true
     }
     
     
@@ -182,6 +346,35 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
+    
+    
+    @objc func contactButtonTapped() -> Void {
+        print("Contact Button")
+    }
+    
+    @objc func siteButtonTapped() -> Void {
+        print("Site Button")
+    }
+    
+    @objc func redesSociaisButtonTapped() -> Void {
+        print("Redes Sociais  Button")
+    }
+    
+    @objc func createAnnoucementButtonTapped() -> Void {
+        print("Create announcement Button")
+    }
+    
+    @objc func sairButtonActionTapped() -> Void {
+        let signOutAlert = UIAlertController(title: "Deseja Sair?", message: "Você poderá fazer login quando quiser novamente", preferredStyle: .alert)
+        signOutAlert.addAction(UIAlertAction(title: "Cancelar", style: .default, handler: nil))
+        signOutAlert.addAction(UIAlertAction(title: "Sair", style: .destructive, handler: { (UIAlertAction) in
+            DatabaseHandler.signOut()
+            if let homeProfileViewController = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.homeProfileViewController), let navigationController = self.navigationController{
+                navigationController.setViewControllers([homeProfileViewController], animated: true)
+            }
+        }))
+        self.present(signOutAlert, animated: true, completion: nil)
+    }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -215,7 +408,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     func collectionView(_ collectionView: UICollectionView, layout: WaterfallLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {//Info
-            return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height)*0.4)
+            return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height)*0.45)
         } else if indexPath.section == 1 {//annoucements
             return CGSize(width: (imageLiteralArray[indexPath.item].size.width), height: (imageLiteralArray[indexPath.item].size.height))
         } else {
