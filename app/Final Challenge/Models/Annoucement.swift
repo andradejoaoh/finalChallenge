@@ -23,6 +23,7 @@ class Annoucement: Codable {
     var deliveryOption: Bool
     var productType: String
     let expirationDate: Date?
+    let isPaid: Bool?
     var user: User?
     
     var didLoadImage: ((Data) -> Void)? {
@@ -44,5 +45,6 @@ class Annoucement: Codable {
         case productType = "product_type"
         case expirationDate = "expiration_date"
         case user = "user"
+        case isPaid = "isPaid"
     }
 }

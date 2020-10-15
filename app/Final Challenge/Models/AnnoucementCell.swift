@@ -10,7 +10,7 @@ import UIKit
 
 class AnnoucementCell: UICollectionViewCell{
     
-    let imageAnnoucements: UIImageView = {
+    let imageAnnoucement: UIImageView = {
         let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))
         image.layer.cornerRadius = 10
         image.clipsToBounds = true
@@ -37,12 +37,12 @@ class AnnoucementCell: UICollectionViewCell{
         activityIndicator.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         activityIndicator.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
         
-        addSubview(imageAnnoucements)
-        imageAnnoucements.translatesAutoresizingMaskIntoConstraints = false
-        imageAnnoucements.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        imageAnnoucements.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        imageAnnoucements.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-        imageAnnoucements.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        addSubview(imageAnnoucement)
+        imageAnnoucement.translatesAutoresizingMaskIntoConstraints = false
+        imageAnnoucement.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        imageAnnoucement.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        imageAnnoucement.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        imageAnnoucement.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
             
         self.bringSubviewToFront(activityIndicator)
         activityIndicator.startAnimating()
@@ -58,6 +58,6 @@ class AnnoucementCell: UICollectionViewCell{
     override func prepareForReuse() {
         activityIndicator.startAnimating()
         activityIndicator.isHidden = false
-        self.imageAnnoucements.image = nil
+        self.imageAnnoucement.image = nil
     }
 }

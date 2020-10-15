@@ -61,8 +61,22 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
 
             var expirationDate: Double {
                 switch HardConstants.PickerView.annoucementTime[annoucementTimePicker.selectedRow(inComponent: 0)] {
+                case "1 hora":
+                    return 3600
                 case "2 horas":
                     return 7200
+                case "4 horas":
+                    return 14400
+                case "6 horas":
+                    return 21600
+                case "8 horas":
+                    return 28800
+                case "12 horas":
+                    return 43200
+                case "16 horas":
+                    return 57600
+                case "2 dias":
+                    return 172800
                 default:
                     return 86400
                 }

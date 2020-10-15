@@ -112,7 +112,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             }
         }))
         actionSheet.addAction(UIAlertAction(title: "Mandar um e-mail", style: .default, handler: { (UIAlertAction) in
-            if let url = URL(string: "mailto:\(self.userProfile?.userEmail)"){
+            if let url = URL(string: "mailto:\(String(describing: self.userProfile?.userEmail))"){
                 if #available(iOS 10.0, *){
                     UIApplication.shared.open(url)
                 } else {
@@ -146,7 +146,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         profileCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         profileCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         profileCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        
         
         let layout = WaterfallLayout()
         layout.delegate = self

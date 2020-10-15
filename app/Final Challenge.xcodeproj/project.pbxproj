@@ -27,8 +27,9 @@
 		61BF922E24FD8F1400A8A8BE /* HomeProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF922D24FD8F1400A8A8BE /* HomeProfileViewController.swift */; };
 		61BF923324FD8F1600A8A8BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61BF923224FD8F1600A8A8BE /* Assets.xcassets */; };
 		61BF923624FD8F1600A8A8BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61BF923424FD8F1600A8A8BE /* LaunchScreen.storyboard */; };
+		61F98848253635BD00934265 /* PaidAnnoucementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F98847253635BD00934265 /* PaidAnnoucementCell.swift */; };
 		61FEB07D250954F70092626A /* EditAnnoucementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FEB07C250954F70092626A /* EditAnnoucementViewController.swift */; };
-		6D04A63D25114EB3003C8E9C /* PaidAnnoucementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D04A63C25114EB3003C8E9C /* PaidAnnoucementCell.swift */; };
+		6D04A63D25114EB3003C8E9C /* PaidAnnoucementSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D04A63C25114EB3003C8E9C /* PaidAnnoucementSection.swift */; };
 		6D3EB414251E801C0065C072 /* CollectionViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3EB413251E801C0065C072 /* CollectionViewCellProtocol.swift */; };
 		6D482CDB2530E05B00D8E753 /* AnnoucementPerfilCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D482CDA2530E05B00D8E753 /* AnnoucementPerfilCell.swift */; };
 		6D482CDF2530E67C00D8E753 /* AnnoucementPortifolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D482CDE2530E67C00D8E753 /* AnnoucementPortifolioCell.swift */; };
@@ -38,10 +39,7 @@
 		6D8A66FB250BF17F0093F889 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D8A66FA250BF17F0093F889 /* GoogleService-Info.plist */; };
 		6D8A66FD250C06EF0093F889 /* StyleElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A66FC250C06EF0093F889 /* StyleElements.swift */; };
 		6D952B202525103300365772 /* WaterFallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D952B1F2525103300365772 /* WaterFallLayout.swift */; };
-		6DCB67B2252E358D00154C87 /* ContactPerfilTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCB67B1252E358C00154C87 /* ContactPerfilTableViewController.swift */; };
-		6DCB67B5252E523A00154C87 /* ContactModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCB67B4252E523900154C87 /* ContactModalViewController.swift */; };
 		6DCB67CF252E629900154C87 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCB67CE252E629800154C87 /* PresentationController.swift */; };
-		6DCB67DA252FA43100154C87 /* ContactModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DCB67D9252FA43000154C87 /* ContactModalView.xib */; };
 		EA1068CF5385B8C601EEEBA6 /* Pods_Final_Challenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB69623477CE06EEF87814D3 /* Pods_Final_Challenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,8 +66,9 @@
 		61BF923224FD8F1600A8A8BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61BF923524FD8F1600A8A8BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61BF923724FD8F1600A8A8BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61F98847253635BD00934265 /* PaidAnnoucementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidAnnoucementCell.swift; sourceTree = "<group>"; };
 		61FEB07C250954F70092626A /* EditAnnoucementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnoucementViewController.swift; sourceTree = "<group>"; };
-		6D04A63C25114EB3003C8E9C /* PaidAnnoucementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidAnnoucementCell.swift; sourceTree = "<group>"; };
+		6D04A63C25114EB3003C8E9C /* PaidAnnoucementSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidAnnoucementSection.swift; sourceTree = "<group>"; };
 		6D3EB413251E801C0065C072 /* CollectionViewCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellProtocol.swift; sourceTree = "<group>"; };
 		6D482CDA2530E05B00D8E753 /* AnnoucementPerfilCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnoucementPerfilCell.swift; sourceTree = "<group>"; };
 		6D482CDE2530E67C00D8E753 /* AnnoucementPortifolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnoucementPortifolioCell.swift; sourceTree = "<group>"; };
@@ -79,10 +78,7 @@
 		6D8A66FA250BF17F0093F889 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6D8A66FC250C06EF0093F889 /* StyleElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleElements.swift; sourceTree = "<group>"; };
 		6D952B1F2525103300365772 /* WaterFallLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterFallLayout.swift; sourceTree = "<group>"; };
-		6DCB67B1252E358C00154C87 /* ContactPerfilTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPerfilTableViewController.swift; sourceTree = "<group>"; };
-		6DCB67B4252E523900154C87 /* ContactModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModalViewController.swift; sourceTree = "<group>"; };
 		6DCB67CE252E629800154C87 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
-		6DCB67D9252FA43000154C87 /* ContactModalView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactModalView.xib; sourceTree = "<group>"; };
 		A64C65BE450A56694F9B8320 /* Pods-Final Challenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Challenge.release.xcconfig"; path = "Target Support Files/Pods-Final Challenge/Pods-Final Challenge.release.xcconfig"; sourceTree = "<group>"; };
 		CB42A5C477F254EBC34B7555 /* Pods-Final Challenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Challenge.debug.xcconfig"; path = "Target Support Files/Pods-Final Challenge/Pods-Final Challenge.debug.xcconfig"; sourceTree = "<group>"; };
 		DB69623477CE06EEF87814D3 /* Pods_Final_Challenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Final_Challenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,8 +117,6 @@
 				61FEB07C250954F70092626A /* EditAnnoucementViewController.swift */,
 				61545BAC251A982100175C84 /* SearchViewController.swift */,
 				61B2DFB3251BC1EB00DB51E1 /* AnnoucementViewController.swift */,
-				6DCB67B1252E358C00154C87 /* ContactPerfilTableViewController.swift */,
-				6DCB67B4252E523900154C87 /* ContactModalViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -131,11 +125,12 @@
 			isa = PBXGroup;
 			children = (
 				614A3E7325080FFC003A24F1 /* Annoucement.swift */,
+				614A3E7925081C12003A24F1 /* AnnoucementCell.swift */,
+				61F98847253635BD00934265 /* PaidAnnoucementCell.swift */,
 				61545BAA25194B2F00175C84 /* User.swift */,
 				6D641757252258FC00C184BA /* HeaderFeedCollectionView.swift */,
-				614A3E7925081C12003A24F1 /* AnnoucementCell.swift */,
-				6D04A63C25114EB3003C8E9C /* PaidAnnoucementCell.swift */,
 				6D482CE42530E7CA00D8E753 /* HeaderPerfilCollectionView.swift */,
+				6D04A63C25114EB3003C8E9C /* PaidAnnoucementSection.swift */,
 				6D482CE12530E6D000D8E753 /* AnnoucementPerfilInfoCell.swift */,
 				6D482CDA2530E05B00D8E753 /* AnnoucementPerfilCell.swift */,
 				6D482CDE2530E67C00D8E753 /* AnnoucementPortifolioCell.swift */,
@@ -186,7 +181,6 @@
 				61BF922B24FD8F1400A8A8BE /* SceneDelegate.swift */,
 				61BF923224FD8F1600A8A8BE /* Assets.xcassets */,
 				619E9434250FE1A0001DF814 /* Main.storyboard */,
-				6DCB67D9252FA43000154C87 /* ContactModalView.xib */,
 				61BF923424FD8F1600A8A8BE /* LaunchScreen.storyboard */,
 				61BF923724FD8F1600A8A8BE /* Info.plist */,
 				6D8A66FA250BF17F0093F889 /* GoogleService-Info.plist */,
@@ -264,7 +258,6 @@
 			files = (
 				61BF923624FD8F1600A8A8BE /* LaunchScreen.storyboard in Resources */,
 				6D8A66FB250BF17F0093F889 /* GoogleService-Info.plist in Resources */,
-				6DCB67DA252FA43100154C87 /* ContactModalView.xib in Resources */,
 				61BF923324FD8F1600A8A8BE /* Assets.xcassets in Resources */,
 				619E9435250FE1A0001DF814 /* Main.storyboard in Resources */,
 			);
@@ -336,16 +329,15 @@
 				613F9EAA2526712300D55524 /* QuerySnapshotExtension.swift in Sources */,
 				61BF922C24FD8F1400A8A8BE /* SceneDelegate.swift in Sources */,
 				61FEB07D250954F70092626A /* EditAnnoucementViewController.swift in Sources */,
-				6DCB67B5252E523A00154C87 /* ContactModalViewController.swift in Sources */,
 				61B6F30925017FE800C65B1F /* HardConstants.swift in Sources */,
 				6D3EB414251E801C0065C072 /* CollectionViewCellProtocol.swift in Sources */,
 				61545BAD251A982100175C84 /* SearchViewController.swift in Sources */,
 				6199162F25096C9C005ABCFE /* DatabaseHandler.swift in Sources */,
-				6D04A63D25114EB3003C8E9C /* PaidAnnoucementCell.swift in Sources */,
+				6D04A63D25114EB3003C8E9C /* PaidAnnoucementSection.swift in Sources */,
 				612E82F8250160B7002C4435 /* ProfileViewController.swift in Sources */,
 				6D8A66FD250C06EF0093F889 /* StyleElements.swift in Sources */,
 				61B2DFB4251BC1EB00DB51E1 /* AnnoucementViewController.swift in Sources */,
-				6DCB67B2252E358D00154C87 /* ContactPerfilTableViewController.swift in Sources */,
+				61F98848253635BD00934265 /* PaidAnnoucementCell.swift in Sources */,
 				613F9EAD2526719E00D55524 /* ErrorTypes.swift in Sources */,
 				6D482CE22530E6D000D8E753 /* AnnoucementPerfilInfoCell.swift in Sources */,
 				614A3E76250812B3003A24F1 /* CreatAnnoucementViewController.swift in Sources */,
