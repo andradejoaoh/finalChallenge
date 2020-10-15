@@ -13,11 +13,9 @@ class AnnoucementPerfilInfoCell: UICollectionViewCell{
     
     let imagePerfil: UIImageView = {
         let image = UIImageView(image: #imageLiteral(resourceName: "placeholder3"))
-        image.frame.size.width = 52
-        image.frame.size.height = 52
+        image.frame = CGRect(x: 0, y: 0, width: 52, height: 52)
         image.layer.cornerRadius = image.frame.size.width/2
         image.clipsToBounds = true
-        image.contentMode = .scaleAspectFill
         return image
     }()
     
@@ -46,17 +44,20 @@ class AnnoucementPerfilInfoCell: UICollectionViewCell{
     }()
     
     let descriptionLabel: UILabel = {
-        let categoryLabel = UILabel()
-        categoryLabel.text = "Descrição - Lorem ipsum dolor sit amet. Ut autem dolores ea quia omnis eos eveniet facilis in possimus dicta"
-        categoryLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
-        categoryLabel.textColor = .black
-        return categoryLabel
+        let descriptionLabel = UILabel()
+        descriptionLabel.text = "Descrição - Lorem ipsum dolor sit amet. Ut autem dolores ea quia omnis eos eveniet facilis in possimus dicta"
+        descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
+        descriptionLabel.textColor = .black
+        descriptionLabel.numberOfLines = 0
+        return descriptionLabel
     }()
     
     let contactButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.7450980392, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
         button.setTitle("Contato", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         button.frame.size.width = 103
         button.frame.size.height = 30
         button.layer.cornerRadius = 15
@@ -68,6 +69,8 @@ class AnnoucementPerfilInfoCell: UICollectionViewCell{
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.7450980392, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
         button.setTitle("Site", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         button.frame.size.width = 103
         button.frame.size.height = 30
         button.layer.cornerRadius = 15
@@ -78,42 +81,129 @@ class AnnoucementPerfilInfoCell: UICollectionViewCell{
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.7450980392, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
         button.setTitle("Redes Sociais", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         button.frame.size.width = 103
         button.frame.size.height = 30
         button.layer.cornerRadius = 15
         return button
     }()
     
+    let createAnnoucementButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 0.7450980392, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
+        button.setTitle("Criar Anúncio", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        button.frame.size.width = 103
+        button.frame.size.height = 30
+        button.layer.cornerRadius = 15
+        return button
+    }()
+    
+    let sairButtonProvisorio: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 1, green: 0.6547823548, blue: 0.6713048816, alpha: 1)
+        button.setTitle("Sair", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 5
+        
+        return button
+    }()
+    
+    
+    
     override init (frame: CGRect){
         super.init(frame: frame)
         setupView()
-        //backgroundColor = .blue
+        sairButtonProvisorio.addTarget(self, action: #selector(buttonSairAction), for: .touchUpInside)
     }
     func setupView(){
         addSubview(imagePerfil)
-//        addSubview(perfilNameLabel)
-//        addSubview(categoryLabel)
-//        addSubview(bairroLabel)
-//
-//        addSubview(descriptionLabel)
-//        addSubview(contactButton)
-//        addSubview(siteButton)
-//        addSubview(redesSociaisButton)
+        addSubview(perfilNameLabel)
+        addSubview(categoryLabel)
+        addSubview(bairroLabel)
+
+        addSubview(descriptionLabel)
+        addSubview(contactButton)
+        addSubview(siteButton)
+        addSubview(redesSociaisButton)
+        addSubview(createAnnoucementButton)
+        //addSubview(sairButtonProvisorio)
         
         
         imagePerfil.translatesAutoresizingMaskIntoConstraints = false
         imagePerfil.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         imagePerfil.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        //imagePerfil.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 50).isActive = true
-        //imagePerfil.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 50).isActive = true
-
+        imagePerfil.heightAnchor.constraint(equalToConstant: CGFloat(52)).isActive = true
+        imagePerfil.widthAnchor.constraint(equalToConstant: CGFloat(52)).isActive = true
+        
+        perfilNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        perfilNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        perfilNameLabel.leftAnchor.constraint(equalTo: self.imagePerfil.rightAnchor, constant: 10).isActive = true
+        perfilNameLabel.heightAnchor.constraint(equalToConstant: CGFloat(20)).isActive = true
+        
+        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        categoryLabel.topAnchor.constraint(equalTo: self.perfilNameLabel.bottomAnchor, constant: 0).isActive = true
+        categoryLabel.leftAnchor.constraint(equalTo: self.imagePerfil.rightAnchor, constant: 10).isActive = true
+        categoryLabel.heightAnchor.constraint(equalToConstant: CGFloat(20)).isActive = true
+        
+        bairroLabel.translatesAutoresizingMaskIntoConstraints = false
+        bairroLabel.topAnchor.constraint(equalTo: self.categoryLabel.bottomAnchor, constant: 0).isActive = true
+        bairroLabel.leftAnchor.constraint(equalTo: self.imagePerfil.rightAnchor, constant: 10).isActive = true
+        bairroLabel.heightAnchor.constraint(equalToConstant: CGFloat(20)).isActive = true
+        
+        contactButton.translatesAutoresizingMaskIntoConstraints = false
+        contactButton.topAnchor.constraint(equalTo: self.imagePerfil.bottomAnchor, constant: 18).isActive = true
+        contactButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        contactButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
+        contactButton.widthAnchor.constraint(equalToConstant: self.contentView.frame.width/3 * 0.95).isActive = true
+        
+        siteButton.translatesAutoresizingMaskIntoConstraints = false
+        siteButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        siteButton.topAnchor.constraint(equalTo: self.imagePerfil.bottomAnchor, constant: 18).isActive = true
+        siteButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
+        siteButton.widthAnchor.constraint(equalToConstant: self.contentView.frame.width/3 * 0.95).isActive = true
+        
+        redesSociaisButton.translatesAutoresizingMaskIntoConstraints = false
+        redesSociaisButton.topAnchor.constraint(equalTo: self.imagePerfil.bottomAnchor, constant: 18).isActive = true
+        redesSociaisButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        redesSociaisButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
+        redesSociaisButton.widthAnchor.constraint(equalToConstant: self.contentView.frame.width/3 * 0.95).isActive = true
+        
+        
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.topAnchor.constraint(equalTo: self.siteButton.bottomAnchor, constant: 10).isActive = true
+        descriptionLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        descriptionLabel.widthAnchor.constraint(equalToConstant: CGFloat(self.contentView.frame.size.width)).isActive = true
+        
+        
+//        sairButtonProvisorio.translatesAutoresizingMaskIntoConstraints = false
+//        sairButtonProvisorio.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -30).isActive = true
+//        sairButtonProvisorio.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+//        sairButtonProvisorio.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
+//        sairButtonProvisorio.widthAnchor.constraint(equalToConstant: CGFloat(self.contentView.frame.size.width * 0.97)).isActive = true
+        
+        createAnnoucementButton.translatesAutoresizingMaskIntoConstraints = false
+        createAnnoucementButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        createAnnoucementButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        createAnnoucementButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
+        createAnnoucementButton.widthAnchor.constraint(equalToConstant: CGFloat(self.contentView.frame.size.width * 0.97)).isActive = true
+        
+                
     }
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+    }
+    
+    @objc func buttonSairAction(sender: UIButton!) {
+      print("Button tapped")
     }
 }
 

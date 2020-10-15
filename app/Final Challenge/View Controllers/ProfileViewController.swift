@@ -34,87 +34,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         cv.backgroundColor = .clear
         return cv
     }()
-    
-    let imageAnnoucements: UIImageView = {
-        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))
-        image.layer.cornerRadius = 10
-        image.clipsToBounds = true
-        image.contentMode = .scaleAspectFill
-        return image
-    }()
-    
-    let imagePerfil: UIImageView = {
-        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))
-        image.frame.size.width = 52
-        image.frame.size.height = 52
-        image.layer.cornerRadius = image.frame.size.width/2
-        image.clipsToBounds = true
-        image.contentMode = .scaleAspectFill
-        return image
-    }()
-    
-    let perfilNameLabel: UILabel = {
-        let perfilNameLabel = UILabel()
-        perfilNameLabel.text = "Nome do perfil placeholder"
-        perfilNameLabel.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.semibold)
-        perfilNameLabel.textColor = .black
-        return perfilNameLabel
-    }()
-    
-    let categoryLabel: UILabel = {
-        let categoryLabel = UILabel()
-        categoryLabel.text = "Categoria placeholder"
-        categoryLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
-        categoryLabel.textColor = .black
-        return categoryLabel
-    }()
-    
-    let bairroLabel: UILabel = {
-        let categoryLabel = UILabel()
-        categoryLabel.text = "Bairro placeholder"
-        categoryLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
-        categoryLabel.textColor = .black
-        return categoryLabel
-    }()
-    
-    let descriptionLabel: UILabel = {
-        let categoryLabel = UILabel()
-        categoryLabel.text = "Descrição - Lorem ipsum dolor sit amet. Ut autem dolores ea quia omnis eos eveniet facilis in possimus dicta"
-        categoryLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
-        categoryLabel.textColor = .black
-        return categoryLabel
-    }()
-    
-    let contactButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.7450980392, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
-        button.setTitle("Contato", for: .normal)
-        button.frame.size.width = 103
-        button.frame.size.height = 30
-        button.layer.cornerRadius = 15
-        return button
-    }()
     //button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-    
-    let siteButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.7450980392, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
-        button.setTitle("Site", for: .normal)
-        button.frame.size.width = 103
-        button.frame.size.height = 30
-        button.layer.cornerRadius = 15
-        return button
-    }()
-    
-    let redesSociaisButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.7450980392, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
-        button.setTitle("Redes Sociais", for: .normal)
-        button.frame.size.width = 103
-        button.frame.size.height = 30
-        button.layer.cornerRadius = 15
-        return button
-    }()
     
     
     override func viewDidLoad() {
@@ -138,6 +58,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         setupView()
     }
     
+    
     @IBAction func signOutAction(_ sender: Any) {
         let signOutAlert = UIAlertController(title: "Deseja Sair?", message: "Você poderá fazer login quando quiser novamente", preferredStyle: .alert)
         signOutAlert.addAction(UIAlertAction(title: "Cancelar", style: .default, handler: nil))
@@ -149,6 +70,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         }))
         self.present(signOutAlert, animated: true, completion: nil)
     }
+    
+    
     
     
     @IBAction func contactAction(_ sender: Any){
@@ -223,11 +146,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         profileCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         profileCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         profileCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        profileCollectionView
+        
         
         let layout = WaterfallLayout()
         layout.delegate = self
-        layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 10)
         layout.minimumLineSpacing = 8.0
         layout.minimumInteritemSpacing = 8.0
         layout.headerHeight = 50.0
@@ -293,7 +216,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     func collectionView(_ collectionView: UICollectionView, layout: WaterfallLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {//Info
-            return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height)*0.3)
+            return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height)*0.4)
         } else if indexPath.section == 1 {//annoucements
             return CGSize(width: (imageLiteralArray[indexPath.item].size.width), height: (imageLiteralArray[indexPath.item].size.height))
         } else {
@@ -301,21 +224,36 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
+    
     func collectionViewLayout(for section: Int) -> WaterfallLayout.Layout {
-        if section == 0 {//
-            return .flow(column: 1)
-        } else if section == 1{
+        if section == 1 {//
             return .waterfall(column: 2, distributionMethod: .balanced)
+        } else if section == 2{
+            return .flow(column: 1)
         } else {
             return .flow(column: 1)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout: WaterfallLayout, estimatedSizeForItemAt indexPath: IndexPath) -> CGSize? {
+        let width = profileCollectionView.frame.size.width
+        let height = profileCollectionView.frame.size.height
+        if indexPath.section == 0 {
+            
+            return CGSize(width: width, height: height)
+        }
+        return CGSize(width: width, height: height)
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HardConstants.CollectionView.headerPerfilView, for: indexPath) as! HeaderPerfilCollectionView
             switch indexPath.section{
+            case 0:
+                //headerView.frame.size.height = 0
+                headerView.labelHeader.text = ""
             case 1:
                 headerView.labelHeader.text = "Anúncios"
             case 2:
@@ -327,6 +265,21 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         default:
             preconditionFailure("Invalid supplementary view type for this collection view")
         }
+    }
+    
+   
+    
+    func collectionView(_ collectionView: UICollectionView, layout: WaterfallLayout, headerHeightFor section: Int) -> CGFloat? {
+        let headerHeight: CGFloat
+
+        switch section {
+        case 0:
+            headerHeight = 10
+            //headerHeight = CGFloat.leastNonzeroMagnitude
+        default:
+            headerHeight = 30
+        }
+        return headerHeight
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {//ARRUMAR AS SEGUES DE PORTIFOLIO

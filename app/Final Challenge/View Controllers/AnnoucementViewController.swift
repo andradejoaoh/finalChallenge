@@ -84,6 +84,11 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
         return actionSheet
     }
     
+    
+    @IBAction func dismissButtonAction(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     func deleteAnnoucement() {
         let deleteAlert = UIAlertController(title: "Deseja deletar seu anúncio?", message: "Essa ação não poderá ser desfeita, mas você sempre pode anunciar novamente.", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
