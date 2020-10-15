@@ -54,10 +54,6 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
         self.present(actionSheet, animated: true, completion: nil)
     }
     
-    @IBAction func dismissButtonAction(_ sender: Any){
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case HardConstants.Storyboard.annoucementProfileSegue:
@@ -68,9 +64,6 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
             guard let editAnnoucementViewController = segue.destination as? EditAnnoucementViewController else { return }
             editAnnoucementViewController.annoucement = self.annoucement
             
-        case HardConstants.Storyboard.showContactTable:
-            guard let contactTableViewController = segue.destination as? ContactPerfilTableViewController else { return }
-            contactTableViewController.delegate = self
         default:
             return
         }
@@ -94,6 +87,11 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
         }
         actionSheet.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
         return actionSheet
+    }
+    
+    
+    @IBAction func dismissButtonAction(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     func deleteAnnoucement() {
