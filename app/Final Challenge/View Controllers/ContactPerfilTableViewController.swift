@@ -13,12 +13,15 @@ class ContactPerfilTableViewController: UITableViewController {
     @IBOutlet var contactPerfilTableView: UITableView!
     @IBOutlet weak var contactCell: UITableViewCell!
     @IBOutlet weak var perfilCell: UITableViewCell!
+    
+    var delegate: AnnoucementViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        setupView()
     }
     
-    func setup(){
+    func setupView(){
         self.contactPerfilTableView.isScrollEnabled = false
         
         self.contactPerfilTableView.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
@@ -32,11 +35,10 @@ class ContactPerfilTableViewController: UITableViewController {
         
     }
 
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -45,27 +47,11 @@ class ContactPerfilTableViewController: UITableViewController {
         return 55.0
     }
     
-    
-    
-    
-    
-    
-    @objc func contactShowAction() {
-        let slideContactVC = ContactModalViewController()
-        slideContactVC.modalPresentationStyle = .custom
-        slideContactVC.transitioningDelegate = self
-        self.present(slideContactVC, animated: true, completion: nil)
-    }
-    
-    @IBAction func contactShowAction(_ sender: Any) {
-        contactShowAction()
-    }
-
-}
-
-
-extension ContactPerfilTableViewController: UIViewControllerTransitioningDelegate {
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        PresentationController(presentedViewController: presented, presenting: presenting)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.item == 0 {
+            delegate?.contactUser()
+        } else if indexPath.item == 1 {
+            delegate?.toProfile()
+        }
     }
 }

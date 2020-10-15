@@ -105,6 +105,7 @@ class DatabaseHandler {
                                                  "expiration_date": dateString,
                                                  "delivery_option": deliveryOption,
                                                  "product_type": productType,
+                                                 "isPaid": false,
                                                  "annoucement_user_id":userAuth.uid]) { (error) in
                         if error != nil {
                             return completion(.failure(error!))

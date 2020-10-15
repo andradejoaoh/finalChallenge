@@ -67,7 +67,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         view.addSubview(feedCollectionView)
         
         feedCollectionView.register(AnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.annoucementCell)
-        feedCollectionView.register(PaidAnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell)
+        feedCollectionView.register(PaidAnnoucementSection.self, forCellWithReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell)
         feedCollectionView.register(HeaderFeedCollectionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HardConstants.CollectionView.headerFeedView)
         
         
@@ -110,13 +110,15 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             cell.layer.cornerRadius = 10
             let annoucement = annoucements[indexPath.item]
             
-            annoucement.didLoadImage = { [weak cell] imageData in
-                cell?.imageAnnoucements.image = UIImage(data: annoucement.imageData ?? Data())
+            annoucement.didLoadImage = { [weak cell, weak self] imageData in
+                cell?.imageAnnoucement.image = UIImage(data: annoucement.imageData ?? Data())
                 cell?.activityIndicator.stopAnimating()
+                self?.feedCollectionView.reloadItems(at: [indexPath])
+                
             }
             return cell
         } else {//PAID
-            guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementCell else { return UICollectionViewCell()}
+            guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementSection else { return UICollectionViewCell()}
             paidCell.delegate = self
             
             return paidCell
