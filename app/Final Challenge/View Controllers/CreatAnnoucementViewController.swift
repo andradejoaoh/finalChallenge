@@ -111,6 +111,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
         StyleElements.styleFilledButton(selectPictureButton)
         StyleElements.styleTextField(annoucementNameTextField)
         StyleElements.styleTextField(annoucementDescriptionTextField)
+        StyleElements.styleTextField(annoucementLocationTextField)
     }
     
     @IBAction func selectImageAction(_ sender: Any) {
