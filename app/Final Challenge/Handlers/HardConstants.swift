@@ -18,6 +18,7 @@ struct HardConstants {
         static let fromProfileToAnnoucementSegue = "profileShowAnnoucement"
         static let annoucementSegue = "showAnnoucement"
         static let contactModalViewController = "contactModalViewController"
+        static let createAnnoucementViewController = "createAnnoucement"
     }
     
     struct Database {
@@ -31,7 +32,6 @@ struct HardConstants {
         static let headerFeedView = "HeaderView"
         
         static let annoucementPerfilInfoCell = "annoucementPerfilInfoCell"
-        static let annoucementPerfilCell = "annoucementPerfilCell"
         static let annoucementPortifolioCell = "annoucementPortifolioCell"
         static let annoucementPortifolioCellSection = "announcementPortifolioCellSection"
         static let headerPerfilView = "HeaderPerfilView"

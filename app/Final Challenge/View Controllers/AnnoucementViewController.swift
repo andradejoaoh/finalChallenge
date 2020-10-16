@@ -26,6 +26,9 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     @IBOutlet weak var buyButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
     
+    @IBOutlet weak var viewComprar: UIView!
+    @IBOutlet weak var viewPerfil: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -54,8 +57,10 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
                 diponibilityLabel.text = "Informações sobre disponibilidade não encontradas"
             }
         }
-        annoucementPrice.layer.backgroundColor = #colorLiteral(red: 0.6823529412, green: 0.6823529412, blue: 0.6980392157, alpha: 1)
         annoucementPrice.layer.cornerRadius = 15
+        annoucementPrice.layer.masksToBounds = true
+        viewComprar.layer.cornerRadius = 8
+        viewPerfil.layer.cornerRadius = 8
     }
     
     @IBAction func optionsAction(_ sender: Any) {

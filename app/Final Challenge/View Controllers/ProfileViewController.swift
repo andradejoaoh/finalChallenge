@@ -132,7 +132,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Nome do perfil"
         setupElementsViewDidLoad()
         setupElementsInCollectionView()
         DatabaseHandler.readAnnoucements { (result) in
@@ -156,8 +155,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     func setupView() {
         let defaults = UserDefaults()
         if let user = self.userProfile {
-            
-            
+            self.title = user.userStoreName
+            self.perfilNameLabel.text = user.userStoreName
+            self.descriptionLabel.text = user.userBio
+            self.categoryLabel.text = user.userName
             
             if user.userID != DatabaseHandler.getCurrentUser() {
                 sairButtonProvisorio.isHidden = true
@@ -166,7 +167,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 sairButtonProvisorio.isHidden = false
                 createAnnoucementButton.isHidden = false
             }
-            
             DatabaseHandler.getProfileImage(userID: user.userID) { result in
                 switch result {
                 case let .success(data):
@@ -175,8 +175,19 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                     print(error)
                 }
             }
+        } else {
+            guard let currentUser = DatabaseHandler.getCurrentUser() else { return }
+            DatabaseHandler.getData(for: currentUser) { (result) in
+                switch result {
+                case let .success(user):
+                    self.userProfile = user
+                    self.setupView()
+                case let .failure(error):
+                    print(error)
+                }
+            }
         }
-        guard case descriptionLabel.text = defaults.value(forKey: "userBio") as? String else { return }
+        
     }
     
     
@@ -281,6 +292,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         createAnnoucementButton.addTarget(self, action: #selector(createAnnoucementButtonTapped), for: UIControl.Event.touchUpInside)
         sairButtonProvisorio.addTarget(self, action: #selector(sairButtonActionTapped), for: UIControl.Event.touchUpInside)
         
+        bairroLabel.isHidden = true
     }
     
     func setupElementsViewDidLoad(){
@@ -291,7 +303,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         
         profileCollectionView.register(AnnoucementPerfilInfoCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.annoucementPerfilInfoCell)
-        profileCollectionView.register(AnnoucementPerfilCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.annoucementPerfilCell)
+        profileCollectionView.register(AnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.annoucementCell)
         profileCollectionView.register(AnnoucementPortifolioCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.annoucementPortifolioCell)
         
         
@@ -352,15 +364,23 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     @objc func siteButtonTapped() -> Void {
-        print("Site Button")
+        guard let userSite = userProfile?.userSite else { return }
+        if let url = URL(string: userSite) {
+            UIApplication.shared.open(url)
+        }
     }
     
     @objc func redesSociaisButtonTapped() -> Void {
-        print("Redes Sociais  Button")
+        guard let userSite = userProfile?.userFacebook else { return }
+        if let url = URL(string: userSite) {
+            UIApplication.shared.open(url)
+        }
     }
     
     @objc func createAnnoucementButtonTapped() -> Void {
-        print("Create announcement Button")
+        
+        guard let createAnnoucementVC = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.createAnnoucementViewController) as? CreateAnnoucementViewController else { return }
+        self.present(createAnnoucementVC, animated: true, completion: nil)
     }
     
     @objc func sairButtonActionTapped() -> Void {
@@ -384,11 +404,17 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             return cellPerfilInfo
             
         } else if indexPath.section == 1 {//ANNOUCEMENT
-            guard let cellPerfilAnnoucement = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementPerfilCell, for: indexPath) as? AnnoucementPerfilCell else { return UICollectionViewCell()}
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCell, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
             
-            let imageName = imageLiteralArray[indexPath.item]
-            cellPerfilAnnoucement.imageAnnoucements.image = imageName
-            return cellPerfilAnnoucement
+            let annoucement = annoucements[indexPath.item]
+            annoucement.didLoadImage = { [weak cell, weak self] imageData in
+                cell?.imageAnnoucement.image = UIImage(data: annoucement.imageData ?? Data())
+                cell?.activityIndicator.stopAnimating()
+                self?.profileCollectionView.reloadItems(at: [indexPath])
+                
+            }
+            
+            return cell
         } else {//PORTIFOLIO
             
             guard let cellPortifolioAnnoucement = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementPortifolioCell, for: indexPath) as? AnnoucementPortifolioCell else { return UICollectionViewCell()}

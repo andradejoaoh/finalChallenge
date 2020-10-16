@@ -192,7 +192,10 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let annoucementViewController = segue.destination as? AnnoucementViewController {
             if comeFromPaid{
-                annoucementViewController.annoucement = annoucements[selectedAnnoucement ?? 0]
+                let paidAnnoucements = annoucements.filter{
+                    $0.isPaid == true
+                }
+                annoucementViewController.annoucement = paidAnnoucements[selectedAnnoucement ?? 0]
                 //TODO - mudar para paid annoucements
             } else {
                 annoucementViewController.annoucement = annoucements[selectedAnnoucement ?? 0]

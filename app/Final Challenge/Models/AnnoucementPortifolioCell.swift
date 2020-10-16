@@ -95,7 +95,7 @@ class AnnoucementPortifolioCell: UICollectionViewCell, UICollectionViewDelegate,
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.delegate?.collectionViewCell(indexPath.item)
+        
     }
     
     

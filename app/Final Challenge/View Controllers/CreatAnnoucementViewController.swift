@@ -60,6 +60,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
             let annoucementLocation = annoucementLocationTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let deliveryOption = deliveryOptionSwitch.isOn
             let productType = HardConstants.PickerView.productType[productTypePicker.selectedRow(inComponent: 0)]
+            let price = Float(annoucementPriceTextField.text!) ?? 0.0
 
             var expirationDate: Double {
                 switch HardConstants.PickerView.annoucementTime[annoucementTimePicker.selectedRow(inComponent: 0)] {
@@ -85,7 +86,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
             }
             
             guard let imageData = annoucementImage else { return }
-            DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation, annoucementImage: imageData, deliveryOption:  deliveryOption, expirationDate: Date(timeIntervalSinceNow: expirationDate), productType: productType) { (result) in
+            DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation, annoucementImage: imageData, deliveryOption:  deliveryOption, expirationDate: Date(timeIntervalSinceNow: expirationDate), productType: productType, price: price) { (result) in
                 switch result {
                 case let .failure(error):
                     //Show error while creating annoucement.
@@ -94,7 +95,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
                     break
                 }
             }
-            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     

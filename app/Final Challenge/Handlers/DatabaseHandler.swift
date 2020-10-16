@@ -27,7 +27,7 @@ class DatabaseHandler {
     }
     
     //Create account using email in Firebase
-    static func signUpWithEmail(email: String, password: String, adress: String, fullname: String, bio: String, facebook: String, site: String, storeName: String, imageData: Data, completion: @escaping (Result<String,Error>) -> Void){
+    static func signUpWithEmail(email: String, password: String, adress: String, fullname: String, bio: String, facebook: String, site: String, storeName: String, phone: String, imageData: Data, completion: @escaping (Result<String,Error>) -> Void){
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 // There was an error while creating user
@@ -60,6 +60,7 @@ class DatabaseHandler {
                                                                                      "site":site,
                                                                                      "facebook":facebook,
                                                                                      "email": email,
+                                                                                     "phone": phone,
                                                                                      "uid":result!.user.uid,
                                                                                      "profile_image_url":url.absoluteString]) { (error) in
                                 if error != nil {
@@ -77,7 +78,7 @@ class DatabaseHandler {
         }
     }
     
-    static func createAnnoucement(annoucementName: String, annoucementDescription: String, annoucementLocation: String, annoucementImage: Data, deliveryOption: Bool, expirationDate: Date, productType: String, completion: @escaping (Result<String,Error>) -> Void){
+    static func createAnnoucement(annoucementName: String, annoucementDescription: String, annoucementLocation: String, annoucementImage: Data, deliveryOption: Bool, expirationDate: Date, productType: String, price: Float, completion: @escaping (Result<String,Error>) -> Void){
         let database = Firestore.firestore()
         guard let userAuth = FirebaseAuth.Auth.auth().currentUser else { return }
         let annoucementDocument = database.collection("annoucements").document()
@@ -106,6 +107,7 @@ class DatabaseHandler {
                                                  "delivery_option": deliveryOption,
                                                  "product_type": productType,
                                                  "isPaid": false,
+                                                 "price": price,
                                                  "annoucement_user_id":userAuth.uid]) { (error) in
                         if error != nil {
                             return completion(.failure(error!))

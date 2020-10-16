@@ -52,10 +52,11 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             let site = self.siteTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let facebook = self.facebookTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let storeName = self.storeNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let phone = self.telefoneTextField.text!.trimmingCharacters(in: .symbols)
             guard let imageData = profileImageView.image?.jpegData(compressionQuality: 0.5) else { return }
 
             // Create the user
-            DatabaseHandler.signUpWithEmail(email: email, password: password, adress: adress, fullname: fullname, bio: bio, facebook: facebook, site: site, storeName: storeName, imageData: imageData) { (result) in
+            DatabaseHandler.signUpWithEmail(email: email, password: password, adress: adress, fullname: fullname, bio: bio, facebook: facebook, site: site, storeName: storeName, phone: phone, imageData: imageData) { (result) in
                 switch result {
                 case let .failure(error):
                     print(error)
