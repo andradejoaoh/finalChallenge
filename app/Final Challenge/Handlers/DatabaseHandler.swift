@@ -251,5 +251,19 @@ class DatabaseHandler {
         annoucements.forEach(getUser)
     }
     
+    static func setCurrentUserData(){
+        let currentUserId = DatabaseHandler.getCurrentUser()
+        guard let userId = currentUserId else { return }
+        DatabaseHandler.getData(for: userId) { (result) in
+            switch result{
+            case let .success(user):
+                let defaults = UserDefaults.standard
+                defaults.set(user.userBio, forKey: "userBio")
+                defaults.set(user.userStoreName, forKey: "userStoreName")
+            case .failure:
+                return
+            }
+        }
+    }
 }
 

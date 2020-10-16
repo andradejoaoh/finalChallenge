@@ -34,7 +34,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         cv.backgroundColor = .clear
         return cv
     }()
-    //button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
     
     
     override func viewDidLoad() {
@@ -265,8 +264,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             preconditionFailure("Invalid supplementary view type for this collection view")
         }
     }
-    
-   
     
     func collectionView(_ collectionView: UICollectionView, layout: WaterfallLayout, headerHeightFor section: Int) -> CGFloat? {
         let headerHeight: CGFloat

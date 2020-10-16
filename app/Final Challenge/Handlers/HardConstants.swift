@@ -17,7 +17,6 @@ struct HardConstants {
         static let annoucementProfileSegue = "toProfileSegue"
         static let annoucementSegue = "showAnnoucement"
         static let contactModalViewController = "contactModalViewController"
-        static let showContactTable = "showContactTable"
     }
     
     struct Database {

@@ -42,11 +42,20 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
             annoucementDescription.text = annoucement.description
             annoucementImage.image = UIImage(data: annoucement.imageData ?? Data())
             categoryLabel.text = annoucement.productType
-            diponibilityLabel.text = "Disponível até \(String(describing: annoucement.expirationDate))"
+            let range = DateInterval(start: Date(), end: annoucement.expirationDate ?? Date())
+            if range.duration > 3600{
+                let hours = Int(range.duration/3600)
+                let minutes = Int((range.duration.truncatingRemainder(dividingBy: 3600)/60))
+                diponibilityLabel.text = "Disponível por \(hours) horas e \(minutes) minutos"
+            } else if range.duration > 100 && range.duration < 3600 {
+                let minutes = Int((range.duration.truncatingRemainder(dividingBy: 3600)/60))
+                diponibilityLabel.text = "Disponível por \(minutes) minutos"
+            } else {
+                diponibilityLabel.text = "Informações sobre disponibilidade não encontradas"
+            }
         }
         annoucementPrice.layer.backgroundColor = #colorLiteral(red: 0.6823529412, green: 0.6823529412, blue: 0.6980392157, alpha: 1)
         annoucementPrice.layer.cornerRadius = 15
-
     }
     
     @IBAction func optionsAction(_ sender: Any) {
@@ -119,10 +128,13 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     func contactUser(){
         self.present(createContactController(), animated: true, completion: nil)
     }
+    
     @IBAction func buyButtonAction(_ sender: Any) {
-        
+        contactUser()
     }
+    
     @IBAction func profileButtonAction(_ sender: Any) {
+        toProfile()
     }
     
     
@@ -143,6 +155,7 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
                 }
             }
         }))
+        actionSheet.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
         return actionSheet
     }
 }
