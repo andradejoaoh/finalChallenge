@@ -8,12 +8,13 @@
 
 import UIKit
 
-class EditAnnoucementViewController: UIViewController {
+class EditAnnoucementViewController: UIViewController, UITextFieldDelegate {
     var annoucement: Annoucement?
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var productTypePicker: UIPickerView!
     @IBOutlet weak var deliveryOption: UISwitch!
@@ -24,6 +25,13 @@ class EditAnnoucementViewController: UIViewController {
         productTypePicker.delegate = self
         productTypePicker.dataSource = self
         
+        nameTextField.delegate = self
+        descriptionTextField.delegate = self
+        locationTextField.delegate = self
+        priceTextField.delegate = self
+        
+        setupStyleForElements()
+        self.hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +66,30 @@ class EditAnnoucementViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
+    }
+    
+    func setupStyleForElements(){
+        StyleElements.styleTextField(nameTextField)
+        StyleElements.styleTextField(descriptionTextField)
+        StyleElements.styleTextField(locationTextField)
+        StyleElements.styleTextField(priceTextField)
+        StyleElements.styleFilledButton(editButton)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == nameTextField {
+            textField.resignFirstResponder()
+            descriptionTextField.becomeFirstResponder()
+        } else if textField == descriptionTextField {
+            textField.resignFirstResponder()
+            locationTextField.becomeFirstResponder()
+        } else if textField == locationTextField {
+            textField.resignFirstResponder()
+            priceTextField.becomeFirstResponder()
+        } else if textField == priceTextField {
+            textField.resignFirstResponder()
+        }
+        return true
     }
 }
 
