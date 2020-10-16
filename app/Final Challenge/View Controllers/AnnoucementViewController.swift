@@ -126,7 +126,9 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     }
     
     func contactUser(){
-        self.present(createContactController(), animated: true, completion: nil)
+        guard let user = self.annoucement?.user else { return }
+        let contactAlert = ContactHandler.createContactController(to: user)
+        self.present(contactAlert, animated: true, completion: nil)
     }
     
     @IBAction func buyButtonAction(_ sender: Any) {
@@ -135,27 +137,5 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     
     @IBAction func profileButtonAction(_ sender: Any) {
         toProfile()
-    }
-    
-    
-    func createContactController() -> UIAlertController {
-        let actionSheet = UIAlertController(title: "Entrar em Contato", message: "Como deseja entrar em contato?", preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Telefonar", style: .default, handler: { (UIAlertAction) in
-            if let url = URL(string: "tel://\(String(describing: self.annoucement?.user?.userPhone))"), UIApplication.shared.canOpenURL(url){
-                UIApplication.shared.open(url)
-            }
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Mandar um e-mail", style: .default, handler: { (UIAlertAction) in
-            if let url = URL(string: "mailto:\(String(describing:  self.annoucement?.user?.userEmail))"){
-                if #available(iOS 10.0, *){
-                    UIApplication.shared.open(url)
-                } else {
-                    UIApplication.shared.openURL(url)
-                    
-                }
-            }
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
-        return actionSheet
     }
 }

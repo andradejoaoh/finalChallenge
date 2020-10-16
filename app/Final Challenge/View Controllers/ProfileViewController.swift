@@ -19,10 +19,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     var selectedAnnoucement: Int = 0
     
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var bio: UILabel!
-    @IBOutlet weak var signOutButton: UIButton!
-    @IBOutlet weak var annouceButton: UIButton!
     
     let profileCollectionView: UICollectionView = {
         let layout = WaterfallLayout()
@@ -145,7 +141,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 //Show error while updating feed
                 print(error)
             case let .success(annoucements):
-                self.annoucements = annoucements
+                self.annoucements = annoucements.filter{ $0.userID == self.userProfile?.userID}
             }
         }
     }
@@ -158,28 +154,29 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func setupView() {
-        
+        let defaults = UserDefaults()
         if let user = self.userProfile {
             
-            bio.text = user.userBio
+            
             
             if user.userID != DatabaseHandler.getCurrentUser() {
-                signOutButton.isHidden = true
-                annouceButton.isHidden = true
+                sairButtonProvisorio.isHidden = true
+                createAnnoucementButton.isHidden = true
             } else {
-                signOutButton.isHidden = false
-                annouceButton.isHidden = false
+                sairButtonProvisorio.isHidden = false
+                createAnnoucementButton.isHidden = false
             }
             
             DatabaseHandler.getProfileImage(userID: user.userID) { result in
                 switch result {
                 case let .success(data):
-                    self.profileImageView.image = UIImage(data: data)
+                    self.imagePerfil.image = UIImage(data: data)
                 case let .failure(error):
                     print(error)
                 }
             }
         }
+        guard case descriptionLabel.text = defaults.value(forKey: "userBio") as? String else { return }
     }
     
     
@@ -349,7 +346,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     
     @objc func contactButtonTapped() -> Void {
-        print("Contact Button")
+        guard let user = self.userProfile else { return }
+        let contactAlert = ContactHandler.createContactController(to: user)
+        self.present(contactAlert, animated: true, completion: nil)
     }
     
     @objc func siteButtonTapped() -> Void {
@@ -365,8 +364,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     @objc func sairButtonActionTapped() -> Void {
-        let signOutAlert = UIAlertController(title: "Deseja Sair?", message: "Você poderá fazer login quando quiser novamente", preferredStyle: .alert)
-        signOutAlert.addAction(UIAlertAction(title: "Cancelar", style: .default, handler: nil))
+        let signOutAlert = UIAlertController(title: "Deseja Sair?", message: "Você poderá fazer login quando quiser novamente.", preferredStyle: .alert)
+        signOutAlert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
         signOutAlert.addAction(UIAlertAction(title: "Sair", style: .destructive, handler: { (UIAlertAction) in
             DatabaseHandler.signOut()
             if let homeProfileViewController = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.homeProfileViewController), let navigationController = self.navigationController{
@@ -474,12 +473,12 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {//ARRUMAR AS SEGUES DE PORTIFOLIO
         if let annoucementViewController = segue.destination as? AnnoucementViewController {
-                annoucementViewController.annoucement = annoucements[selectedAnnoucement ?? 0]
+                annoucementViewController.annoucement = annoucements[selectedAnnoucement]
         }
     }
     
     func collectionViewCell(_ announcementNumber: Int) {
         self.selectedAnnoucement = announcementNumber
-        performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
+        performSegue(withIdentifier: HardConstants.Storyboard.fromProfileToAnnoucementSegue, sender: self)
     }
 }
