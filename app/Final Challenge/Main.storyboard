@@ -160,7 +160,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QXk-md-Dwk">
                                 <rect key="frame" x="80.5" y="717.5" width="253" height="50.5"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contactIconPhone" translatesAutoresizingMaskIntoConstraints="NO" id="G78-3f-Yjx">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="perfilIcon" translatesAutoresizingMaskIntoConstraints="NO" id="G78-3f-Yjx">
                                         <rect key="frame" x="55" y="9" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="G78-3f-Yjx" secondAttribute="height" multiplier="1:1" id="gZI-l0-ktt"/>
@@ -191,7 +191,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kJV-ZR-zLM">
                                 <rect key="frame" x="80.5" y="667" width="253" height="50.5"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contactIconPhone" translatesAutoresizingMaskIntoConstraints="NO" id="gei-aF-AB1">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contactIcon" translatesAutoresizingMaskIntoConstraints="NO" id="gei-aF-AB1">
                                         <rect key="frame" x="56.5" y="10" width="32" height="30"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qP-g4-PFj">
@@ -907,9 +907,10 @@
     <resources>
         <image name="bairroPin" width="20" height="20"/>
         <image name="categoriaPin" width="16" height="16"/>
-        <image name="contactIconPhone" width="32" height="32"/>
+        <image name="contactIcon" width="32" height="32"/>
         <image name="doc.text.fill" catalog="system" width="115" height="128"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
+        <image name="perfilIcon" width="32" height="32"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <namedColor name="backgroundColor">
