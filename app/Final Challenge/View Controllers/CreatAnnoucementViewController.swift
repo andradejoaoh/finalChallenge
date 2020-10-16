@@ -18,6 +18,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
     @IBOutlet weak var annoucementNameTextField: UITextField!
     @IBOutlet weak var annoucementDescriptionTextField: UITextField!
     @IBOutlet weak var annoucementLocationTextField: UITextField!
+    @IBOutlet weak var annoucementPriceTextField: UITextField!
     
     @IBOutlet weak var deliveryOptionSwitch: UISwitch!
     @IBOutlet weak var productTypePicker: UIPickerView!
@@ -30,6 +31,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
         
         self.annoucementNameTextField.delegate = self
         self.annoucementDescriptionTextField.delegate = self
+        self.annoucementLocationTextField.delegate = self
         
         self.productTypePicker.delegate = self
         self.productTypePicker.dataSource = self
@@ -112,6 +114,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
         StyleElements.styleTextField(annoucementNameTextField)
         StyleElements.styleTextField(annoucementDescriptionTextField)
         StyleElements.styleTextField(annoucementLocationTextField)
+        StyleElements.styleTextField(annoucementPriceTextField)
     }
     
     @IBAction func selectImageAction(_ sender: Any) {
@@ -124,6 +127,21 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
         guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
         self.annoucementImage = image.jpegData(compressionQuality: 0.8)
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    //hide keyboard function
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == annoucementNameTextField {
+            textField.resignFirstResponder()
+            annoucementLocationTextField.becomeFirstResponder()
+        } else if textField == annoucementLocationTextField {
+            textField.resignFirstResponder()
+            annoucementDescriptionTextField.becomeFirstResponder()
+        } else if textField == annoucementDescriptionTextField {
+            textField.resignFirstResponder()
+        }
+        return true
     }
 }
 
