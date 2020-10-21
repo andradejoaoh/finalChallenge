@@ -23,7 +23,9 @@ extension QuerySnapshot {
 extension QueryDocumentSnapshot {
     func toObject<T: Decodable>() throws -> T {
         let jsonData = try JSONSerialization.data(withJSONObject: data(), options: [])
-        let object = try JSONDecoder().decode(T.self, from: jsonData)
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.dateDecodingStrategy = .iso8601
+        let object = try jsonDecoder.decode(T.self, from: jsonData)
         
         return object
     }

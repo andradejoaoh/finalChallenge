@@ -15,14 +15,16 @@ class User: Codable {
     let userBio: String
     let userSite: String?
     let userStoreName: String
+    let userPhone: String
     
     enum CodingKeys: String, CodingKey {
-       case userName = "full_name"
-       case userEmail = "email"
-       case userID = "uid"
-       case userFacebook = "facebook"
-       case userBio = "bio"
-       case userSite = "site"
-       case userStoreName = "store_name"
+        case userName = "full_name"
+        case userEmail = "email"
+        case userID = "uid"
+        case userFacebook = "facebook"
+        case userBio = "bio"
+        case userSite = "site"
+        case userPhone = "phone"
+        case userStoreName = "store_name"
     }
 }

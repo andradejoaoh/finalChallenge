@@ -9,18 +9,29 @@
 import UIKit
 
 class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
+    
+    
     var annoucement: Annoucement?
-    var user: User?
     
     @IBOutlet weak var annoucementImage: UIImageView!
     @IBOutlet weak var annoucementName: UILabel!
     @IBOutlet weak var annoucementDescription: UILabel!
     @IBOutlet weak var annoucementPrice: UILabel!
     
+    @IBOutlet weak var diponibilityLabel: UILabel!
+    
+    @IBOutlet weak var bairroLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
+    
+    @IBOutlet weak var buyButton: UIButton!
+    @IBOutlet weak var profileButton: UIButton!
+    
+    @IBOutlet weak var viewComprar: UIView!
+    @IBOutlet weak var viewPerfil: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        getUserData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,7 +44,23 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
             annoucementName.text = annoucement.annoucementName
             annoucementDescription.text = annoucement.description
             annoucementImage.image = UIImage(data: annoucement.imageData ?? Data())
+            categoryLabel.text = annoucement.productType
+            let range = DateInterval(start: Date(), end: annoucement.expirationDate ?? Date())
+            if range.duration > 3600{
+                let hours = Int(range.duration/3600)
+                let minutes = Int((range.duration.truncatingRemainder(dividingBy: 3600)/60))
+                diponibilityLabel.text = "Disponível por \(hours) horas e \(minutes) minutos"
+            } else if range.duration > 100 && range.duration < 3600 {
+                let minutes = Int((range.duration.truncatingRemainder(dividingBy: 3600)/60))
+                diponibilityLabel.text = "Disponível por \(minutes) minutos"
+            } else {
+                diponibilityLabel.text = "Informações sobre disponibilidade não encontradas"
+            }
         }
+        annoucementPrice.layer.cornerRadius = 15
+        annoucementPrice.layer.masksToBounds = true
+        viewComprar.layer.cornerRadius = 8
+        viewPerfil.layer.cornerRadius = 8
     }
     
     @IBAction func optionsAction(_ sender: Any) {
@@ -42,11 +69,17 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let editAnnoucementViewController = segue.destination as? EditAnnoucementViewController {
+        switch segue.identifier {
+        case HardConstants.Storyboard.annoucementProfileSegue:
+            guard let profileViewController = segue.destination as? ProfileViewController else { return }
+                profileViewController.userProfile = annoucement?.user
+            
+        case HardConstants.Storyboard.editSegue:
+            guard let editAnnoucementViewController = segue.destination as? EditAnnoucementViewController else { return }
             editAnnoucementViewController.annoucement = self.annoucement
-        }
-        if let profileViewController = segue.destination as? ProfileViewController {
-            profileViewController.userProfile = user
+            
+        default:
+            return
         }
     }
     
@@ -62,17 +95,17 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
                 self.deleteAnnoucement()
             }))
         } else {
-            actionSheet.addAction(UIAlertAction(title: "Ver Perfil", style: .default, handler: { (UIAlertAction) in
-                guard self.user != nil else { return }
-                self.performSegue(withIdentifier: HardConstants.Storyboard.annoucementProfileSegue, sender: self)
-                
-            }))
             actionSheet.addAction(UIAlertAction(title: "Denunciar", style: .destructive, handler: { (UIAlertAction) in
                 print("Denunciar")
             }))
         }
         actionSheet.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
         return actionSheet
+    }
+    
+    
+    @IBAction func dismissButtonAction(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     func deleteAnnoucement() {
@@ -91,15 +124,23 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
         }))
         self.present(deleteAlert, animated: true, completion: nil)
     }
-    func getUserData() {
-        guard let annoucement = self.annoucement else { return }
-        DatabaseHandler.getData(for: annoucement.userID, completion: { (result) in
-            switch result{
-            case let .success(user):
-                self.user = user
-            case let .failure(err):
-                print(err)
-            }
-        })
+    
+    func toProfile(){
+        guard self.annoucement?.user != nil else { return }
+        self.performSegue(withIdentifier: HardConstants.Storyboard.annoucementProfileSegue, sender: self)
+    }
+    
+    func contactUser(){
+        guard let user = self.annoucement?.user else { return }
+        let contactAlert = ContactHandler.createContactController(to: user)
+        self.present(contactAlert, animated: true, completion: nil)
+    }
+    
+    @IBAction func buyButtonAction(_ sender: Any) {
+        contactUser()
+    }
+    
+    @IBAction func profileButtonAction(_ sender: Any) {
+        toProfile()
     }
 }

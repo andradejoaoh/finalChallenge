@@ -18,6 +18,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
     @IBOutlet weak var annoucementNameTextField: UITextField!
     @IBOutlet weak var annoucementDescriptionTextField: UITextField!
     @IBOutlet weak var annoucementLocationTextField: UITextField!
+    @IBOutlet weak var annoucementPriceTextField: UITextField!
     
     @IBOutlet weak var deliveryOptionSwitch: UISwitch!
     @IBOutlet weak var productTypePicker: UIPickerView!
@@ -30,6 +31,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
         
         self.annoucementNameTextField.delegate = self
         self.annoucementDescriptionTextField.delegate = self
+        self.annoucementLocationTextField.delegate = self
         
         self.productTypePicker.delegate = self
         self.productTypePicker.dataSource = self
@@ -58,8 +60,33 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
             let annoucementLocation = annoucementLocationTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let deliveryOption = deliveryOptionSwitch.isOn
             let productType = HardConstants.PickerView.productType[productTypePicker.selectedRow(inComponent: 0)]
+            let price = Float(annoucementPriceTextField.text!) ?? 0.0
+
+            var expirationDate: Double {
+                switch HardConstants.PickerView.annoucementTime[annoucementTimePicker.selectedRow(inComponent: 0)] {
+                case "1 hora":
+                    return 3600
+                case "2 horas":
+                    return 7200
+                case "4 horas":
+                    return 14400
+                case "6 horas":
+                    return 21600
+                case "8 horas":
+                    return 28800
+                case "12 horas":
+                    return 43200
+                case "16 horas":
+                    return 57600
+                case "2 dias":
+                    return 172800
+                default:
+                    return 86400
+                }
+            }
+            
             guard let imageData = annoucementImage else { return }
-            DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation, annoucementImage: imageData, deliveryOption:  deliveryOption, productType: productType) { (result) in
+            DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation, annoucementImage: imageData, deliveryOption:  deliveryOption, expirationDate: Date(timeIntervalSinceNow: expirationDate), productType: productType, price: price) { (result) in
                 switch result {
                 case let .failure(error):
                     //Show error while creating annoucement.
@@ -68,7 +95,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
                     break
                 }
             }
-            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -87,6 +114,8 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
         StyleElements.styleFilledButton(selectPictureButton)
         StyleElements.styleTextField(annoucementNameTextField)
         StyleElements.styleTextField(annoucementDescriptionTextField)
+        StyleElements.styleTextField(annoucementLocationTextField)
+        StyleElements.styleTextField(annoucementPriceTextField)
     }
     
     @IBAction func selectImageAction(_ sender: Any) {
@@ -99,6 +128,21 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
         guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
         self.annoucementImage = image.jpegData(compressionQuality: 0.8)
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    //hide keyboard function
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == annoucementNameTextField {
+            textField.resignFirstResponder()
+            annoucementLocationTextField.becomeFirstResponder()
+        } else if textField == annoucementLocationTextField {
+            textField.resignFirstResponder()
+            annoucementDescriptionTextField.becomeFirstResponder()
+        } else if textField == annoucementDescriptionTextField {
+            textField.resignFirstResponder()
+        }
+        return true
     }
 }
 

@@ -10,7 +10,7 @@ import UIKit
 
 class AnnoucementCell: UICollectionViewCell{
     
-    let imageAnnoucements: UIImageView = {
+    let imageAnnoucement: UIImageView = {
         let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))
         image.layer.cornerRadius = 10
         image.clipsToBounds = true
@@ -18,20 +18,34 @@ class AnnoucementCell: UICollectionViewCell{
         return image
     }()
     
+    let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(frame: .zero)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+    
     override init (frame: CGRect){
         super.init(frame: frame)
         setupView()
-        //backgroundColor = .blue
     }
+    
     func setupView(){
-        addSubview(imageAnnoucements)
+        addSubview(activityIndicator)
+        activityIndicator.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        activityIndicator.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        activityIndicator.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        activityIndicator.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
         
-        imageAnnoucements.translatesAutoresizingMaskIntoConstraints = false
-        imageAnnoucements.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        imageAnnoucements.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        imageAnnoucements.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-        imageAnnoucements.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
-
+        addSubview(imageAnnoucement)
+        imageAnnoucement.translatesAutoresizingMaskIntoConstraints = false
+        imageAnnoucement.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        imageAnnoucement.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        imageAnnoucement.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        imageAnnoucement.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+            
+        self.bringSubviewToFront(activityIndicator)
+        activityIndicator.startAnimating()
     }
     
     required init?(coder: NSCoder) {
@@ -39,5 +53,11 @@ class AnnoucementCell: UICollectionViewCell{
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+    }
+    
+    override func prepareForReuse() {
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
+        self.imageAnnoucement.image = nil
     }
 }
