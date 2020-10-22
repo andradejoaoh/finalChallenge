@@ -100,20 +100,27 @@
             </objects>
             <point key="canvasLocation" x="1975" y="1596"/>
         </scene>
-        <!--View Controller-->
+        <!--SearchViewController-->
         <scene sceneID="qoR-Ti-oic">
             <objects>
-                <viewController id="4yb-ks-gcD" sceneMemberID="viewController">
+                <viewController title="SearchViewController" id="4yb-ks-gcD" customClass="SearchViewController" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FBP-YB-0wd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="5yP-YK-b4x">
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aMc-h2-KfE">
                                 <rect key="frame" x="0.0" y="144" width="414" height="160"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHh-Qw-RLE">
                                         <rect key="frame" x="347" y="8" width="59" height="30"/>
                                         <state key="normal" title="Ver tudo"/>
+                                        <connections>
+                                            <action selector="expandCategoryButtonAction:" destination="4yb-ks-gcD" eventType="touchUpInside" id="AM8-PQ-95d"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categorias" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCG-1S-TzS">
                                         <rect key="frame" x="8" y="13" width="82.5" height="20.5"/>
@@ -255,25 +262,6 @@
                                     <constraint firstAttribute="trailing" secondItem="UYv-7f-hc7" secondAttribute="trailing" constant="8" id="wcJ-96-her"/>
                                 </constraints>
                             </view>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="5yP-YK-b4x">
-                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6hO-c3-SeJ">
-                                <rect key="frame" x="0.0" y="495" width="414" height="148"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="sik-CG-tsb">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sik-CG-tsb" id="Sst-Gj-y5X">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUN-AV-mf7">
                                 <rect key="frame" x="0.0" y="304" width="414" height="0.0"/>
                                 <subviews>
@@ -397,6 +385,21 @@
                                     <constraint firstItem="Vwc-Yj-4QJ" firstAttribute="centerX" secondItem="uUN-AV-mf7" secondAttribute="centerX" id="xxl-Zo-mIh"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6hO-c3-SeJ">
+                                <rect key="frame" x="0.0" y="495" width="414" height="148"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="sik-CG-tsb">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sik-CG-tsb" id="Sst-Gj-y5X">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Iql-AZ-4i5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -413,6 +416,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Z2c-vm-9xK"/>
+                    <connections>
+                        <outlet property="ExpandableView" destination="uUN-AV-mf7" id="Jj6-Fj-bQU"/>
+                        <outlet property="heightOfExpandableViewConstraint" destination="JgK-9a-OAt" id="vKq-0O-lJC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="30W-TX-Uda" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
