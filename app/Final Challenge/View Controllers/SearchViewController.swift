@@ -16,20 +16,30 @@ class SearchViewController: UIViewController {
     
     var expandableCategoryControl: Bool = false
     
+    @IBOutlet weak var scrollView: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.scrollView.isScrollEnabled = false
         // Do any additional setup after loading the view.
     }
     @IBAction func expandCategoryButtonAction(_ sender: Any) {
         if expandableCategoryControl == false {
-            heightOfExpandableViewConstraint.constant = 100.0
-            self.view.setNeedsUpdateConstraints()
+            UIView .animate(withDuration: 0.3) {
+                self.heightOfExpandableViewConstraint.constant = 250.0
+                self.view.setNeedsUpdateConstraints()
+                self.view.layoutIfNeeded()
+            }
+            self.scrollView.isScrollEnabled = true
             expandableCategoryControl = true
         } else {
-            heightOfExpandableViewConstraint.constant = 0.0
-            self.view.setNeedsUpdateConstraints()
+            UIView .animate(withDuration: 0.3) {
+                self.heightOfExpandableViewConstraint.constant = 0.0
+                self.view.setNeedsUpdateConstraints()
+                self.view.layoutIfNeeded()
+            }
+            scrollView.setContentOffset(.zero, animated: true)
             expandableCategoryControl = false
+            self.scrollView.isScrollEnabled = false
         }
     }
 }
