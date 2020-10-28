@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Arrow.png",
+      "filename" : "SelectedDecoracao.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Arrow@2x.png",
+      "filename" : "SelectedDecoracao@2x.pdf",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Arrow@3x.png",
+      "filename" : "SelectedDecoracao@3x.pdf",
       "idiom" : "universal",
       "scale" : "3x"
     }

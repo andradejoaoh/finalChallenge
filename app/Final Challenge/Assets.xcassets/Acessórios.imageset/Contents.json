@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Arrow.png",
+      "filename" : "Acessórios.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Arrow@2x.png",
+      "filename" : "Acessórios@2x.pdf",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Arrow@3x.png",
+      "filename" : "Acessórios@3x.pdf",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Arrow.png",
+      "filename" : "Papelaria.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Arrow@2x.png",
+      "filename" : "Papelaria@2x.pdf",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Arrow@3x.png",
+      "filename" : "Papelaria@3x.pdf",
       "idiom" : "universal",
       "scale" : "3x"
     }

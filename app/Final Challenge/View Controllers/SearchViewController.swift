@@ -25,6 +25,47 @@ class SearchViewController: UIViewController {
     var expandableProximityControl: Bool = false
     
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    
+    
+    @IBOutlet weak var casaBttn: UIButton!
+    
+    @IBOutlet weak var docesBttn: UIButton!
+    
+    @IBOutlet weak var roupasBttn: UIButton!
+    
+    @IBOutlet weak var festaBttn: UIButton!
+    
+    @IBOutlet weak var comidasBttn: UIButton!
+    
+    @IBOutlet weak var decoracaoBttn: UIButton!
+    
+    @IBOutlet weak var acessoriosBttn: UIButton!
+    
+    @IBOutlet weak var salgadosBttn: UIButton!
+    
+    @IBOutlet weak var cosmeticosBttn: UIButton!
+    
+    @IBOutlet weak var educacaoBttn: UIButton!
+    
+    @IBOutlet weak var papelariaBttn: UIButton!
+    
+    @IBOutlet weak var saudeBttn: UIButton!
+    
+    var casaBttnControl:Bool = false
+    var docesBttnControl:Bool = false
+    var roupasBttnControl:Bool = false
+    var festaBttnControl:Bool = false
+    var comidasBttnControl:Bool = false
+    var decorationBttnControl:Bool = false
+    var acessorioBttnControl:Bool = false
+    var salgadosBttnControl:Bool = false
+    var cosmeticosBttnControl:Bool = false
+    var educacaoBttnControl:Bool = false
+    var papelariaBttnControl:Bool = false
+    var saudeBttnControl:Bool = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -32,7 +73,7 @@ class SearchViewController: UIViewController {
     }
     
     func setup(){
-        self.scrollView.isScrollEnabled = false
+        self.scrollView.isScrollEnabled = true
         sliderProximity.value = 6
         
         self.sliderLabel.text = "\(sliderProximity.value - 1) km"
@@ -50,8 +91,6 @@ class SearchViewController: UIViewController {
                 self.verTudoButtonOutlet.setTitle("Minimizar", for: .normal)
                 self.view.layoutIfNeeded()
             }
-            
-            self.scrollView.isScrollEnabled = true
             expandableCategoryControl = true
         } else {
             UIView .animate(withDuration: 0.3) {
@@ -63,7 +102,6 @@ class SearchViewController: UIViewController {
             
             scrollView.setContentOffset(.zero, animated: true)
             expandableCategoryControl = false
-            self.scrollView.isScrollEnabled = false
         }
     }
     
@@ -97,6 +135,125 @@ class SearchViewController: UIViewController {
 //        let thumbRect = sliderProximity.thumbRect(forBounds: sliderProximity.bounds, trackRect: trackRect, value: sliderProximity.value)
 //
 //        self.sliderLabel.center = CGPoint(x: thumbRect.midX, y: self.sliderLabel.center.y)
+    }
+    
+    @IBAction func casaActionButton(_ sender: Any) {
+        if casaBttnControl == false {
+            casaBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedCasa"), for: .normal)
+            casaBttnControl = true
+        } else {
+            casaBttn.setBackgroundImage(#imageLiteral(resourceName: "Casa"), for: .normal)
+            casaBttnControl = false
+        }
+    }
+    
+    @IBAction func docesActionButton(_ sender: Any) {
+        if docesBttnControl == false {
+            docesBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedDoces"), for: .normal)
+            docesBttnControl = true
+        } else {
+            docesBttn.setBackgroundImage(#imageLiteral(resourceName: "Doces"), for: .normal)
+            docesBttnControl = false
+        }
+    }
+    
+    @IBAction func roupasActionButton(_ sender: Any) {
+        if roupasBttnControl == false {
+            roupasBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedRoupas"), for: .normal)
+            roupasBttnControl = true
+        } else {
+            roupasBttn.setBackgroundImage(#imageLiteral(resourceName: "Roupas"), for: .normal)
+            roupasBttnControl = false
+        }
+    }
+    
+    @IBAction func festaActionButton(_ sender: Any) {
+        if festaBttnControl == false {
+            festaBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedFesta"), for: .normal)
+            festaBttnControl = true
+        } else {
+            festaBttn.setBackgroundImage(#imageLiteral(resourceName: "Festa"), for: .normal)
+            festaBttnControl = false
+        }
+    }
+    
+    @IBAction func comidasActionButton(_ sender: Any) {
+        if comidasBttnControl == false {
+            comidasBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedComidas"), for: .normal)
+            comidasBttnControl = true
+        } else {
+            comidasBttn.setBackgroundImage(#imageLiteral(resourceName: "Comidas"), for: .normal)
+            comidasBttnControl = false
+        }
+    }
+    
+    @IBAction func decoracaoActionButton(_ sender: Any) {
+        if decorationBttnControl == false {
+            decoracaoBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedDecoracao"), for: .normal)
+            decorationBttnControl = true
+        } else {
+            decoracaoBttn.setBackgroundImage(#imageLiteral(resourceName: "Decoração"), for: .normal)
+            decorationBttnControl = false
+        }
+    }
+    @IBAction func acessoriosActionButton(_ sender: Any) {
+        if acessorioBttnControl == false {
+            acessoriosBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedAcessórios"), for: .normal)
+            acessorioBttnControl = true
+        } else {
+            acessoriosBttn.setBackgroundImage(#imageLiteral(resourceName: "Acessórios"), for: .normal)
+            acessorioBttnControl = false
+        }
+    }
+    
+    @IBAction func salgadosActionButton(_ sender: Any) {
+        if salgadosBttnControl == false {
+            salgadosBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedSalgados"), for: .normal)
+            salgadosBttnControl = true
+        } else {
+            salgadosBttn.setBackgroundImage(#imageLiteral(resourceName: "Salgados"), for: .normal)
+            salgadosBttnControl = false
+        }
+    }
+    
+    @IBAction func cosmeticosActionButton(_ sender: Any) {
+        if cosmeticosBttnControl == false {
+            cosmeticosBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedCosméticos"), for: .normal)
+            cosmeticosBttnControl = true
+        } else {
+            cosmeticosBttn.setBackgroundImage(#imageLiteral(resourceName: "Cosméticos"), for: .normal)
+            cosmeticosBttnControl = false
+        }
+    }
+    
+    @IBAction func educacaoActionButton(_ sender: Any) {
+        if educacaoBttnControl == false {
+            educacaoBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedEducação"), for: .normal)
+            educacaoBttnControl = true
+        } else {
+            educacaoBttn.setBackgroundImage(#imageLiteral(resourceName: "Educação"), for: .normal)
+            educacaoBttnControl = false
+        }
+    }
+    
+    @IBAction func papelariaActionButton(_ sender: Any) {
+        if papelariaBttnControl == false {
+            papelariaBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedPapelaria"), for: .normal)
+            papelariaBttnControl = true
+        } else {
+            papelariaBttn.setBackgroundImage(#imageLiteral(resourceName: "Papelaria"), for: .normal)
+            papelariaBttnControl = false
+        }
+    }
+    
+    @IBAction func saudeActionButton(_ sender: Any) {
+        if saudeBttnControl == false {
+            saudeBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedSaúde"), for: .normal)
+            saudeBttnControl = true
+        } else {
+            saudeBttn.setBackgroundImage(#imageLiteral(resourceName: "Saúde"), for: .normal)
+            saudeBttnControl = false
+        }
     }
     
     
