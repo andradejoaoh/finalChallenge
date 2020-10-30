@@ -438,7 +438,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                                         <size key="titleShadowOffset" width="-1" height="0.0"/>
                                                         <connections>
-                                                            <segue destination="wy7-s7-CyM" kind="show" id="TGU-RL-FqI"/>
+                                                            <segue destination="Ouf-xw-r2e" kind="show" id="mvF-1b-EXL"/>
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wyf-9h-axt" userLabel="separator">
@@ -628,32 +628,39 @@
             </objects>
             <point key="canvasLocation" x="2762.3188405797105" y="1597.7678571428571"/>
         </scene>
-        <!--Bairros-->
-        <scene sceneID="49a-mR-P2Z">
+        <!--Search Bairro Table View Controller-->
+        <scene sceneID="vh7-9g-CvZ">
             <objects>
-                <viewController id="wy7-s7-CyM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="k90-5P-vuS">
+                <tableViewController id="Ouf-xw-r2e" customClass="SearchBairroTableViewController" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="D2U-hq-d6I">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" placeholder="Busque o bairro que deseja" translatesAutoresizingMaskIntoConstraints="NO" id="vqf-PQ-u9B">
-                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="pON-88-yNM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="vqf-PQ-u9B" firstAttribute="leading" secondItem="pON-88-yNM" secondAttribute="leading" id="Izd-s2-ZTb"/>
-                            <constraint firstItem="vqf-PQ-u9B" firstAttribute="trailing" secondItem="pON-88-yNM" secondAttribute="trailing" id="PeJ-Ev-Paf"/>
-                            <constraint firstItem="vqf-PQ-u9B" firstAttribute="top" secondItem="pON-88-yNM" secondAttribute="top" id="bc0-zh-g7M"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Bairros" id="UEC-84-t5r"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rh4-w1-HCo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="qLL-Ku-4ts">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="bairroCell" id="dee-tb-AyP">
+                                <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dee-tb-AyP" id="IsJ-uy-KD2">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Ouf-xw-r2e" id="sUO-rv-wjz"/>
+                            <outlet property="delegate" destination="Ouf-xw-r2e" id="7rf-aV-hFC"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="hk7-a9-Dkz"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LH0-hi-KIa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3498" y="1560"/>
+            <point key="canvasLocation" x="3617" y="1564"/>
         </scene>
         <!--Annoucement View Controller-->
         <scene sceneID="RJb-oi-6N4">
@@ -1479,7 +1486,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Acessórios" width="61" height="61"/>
-        <image name="Arrow" width="9" height="16"/>
+        <image name="Arrow" width="8.5" height="15"/>
         <image name="Casa" width="61" height="61"/>
         <image name="Comidas" width="61" height="61"/>
         <image name="Cosméticos" width="61" height="61"/>
