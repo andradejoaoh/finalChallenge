@@ -657,6 +657,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="hk7-a9-Dkz"/>
+                    <connections>
+                        <outlet property="searchBar" destination="qLL-Ku-4ts" id="c7q-K7-nkZ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LH0-hi-KIa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
