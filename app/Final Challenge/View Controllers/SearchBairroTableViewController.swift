@@ -76,9 +76,6 @@ class SearchBairroTableViewController: UITableViewController, UISearchBarDelegat
         let cell = tableView.dequeueReusableCell(withIdentifier: HardConstants.TableView.bairroCell, for: indexPath)
               
         
-        
-        
-        
         if searchBar.text == "" {
             let bairroKey = bairrosSectionTitles[indexPath.section]
             if let bairroValues = bairrosDictionary[bairroKey] {

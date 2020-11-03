@@ -8,8 +8,11 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var tableViewSearch: UITableView!
+    
+    
     @IBOutlet weak var ExpandableView: UIView!
     
     @IBOutlet weak var ExpandableProximityView: UIView!
@@ -65,6 +68,7 @@ class SearchViewController: UIViewController {
     var papelariaBttnControl:Bool = false
     var saudeBttnControl:Bool = false
     
+    var arrayRecentes = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +77,10 @@ class SearchViewController: UIViewController {
     }
     
     func setup(){
+        
+        tableViewSearch.delegate = self
+        tableViewSearch.dataSource = self
+        
         self.scrollView.isScrollEnabled = true
         sliderProximity.value = 6
         
@@ -81,6 +89,8 @@ class SearchViewController: UIViewController {
         let thumbRect = sliderProximity.thumbRect(forBounds: sliderProximity.bounds, trackRect: trackRect, value: sliderProximity.value)
         
         self.sliderLabel.center = CGPoint(x: thumbRect.midX, y: self.sliderLabel.center.y)
+        
+        arrayRecentes = ["casa","doces","roupas","festa","comidas","decorações","acessórios","salgados","cosméticos","educação","papelaria","saúde"]
         
     }
     @IBAction func expandCategoryButtonAction(_ sender: Any) {
@@ -254,6 +264,17 @@ class SearchViewController: UIViewController {
             saudeBttn.setBackgroundImage(#imageLiteral(resourceName: "Saúde"), for: .normal)
             saudeBttnControl = false
         }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return arrayRecentes.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: HardConstants.TableView.searchCell, for: indexPath)
+        cell.textLabel?.text = arrayRecentes[indexPath.row]
+        return cell
     }
     
     

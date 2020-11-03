@@ -41,6 +41,7 @@ struct HardConstants {
     struct TableView {
         static let contactPerfilCell = "contactPerfilCell"
         static let bairroCell = "bairroCell"
+        static let searchCell = "searchCell"
     }
     
     struct PickerView {

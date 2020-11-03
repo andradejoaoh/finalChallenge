@@ -118,8 +118,8 @@
 				614A3E75250812B3003A24F1 /* CreatAnnoucementViewController.swift */,
 				61FEB07C250954F70092626A /* EditAnnoucementViewController.swift */,
 				61545BAC251A982100175C84 /* SearchViewController.swift */,
-				61B2DFB3251BC1EB00DB51E1 /* AnnoucementViewController.swift */,
 				6DCD0BB0254C866000E2DE51 /* SearchBairroTableViewController.swift */,
+				61B2DFB3251BC1EB00DB51E1 /* AnnoucementViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

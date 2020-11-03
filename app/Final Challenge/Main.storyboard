@@ -115,11 +115,28 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                         <subviews>
                                             <searchBar contentMode="redraw" placeholder="Busque aqui o que deseja" translatesAutoresizingMaskIntoConstraints="NO" id="5yP-YK-b4x">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="66"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </searchBar>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pNJ-Iu-lB9">
+                                                <rect key="frame" x="0.0" y="56" width="414" height="300"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="300" id="yNN-g2-War"/>
+                                                </constraints>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="DVc-0a-32f">
+                                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DVc-0a-32f" id="rRk-J6-KhA">
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aMc-h2-KfE" userLabel="Categorias">
-                                                <rect key="frame" x="0.0" y="66" width="414" height="150"/>
+                                                <rect key="frame" x="0.0" y="356" width="414" height="150"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHh-Qw-RLE">
                                                         <rect key="frame" x="339" y="12" width="59" height="30"/>
@@ -242,7 +259,7 @@
                                                 </constraints>
                                             </view>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUN-AV-mf7">
-                                                <rect key="frame" x="0.0" y="216" width="414" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="506" width="414" height="0.0"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hvl-li-nxk">
                                                         <rect key="frame" x="22" y="-30" width="60" height="60"/>
@@ -419,7 +436,7 @@
                                                 </constraints>
                                             </view>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlV-Wb-WR5" userLabel="Bairros">
-                                                <rect key="frame" x="0.0" y="216" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="506" width="414" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bairros" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1BT-Rm-7IE">
                                                         <rect key="frame" x="16" y="15" width="54" height="20.5"/>
@@ -466,7 +483,7 @@
                                                 </constraints>
                                             </view>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zio-t7-Kfh" userLabel="Proximidade">
-                                                <rect key="frame" x="0.0" y="266" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="556" width="414" height="50"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6V-Hi-I7J" userLabel="separator">
                                                         <rect key="frame" x="16" y="49" width="398" height="1"/>
@@ -511,7 +528,7 @@
                                                 </constraints>
                                             </view>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKt-gU-WiS">
-                                                <rect key="frame" x="0.0" y="316" width="414" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="606" width="414" height="0.0"/>
                                                 <subviews>
                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="6" minValue="1" maxValue="11" translatesAutoresizingMaskIntoConstraints="NO" id="v6f-bV-wiD">
                                                         <rect key="frame" x="79.5" y="-15" width="259" height="31"/>
@@ -559,9 +576,11 @@
                                         <color key="backgroundColor" name="backgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="uUN-AV-mf7" firstAttribute="leading" secondItem="Lie-bs-jBB" secondAttribute="leading" id="1r9-Tu-CMM"/>
+                                            <constraint firstAttribute="trailing" secondItem="pNJ-Iu-lB9" secondAttribute="trailing" id="8aH-2K-TJY"/>
                                             <constraint firstAttribute="trailing" secondItem="aMc-h2-KfE" secondAttribute="trailing" id="CeK-9w-Lwx"/>
                                             <constraint firstAttribute="trailing" secondItem="Zio-t7-Kfh" secondAttribute="trailing" id="Eib-64-dK8"/>
                                             <constraint firstItem="5yP-YK-b4x" firstAttribute="top" secondItem="Lie-bs-jBB" secondAttribute="top" id="GN2-uq-oUW"/>
+                                            <constraint firstItem="aMc-h2-KfE" firstAttribute="top" secondItem="pNJ-Iu-lB9" secondAttribute="bottom" id="Ja7-aJ-OfZ"/>
                                             <constraint firstItem="XlV-Wb-WR5" firstAttribute="leading" secondItem="Lie-bs-jBB" secondAttribute="leading" id="Mvm-R5-Ngm"/>
                                             <constraint firstItem="aMc-h2-KfE" firstAttribute="leading" secondItem="Lie-bs-jBB" secondAttribute="leading" id="N4I-Kt-H1g"/>
                                             <constraint firstItem="Zio-t7-Kfh" firstAttribute="leading" secondItem="Lie-bs-jBB" secondAttribute="leading" id="RXY-kc-ugp"/>
@@ -571,13 +590,13 @@
                                             <constraint firstAttribute="trailing" secondItem="XlV-Wb-WR5" secondAttribute="trailing" id="XmT-a8-ePS"/>
                                             <constraint firstItem="rKt-gU-WiS" firstAttribute="top" secondItem="Zio-t7-Kfh" secondAttribute="bottom" id="aSm-bv-Fv0"/>
                                             <constraint firstAttribute="trailing" secondItem="uUN-AV-mf7" secondAttribute="trailing" id="bVJ-5F-Gxk"/>
-                                            <constraint firstAttribute="bottom" secondItem="aMc-h2-KfE" secondAttribute="bottom" constant="784" id="e7V-1w-8gH"/>
+                                            <constraint firstItem="pNJ-Iu-lB9" firstAttribute="top" secondItem="5yP-YK-b4x" secondAttribute="bottom" id="bdU-zS-Uxl"/>
                                             <constraint firstItem="5yP-YK-b4x" firstAttribute="leading" secondItem="Lie-bs-jBB" secondAttribute="leading" id="etg-0S-ps9"/>
                                             <constraint firstAttribute="height" constant="1000" id="hD7-Je-pWG"/>
                                             <constraint firstAttribute="trailing" secondItem="5yP-YK-b4x" secondAttribute="trailing" id="pta-Oi-ioA"/>
                                             <constraint firstItem="XlV-Wb-WR5" firstAttribute="top" secondItem="uUN-AV-mf7" secondAttribute="bottom" id="tLM-Jz-rbG"/>
                                             <constraint firstItem="Zio-t7-Kfh" firstAttribute="top" secondItem="XlV-Wb-WR5" secondAttribute="bottom" id="tza-A8-Irl"/>
-                                            <constraint firstItem="aMc-h2-KfE" firstAttribute="top" secondItem="5yP-YK-b4x" secondAttribute="bottom" id="xFn-du-Tzi"/>
+                                            <constraint firstItem="pNJ-Iu-lB9" firstAttribute="leading" secondItem="Lie-bs-jBB" secondAttribute="leading" id="vIa-RY-Kt4"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -621,6 +640,7 @@
                         <outlet property="scrollView" destination="RwH-za-58Q" id="Pix-Uf-epK"/>
                         <outlet property="sliderLabel" destination="dtT-NZ-RsO" id="ICT-38-RUx"/>
                         <outlet property="sliderProximity" destination="v6f-bV-wiD" id="Sv9-iv-7oo"/>
+                        <outlet property="tableViewSearch" destination="pNJ-Iu-lB9" id="2zP-Gs-cTo"/>
                         <outlet property="verTudoButtonOutlet" destination="qHh-Qw-RLE" id="1a9-ds-JEv"/>
                     </connections>
                 </viewController>
@@ -628,7 +648,7 @@
             </objects>
             <point key="canvasLocation" x="2762.3188405797105" y="1597.7678571428571"/>
         </scene>
-        <!--Search Bairro Table View Controller-->
+        <!--Bairros-->
         <scene sceneID="vh7-9g-CvZ">
             <objects>
                 <tableViewController id="Ouf-xw-r2e" customClass="SearchBairroTableViewController" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
@@ -656,7 +676,7 @@
                             <outlet property="delegate" destination="Ouf-xw-r2e" id="7rf-aV-hFC"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="hk7-a9-Dkz"/>
+                    <navigationItem key="navigationItem" title="Bairros" id="hk7-a9-Dkz"/>
                     <connections>
                         <outlet property="searchBar" destination="qLL-Ku-4ts" id="c7q-K7-nkZ"/>
                     </connections>
