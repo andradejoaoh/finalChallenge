@@ -8,9 +8,10 @@
 
 import UIKit
 
-class SearchBairroTableViewController: UITableViewController, UISearchBarDelegate {
+class SearchBairroTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableViewBairro: UITableView!
     var bairrosDictionary = [String: [String]]()
     var bairrosSectionTitles = [String]()
     var bairros = [String]()
@@ -27,6 +28,8 @@ class SearchBairroTableViewController: UITableViewController, UISearchBarDelegat
     func setup(){
         searchBar.delegate = self
         
+        tableViewBairro.delegate = self
+        tableViewBairro.dataSource = self
         bairros = HardConstants.BairroArray.bairrosArray
         filteredBairros = bairros
         
@@ -48,7 +51,7 @@ class SearchBairroTableViewController: UITableViewController, UISearchBarDelegat
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         if searchBar.text == "" {
             return bairrosSectionTitles.count
         } else {
@@ -56,7 +59,7 @@ class SearchBairroTableViewController: UITableViewController, UISearchBarDelegat
         }
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searchBar.text == "" {
             let bairroKey = bairrosSectionTitles[section]
@@ -71,7 +74,7 @@ class SearchBairroTableViewController: UITableViewController, UISearchBarDelegat
     }
 
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: HardConstants.TableView.bairroCell, for: indexPath)
               
@@ -88,7 +91,7 @@ class SearchBairroTableViewController: UITableViewController, UISearchBarDelegat
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if searchBar.text == "" {
             return bairrosSectionTitles[section]
         } else {
@@ -96,7 +99,7 @@ class SearchBairroTableViewController: UITableViewController, UISearchBarDelegat
         }
     }
     
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
        return bairrosSectionTitles
    }
     
@@ -117,7 +120,7 @@ class SearchBairroTableViewController: UITableViewController, UISearchBarDelegat
             }
         }
         
-        self.tableView.reloadData()
+        self.tableViewBairro.reloadData()
     }
 
     
