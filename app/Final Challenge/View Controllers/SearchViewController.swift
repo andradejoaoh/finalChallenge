@@ -114,39 +114,48 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         hideKeyboardWhenTappedAround()
         setup()
         setupCollectionView()
+        
+        DatabaseHandler.readAnnoucements { (result) in
+            switch result {
+            case let .failure(error):
+                //Show error while updating feed
+                print(error)
+            case let .success(annoucements):
+                self.annoucements = annoucements
+            }
+        }
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.comeFromPaid = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        searchCollectionView.reloadData()
+    }
+    
+    
+    
     func setup(){
-        
         tableViewSearch.delegate = self
         tableViewSearch.dataSource = self
-        
         searchBar.delegate = self
-        
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
         
         self.scrollView.isScrollEnabled = true
         sliderProximity.value = 6
-        
         self.sliderLabel.text = "\(sliderProximity.value - 1) km"
         let trackRect = sliderProximity.trackRect(forBounds: sliderProximity.frame)
         let thumbRect = sliderProximity.thumbRect(forBounds: sliderProximity.bounds, trackRect: trackRect, value: sliderProximity.value)
-        
         self.sliderLabel.center = CGPoint(x: thumbRect.midX, y: self.sliderLabel.center.y)
-        
         arrayRecentes = ["casa","doces","roupas","festa","comidas","decorações","acessórios","salgados","cosméticos","educação","papelaria","saúde"]
-        
-        
-        
     }
     
     func setupCollectionView(){
         searchCollectionView.delegate = self
-        searchCollectionView.dataSource = self
-        //view.addSubview(searchCollectionView)
-        
+        searchCollectionView.dataSource = self        
         mainView.addSubview(searchCollectionView)
         
         searchCollectionView.register(AnnoucementSearchCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.searchAnnoucementCell)
@@ -173,7 +182,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchCollectionView.collectionViewLayout = layout
     }
     
-    
+    //BUTTONS FUNCTIONS
     @IBAction func expandCategoryButtonAction(_ sender: Any) {
         if expandableCategoryControl == false {
             UIView.animate(withDuration: 0.3) {
@@ -228,7 +237,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        self.sliderLabel.center = CGPoint(x: thumbRect.midX, y: self.sliderLabel.center.y)
     }
     
-    //BUTTON FUNCTIONS
     @IBAction func casaActionButton(_ sender: Any) {
         if casaBttnControl == false {
             casaBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedCasa"), for: .normal)
@@ -407,10 +415,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return annoucements.count
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.searchAnnoucementCell, for: indexPath) as? AnnoucementSearchCell else { return UICollectionViewCell()}
         cell.layer.cornerRadius = 10
@@ -424,7 +428,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         //TODO: essa celula não retorna
         return cell
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

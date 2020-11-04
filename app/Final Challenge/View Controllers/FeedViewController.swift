@@ -32,13 +32,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cv
     }()
     
-    let imageAnnoucements: UIImageView = {
-        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))
-        image.layer.cornerRadius = 10
-        image.clipsToBounds = true
-        image.contentMode = .scaleAspectFill
-        return image
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +50,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewWillAppear(_ animated: Bool) {
         self.comeFromPaid = false
-        
     }
     
     func setupViews(){
