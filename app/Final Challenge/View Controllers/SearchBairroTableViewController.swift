@@ -30,6 +30,7 @@ class SearchBairroTableViewController: UIViewController, UITableViewDelegate, UI
         
         tableViewBairro.delegate = self
         tableViewBairro.dataSource = self
+        
         bairros = HardConstants.BairroArray.bairrosArray
         filteredBairros = bairros
         

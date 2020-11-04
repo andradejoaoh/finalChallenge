@@ -8,10 +8,14 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CollectionViewCellDelegate, WaterfallLayoutDelegate {
+    
 
+    @IBOutlet weak var mainView: UIView!
+    
     @IBOutlet weak var tableViewSearch: UITableView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var ExpandableView: UIView!
     
@@ -19,6 +23,16 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var sliderProximity: UISlider!
     @IBOutlet weak var heightOfExpandableViewConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var heigthOfTableSearchViewConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightOfViewConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightOfCategoriesView: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightOfProximityView: NSLayoutConstraint!
+    @IBOutlet weak var heightOfBairrosView: NSLayoutConstraint!
+    
     
     @IBOutlet weak var verTudoButtonOutlet: UIButton!
     @IBOutlet weak var heightOfProximityExpandableViewConstraint: NSLayoutConstraint!
@@ -69,10 +83,37 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var saudeBttnControl:Bool = false
     
     var arrayRecentes = [String]()
+    var filteredArray = [String]()
+    
+    
+    let searchCollectionView: UICollectionView = {
+        let layout = WaterfallLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.minimumLineSpacing = 16
+        layout.minimumInteritemSpacing = 8.0
+        layout.headerHeight = 20.0
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = .clear
+        return cv
+    }()
+    
+    
+    
+    var annoucements: [Annoucement] = []{
+        didSet{
+            searchCollectionView.reloadData()
+        }
+    }
+    
+    var selectedAnnoucement:Int?
+    var comeFromPaid: Bool = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         setup()
+        setupCollectionView()
         // Do any additional setup after loading the view.
     }
     
@@ -80,6 +121,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         tableViewSearch.delegate = self
         tableViewSearch.dataSource = self
+        
+        searchBar.delegate = self
+        
+        searchCollectionView.delegate = self
+        searchCollectionView.dataSource = self
         
         self.scrollView.isScrollEnabled = true
         sliderProximity.value = 6
@@ -92,7 +138,42 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         arrayRecentes = ["casa","doces","roupas","festa","comidas","decorações","acessórios","salgados","cosméticos","educação","papelaria","saúde"]
         
+        
+        
     }
+    
+    func setupCollectionView(){
+        searchCollectionView.delegate = self
+        searchCollectionView.dataSource = self
+        //view.addSubview(searchCollectionView)
+        
+        mainView.addSubview(searchCollectionView)
+        
+        searchCollectionView.register(AnnoucementSearchCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.searchAnnoucementCell)
+        searchCollectionView.register(HeaderSearchCollectionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HardConstants.CollectionView.headerSearchView)
+        
+        searchCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        searchCollectionView.topAnchor.constraint(equalTo: ExpandableProximityView.bottomAnchor).isActive = true
+        
+        searchCollectionView.leftAnchor.constraint(equalTo: mainView.leftAnchor).isActive = true
+        searchCollectionView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor).isActive = true
+        searchCollectionView.rightAnchor.constraint(equalTo: mainView.rightAnchor).isActive = true
+        //searchCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        searchCollectionView.widthAnchor.constraint(equalTo: mainView.widthAnchor).isActive = true
+        
+        searchCollectionView.clipsToBounds = true
+        
+        let layout = WaterfallLayout()
+        layout.delegate = self
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 16, bottom: 10, right: 16)
+        layout.minimumLineSpacing = 8.0
+        layout.minimumInteritemSpacing = 8.0
+        layout.headerHeight = 50.0
+        searchCollectionView.collectionViewLayout = layout
+    }
+    
+    
     @IBAction func expandCategoryButtonAction(_ sender: Any) {
         if expandableCategoryControl == false {
             UIView.animate(withDuration: 0.3) {
@@ -147,6 +228,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        self.sliderLabel.center = CGPoint(x: thumbRect.midX, y: self.sliderLabel.center.y)
     }
     
+    //BUTTON FUNCTIONS
     @IBAction func casaActionButton(_ sender: Any) {
         if casaBttnControl == false {
             casaBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedCasa"), for: .normal)
@@ -267,15 +349,183 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
+    
+    
+    
+    //TABLE VIEW FUNCTIONS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayRecentes.count
+        if searchBar.text == "" {
+            return arrayRecentes.count
+        } else {
+            return filteredArray.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: HardConstants.TableView.searchCell, for: indexPath)
-        cell.textLabel?.text = arrayRecentes[indexPath.row]
+        
+        if searchBar.text == ""{
+            cell.textLabel?.text = arrayRecentes[indexPath.row]
+        } else {
+            cell.textLabel?.text = filteredArray[indexPath.row]
+        }
+        
         return cell
     }
     
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//        if searchBar.text == "" {
+//            searchBar.text = arrayRecentes[indexPath.row+1]
+//        } else {
+//            searchBar.text = filteredArray[indexPath.row]
+//        }
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        searchBar.text = cell?.textLabel?.text
+        
+        heigthOfTableSearchViewConstraint.constant = 0.0
+        heightOfCategoriesView.constant = 150.0
+        heightOfExpandableViewConstraint.constant = 0.0
+        heightOfBairrosView.constant = 50.0
+        heightOfProximityView.constant = 50.0
+        heightOfProximityExpandableViewConstraint.constant = 0.0
+        
+        
+        self.view.setNeedsUpdateConstraints()
+        self.view.layoutIfNeeded()
+        searchBar.resignFirstResponder()
+    }
+    
+    
+    
+    
+    //COLLECTION VIEW FUNCTIONS
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return annoucements.count
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.searchAnnoucementCell, for: indexPath) as? AnnoucementSearchCell else { return UICollectionViewCell()}
+        cell.layer.cornerRadius = 10
+        let annoucement = annoucements[indexPath.item]
+        
+        annoucement.didLoadImage = { [weak cell, weak self] imageData in
+            cell?.imageAnnoucement.image = UIImage(data: annoucement.imageData ?? Data())
+            cell?.activityIndicator.stopAnimating()
+            self?.searchCollectionView.reloadItems(at: [indexPath])
+            
+        }
+        //TODO: essa celula não retorna
+        return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedAnnoucement = indexPath.item
+        performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout: WaterfallLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard let annoucementImage = UIImage(data: annoucements[indexPath.item].imageData ?? Data()) else {
+            return CGSize(width: 200, height: 200)
+        }
+        return CGSize(width: (annoucementImage.size.width), height: (annoucementImage.size.height))
+    }
+    
+
+    func collectionViewCell(_ announcementNumber: Int) {
+        self.selectedAnnoucement = announcementNumber
+        self.comeFromPaid = true
+        performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
+    }
+    
+    func collectionViewLayout(for section: Int) -> WaterfallLayout.Layout {
+        return .waterfall(column: 2, distributionMethod: .balanced)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HardConstants.CollectionView.headerSearchView, for: indexPath) as! HeaderSearchCollectionView
+            switch indexPath.section{
+            case 0:
+                headerView.labelHeader.text = "Anúncios"
+            default:
+                headerView.labelHeader.text = "Header Unknown"
+            }
+            return headerView
+        default:
+            preconditionFailure("Invalid supplementary view type for this collection view")
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout: WaterfallLayout, headerHeightFor section: Int) -> CGFloat? {
+        let headerHeight: CGFloat
+        headerHeight = 40
+        return headerHeight
+    }
+    
+    
+    
+    //SEARCH BAR FUNCTIONS
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredArray = []
+        if searchText == "" {
+            filteredArray = arrayRecentes
+        } else {
+            for arraySearch in arrayRecentes {
+                if arraySearch.lowercased().contains(searchText.lowercased()) {
+                    filteredArray.append(arraySearch)
+                }
+            }
+        }
+        self.tableViewSearch.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        heigthOfTableSearchViewConstraint.constant = heightOfViewConstraint.constant
+        heightOfCategoriesView.constant = 0.0
+        heightOfExpandableViewConstraint.constant = 0.0
+        heightOfBairrosView.constant = 0.0
+        heightOfProximityView.constant = 0.0
+        heightOfProximityExpandableViewConstraint.constant = 0.0
+        
+        self.view.setNeedsUpdateConstraints()
+        self.view.layoutIfNeeded()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        heigthOfTableSearchViewConstraint.constant = 0.0
+        heightOfCategoriesView.constant = 150.0
+        heightOfExpandableViewConstraint.constant = 0.0
+        heightOfBairrosView.constant = 50.0
+        heightOfProximityView.constant = 50.0
+        heightOfProximityExpandableViewConstraint.constant = 0.0
+        
+        
+        self.view.setNeedsUpdateConstraints()
+        self.view.layoutIfNeeded()
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if searchBar.text == "" {
+//            heigthOfTableSearchViewConstraint.constant = 0.0
+//            heightOfCategoriesView.constant = 150.0
+//            heightOfExpandableViewConstraint.constant = 0.0
+//            heightOfBairrosView.constant = 50.0
+//            heightOfProximityView.constant = 50.0
+//            heightOfProximityExpandableViewConstraint.constant = 0.0
+//            self.view.setNeedsUpdateConstraints()
+//            self.view.layoutIfNeeded()
+        }
+    }
 }

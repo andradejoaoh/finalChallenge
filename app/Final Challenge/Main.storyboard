@@ -119,24 +119,24 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </searchBar>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pNJ-Iu-lB9">
-                                                <rect key="frame" x="0.0" y="56" width="414" height="300"/>
+                                                <rect key="frame" x="0.0" y="56" width="414" height="0.0"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="300" id="yNN-g2-War"/>
+                                                    <constraint firstAttribute="height" id="yNN-g2-War"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="DVc-0a-32f">
-                                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DVc-0a-32f" id="rRk-J6-KhA">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aMc-h2-KfE" userLabel="Categorias">
-                                                <rect key="frame" x="0.0" y="356" width="414" height="150"/>
+                                                <rect key="frame" x="0.0" y="56" width="414" height="150"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHh-Qw-RLE">
                                                         <rect key="frame" x="339" y="12" width="59" height="30"/>
@@ -259,7 +259,7 @@
                                                 </constraints>
                                             </view>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUN-AV-mf7">
-                                                <rect key="frame" x="0.0" y="506" width="414" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="206" width="414" height="0.0"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hvl-li-nxk">
                                                         <rect key="frame" x="22" y="-30" width="60" height="60"/>
@@ -436,7 +436,7 @@
                                                 </constraints>
                                             </view>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlV-Wb-WR5" userLabel="Bairros">
-                                                <rect key="frame" x="0.0" y="506" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="206" width="414" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bairros" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1BT-Rm-7IE">
                                                         <rect key="frame" x="16" y="15" width="54" height="20.5"/>
@@ -483,7 +483,7 @@
                                                 </constraints>
                                             </view>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zio-t7-Kfh" userLabel="Proximidade">
-                                                <rect key="frame" x="0.0" y="556" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="256" width="414" height="50"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6V-Hi-I7J" userLabel="separator">
                                                         <rect key="frame" x="16" y="49" width="398" height="1"/>
@@ -528,7 +528,7 @@
                                                 </constraints>
                                             </view>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKt-gU-WiS">
-                                                <rect key="frame" x="0.0" y="606" width="414" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="306" width="414" height="0.0"/>
                                                 <subviews>
                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="6" minValue="1" maxValue="11" translatesAutoresizingMaskIntoConstraints="NO" id="v6f-bV-wiD">
                                                         <rect key="frame" x="79.5" y="-15" width="259" height="31"/>
@@ -631,13 +631,20 @@
                         <outlet property="docesBttn" destination="XoR-nJ-IFG" id="sAW-2Y-kfV"/>
                         <outlet property="educacaoBttn" destination="7Ig-zm-pNg" id="0mV-eP-rZa"/>
                         <outlet property="festaBttn" destination="v0M-FH-oQg" id="t8x-AU-adG"/>
+                        <outlet property="heightOfBairrosView" destination="b6Y-eS-iYt" id="KwP-9L-gBH"/>
+                        <outlet property="heightOfCategoriesView" destination="cWt-bB-DaC" id="NJp-ls-dQf"/>
                         <outlet property="heightOfExpandableViewConstraint" destination="iaz-kT-CxP" id="eX1-qA-0aS"/>
                         <outlet property="heightOfProximityExpandableViewConstraint" destination="Dsx-Av-MSZ" id="TQE-pa-baq"/>
+                        <outlet property="heightOfProximityView" destination="vvl-bc-1p2" id="vog-St-NZ2"/>
+                        <outlet property="heightOfViewConstraint" destination="hD7-Je-pWG" id="7qQ-2D-V3S"/>
+                        <outlet property="heigthOfTableSearchViewConstraint" destination="yNN-g2-War" id="A6A-0c-VUp"/>
+                        <outlet property="mainView" destination="Lie-bs-jBB" id="azn-N8-xhv"/>
                         <outlet property="papelariaBttn" destination="PbE-jW-4Lh" id="6Wn-Cq-41R"/>
                         <outlet property="roupasBttn" destination="MdA-9g-m8I" id="n9J-3e-bKH"/>
                         <outlet property="salgadosBttn" destination="dOV-1I-XwR" id="sJb-zh-dK7"/>
                         <outlet property="saudeBttn" destination="ZFb-vv-oxb" id="5Hl-hr-roc"/>
                         <outlet property="scrollView" destination="RwH-za-58Q" id="Pix-Uf-epK"/>
+                        <outlet property="searchBar" destination="5yP-YK-b4x" id="8mE-PT-dHg"/>
                         <outlet property="sliderLabel" destination="dtT-NZ-RsO" id="ICT-38-RUx"/>
                         <outlet property="sliderProximity" destination="v6f-bV-wiD" id="Sv9-iv-7oo"/>
                         <outlet property="tableViewSearch" destination="pNJ-Iu-lB9" id="2zP-Gs-cTo"/>

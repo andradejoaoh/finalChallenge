@@ -116,6 +116,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 self?.feedCollectionView.reloadItems(at: [indexPath])
                 
             }
+            //TODO: essa celula não retorna
             return cell
         } else {//PAID
             guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementSection else { return UICollectionViewCell()}
