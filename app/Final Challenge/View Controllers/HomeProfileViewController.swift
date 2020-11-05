@@ -43,11 +43,6 @@ class HomeProfileViewController: UIViewController, UITextFieldDelegate{
     
     
     
-    func transitionToProfile(){
-        let profileViewController = storyboard?.instantiateViewController(identifier: HardConstants.Storyboard.profileViewController) as? ProfileViewController
-        view.window?.rootViewController = profileViewController
-        view.window?.makeKeyAndVisible()
-    }
     
     func transitionToProfile(){
         if let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.profileViewController), let navigationController = self.navigationController{
