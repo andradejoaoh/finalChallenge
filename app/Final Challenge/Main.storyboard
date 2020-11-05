@@ -43,20 +43,56 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGk-2Q-QtO">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="403"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crie uma conta no Produba e aumente suas vendas!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tq8-OX-fIz">
+                                        <rect key="frame" x="16" y="173" width="382" height="57.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" name="textButton"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="button"/>
+                                <constraints>
+                                    <constraint firstItem="Tq8-OX-fIz" firstAttribute="centerX" secondItem="BGk-2Q-QtO" secondAttribute="centerX" id="1gA-bn-QzJ"/>
+                                    <constraint firstItem="Tq8-OX-fIz" firstAttribute="leading" secondItem="BGk-2Q-QtO" secondAttribute="leading" constant="16" id="Vyg-8e-fbK"/>
+                                    <constraint firstItem="Tq8-OX-fIz" firstAttribute="centerY" secondItem="BGk-2Q-QtO" secondAttribute="centerY" id="ref-T2-Ko6"/>
+                                    <constraint firstAttribute="trailing" secondItem="Tq8-OX-fIz" secondAttribute="trailing" constant="16" id="tKG-2b-3FY"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ec7-8D-Twl">
+                                <rect key="frame" x="159" y="497" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KXH-e3-NPl">
+                                <rect key="frame" x="159" y="539" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="riI-Bf-kgX" secondAttribute="trailing" constant="40" id="46Y-uy-rBb"/>
+                            <constraint firstItem="BGk-2Q-QtO" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="CRH-Z0-Wwc"/>
+                            <constraint firstItem="BGk-2Q-QtO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CeH-zU-awi"/>
                             <constraint firstItem="riI-Bf-kgX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="GNp-2E-g5g"/>
+                            <constraint firstItem="BGk-2Q-QtO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="MnI-JY-WvL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="riI-Bf-kgX" secondAttribute="bottom" constant="40" id="OG1-11-XJa"/>
+                            <constraint firstItem="BGk-2Q-QtO" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.45" id="Xuu-XY-iXf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cP5-JQ-yH9">
                         <barButtonItem key="backBarButtonItem" title="Back" id="WED-4E-pvk"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="emailTextField" destination="ec7-8D-Twl" id="z1a-c7-bpi"/>
                         <outlet property="loginButton" destination="NOy-CV-52I" id="YSL-xj-djj"/>
+                        <outlet property="passwordTextField" destination="KXH-e3-NPl" id="elZ-xc-tax"/>
                         <outlet property="signUpButton" destination="hQ8-Fe-kyR" id="7eS-D4-N9O"/>
                     </connections>
                 </viewController>
@@ -923,7 +959,7 @@
             <objects>
                 <viewController storyboardIdentifier="profileViewController" id="bxg-Er-exs" customClass="ProfileViewController" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A0K-bS-KwT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="YQu-An-jBy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1307,7 +1343,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqD-0l-8BC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2850.7246376811595" y="-546.42857142857144"/>
+            <point key="canvasLocation" x="3778" y="-646"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="fMT-n5-jal">
@@ -1461,7 +1497,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gXe-NS-PmL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3776.811594202899" y="-680.35714285714278"/>
+            <point key="canvasLocation" x="4694" y="-680"/>
         </scene>
         <!--Profile-->
         <scene sceneID="5xe-Gi-BnM">
@@ -1523,7 +1559,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="riO-UY-M8r"/>
+        <segue reference="NhS-sg-KF7"/>
         <segue reference="qcg-AS-AZk"/>
     </inferredMetricsTieBreakers>
     <resources>
