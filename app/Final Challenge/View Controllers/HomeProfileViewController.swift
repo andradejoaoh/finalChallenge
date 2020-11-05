@@ -12,6 +12,7 @@ class HomeProfileViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
+    @IBOutlet weak var orangeView: UIView!
     
     @IBOutlet weak var emailTextField: UITextField!
     
@@ -25,10 +26,10 @@ class HomeProfileViewController: UIViewController, UITextFieldDelegate{
         if DatabaseHandler.isUserLoggedIn() {
             transitionToProfile()
         }
-        
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
         self.hideKeyboardWhenTappedAround()
+        setupStyleElements()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,10 +39,13 @@ class HomeProfileViewController: UIViewController, UITextFieldDelegate{
                 navigationController.setViewControllers([profileViewController], animated: true)
             }
         }
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     
     func transitionToProfile(){
@@ -98,6 +102,8 @@ class HomeProfileViewController: UIViewController, UITextFieldDelegate{
     
     
     func setupStyleElements(){
+        orangeView.layer.cornerRadius = 15
+        orangeView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         StyleElements.styleTextField(emailTextField)
         StyleElements.styleTextField(passwordTextField)
         StyleElements.styleFilledButton(loginButton)
