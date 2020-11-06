@@ -15,6 +15,8 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var adressTextField: UITextField!
     @IBOutlet weak var storeNameTextField: UITextField!
     
+    
+    
     @IBOutlet weak var siteTextField: UITextField!
     @IBOutlet weak var telefoneTextField: UITextField!
     @IBOutlet weak var bioTextField: UITextField!
@@ -159,5 +161,8 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
         return true
     }
+    
+    
+    
 }
 
