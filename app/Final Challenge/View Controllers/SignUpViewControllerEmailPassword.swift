@@ -27,20 +27,6 @@ class SignUpViewControllerEmailPassword: UIViewController, UIImagePickerControll
         self.hideKeyboardWhenTappedAround()
     }
     
-    
-    
-    func validateFields() -> String? {
-        //Check if fields are filled in
-        if
-            emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            return "Preencha todos os campos."
-        }
-        return nil
-    }
-    
-    
-    
     func setDelegateForTextFields(){
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
@@ -52,7 +38,7 @@ class SignUpViewControllerEmailPassword: UIViewController, UIImagePickerControll
         StyleElements.styleTextField(passwordTextField)
         AvanceButton.backgroundColor = UIColor(named: "button")
         AvanceButton.layer.cornerRadius = 15
-        pageControl.currentPage = 1
+        pageControl.currentPage = 0
     }
     
     //hide keyboard function
@@ -65,4 +51,88 @@ class SignUpViewControllerEmailPassword: UIViewController, UIImagePickerControll
         }
         return true
     }
+    
+    
+    func validateFields() -> Bool? {
+        //Check if fields are filled in
+        if emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    
+    @IBAction func unwindToEmailPasswordContent(segue:UIStoryboardSegue) {}
+    
+    
+//
+//    func validateFields() -> String? {
+//        //Check if fields are filled in
+//        if fullNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+//            emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+//            passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+//            adressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+//            bioTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+//            profileImageView.image == nil {
+//            return "Preencha todos os campos."
+//        }
+//        return nil
+//    }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if validateFields() == true{
+            let destinationController = segue.destination as! SignUpViewControllerName
+            destinationController.email = emailTextField.text!
+            destinationController.senha = passwordTextField.text!
+        } else {
+            print("Textos nao inseridos nada acontece")
+        }
+        
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if validateFields() == true {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+   
+    
+//    if validateFields() == true{
+//        if segue.identifier == "segueToName" {
+//            let destinationController = segue.destination as! SignUpViewControllerName
+//            destinationController.email = emailTextField.text!
+//            destinationController.senha = passwordTextField.text!
+//        }
+//    } else {
+//        print("Textos nao inseridos nada acontece")
+//    }
+//
+//    @IBAction func startBtn(_ sender: Any) {
+//            if(emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+//                passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
+//                print("no text")
+//                //Show alert message here
+//            }else{
+//
+//                self.performSegue(withIdentifier: "segueToName", sender: self)
+//                let destinationController = segue.destination as! SignUpViewControllerName
+//                destinationController.email = emailTextField.text!
+//                destinationController.senha = passwordTextField.text!
+//
+//
+//            }
+//        }
+//
+//    @IBAction func avanceAction(_ sender: Any) {
+//
+//
+//    }
+    
 }
