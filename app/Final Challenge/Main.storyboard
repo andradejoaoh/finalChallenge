@@ -1457,10 +1457,10 @@
             </objects>
             <point key="canvasLocation" x="4694" y="-680"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller Email Password-->
         <scene sceneID="SHB-T0-JRh">
             <objects>
-                <viewController id="ZSe-u6-Qrf" sceneMemberID="viewController">
+                <viewController id="ZSe-u6-Qrf" customClass="SignUpViewControllerEmailPassword" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DBp-Ed-d4k">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1499,7 +1499,9 @@
                                     <constraint firstAttribute="height" constant="30" id="3wj-oT-NVC"/>
                                     <constraint firstAttribute="width" constant="136" id="UO1-MU-yAh"/>
                                 </constraints>
-                                <state key="normal" title="Avançar"/>
+                                <state key="normal" title="Avançar">
+                                    <color key="titleColor" name="textButton"/>
+                                </state>
                             </button>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" defersCurrentPageDisplay="YES" numberOfPages="6" translatesAutoresizingMaskIntoConstraints="NO" id="Lql-7l-ndg">
                                 <rect key="frame" x="0.0" y="74" width="414" height="28"/>
@@ -1529,6 +1531,12 @@
                             <constraint firstItem="9vT-e4-ncw" firstAttribute="centerX" secondItem="exs-wG-bCa" secondAttribute="centerX" id="zut-pw-mpO"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="AvanceButton" destination="9vT-e4-ncw" id="Kku-2X-ky5"/>
+                        <outlet property="emailTextField" destination="dKf-Ep-0v6" id="0v2-7C-TAU"/>
+                        <outlet property="pageControl" destination="Lql-7l-ndg" id="cDU-cI-Q7a"/>
+                        <outlet property="passwordTextField" destination="nrq-xi-pky" id="GkM-YE-2bD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eqV-0h-2Qn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2171,6 +2179,24 @@ Forneça também um telefone para contato.</string>
                                 <color key="textColor" name="text"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cq-GA-uD4">
+                                <rect key="frame" x="16" y="357" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="bma-RM-fB1"/>
+                                    <constraint firstAttribute="height" constant="15" id="u0y-lh-kn9"/>
+                                </constraints>
+                                <state key="normal" image="CheckBoxNotSelected"/>
+                                <state key="selected" image="CheckBox"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y20-nv-0Sa">
+                                <rect key="frame" x="16" y="457" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="36Y-Xq-hSg"/>
+                                    <constraint firstAttribute="height" constant="15" id="Cmw-8m-YhD"/>
+                                </constraints>
+                                <state key="normal" image="CheckBoxNotSelected"/>
+                                <state key="selected" image="CheckBox"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2e6-1L-5gY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2193,11 +2219,15 @@ Forneça também um telefone para contato.</string>
                             <constraint firstItem="2e6-1L-5gY" firstAttribute="trailing" secondItem="Tbf-Xk-Fjm" secondAttribute="trailing" constant="16" id="XH0-lW-Y52"/>
                             <constraint firstItem="SQC-i8-t4G" firstAttribute="top" secondItem="qaA-Nc-cO1" secondAttribute="bottom" constant="16" id="adO-iv-48j"/>
                             <constraint firstItem="Tbf-Xk-Fjm" firstAttribute="top" secondItem="cg2-ja-8xc" secondAttribute="bottom" constant="16" id="akk-NK-zcJ"/>
+                            <constraint firstItem="1cq-GA-uD4" firstAttribute="centerY" secondItem="qaA-Nc-cO1" secondAttribute="centerY" id="gE5-je-PBw"/>
                             <constraint firstItem="YlB-AH-UmQ" firstAttribute="leading" secondItem="2e6-1L-5gY" secondAttribute="leading" constant="16" id="gSc-k1-fg0"/>
+                            <constraint firstItem="y20-nv-0Sa" firstAttribute="centerY" secondItem="3Qr-l8-oKA" secondAttribute="centerY" id="kN8-He-JDy"/>
                             <constraint firstItem="2e6-1L-5gY" firstAttribute="trailing" secondItem="YlB-AH-UmQ" secondAttribute="trailing" constant="16" id="lQA-gM-673"/>
                             <constraint firstItem="2e6-1L-5gY" firstAttribute="trailing" secondItem="SQC-i8-t4G" secondAttribute="trailing" constant="16" id="lqH-8C-UJ7"/>
                             <constraint firstItem="4fl-sD-JDf" firstAttribute="top" secondItem="YlB-AH-UmQ" secondAttribute="bottom" constant="16" id="oAM-bN-Trb"/>
+                            <constraint firstItem="3Qr-l8-oKA" firstAttribute="leading" secondItem="y20-nv-0Sa" secondAttribute="trailing" constant="8" symbolic="YES" id="rFe-e0-KhU"/>
                             <constraint firstItem="tT4-4Q-zSc" firstAttribute="top" secondItem="3Qr-l8-oKA" secondAttribute="bottom" constant="16" id="t2M-p7-hSp"/>
+                            <constraint firstItem="qaA-Nc-cO1" firstAttribute="leading" secondItem="1cq-GA-uD4" secondAttribute="trailing" constant="8" symbolic="YES" id="w0t-m9-Q6J"/>
                             <constraint firstItem="cg2-ja-8xc" firstAttribute="centerX" secondItem="2e6-1L-5gY" secondAttribute="centerX" id="wID-0M-OCE"/>
                             <constraint firstItem="Tbf-Xk-Fjm" firstAttribute="leading" secondItem="tM9-Ji-iRK" secondAttribute="leading" constant="16" id="ypb-4f-nD7"/>
                         </constraints>
@@ -2423,6 +2453,8 @@ Agora explore a plataforma e boas vendas!</string>
         <image name="Acessórios" width="61" height="61"/>
         <image name="Arrow" width="8.5" height="15"/>
         <image name="Casa" width="61" height="61"/>
+        <image name="CheckBox" width="15" height="15"/>
+        <image name="CheckBoxNotSelected" width="15" height="15"/>
         <image name="Comidas" width="61" height="61"/>
         <image name="Cosméticos" width="61" height="61"/>
         <image name="Decoração" width="61" height="61"/>
@@ -2449,7 +2481,7 @@ Agora explore a plataforma e boas vendas!</string>
             <color red="0.93725490196078431" green="0.49803921568627452" blue="0.38823529411764707" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="pageControlNotSelected">
-            <color red="0.93725490196078431" green="0.49803921568627452" blue="0.38823529411764707" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.93699997663497925" green="0.49799999594688416" blue="0.3880000114440918" alpha="0.40000000596046448" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="priceBackground">
             <color red="0.14509803921568629" green="0.15294117647058825" blue="0.30588235294117649" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
