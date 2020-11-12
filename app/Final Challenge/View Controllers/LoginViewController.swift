@@ -74,6 +74,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func setupStyleElements(){
         StyleElements.styleTextField(emailTextField)
         StyleElements.styleTextField(passwordTextField)
-        StyleElements.styleFilledButton(loginButton)
+        loginButton.layer.cornerRadius = 15
+        loginButton.backgroundColor = UIColor(named: "button")
+        //StyleElements.styleFilledButton(loginButton)
     }
 }

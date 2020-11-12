@@ -18,14 +18,23 @@ class SignUpViewControllerEmailPassword: UIViewController, UIImagePickerControll
     
     @IBOutlet weak var AvanceButton: UIButton!
     
+    var teste:Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setDelegateForTextFields()
         setupStyleForElements()
+        
         self.hideKeyboardWhenTappedAround()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    
+    //self.performSegue(withIdentifier: "segue", sender: self)
     
     func setDelegateForTextFields(){
         self.emailTextField.delegate = self
@@ -67,24 +76,8 @@ class SignUpViewControllerEmailPassword: UIViewController, UIImagePickerControll
     @IBAction func unwindToEmailPasswordContent(segue:UIStoryboardSegue) {}
     
     
-//
-//    func validateFields() -> String? {
-//        //Check if fields are filled in
-//        if fullNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-//            emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-//            passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-//            adressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-//            bioTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-//            profileImageView.image == nil {
-//            return "Preencha todos os campos."
-//        }
-//        return nil
-//    }
-    
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if validateFields() == true{
+        if validateFields() == true && (segue.identifier == "segueToNameSwipeGesture" || segue.identifier == "segueToName"){
             let destinationController = segue.destination as! SignUpViewControllerName
             destinationController.email = emailTextField.text!
             destinationController.senha = passwordTextField.text!
@@ -94,45 +87,16 @@ class SignUpViewControllerEmailPassword: UIViewController, UIImagePickerControll
         
     }
     
+    
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if validateFields() == true {
+        if (validateFields() == true) && (identifier == "segueToNameSwipeGesture" || identifier == "segueToName") {
+            return true
+        } else if (validateFields() == false || validateFields() == true) && identifier == "unwindToHomeProfile" {
             return true
         } else {
             return false
         }
     }
     
-   
-    
-//    if validateFields() == true{
-//        if segue.identifier == "segueToName" {
-//            let destinationController = segue.destination as! SignUpViewControllerName
-//            destinationController.email = emailTextField.text!
-//            destinationController.senha = passwordTextField.text!
-//        }
-//    } else {
-//        print("Textos nao inseridos nada acontece")
-//    }
-//
-//    @IBAction func startBtn(_ sender: Any) {
-//            if(emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-//                passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
-//                print("no text")
-//                //Show alert message here
-//            }else{
-//
-//                self.performSegue(withIdentifier: "segueToName", sender: self)
-//                let destinationController = segue.destination as! SignUpViewControllerName
-//                destinationController.email = emailTextField.text!
-//                destinationController.senha = passwordTextField.text!
-//
-//
-//            }
-//        }
-//
-//    @IBAction func avanceAction(_ sender: Any) {
-//
-//
-//    }
     
 }

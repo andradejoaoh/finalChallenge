@@ -100,6 +100,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             navigationController.setViewControllers([profileViewController], animated: true)
         }
     }
+    
     func setDelegateForTextFields(){
         self.storeNameTextField.delegate = self
         self.fullNameTextField.delegate = self

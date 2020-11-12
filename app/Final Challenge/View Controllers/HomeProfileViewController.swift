@@ -54,7 +54,8 @@ class HomeProfileViewController: UIViewController, UITextFieldDelegate{
         }
     }
     
-   
+    @IBAction func unwindToHomeProfileContent(segue:UIStoryboardSegue) {}
+
     
     @IBAction func loginAction(_ sender: Any) {
         //Validate Text Fields
@@ -106,7 +107,9 @@ class HomeProfileViewController: UIViewController, UITextFieldDelegate{
         orangeView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         StyleElements.styleTextField(emailTextField)
         StyleElements.styleTextField(passwordTextField)
-        StyleElements.styleFilledButton(loginButton)
+        //StyleElements.styleFilledButton(loginButton)
+        loginButton.backgroundColor = UIColor(named: "button")
+        loginButton.layer.cornerRadius = 15
     }
 }
 

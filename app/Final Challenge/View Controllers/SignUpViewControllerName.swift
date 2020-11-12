@@ -20,7 +20,8 @@ class SignUpViewControllerName: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var pageControl: UIPageControl!
     
     
-    @IBOutlet var swipeGesture: UISwipeGestureRecognizer!
+    var teste: Bool = true
+ 
     
     var email = String()
     var senha = String()
@@ -31,25 +32,22 @@ class SignUpViewControllerName: UIViewController, UIImagePickerControllerDelegat
         setDelegateForTextFields()
         setupStyleForElements()
         self.hideKeyboardWhenTappedAround()
-        
-//        swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(rightSwipe(sender:)))
-//        swipeGesture.direction = .right
-//        func swipeLeft(recognizer : UISwipeGestureRecognizer){
-//        }
+
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
     
-//    @objc func rightSwipe(sender: UISwipeGestureRecognizer){
-//        self.performSegue(withIdentifier: "segueBackToEmailPassword", sender: self)
-//    }
-    //segueBackToEmailPassword
     
-    
-    func validateFields() -> String? {
-        //Check if fields are filled in
+    func validateFields() -> Bool? {
         if nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
-            return "Preencha todos os campos."
+            return false
+        } else {
+            return true
         }
-        return nil
+       
     }
     
     
@@ -66,6 +64,34 @@ class SignUpViewControllerName: UIViewController, UIImagePickerControllerDelegat
         AvanceButton.layer.cornerRadius = 15
         pageControl.currentPage = 1
     }
+    
+    @IBAction func unwindToNameContent(segue:UIStoryboardSegue) {}
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToBemVindo" || segue.identifier == "segueSwipeGestureToBemVindo" {
+            if validateFields() == true {
+                let destinationController = segue.destination as! SignUpViewControllerBemVindo
+                destinationController.email = email
+                destinationController.senha = senha
+                destinationController.name = nameTextField.text!
+            } else {
+                print("textos n preenchidos")
+            }
+            
+        }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if (validateFields() == true) && (identifier == "segueToBemVindo" || identifier == "segueSwipeGestureToBemVindo") {
+            return true
+        } else if (validateFields() == false || validateFields() == true) && identifier == "unwindToEmailPassword" {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+
     
     //hide keyboard function
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
