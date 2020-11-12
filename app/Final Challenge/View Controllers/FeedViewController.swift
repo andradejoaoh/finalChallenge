@@ -10,16 +10,14 @@ import UIKit
 
 class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CollectionViewCellDelegate, WaterfallLayoutDelegate {
     
-    var comeFromPaid: Bool = false
     var selectedAnnoucement:Int?
     
-
     var annoucements: [Annoucement] = []{
         didSet{
             feedCollectionView.reloadData()
         }
     }
-
+    
     
     let feedCollectionView: UICollectionView = {
         let layout = WaterfallLayout()
@@ -49,10 +47,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.comeFromPaid = false
-    }
-    
     func setupViews(){
         
         feedCollectionView.dataSource = self
@@ -60,7 +54,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         view.addSubview(feedCollectionView)
         
         feedCollectionView.register(AnnoucementCell.self, forCellWithReuseIdentifier: HardConstants.CollectionView.annoucementCell)
-        feedCollectionView.register(PaidAnnoucementSection.self, forCellWithReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell)
         feedCollectionView.register(HeaderFeedCollectionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HardConstants.CollectionView.headerFeedView)
         
         
@@ -82,71 +75,52 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         layout.headerHeight = 50.0
         feedCollectionView.collectionViewLayout = layout
     }
-  
+    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 1 {//ANNOUCEMENT
-            return annoucements.count
-        } else {//PAID
-            return 1
-        }
+        return annoucements.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 1 {//ANNOUCEMENT
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCell, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
-            cell.layer.cornerRadius = 10
-            let annoucement = annoucements[indexPath.item]
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.annoucementCell, for: indexPath) as? AnnoucementCell else { return UICollectionViewCell()}
+        cell.layer.cornerRadius = 10
+        let annoucement = annoucements[indexPath.item]
+        
+        annoucement.didLoadImage = { [weak cell, weak self] imageData in
+            cell?.imageAnnoucement.image = UIImage(data: annoucement.imageData ?? Data())
+            cell?.activityIndicator.stopAnimating()
+            self?.feedCollectionView.reloadItems(at: [indexPath])
             
-            annoucement.didLoadImage = { [weak cell, weak self] imageData in
-                cell?.imageAnnoucement.image = UIImage(data: annoucement.imageData ?? Data())
-                cell?.activityIndicator.stopAnimating()
-                self?.feedCollectionView.reloadItems(at: [indexPath])
-                
-            }
-            //TODO: essa celula não retorna
-            return cell
-        } else {//PAID
-            guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementSection else { return UICollectionViewCell()}
-            paidCell.delegate = self
-            
-            return paidCell
         }
+        //TODO: essa celula não retorna
+        return cell
+        
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            selectedAnnoucement = indexPath.item
-            performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
-        }
+        selectedAnnoucement = indexPath.item
+        performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
+        
     }
     
     
     
     func collectionView(_ collectionView: UICollectionView, layout: WaterfallLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        if indexPath.section == 0 {//PAID
-            return CGSize(width: (collectionView.frame.width), height: (collectionView.frame.height)*0.3)
-        } else {
-            guard let annoucementImage = UIImage(data: annoucements[indexPath.item].imageData ?? Data()) else {
-                return CGSize(width: 200, height: 200)
-            }
-            return CGSize(width: (annoucementImage.size.width), height: (annoucementImage.size.height))
+        guard let annoucementImage = UIImage(data: annoucements[indexPath.item].imageData ?? Data()) else {
+            return CGSize(width: 200, height: 200)
         }
+        return CGSize(width: (annoucementImage.size.width), height: (annoucementImage.size.height))
+        
     }
     
     func collectionViewLayout(for section: Int) -> WaterfallLayout.Layout {
-        if section == 0{
-            return .flow(column: 1)
-        } else {
-            return .waterfall(column: 2, distributionMethod: .balanced)
-        }
+        return .waterfall(column: 2, distributionMethod: .balanced)
     }
     
     
@@ -157,8 +131,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HardConstants.CollectionView.headerFeedView, for: indexPath) as! HeaderFeedCollectionView
             switch indexPath.section{
             case 0:
-                headerView.labelHeader.text = "Anúncios em destaque:"
-            case 1:
                 headerView.labelHeader.text = "Anúncios"
             default:
                 headerView.labelHeader.text = "Header Unknown"
@@ -178,23 +150,13 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionViewCell(_ annoucementNumber: Int) {
         self.selectedAnnoucement = annoucementNumber
-        self.comeFromPaid = true
         performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
     }
-
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let annoucementViewController = segue.destination as? AnnoucementViewController {
-            if comeFromPaid{
-                let paidAnnoucements = annoucements.filter{
-                    $0.isPaid == true
-                }
-                annoucementViewController.annoucement = paidAnnoucements[selectedAnnoucement ?? 0]
-                //TODO - mudar para paid annoucements
-            } else {
-                annoucementViewController.annoucement = annoucements[selectedAnnoucement ?? 0]
-            }
-            
+            annoucementViewController.annoucement = annoucements[selectedAnnoucement ?? 0]
         }
     }
     
@@ -205,15 +167,15 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func configureRefreshControl () {
-       // Add the refresh control to your UIScrollView object.
-       feedCollectionView.refreshControl = UIRefreshControl()
-       feedCollectionView.refreshControl?.addTarget(self, action:
-                                          #selector(handleRefreshControl),
-                                          for: .valueChanged)
+        // Add the refresh control to your UIScrollView object.
+        feedCollectionView.refreshControl = UIRefreshControl()
+        feedCollectionView.refreshControl?.addTarget(self, action:
+                                                        #selector(handleRefreshControl),
+                                                     for: .valueChanged)
     }
-        
+    
     @objc func handleRefreshControl() {
-       // Update your content…
+        // Update your content…
         DatabaseHandler.readAnnoucements(completion: { (result) in
             switch result {
             case let .failure(error):
@@ -224,12 +186,12 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 self.feedCollectionView.reloadData()
             }
         })
-       // Dismiss the refresh control.
-       DispatchQueue.main.async {
-          self.feedCollectionView.refreshControl?.endRefreshing()
-       }
+        // Dismiss the refresh control.
+        DispatchQueue.main.async {
+            self.feedCollectionView.refreshControl?.endRefreshing()
+        }
     }
-
+    
 }
 
 extension UIViewController {
