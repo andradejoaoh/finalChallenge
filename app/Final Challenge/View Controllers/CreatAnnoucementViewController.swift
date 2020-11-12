@@ -9,6 +9,43 @@
 import UIKit
 import CoreLocation
 
+/*
+ Nome
+ 
+ Descrição
+ 
+ MUDAR O TIPO DO PRODUTO PARA BAIRRO
+ 
+ Categoria do perfil transferindo para a página de produto
+ 
+ Preço
+ 
+ Telefone - ser um switch onde pega o numero do telefone do perfil para adicionar no produto também (mesma coisa da categoria)
+ 
+ 
+ Delivey - TIRAR O DELIVERY E COLOCAR CONTATO TELEFONE
+ 
+ 
+ Tempo do produto mantem
+ Imagem do produto mantem
+ 
+ 
+ Figma:
+ Nome do produto
+
+ Descrição
+
+ Bairro
+
+ Categoria do perfil na pág de produto
+
+ Preço
+
+ Telefone
+ 
+ */
+
+
 class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     let imagePicker = UIImagePickerController()

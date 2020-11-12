@@ -32,13 +32,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cv
     }()
     
-    let imageAnnoucements: UIImageView = {
-        let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))
-        image.layer.cornerRadius = 10
-        image.clipsToBounds = true
-        image.contentMode = .scaleAspectFill
-        return image
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +51,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewWillAppear(_ animated: Bool) {
         self.comeFromPaid = false
-        
     }
     
     func setupViews(){
@@ -117,6 +109,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 self?.feedCollectionView.reloadItems(at: [indexPath])
                 
             }
+            //TODO: essa celula não retorna
             return cell
         } else {//PAID
             guard let paidCell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.paidAnnouncementCell, for: indexPath) as? PaidAnnoucementSection else { return UICollectionViewCell()}
