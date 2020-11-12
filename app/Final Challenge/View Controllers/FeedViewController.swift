@@ -37,6 +37,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewDidLoad()
         setupViews()
         configureRefreshControl()
+        getLocation()
         DatabaseHandler.readAnnoucements { (result) in
             switch result {
             case let .failure(error):
@@ -197,6 +198,11 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
+    func getLocation(){
+        if LocationHandler.shared.getUserLocation() != nil {
+            present(LocationHandler.shared.getUserLocation()!, animated: true, completion: nil)
+        }
+    }
     
     func configureRefreshControl () {
        // Add the refresh control to your UIScrollView object.

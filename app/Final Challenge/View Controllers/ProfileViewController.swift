@@ -129,7 +129,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         button.layer.cornerRadius = 15
         return button
     }()
-    
+       
     override func viewDidLoad() {
         super.viewDidLoad()
         setupElementsViewDidLoad()
@@ -153,7 +153,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func setupView() {
-        let defaults = UserDefaults()
         if let user = self.userProfile {
             self.title = user.userStoreName
             self.perfilNameLabel.text = user.userStoreName

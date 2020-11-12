@@ -40,6 +40,12 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
     }
     
     func setupView() {
+        
+        annoucementPrice.layer.cornerRadius = 15
+        annoucementPrice.layer.masksToBounds = true
+        viewComprar.layer.cornerRadius = 8
+        viewPerfil.layer.cornerRadius = 8
+        
         if let annoucement = self.annoucement {
             annoucementName.text = annoucement.annoucementName
             annoucementDescription.text = annoucement.description
@@ -56,11 +62,17 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
             } else {
                 diponibilityLabel.text = "Informações sobre disponibilidade não encontradas"
             }
+            if let lat = annoucement.lat, let long = annoucement.long {
+                let distance = LocationHandler.shared.getDistance(from: (lat, long))
+                if distance > 1000 {
+                    let distanceInKilometers = distance/1000
+                    bairroLabel.text = String(format: "%.1f km de distância", distanceInKilometers)
+                } else {
+                    bairroLabel.text = "\(distance) metros de distância"
+                }
+            }
         }
-        annoucementPrice.layer.cornerRadius = 15
-        annoucementPrice.layer.masksToBounds = true
-        viewComprar.layer.cornerRadius = 8
-        viewPerfil.layer.cornerRadius = 8
+
     }
     
     @IBAction func optionsAction(_ sender: Any) {

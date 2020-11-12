@@ -65,6 +65,8 @@ class AnnoucementPortifolioCell: UICollectionViewCell, UICollectionViewDelegate,
         portifolioCollectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
         
         
+        
+        
         DatabaseHandler.readAnnoucements { (result) in
             switch result {
             case let .failure(error):
@@ -91,6 +93,14 @@ class AnnoucementPortifolioCell: UICollectionViewCell, UICollectionViewDelegate,
         return cell
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (frame.width)*0.3, height: (frame.height))
     }
@@ -99,17 +109,8 @@ class AnnoucementPortifolioCell: UICollectionViewCell, UICollectionViewDelegate,
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
-    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        let portifolioPreviewVC = PortifolioPreviewViewController(portifolio: imageLiteralArray[indexPath.row])
-        return UIContextMenuConfiguration(identifier: nil) { () -> UIViewController? in
-            return portifolioPreviewVC
-        } actionProvider: { (_) -> UIMenu? in
-            return nil
-        }
-    }
-    
-    
     private class annoucementPortifoliiCellForSection: UICollectionViewCell {
+        
         
         let imagePortifolioAnnoucements: UIImageView = {
             let image = UIImageView(image: #imageLiteral(resourceName: "placeholder1"))

@@ -28,6 +28,8 @@
 		61BF923324FD8F1600A8A8BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61BF923224FD8F1600A8A8BE /* Assets.xcassets */; };
 		61BF923624FD8F1600A8A8BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61BF923424FD8F1600A8A8BE /* LaunchScreen.storyboard */; };
 		61C1B132253A16520047A771 /* ContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C1B131253A16520047A771 /* ContactHandler.swift */; };
+		61F6E8B325488F3F00FB37FA /* PortifolioPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F6E8B225488F3F00FB37FA /* PortifolioPreviewViewController.swift */; };
+		61F6E8B72549F71200FB37FA /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F6E8B62549F71200FB37FA /* LocationHandler.swift */; };
 		61F98848253635BD00934265 /* PaidAnnoucementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F98847253635BD00934265 /* PaidAnnoucementCell.swift */; };
 		61FEB07D250954F70092626A /* EditAnnoucementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FEB07C250954F70092626A /* EditAnnoucementViewController.swift */; };
 		6D04A63D25114EB3003C8E9C /* PaidAnnoucementSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D04A63C25114EB3003C8E9C /* PaidAnnoucementSection.swift */; };
@@ -78,6 +80,8 @@
 		61BF923524FD8F1600A8A8BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61BF923724FD8F1600A8A8BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61C1B131253A16520047A771 /* ContactHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactHandler.swift; sourceTree = "<group>"; };
+		61F6E8B225488F3F00FB37FA /* PortifolioPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortifolioPreviewViewController.swift; sourceTree = "<group>"; };
+		61F6E8B62549F71200FB37FA /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		61F98847253635BD00934265 /* PaidAnnoucementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidAnnoucementCell.swift; sourceTree = "<group>"; };
 		61FEB07C250954F70092626A /* EditAnnoucementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnoucementViewController.swift; sourceTree = "<group>"; };
 		6D04A63C25114EB3003C8E9C /* PaidAnnoucementSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidAnnoucementSection.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 				61545BAC251A982100175C84 /* SearchViewController.swift */,
 				6DCD0BB0254C866000E2DE51 /* SearchBairroTableViewController.swift */,
 				61B2DFB3251BC1EB00DB51E1 /* AnnoucementViewController.swift */,
+				61F6E8B225488F3F00FB37FA /* PortifolioPreviewViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 				6D3EB413251E801C0065C072 /* CollectionViewCellProtocol.swift */,
 				613F9EA92526712300D55524 /* QuerySnapshotExtension.swift */,
 				613F9EAC2526719E00D55524 /* ErrorTypes.swift */,
+				61F6E8B62549F71200FB37FA /* LocationHandler.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -372,6 +378,7 @@
 				61B6F30925017FE800C65B1F /* HardConstants.swift in Sources */,
 				6D3EB414251E801C0065C072 /* CollectionViewCellProtocol.swift in Sources */,
 				6D57A406255DBDFB00A74147 /* SignUpViewControllerFimCadastro.swift in Sources */,
+				61F6E8B72549F71200FB37FA /* LocationHandler.swift in Sources */,
 				61545BAD251A982100175C84 /* SearchViewController.swift in Sources */,
 				6D57A403255DB43300A74147 /* SignUpViewControllerSiteRedes.swift in Sources */,
 				6199162F25096C9C005ABCFE /* DatabaseHandler.swift in Sources */,
@@ -380,6 +387,7 @@
 				6D04A63D25114EB3003C8E9C /* PaidAnnoucementSection.swift in Sources */,
 				612E82F8250160B7002C4435 /* ProfileViewController.swift in Sources */,
 				6D8A66FD250C06EF0093F889 /* StyleElements.swift in Sources */,
+				61F6E8B325488F3F00FB37FA /* PortifolioPreviewViewController.swift in Sources */,
 				61B2DFB4251BC1EB00DB51E1 /* AnnoucementViewController.swift in Sources */,
 				61F98848253635BD00934265 /* PaidAnnoucementCell.swift in Sources */,
 				613F9EAD2526719E00D55524 /* ErrorTypes.swift in Sources */,
