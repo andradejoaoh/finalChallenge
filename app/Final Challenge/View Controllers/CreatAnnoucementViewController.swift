@@ -46,9 +46,8 @@ import CoreLocation
  */
 
 
-class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate{
     
-    let imagePicker = UIImagePickerController()
     var annoucementImage: Data?
     
     @IBOutlet weak var announceButton: UIButton!
@@ -62,7 +61,6 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
     @IBOutlet weak var productTypePicker: UIPickerView!
     @IBOutlet weak var annoucementTimePicker: UIPickerView!
     
-    @IBOutlet weak var selectPictureButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,9 +73,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
         self.productTypePicker.dataSource = self
         self.annoucementTimePicker.delegate = self
         self.annoucementTimePicker.dataSource = self
-                
-        self.imagePicker.delegate = self
-        
+                        
         setupStyleForElements()
         self.hideKeyboardWhenTappedAround()
     }
@@ -157,24 +153,14 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
     
     func setupStyleForElements(){
         StyleElements.styleFilledButton(announceButton)
-        StyleElements.styleFilledButton(selectPictureButton)
         StyleElements.styleTextField(annoucementNameTextField)
         StyleElements.styleTextField(annoucementDescriptionTextField)
         StyleElements.styleTextField(annoucementLocationTextField)
         StyleElements.styleTextField(annoucementPriceTextField)
     }
     
-    @IBAction func selectImageAction(_ sender: Any) {
-        imagePicker.allowsEditing = true
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
-    }
+
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
-        self.annoucementImage = image.jpegData(compressionQuality: 0.8)
-        self.dismiss(animated: true, completion: nil)
-    }
     
     
     //hide keyboard function

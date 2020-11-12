@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CollectionViewCellDelegate, WaterfallLayoutDelegate {
+class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UICollectionViewDelegateFlowLayout, CollectionViewCellDelegate, WaterfallLayoutDelegate, UINavigationControllerDelegate {
     
     
     var userProfile: User?
@@ -18,6 +18,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     var selectedAnnoucement: Int = 0
+    
+    var image: UIImage?
+    let imagePicker = UIImagePickerController()
+    var annoucementImage: Data?
     
     
     let profileCollectionView: UICollectionView = {
@@ -132,6 +136,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
        
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.imagePicker.delegate = self
         setupElementsViewDidLoad()
         setupElementsInCollectionView()
         DatabaseHandler.readAnnoucements { (result) in
@@ -377,10 +382,29 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     @objc func createAnnoucementButtonTapped() -> Void {
-        
-        guard let createAnnoucementVC = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.createAnnoucementViewController) as? CreateAnnoucementViewController else { return }
-        self.present(createAnnoucementVC, animated: true, completion: nil)
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
+//        guard let createAnnoucementVC = self.storyboard?.instantiateViewController(withIdentifier: HardConstants.Storyboard.createAnnoucementViewController) as? CreateAnnoucementViewController else { return }
+//        self.present(createAnnoucementVC, animated: true, completion: nil)
     }
+    
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
+        self.annoucementImage = image.jpegData(compressionQuality: 0.8)
+        //self.dismiss(animated: true, completion: nil)
+
+//        self.image = image
+        
+        self.dismiss(animated: false, completion: {                 self.performSegue(withIdentifier: "segueCreateAnnoucementView", sender: self)})
+        
+    }
+
+    
+ 
+    
+    
     
     @objc func sairButtonActionTapped() -> Void {
         let signOutAlert = UIAlertController(title: "Deseja Sair?", message: "Você poderá fazer login quando quiser novamente.", preferredStyle: .alert)
@@ -497,9 +521,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {//ARRUMAR AS SEGUES DE PORTIFOLIO
-        if let annoucementViewController = segue.destination as? AnnoucementViewController {
-                annoucementViewController.annoucement = annoucements[selectedAnnoucement]
+        
+        if segue.identifier == "segueCreateAnnoucementView" {
+            let destinationViewController = segue.destination as! CreateAnnoucementViewController
+                destinationViewController.annoucementImage = annoucementImage
+        } else {
+            if let annoucementViewController = segue.destination as? AnnoucementViewController {
+                    annoucementViewController.annoucement = annoucements[selectedAnnoucement]
+            }
         }
+        
     }
     
     func collectionViewCell(_ announcementNumber: Int) {
