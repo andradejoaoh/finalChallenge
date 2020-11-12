@@ -78,7 +78,7 @@ class DatabaseHandler {
         }
     }
     
-    static func createAnnoucement(annoucementName: String, annoucementDescription: String, annoucementLocation: String, annoucementImage: Data, deliveryOption: Bool, expirationDate: Date, productType: String, price: Float, completion: @escaping (Result<String,Error>) -> Void){
+    static func createAnnoucement(annoucementName: String, annoucementDescription: String, annoucementLocation: String, annoucementImage: Data, deliveryOption: Bool, expirationDate: Date, productType: String, price: Float, coordinates: (Double?, Double?) , completion: @escaping (Result<String,Error>) -> Void){
         let database = Firestore.firestore()
         guard let userAuth = FirebaseAuth.Auth.auth().currentUser else { return }
         let annoucementDocument = database.collection("annoucements").document()
@@ -86,6 +86,8 @@ class DatabaseHandler {
         let storageReference = storage.reference()
         let annoucementImageReference = storageReference.child("annoucementPictures/\(annoucementDocument.documentID)")
         let annoucementImageData = annoucementImage
+        let lat = coordinates.0
+        let long = coordinates.1
         let dateFormatter = ISO8601DateFormatter()
         dateFormatter.formatOptions = [.withInternetDateTime]
         let dateString = dateFormatter.string(from: expirationDate)
@@ -106,8 +108,10 @@ class DatabaseHandler {
                                                  "expiration_date": dateString,
                                                  "delivery_option": deliveryOption,
                                                  "product_type": productType,
-                                                 "isPaid": false,
+                                                 "isActive": true,
                                                  "price": price,
+                                                 "lat": lat,
+                                                 "long": long,
                                                  "annoucement_user_id":userAuth.uid]) { (error) in
                         if error != nil {
                             return completion(.failure(error!))

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
@@ -54,6 +55,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
         if validateFields() != nil {
             //Show fill all fields error
         } else {
+            let geoCoder = CLGeocoder()
             
             let annoucementName = annoucementNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let annoucementDescription = annoucementDescriptionTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -61,7 +63,8 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
             let deliveryOption = deliveryOptionSwitch.isOn
             let productType = HardConstants.PickerView.productType[productTypePicker.selectedRow(inComponent: 0)]
             let price = Float(annoucementPriceTextField.text!) ?? 0.0
-
+            guard let imageData = annoucementImage else { return }
+            
             var expirationDate: Double {
                 switch HardConstants.PickerView.annoucementTime[annoucementTimePicker.selectedRow(inComponent: 0)] {
                 case "1 hora":
@@ -84,15 +87,21 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
                     return 86400
                 }
             }
-            
-            guard let imageData = annoucementImage else { return }
-            DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation, annoucementImage: imageData, deliveryOption:  deliveryOption, expirationDate: Date(timeIntervalSinceNow: expirationDate), productType: productType, price: price) { (result) in
-                switch result {
-                case let .failure(error):
-                    //Show error while creating annoucement.
-                    print(error)
-                case .success:
-                    break
+            geoCoder.geocodeAddressString(annoucementLocation) {(placemarks, error) in
+                guard error == nil else {
+                    return
+                }
+                let placemark = placemarks?.first
+                let lat = placemark?.location?.coordinate.latitude
+                let long = placemark?.location?.coordinate.longitude
+                DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation, annoucementImage: imageData, deliveryOption:  deliveryOption, expirationDate: Date(timeIntervalSinceNow: expirationDate), productType: productType, price: price, coordinates: (lat, long)) { (result) in
+                    switch result {
+                    case let .failure(error):
+                        //Show error while creating annoucement.
+                        print(error)
+                    case .success:
+                        break
+                    }
                 }
             }
             self.dismiss(animated: true, completion: nil)
@@ -154,6 +163,7 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
  - Author:
    João Henrique Andrade
 */
+
 extension CreateAnnoucementViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
