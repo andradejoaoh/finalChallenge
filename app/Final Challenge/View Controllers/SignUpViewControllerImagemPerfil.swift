@@ -27,6 +27,8 @@ class SignUpViewControllerImagemPerfil: UIViewController, UIImagePickerControlle
     
     let imagePicker = UIImagePickerController()
     
+    var fullname = String()
+    var bio = String()
     var email = String()
     var senha = String()
     var name = String()
@@ -73,7 +75,7 @@ class SignUpViewControllerImagemPerfil: UIViewController, UIImagePickerControlle
         avanceButton.backgroundColor = UIColor(named: "button")
         avanceButton.layer.cornerRadius = 15
         imagemPerfil.layer.cornerRadius = 10
-        pageControler.currentPage = 2
+        pageControler.currentPage = 3
     }
     
     @IBAction func unwindToImagePerfilContent(segue:UIStoryboardSegue) {}
@@ -81,24 +83,32 @@ class SignUpViewControllerImagemPerfil: UIViewController, UIImagePickerControlle
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "avanceSegueToCategoria" {
             let destinationControler = segue.destination as! SignUpViewControllerCategoria
+            destinationControler.fullname = fullname
+            destinationControler.bio = bio
             destinationControler.email = email
             destinationControler.senha = senha
             destinationControler.name = name
             destinationControler.image = imagemPerfil
         } else if segue.identifier == "pularSegueToCategoria" {
             let destinationControler = segue.destination as! SignUpViewControllerCategoria
+            destinationControler.fullname = fullname
+            destinationControler.bio = bio
             destinationControler.email = email
             destinationControler.senha = senha
             destinationControler.name = name
             destinationControler.image = UIImageView(image: imagePlaceholder)
         } else if segue.identifier == "swipeSegueToCategoria" && imagemPerfil != nil{
             let destinationControler = segue.destination as! SignUpViewControllerCategoria
+            destinationControler.fullname = fullname
+            destinationControler.bio = bio
             destinationControler.email = email
             destinationControler.senha = senha
             destinationControler.name = name
             destinationControler.image = imagemPerfil
         } else if segue.identifier == "swipeSegueToCategoria" && imagemPerfil == nil {
             let destinationControler = segue.destination as! SignUpViewControllerCategoria
+            destinationControler.fullname = fullname
+            destinationControler.bio = bio
             destinationControler.email = email
             destinationControler.senha = senha
             destinationControler.name = name

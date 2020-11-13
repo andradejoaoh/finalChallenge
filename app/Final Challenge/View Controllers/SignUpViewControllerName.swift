@@ -23,6 +23,8 @@ class SignUpViewControllerName: UIViewController, UIImagePickerControllerDelegat
     var teste: Bool = true
  
     
+    var fullname = String()
+    var bio = String()
     var email = String()
     var senha = String()
     
@@ -62,7 +64,7 @@ class SignUpViewControllerName: UIViewController, UIImagePickerControllerDelegat
         StyleElements.styleTextField(nameTextField)
         AvanceButton.backgroundColor = UIColor(named: "button")
         AvanceButton.layer.cornerRadius = 15
-        pageControl.currentPage = 1
+        pageControl.currentPage = 2
     }
     
     @IBAction func unwindToNameContent(segue:UIStoryboardSegue) {}
@@ -71,6 +73,8 @@ class SignUpViewControllerName: UIViewController, UIImagePickerControllerDelegat
         if segue.identifier == "segueToBemVindo" || segue.identifier == "segueSwipeGestureToBemVindo" {
             if validateFields() == true {
                 let destinationController = segue.destination as! SignUpViewControllerBemVindo
+                destinationController.fullname = fullname
+                destinationController.bio = bio
                 destinationController.email = email
                 destinationController.senha = senha
                 destinationController.name = nameTextField.text!

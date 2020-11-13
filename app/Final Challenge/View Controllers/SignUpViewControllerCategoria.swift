@@ -13,7 +13,8 @@ import UIKit
 class SignUpViewControllerCategoria: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
    
     
-    
+    var fullname = String()
+    var bio = String()
     var email = String()
     var senha = String()
     var name = String()
@@ -516,7 +517,7 @@ class SignUpViewControllerCategoria: UIViewController, UIImagePickerControllerDe
     func setupStyleForElements(){
         avanceButton.backgroundColor = UIColor(named: "button")
         avanceButton.layer.cornerRadius = 15
-        pageControl.currentPage = 3
+        pageControl.currentPage = 4
     }
     
     func gravaCategory(){
@@ -552,6 +553,8 @@ class SignUpViewControllerCategoria: UIViewController, UIImagePickerControllerDe
         gravaCategory()
         if segue.identifier == "segueToInfoPessoais" || segue.identifier == "swipeSegueToInfoPessoais" {
             let destinationController = segue.destination as! SignUpViewControllerPessoalInfo
+            destinationController.fullname = fullname
+            destinationController.bio = bio
             destinationController.email = email
             destinationController.senha = senha
             destinationController.name = name

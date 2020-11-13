@@ -18,7 +18,8 @@ class SignUpViewControllerEmailPassword: UIViewController, UIImagePickerControll
     
     @IBOutlet weak var AvanceButton: UIButton!
     
-    var teste:Bool = true
+    var fullname = String()
+    var bio = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +48,7 @@ class SignUpViewControllerEmailPassword: UIViewController, UIImagePickerControll
         StyleElements.styleTextField(passwordTextField)
         AvanceButton.backgroundColor = UIColor(named: "button")
         AvanceButton.layer.cornerRadius = 15
-        pageControl.currentPage = 0
+        pageControl.currentPage = 1
     }
     
     //hide keyboard function
@@ -79,6 +80,8 @@ class SignUpViewControllerEmailPassword: UIViewController, UIImagePickerControll
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if validateFields() == true && (segue.identifier == "segueToNameSwipeGesture" || segue.identifier == "segueToName"){
             let destinationController = segue.destination as! SignUpViewControllerName
+            destinationController.fullname = fullname
+            destinationController.bio = bio
             destinationController.email = emailTextField.text!
             destinationController.senha = passwordTextField.text!
         } else {
@@ -91,7 +94,7 @@ class SignUpViewControllerEmailPassword: UIViewController, UIImagePickerControll
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if (validateFields() == true) && (identifier == "segueToNameSwipeGesture" || identifier == "segueToName") {
             return true
-        } else if (validateFields() == false || validateFields() == true) && identifier == "unwindToHomeProfile" {
+        } else if (validateFields() == false || validateFields() == true) && identifier == "unwindToFullNameBio" {
             return true
         } else {
             return false

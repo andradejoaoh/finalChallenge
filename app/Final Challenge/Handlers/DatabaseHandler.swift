@@ -27,7 +27,7 @@ class DatabaseHandler {
     }
     
     //Create account using email in Firebase
-    static func signUpWithEmail(email: String, password: String, adress: String, fullname: String, bio: String, facebook: String, site: String, storeName: String, phone: String, imageData: Data, completion: @escaping (Result<String,Error>) -> Void){
+    static func signUpWithEmail(email: String, password: String, address: String, CEP: String, fullname: String, bio: String, categoria: String, numeroEndereco: String, facebook: String, site: String, instagram: String, telegram: String, checkLocation: Bool, checkTelefone: Bool, storeName: String, phone: String, imageData: Data, completion: @escaping (Result<String,Error>) -> Void){
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 // There was an error while creating user
@@ -55,10 +55,17 @@ class DatabaseHandler {
                             let database = Firestore.firestore()
                             database.collection("users").document(user.uid).setData(["full_name":fullname,
                                                                                      "store_name":storeName,
-                                                                                     "adress":adress,
+                                                                                     "address":address,
+                                                                                     "CEP": CEP,
                                                                                      "bio":bio,
+                                                                                     "category":categoria,
+                                                                                     "addressNumber":numeroEndereco,
                                                                                      "site":site,
                                                                                      "facebook":facebook,
+                                                                                     "instagram":instagram,
+                                                                                     "telegram":telegram,
+                                                                                     "checkLocation":checkLocation,
+                                                                                     "checkTelefone":checkTelefone,
                                                                                      "email": email,
                                                                                      "phone": phone,
                                                                                      "uid":result!.user.uid,

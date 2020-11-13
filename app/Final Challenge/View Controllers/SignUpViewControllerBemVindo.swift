@@ -18,7 +18,8 @@ class SignUpViewControllerBemVindo: UIViewController, UIImagePickerControllerDel
     
     @IBOutlet weak var continueCadastroButton: UIButton!
     
-    
+    var fullname = String()
+    var bio = String()
     var email = String()
     var senha = String()
     var name = String()
@@ -47,6 +48,8 @@ class SignUpViewControllerBemVindo: UIViewController, UIImagePickerControllerDel
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SwipeSegueToImagemPerfil" || segue.identifier == "SegueToImagemPerfil" {
             let destinationController = segue.destination as! SignUpViewControllerImagemPerfil
+            destinationController.fullname = fullname
+            destinationController.bio = bio
             destinationController.email = email
             destinationController.senha = senha
             destinationController.name = name

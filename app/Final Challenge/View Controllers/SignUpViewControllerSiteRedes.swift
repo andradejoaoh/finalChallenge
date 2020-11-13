@@ -11,14 +11,14 @@ import UIKit
 
 class SignUpViewControllerSiteRedes: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-  
-    
-    
+    var fullname = String()
+    var bio = String()
     var email = String()
     var senha = String()
     var name = String()
     var image = UIImageView()
     var categoria = String()
+    var endereco = String()
     var CEP = String()
     var numeroEndereco = String()
     var permissionLocationCheck =  Bool()
@@ -48,20 +48,10 @@ class SignUpViewControllerSiteRedes: UIViewController, UIImagePickerControllerDe
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    
-    
-    
-  
-    
-    
-   
-
-    
-    //style for elements
     func setupStyleForElements(){
         avanceButton.backgroundColor = UIColor(named: "button")
         avanceButton.layer.cornerRadius = 15
-        pageControle.currentPage = 4
+        pageControle.currentPage = 6
     }
     
     @IBAction func unwindToSiteRedes(segue:UIStoryboardSegue) {}
@@ -69,11 +59,14 @@ class SignUpViewControllerSiteRedes: UIViewController, UIImagePickerControllerDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SwipeSegueToFinalCadastro" || segue.identifier == "segueToFinalCadastro" {
             let destinationController = segue.destination as! SignUpViewControllerFimCadastro
+            destinationController.fullname = fullname
+            destinationController.bio = bio
             destinationController.email = email
             destinationController.senha = senha
             destinationController.name = name
             destinationController.image = image
             destinationController.categoria = categoria
+            destinationController.endereco = endereco
             destinationController.CEP = CEP
             destinationController.numeroEndereco = numeroEndereco
             destinationController.telefone = telefone
@@ -91,13 +84,6 @@ class SignUpViewControllerSiteRedes: UIViewController, UIImagePickerControllerDe
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         true
     }
-    
-    
-    //SwipeSegueToFinalCadastro
-    
-    //segueToFinalCadastro
-    
-    //unwindToPessoaInfo
 
 }
 

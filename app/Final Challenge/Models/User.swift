@@ -16,6 +16,14 @@ class User: Codable {
     let userSite: String?
     let userStoreName: String
     let userPhone: String
+    let userCategory: String
+    let userAddress: String
+    let userNumberAddress: String
+    let userInstagram: String?
+    let userTelegram: String?
+    let userCheckLocation: Bool
+    let userCheckTelefone: Bool
+    let userCEP: String
     
     enum CodingKeys: String, CodingKey {
         case userName = "full_name"
@@ -26,5 +34,13 @@ class User: Codable {
         case userSite = "site"
         case userPhone = "phone"
         case userStoreName = "store_name"
+        case userCategory = "category"
+        case userAddress = "address"
+        case userNumberAddress = "addressNumber"
+        case userInstagram = "instagram"
+        case userTelegram = "telegram"
+        case userCheckLocation = "checkLocation"
+        case userCheckTelefone = "checkTelefone"
+        case userCEP = "CEP"
     }
 }

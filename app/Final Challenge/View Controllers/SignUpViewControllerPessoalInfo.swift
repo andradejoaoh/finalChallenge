@@ -13,6 +13,8 @@ class SignUpViewControllerPessoalInfo: UIViewController, UIImagePickerController
     
     @IBOutlet weak var pageControl: UIPageControl!
     
+    @IBOutlet weak var EnderecoTextField: UITextField!
+    
     @IBOutlet weak var CEPTextField: UITextField!
     
     @IBOutlet weak var NumeroEnderecoTextField: UITextField!
@@ -25,7 +27,8 @@ class SignUpViewControllerPessoalInfo: UIViewController, UIImagePickerController
     
     @IBOutlet weak var avanceButton: UIButton!
     
-    
+    var fullname = String()
+    var bio = String()
     var email = String()
     var senha = String()
     var name = String()
@@ -48,7 +51,7 @@ class SignUpViewControllerPessoalInfo: UIViewController, UIImagePickerController
     
     
     @IBAction func buttonCheckLocationAction(_ sender: UIButton) {
-        if CEPTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != "" && NumeroEnderecoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+        if EnderecoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != "" && CEPTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != "" && NumeroEnderecoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
             if sender.isSelected {
                 sender.isSelected = false
             } else {
@@ -72,7 +75,7 @@ class SignUpViewControllerPessoalInfo: UIViewController, UIImagePickerController
     
     
     func validateFields() -> Bool? {
-        if CEPTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || NumeroEnderecoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || telefoneTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+        if EnderecoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || CEPTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || NumeroEnderecoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || telefoneTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             return false
         } else {
             return true
@@ -84,7 +87,7 @@ class SignUpViewControllerPessoalInfo: UIViewController, UIImagePickerController
     func setupStyleForElements(){
         avanceButton.backgroundColor = UIColor(named: "button")
         avanceButton.layer.cornerRadius = 15
-        pageControl.currentPage = 4
+        pageControl.currentPage = 5
     }
     
     @IBAction func unwindToPessoaInfo(segue:UIStoryboardSegue) {}
@@ -92,11 +95,14 @@ class SignUpViewControllerPessoalInfo: UIViewController, UIImagePickerController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "swipeSegueToSiteRedes" || segue.identifier == "segueToSiteRedes" {
             let destinationController = segue.destination as! SignUpViewControllerSiteRedes
+            destinationController.fullname = fullname
+            destinationController.bio = bio
             destinationController.email = email
             destinationController.senha = senha
             destinationController.name = name
             destinationController.image = image
             destinationController.categoria = categoria
+            destinationController.endereco = EnderecoTextField.text!
             destinationController.CEP = CEPTextField.text!
             destinationController.numeroEndereco = NumeroEnderecoTextField.text!
             destinationController.telefone = telefoneTextField.text!
