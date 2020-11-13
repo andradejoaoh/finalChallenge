@@ -40,6 +40,9 @@ class SignUpViewControllerFullNameBio: UIViewController, UIImagePickerController
         AvanceButton.backgroundColor = UIColor(named: "button")
         AvanceButton.layer.cornerRadius = 15
         pageControl.currentPage = 0
+        bioTextView.layer.borderWidth = 1
+        bioTextView.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        bioTextView.layer.cornerRadius = 5
     }
     
     //hide keyboard function
