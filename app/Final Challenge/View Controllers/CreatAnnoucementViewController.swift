@@ -10,90 +10,84 @@ import UIKit
 import CoreLocation
 
 /*
- Nome
  
- Descrição
+ Telefone e email do usuário.
+ O resto foi criado.
  
- MUDAR O TIPO DO PRODUTO PARA BAIRRO
+ Campos oficiais:
  
- Categoria do perfil transferindo para a página de produto
- 
- Preço
- 
- Telefone - ser um switch onde pega o numero do telefone do perfil para adicionar no produto também (mesma coisa da categoria)
- 
- 
- Delivey - TIRAR O DELIVERY E COLOCAR CONTATO TELEFONE
- 
- 
- Tempo do produto mantem
- 
- 
- Imagem do produto mantem
- 
- 
- Figma:
- Nome do produto
-
- Descrição
-
- Bairro
-
- Categoria do perfil na pág de produto
-
- Preço
-
- Telefone
+ Imagem
+ Nome do anuncio
+ Descrição do anuncio
+ Categoria do anuncio
+ Preco do anuncio
+ Tempo do anuncio
+ Bairro do anuncio
+ Switch do telefone (usuario)
+ Switch do email (usuario)
  
  */
 
 
-class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate{
+class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UITextViewDelegate{
     
     var annoucementImage: Data?
     
     @IBOutlet weak var announceButton: UIButton!
     
     @IBOutlet weak var annoucementNameTextField: UITextField!
-    @IBOutlet weak var annoucementDescriptionTextField: UITextField!
-    @IBOutlet weak var annoucementLocationTextField: UITextField!
+
+    @IBOutlet weak var annoucementDescriptionTextView: UITextView!
+    
+    //@IBOutlet weak var annoucementLocationTextField: UITextField!
+    var annoucementCategory:String = ""
+    
     @IBOutlet weak var annoucementPriceTextField: UITextField!
     
-    @IBOutlet weak var deliveryOptionSwitch: UISwitch!
-    @IBOutlet weak var productTypePicker: UIPickerView!
-    @IBOutlet weak var annoucementTimePicker: UIPickerView!
+    var annoucementTime:Int = 0
+        
+    var annoucementBairro:String = ""
+    
+    @IBOutlet weak var annoucementTelefoneSwitch: UISwitch!
+    
+    @IBOutlet weak var annoucementEmailSwitch: UISwitch!
+    
+    
+//    @IBOutlet weak var deliveryOptionSwitch: UISwitch!
+//    @IBOutlet weak var productTypePicker: UIPickerView!
+//    @IBOutlet weak var annoucementTimePicker: UIPickerView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.annoucementNameTextField.delegate = self
-        self.annoucementDescriptionTextField.delegate = self
-        self.annoucementLocationTextField.delegate = self
+        self.annoucementDescriptionTextView.delegate = self
         
-        self.productTypePicker.delegate = self
-        self.productTypePicker.dataSource = self
-        self.annoucementTimePicker.delegate = self
-        self.annoucementTimePicker.dataSource = self
-                        
+        placeholderForTextView()
+        
         setupStyleForElements()
         self.hideKeyboardWhenTappedAround()
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.productTypePicker.tag = 1
-        self.annoucementTimePicker.tag = 2
     }
     
+    
+    
     @IBAction func annouceAction(_ sender: Any) {
+        /*
         if validateFields() != nil {
             //Show fill all fields error
         } else {
             let geoCoder = CLGeocoder()
             
             let annoucementName = annoucementNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let annoucementDescription = annoucementDescriptionTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let annoucementDescription = annoucementDescriptionTextView.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let annoucementLocation = annoucementLocationTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let deliveryOption = deliveryOptionSwitch.isOn
             let productType = HardConstants.PickerView.productType[productTypePicker.selectedRow(inComponent: 0)]
@@ -141,44 +135,68 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
             }
             self.dismiss(animated: true, completion: nil)
         }
+         */
     }
+    
     
     func validateFields() -> String? {
         //Check if fields are filled in
-        if annoucementNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            annoucementLocationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            annoucementDescriptionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+        if annoucementNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || annoucementDescriptionTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || annoucementPriceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || annoucementTime == 0 || annoucementBairro == "" || annoucementCategory == ""{
             return "Preencha todos os campos."
         }
         return nil
     }
     
     func setupStyleForElements(){
-        StyleElements.styleFilledButton(announceButton)
-        StyleElements.styleTextField(annoucementNameTextField)
-        StyleElements.styleTextField(annoucementDescriptionTextField)
-        StyleElements.styleTextField(annoucementLocationTextField)
-        StyleElements.styleTextField(annoucementPriceTextField)
+    }
+    
+    @IBAction func unwindCreateAnnoucement(segue:UIStoryboardSegue) {
+        print(annoucementBairro)
+    }
+    
+    @IBAction func unwindCreateAnnoucementFromHoras(segue:UIStoryboardSegue) {
+        print(annoucementTime)
+    }
+    
+    @IBAction func unwindCreateAnnoucementFromCategory(segue:UIStoryboardSegue) {
+        print(annoucementCategory)
     }
     
 
+    func placeholderForTextView(){
+        annoucementDescriptionTextView.text = "Descreva seu produto..."
+        annoucementDescriptionTextView.textColor = UIColor.lightGray
+    }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor(named: "text")
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Descreva seu produto..."
+            textView.textColor = UIColor.lightGray
+        }
+    }
+   
     
     
     //hide keyboard function
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == annoucementNameTextField {
             textField.resignFirstResponder()
-            annoucementLocationTextField.becomeFirstResponder()
-        } else if textField == annoucementLocationTextField {
-            textField.resignFirstResponder()
-            annoucementDescriptionTextField.becomeFirstResponder()
-        } else if textField == annoucementDescriptionTextField {
+            annoucementDescriptionTextView.becomeFirstResponder()
+        } else if textField == annoucementDescriptionTextView {
             textField.resignFirstResponder()
         }
         return true
     }
 }
+
+
 
 /**
  `UIPickerView protocols` used by two of the same.
@@ -189,24 +207,4 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
    João Henrique Andrade
 */
 
-extension CreateAnnoucementViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView.tag == 1 {
-            return HardConstants.PickerView.productType.count
-        } else {
-            return HardConstants.PickerView.annoucementTime.count
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView.tag == 1 {
-            return HardConstants.PickerView.productType[row]
-        } else {
-            return HardConstants.PickerView.annoucementTime[row]
-        }
-    }
-}
+

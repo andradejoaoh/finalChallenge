@@ -23,12 +23,33 @@ class SignUpViewControllerFullNameBio: UIViewController, UIImagePickerController
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupStyleForElements()
+        bioTextView.delegate = self
+        placeholderForTextView()
         
         self.hideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    func placeholderForTextView(){
+        bioTextView.text = "Coloque a descrição da sua loja..."
+        bioTextView.textColor = UIColor.lightGray
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor(named: "text")
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Coloque a descrição da sua loja..."
+            textView.textColor = UIColor.lightGray
+        }
     }
     
     

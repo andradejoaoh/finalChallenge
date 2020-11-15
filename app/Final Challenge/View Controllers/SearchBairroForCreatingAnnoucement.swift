@@ -18,6 +18,8 @@ class SearchBairroForCreatingAnnoucement: UIViewController, UITableViewDelegate,
     var bairros = [String]()
     var filteredBairros = [String]()
     
+    var bairroSelected = String()
+    
     var valuesBairrosTest = [String]()
     
 
@@ -48,6 +50,8 @@ class SearchBairroForCreatingAnnoucement: UIViewController, UITableViewDelegate,
         
         bairrosSectionTitles = [String](bairrosDictionary.keys)
         bairrosSectionTitles = bairrosSectionTitles.sorted(by: {$0 < $1})
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
         
     }
 
@@ -105,6 +109,20 @@ class SearchBairroForCreatingAnnoucement: UIViewController, UITableViewDelegate,
        return bairrosSectionTitles
    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)!
+        print(cell.textLabel?.text ?? "Bairro não informado")
+        
+        bairroSelected = cell.textLabel?.text ?? "Bairro não informado"
+        performSegue(withIdentifier: "unwindToCreateAnnoucement", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "unwindToCreateAnnoucement" {
+            let destinationController =  segue.destination as! CreateAnnoucementViewController
+            destinationController.annoucementBairro = bairroSelected
+        }
+    }
     
     //SEARCH BAR
     

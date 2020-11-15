@@ -127,10 +127,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     let sairButtonProvisorio: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 1, green: 0.6547823548, blue: 0.6713048816, alpha: 1)
-        button.setTitle("Sair", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.layer.cornerRadius = 15
+        let imageLogout = UIImage(named: "logout") as UIImage?
+        button.setImage(imageLogout, for: .normal)
+        button.frame.size.height = 50
+        button.frame.size.width = 50
         return button
     }()
        
@@ -278,13 +278,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         
         sairButtonProvisorio.translatesAutoresizingMaskIntoConstraints = false
-        sairButtonProvisorio.topAnchor.constraint(equalTo: self.profileCollectionView.topAnchor, constant: self.view.frame.size.height * 0.3).isActive = true
-        sairButtonProvisorio.centerXAnchor.constraint(equalTo: self.profileCollectionView.centerXAnchor, constant: 0).isActive = true
-        sairButtonProvisorio.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
-        sairButtonProvisorio.widthAnchor.constraint(equalToConstant: CGFloat(self.view.frame.size.width * 0.5)).isActive = true
+        
+        sairButtonProvisorio.topAnchor.constraint(equalTo: self.profileCollectionView.topAnchor, constant: 16).isActive = true
+        sairButtonProvisorio.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: self.view.frame.width/2.5).isActive = true
+                
+        sairButtonProvisorio.heightAnchor.constraint(equalToConstant: CGFloat(50)).isActive = true
+        
+        sairButtonProvisorio.widthAnchor.constraint(equalToConstant: CGFloat(50)).isActive = true
         
         createAnnoucementButton.translatesAutoresizingMaskIntoConstraints = false
-        createAnnoucementButton.topAnchor.constraint(equalTo: sairButtonProvisorio.bottomAnchor, constant: 10).isActive = true
+        createAnnoucementButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10).isActive = true
         createAnnoucementButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
         createAnnoucementButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
         createAnnoucementButton.widthAnchor.constraint(equalToConstant: CGFloat(self.view.frame.size.width * 0.90)).isActive = true
