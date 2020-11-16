@@ -33,7 +33,6 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
     
     var annoucementImage: Data?
     
-    @IBOutlet weak var announceButton: UIButton!
     
     @IBOutlet weak var annoucementNameTextField: UITextField!
 
@@ -52,10 +51,6 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
     
     @IBOutlet weak var annoucementEmailSwitch: UISwitch!
     
-    
-//    @IBOutlet weak var deliveryOptionSwitch: UISwitch!
-//    @IBOutlet weak var productTypePicker: UIPickerView!
-//    @IBOutlet weak var annoucementTimePicker: UIPickerView!
     
     
     override func viewDidLoad() {
@@ -80,6 +75,17 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
     
     
     @IBAction func annouceAction(_ sender: Any) {
+        
+        print("ANUNCIADO")
+        print(annoucementImage)
+        print(annoucementNameTextField.text!)
+        print(annoucementDescriptionTextView.text!)
+        print(annoucementCategory)
+        print(annoucementPriceTextField.text!)
+        print(annoucementTime)
+        print(annoucementBairro)
+        print(annoucementEmailSwitch.isOn)
+        print(annoucementTelefoneSwitch.isOn)
         /*
         if validateFields() != nil {
             //Show fill all fields error

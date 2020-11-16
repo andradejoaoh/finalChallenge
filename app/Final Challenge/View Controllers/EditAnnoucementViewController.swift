@@ -8,42 +8,59 @@
 
 import UIKit
 
-class EditAnnoucementViewController: UIViewController, UITextFieldDelegate {
+class EditAnnoucementViewController:  UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+    
     var annoucement: Annoucement?
     
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var descriptionTextField: UITextField!
-    @IBOutlet weak var locationTextField: UITextField!
-    @IBOutlet weak var priceTextField: UITextField!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var productTypePicker: UIPickerView!
-    @IBOutlet weak var deliveryOption: UISwitch!
+//    @IBOutlet weak var nameTextField: UITextField!
+//    @IBOutlet weak var descriptionTextField: UITextField!
+//    @IBOutlet weak var locationTextField: UITextField!
+//    @IBOutlet weak var priceTextField: UITextField!
+//    @IBOutlet weak var editButton: UIButton!
+//    @IBOutlet weak var productTypePicker: UIPickerView!
+//    @IBOutlet weak var deliveryOption: UISwitch!
+    
+    
+    
+    @IBOutlet weak var annoucementNameTextField: UITextField!
+
+    @IBOutlet weak var annoucementDescriptionTextView: UITextView!
+    
+    //@IBOutlet weak var annoucementLocationTextField: UITextField!
+    var annoucementCategory:String = ""
+    
+    @IBOutlet weak var annoucementPriceTextField: UITextField!
+    
+    var annoucementTime:Int = 0
+        
+    var annoucementBairro:String = ""
+    
+    @IBOutlet weak var annoucementTelefoneSwitch: UISwitch!
+    
+    @IBOutlet weak var annoucementEmailSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        productTypePicker.delegate = self
-        productTypePicker.dataSource = self
         
-        nameTextField.delegate = self
-        descriptionTextField.delegate = self
-        locationTextField.delegate = self
-        priceTextField.delegate = self
         
-        setupStyleForElements()
         self.hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        /*
         if let annoucement = annoucement {
             nameTextField.text = annoucement.annoucementName
             descriptionTextField.text = annoucement.description
             locationTextField.text = annoucement.location
         }
+ */
     }
     
     @IBAction func editAction(_ sender: Any) {
+        
+        /*
         guard let annoucement = annoucement else { return }
         
         guard let name = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
@@ -66,43 +83,60 @@ class EditAnnoucementViewController: UIViewController, UITextFieldDelegate {
                 self.navigationController?.popViewController(animated: true)
             }
         }
+ */
     }
     
-    func setupStyleForElements(){
-        StyleElements.styleTextField(nameTextField)
-        StyleElements.styleTextField(descriptionTextField)
-        StyleElements.styleTextField(locationTextField)
-        StyleElements.styleTextField(priceTextField)
-        StyleElements.styleFilledButton(editButton)
+    
+    func validateFields() -> String? {
+        //Check if fields are filled in
+        if annoucementNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || annoucementDescriptionTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || annoucementPriceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || annoucementTime == 0 || annoucementBairro == "" || annoucementCategory == ""{
+            return "Preencha todos os campos."
+        }
+        return nil
+    }
+    
+    
+    
+    @IBAction func unwindEditBairroAnnoucement(segue:UIStoryboardSegue) {
+        print(annoucementBairro)
+    }
+    
+    @IBAction func unwindEditAnnoucementFromHoras(segue:UIStoryboardSegue) {
+        print(annoucementTime)
+    }
+    
+    @IBAction func unwindEditAnnoucementFromCategory(segue:UIStoryboardSegue) {
+        print(annoucementCategory)
+    }
+    
+    func placeholderForTextView(){
+        annoucementDescriptionTextView.text = "Descreva seu produto..."
+        annoucementDescriptionTextView.textColor = UIColor.lightGray
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor(named: "text")
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Descreva seu produto..."
+            textView.textColor = UIColor.lightGray
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == nameTextField {
+        if textField == annoucementNameTextField {
             textField.resignFirstResponder()
-            descriptionTextField.becomeFirstResponder()
-        } else if textField == descriptionTextField {
-            textField.resignFirstResponder()
-            locationTextField.becomeFirstResponder()
-        } else if textField == locationTextField {
-            textField.resignFirstResponder()
-            priceTextField.becomeFirstResponder()
-        } else if textField == priceTextField {
+            annoucementDescriptionTextView.becomeFirstResponder()
+        } else if textField == annoucementDescriptionTextView {
             textField.resignFirstResponder()
         }
         return true
     }
 }
 
-extension EditAnnoucementViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        HardConstants.PickerView.productType.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        HardConstants.PickerView.productType[row]
-    }
-}
+
