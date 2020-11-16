@@ -85,7 +85,19 @@ class DatabaseHandler {
         }
     }
     
-    static func createAnnoucement(annoucementName: String, annoucementDescription: String, annoucementLocation: String, annoucementImage: Data, deliveryOption: Bool, expirationDate: Date, productType: String, price: Float, coordinates: (Double?, Double?) , completion: @escaping (Result<String,Error>) -> Void){
+    /*
+     print(annoucementImage)ok
+     print(annoucementNameTextField.text!)ok
+     print(annoucementDescriptionTextView.text!)ok
+     print(annoucementCategory)ok
+     print(annoucementPriceTextField.text!)ok
+     print(annoucementTime)ok
+     print(annoucementBairro)ok
+     print(annoucementEmailSwitch.isOn)
+     print(annoucementTelefoneSwitch.isOn)
+     */
+    
+    static func createAnnoucement(annoucementName: String, annoucementDescription: String, annoucementLocation: String, annoucementImage: Data, expirationDate: Date, price: Float, coordinates: (Double?, Double?), category: String, emailCheck: Bool, telefoneCheck: Bool, completion: @escaping (Result<String,Error>) -> Void){
         let database = Firestore.firestore()
         guard let userAuth = FirebaseAuth.Auth.auth().currentUser else { return }
         let annoucementDocument = database.collection("annoucements").document()
@@ -113,8 +125,9 @@ class DatabaseHandler {
                                                  "annoucement_location":annoucementLocation,
                                                  "annoucement_id":annoucementDocument.documentID,
                                                  "expiration_date": dateString,
-                                                 "delivery_option": deliveryOption,
-                                                 "product_type": productType,
+                                                 "category": category,
+                                                 "emailCheck": emailCheck,
+                                                 "telefoneCheck": telefoneCheck,
                                                  "isActive": true,
                                                  "price": price,
                                                  "lat": lat,

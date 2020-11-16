@@ -2124,12 +2124,27 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHx-TD-wRb">
+                                                <rect key="frame" x="139" y="91" width="136" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="DDN-vQ-jcY"/>
+                                                    <constraint firstAttribute="width" constant="136" id="tSY-gn-kjn"/>
+                                                </constraints>
+                                                <state key="normal" title="Salvar">
+                                                    <color key="titleColor" name="textButton"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="editAction:" destination="gyI-RA-dZL" eventType="touchUpInside" id="o4m-Zm-UDJ"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" name="backgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="rHx-TD-wRb" firstAttribute="centerY" secondItem="aB8-WM-4rN" secondAttribute="centerY" id="Fie-eK-xCH"/>
                                             <constraint firstAttribute="trailing" secondItem="22i-Q4-Zj8" secondAttribute="trailing" constant="16" id="M88-iN-wfD"/>
                                             <constraint firstItem="22i-Q4-Zj8" firstAttribute="leading" secondItem="aB8-WM-4rN" secondAttribute="leading" constant="16" id="V41-NF-Ily"/>
                                             <constraint firstItem="22i-Q4-Zj8" firstAttribute="top" secondItem="aB8-WM-4rN" secondAttribute="top" constant="10" id="s41-mQ-Bwj"/>
+                                            <constraint firstItem="rHx-TD-wRb" firstAttribute="centerX" secondItem="aB8-WM-4rN" secondAttribute="centerX" id="zLG-rw-dgc"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RQw-VU-EVU">
@@ -2257,6 +2272,7 @@
                         <outlet property="annoucementNameTextField" destination="KFp-PQ-di5" id="U2j-FT-qkQ"/>
                         <outlet property="annoucementPriceTextField" destination="yfS-8X-f5v" id="r9I-Yh-RF7"/>
                         <outlet property="annoucementTelefoneSwitch" destination="u1s-51-LPk" id="6MM-CA-Xnq"/>
+                        <outlet property="editBttnOutlet" destination="rHx-TD-wRb" id="YcF-wm-XLv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n0t-2R-egG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

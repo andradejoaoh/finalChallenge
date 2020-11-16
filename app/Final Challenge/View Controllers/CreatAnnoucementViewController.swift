@@ -76,7 +76,6 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
     
     @IBAction func annouceAction(_ sender: Any) {
         
-        print("ANUNCIADO")
         print(annoucementImage)
         print(annoucementNameTextField.text!)
         print(annoucementDescriptionTextView.text!)
@@ -86,50 +85,35 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
         print(annoucementBairro)
         print(annoucementEmailSwitch.isOn)
         print(annoucementTelefoneSwitch.isOn)
-        /*
+        
+        
         if validateFields() != nil {
             //Show fill all fields error
         } else {
             let geoCoder = CLGeocoder()
             
-            let annoucementName = annoucementNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let annoucementDescription = annoucementDescriptionTextView.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let annoucementLocation = annoucementLocationTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let deliveryOption = deliveryOptionSwitch.isOn
-            let productType = HardConstants.PickerView.productType[productTypePicker.selectedRow(inComponent: 0)]
+            let annoucementName = annoucementNameTextField.text!
+            let annoucementDescription = annoucementDescriptionTextView.text!
+            let annoucementPrice = annoucementPriceTextField.text!
+            //category
             let price = Float(annoucementPriceTextField.text!) ?? 0.0
+            //tempo
+            //bairro
+            let emailCheck = annoucementEmailSwitch.isOn
+            let telefoneCheck = annoucementTelefoneSwitch.isOn
+            
             guard let imageData = annoucementImage else { return }
             
-            var expirationDate: Double {
-                switch HardConstants.PickerView.annoucementTime[annoucementTimePicker.selectedRow(inComponent: 0)] {
-                case "1 hora":
-                    return 3600
-                case "2 horas":
-                    return 7200
-                case "4 horas":
-                    return 14400
-                case "6 horas":
-                    return 21600
-                case "8 horas":
-                    return 28800
-                case "12 horas":
-                    return 43200
-                case "16 horas":
-                    return 57600
-                case "2 dias":
-                    return 172800
-                default:
-                    return 86400
-                }
-            }
-            geoCoder.geocodeAddressString(annoucementLocation) {(placemarks, error) in
+            let expirationDate = Date(timeIntervalSinceNow: TimeInterval(annoucementTime))
+            
+            geoCoder.geocodeAddressString("\(annoucementBairro) - São Paulo") {(placemarks, error) in
                 guard error == nil else {
                     return
                 }
                 let placemark = placemarks?.first
                 let lat = placemark?.location?.coordinate.latitude
                 let long = placemark?.location?.coordinate.longitude
-                DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: annoucementLocation, annoucementImage: imageData, deliveryOption:  deliveryOption, expirationDate: Date(timeIntervalSinceNow: expirationDate), productType: productType, price: price, coordinates: (lat, long)) { (result) in
+                DatabaseHandler.createAnnoucement(annoucementName: annoucementName, annoucementDescription: annoucementDescription, annoucementLocation: self.annoucementBairro, annoucementImage: imageData, expirationDate: expirationDate, price: price, coordinates: (lat, long), category: self.annoucementCategory, emailCheck: emailCheck, telefoneCheck: telefoneCheck) { (result) in
                     switch result {
                     case let .failure(error):
                         //Show error while creating annoucement.
@@ -138,10 +122,13 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
                         break
                     }
                 }
+                    
+                
+
             }
             self.dismiss(animated: true, completion: nil)
         }
-         */
+         
     }
     
     

@@ -50,7 +50,7 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
             annoucementName.text = annoucement.annoucementName
             annoucementDescription.text = annoucement.description
             annoucementImage.image = UIImage(data: annoucement.imageData ?? Data())
-            categoryLabel.text = annoucement.productType
+            categoryLabel.text = annoucement.category
             let range = DateInterval(start: Date(), end: annoucement.expirationDate ?? Date())
             if range.duration > 3600{
                 let hours = Int(range.duration/3600)

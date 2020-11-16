@@ -11,16 +11,9 @@ import UIKit
 class EditAnnoucementViewController:  UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     
     var annoucement: Annoucement?
+        
     
-//    @IBOutlet weak var nameTextField: UITextField!
-//    @IBOutlet weak var descriptionTextField: UITextField!
-//    @IBOutlet weak var locationTextField: UITextField!
-//    @IBOutlet weak var priceTextField: UITextField!
-//    @IBOutlet weak var editButton: UIButton!
-//    @IBOutlet weak var productTypePicker: UIPickerView!
-//    @IBOutlet weak var deliveryOption: UISwitch!
-    
-    
+    @IBOutlet weak var editBttnOutlet: UIButton!
     
     @IBOutlet weak var annoucementNameTextField: UITextField!
 
@@ -56,6 +49,12 @@ class EditAnnoucementViewController:  UIViewController, UITextFieldDelegate, UIN
             locationTextField.text = annoucement.location
         }
  */
+    }
+    
+    func styleElements(){
+        editBttnOutlet.layer.cornerRadius = 15
+        editBttnOutlet.backgroundColor = UIColor(named: "button")
+        
     }
     
     @IBAction func editAction(_ sender: Any) {

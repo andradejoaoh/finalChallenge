@@ -20,11 +20,12 @@ class Annoucement: Codable {
     var description: String
     let annoucementID: String
     var location: String
-    var deliveryOption: Bool
-    var productType: String
     let expirationDate: Date?
     let isActive: Bool?
     var price: Float?
+    var category: String
+    var emailCheck: Bool
+    var telefoneCheck: Bool
     var user: User?
     
     var lat: Double?
@@ -45,12 +46,13 @@ class Annoucement: Codable {
         case description = "annoucement_description"
         case annoucementID = "annoucement_id"
         case location = "annoucement_location"
-        case deliveryOption = "delivery_option"
-        case productType = "product_type"
         case expirationDate = "expiration_date"
         case user = "user"
         case isActive = "isActive"
         case price = "price"
+        case category = "category"
+        case emailCheck = "emailCheck"
+        case telefoneCheck = "telefoneCheck"
         case lat = "lat"
         case long = "long"
     }
