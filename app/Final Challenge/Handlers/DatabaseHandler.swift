@@ -85,17 +85,6 @@ class DatabaseHandler {
         }
     }
     
-    /*
-     print(annoucementImage)ok
-     print(annoucementNameTextField.text!)ok
-     print(annoucementDescriptionTextView.text!)ok
-     print(annoucementCategory)ok
-     print(annoucementPriceTextField.text!)ok
-     print(annoucementTime)ok
-     print(annoucementBairro)ok
-     print(annoucementEmailSwitch.isOn)
-     print(annoucementTelefoneSwitch.isOn)
-     */
     
     static func createAnnoucement(annoucementName: String, annoucementDescription: String, annoucementLocation: String, annoucementImage: Data, expirationDate: Date, price: Float, coordinates: (Double?, Double?), category: String, emailCheck: Bool, telefoneCheck: Bool, completion: @escaping (Result<String,Error>) -> Void){
         let database = Firestore.firestore()
@@ -163,14 +152,15 @@ class DatabaseHandler {
         }
     }
     
-    static func editAnnoucement(annoucementID: String, annoucementName: String, annoucementLocation: String, annoucementDescription: String, deliveryOption: Bool, productType: String, completion: @escaping (Result<String,Error>) -> Void){
+    static func editAnnoucement(annoucementID: String, annoucementName: String, annoucementDescription: String, telefoneCheck: Bool, emailCheck: Bool, category: String, price: Float, completion: @escaping (Result<String,Error>) -> Void){
         let database = Firestore.firestore()
         database.collection("annoucements").document(annoucementID).updateData(
             ["annoucement_name":annoucementName,
-             "annoucement_location":annoucementLocation,
              "annoucement_description":annoucementDescription,
-             "delivery_option":deliveryOption,
-             "product_type": productType]) { (error) in
+             "telefoneCheck":telefoneCheck,
+             "emailCheck":emailCheck,
+             "price":price,
+             "category": category]) { (error) in
             if error != nil {
                 completion(.failure(error!))
             }

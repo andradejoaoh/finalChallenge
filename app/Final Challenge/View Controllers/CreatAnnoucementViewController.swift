@@ -122,11 +122,9 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
                         break
                     }
                 }
-                    
-                
 
             }
-            self.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
         }
          
     }
@@ -134,8 +132,18 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
     
     func validateFields() -> String? {
         //Check if fields are filled in
-        if annoucementNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || annoucementDescriptionTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || annoucementPriceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || annoucementTime == 0 || annoucementBairro == "" || annoucementCategory == ""{
-            return "Preencha todos os campos."
+        if annoucementNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+            return "Preencha corretamente o nome"
+        } else if annoucementDescriptionTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            return "preencha corretamente a descricao"
+        } else if annoucementPriceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+            return "preencha corretamente o preco"
+        } else if annoucementTime == 0 {
+            return "preencha corretamente o tempo"
+        } else if annoucementBairro == "" {
+            return "preencha corretamente o bairro"
+        } else if annoucementCategory == "" {
+            return "Preencha todos as categorias"
         }
         return nil
     }

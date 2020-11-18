@@ -494,7 +494,7 @@ class CategoryAnnoucementForCreatingAnnoucement: UIViewController {
     }
     
     
-    func gravaCategory(){
+    func gravaCategory(){// ARRUMAR ESSA FUNCAO
         if casaBttn.isSelected {
             categoriaSelecionada = "Casa"
         } else if docesBttn.isSelected {
