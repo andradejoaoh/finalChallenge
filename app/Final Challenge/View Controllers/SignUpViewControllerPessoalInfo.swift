@@ -11,6 +11,7 @@ import UIKit
 
 class SignUpViewControllerPessoalInfo: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
     
     @IBOutlet weak var EnderecoTextField: UITextField!
@@ -42,6 +43,7 @@ class SignUpViewControllerPessoalInfo: UIViewController, UIImagePickerController
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupStyleForElements()
+        errorLabel.text = ""
         self.hideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -75,9 +77,20 @@ class SignUpViewControllerPessoalInfo: UIViewController, UIImagePickerController
     
     
     func validateFields() -> Bool? {
-        if EnderecoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || CEPTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || NumeroEnderecoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || telefoneTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+        if EnderecoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            errorLabel.text = "Preencha o campo de endereço"
+            return false
+        } else if CEPTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            errorLabel.text = "Preencha o campo de CEP"
+            return false
+        } else if NumeroEnderecoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            errorLabel.text = "Preencha o campo de número de endereço"
+            return false
+        } else if telefoneTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            errorLabel.text = "Preencha o campo de telefone"
             return false
         } else {
+            errorLabel.text = ""
             return true
         }
     }

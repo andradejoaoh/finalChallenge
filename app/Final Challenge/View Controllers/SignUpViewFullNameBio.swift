@@ -11,6 +11,9 @@ import UIKit
 
 class SignUpViewControllerFullNameBio: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
     
+    
+    @IBOutlet weak var errorLabel: UILabel!
+    
     @IBOutlet weak var pageControl: UIPageControl!
     
     @IBOutlet weak var fullNameTextField: UITextField!
@@ -25,7 +28,7 @@ class SignUpViewControllerFullNameBio: UIViewController, UIImagePickerController
         setupStyleForElements()
         bioTextView.delegate = self
         placeholderForTextView()
-        
+        errorLabel.text = ""
         self.hideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -62,7 +65,7 @@ class SignUpViewControllerFullNameBio: UIViewController, UIImagePickerController
         AvanceButton.layer.cornerRadius = 15
         pageControl.currentPage = 0
         bioTextView.layer.borderWidth = 1
-        bioTextView.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        bioTextView.layer.borderColor = #colorLiteral(red: 0.8235294118, green: 0.8235294118, blue: 0.8235294118, alpha: 1)
         bioTextView.layer.cornerRadius = 5
     }
     
@@ -80,10 +83,14 @@ class SignUpViewControllerFullNameBio: UIViewController, UIImagePickerController
     
     func validateFields() -> Bool? {
         //Check if fields are filled in
-        if fullNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            bioTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+        if fullNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            errorLabel.text = "Preencha o campo do nome"
+            return false
+        } else if bioTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            errorLabel.text = "Preencha o campo de descrição"
             return false
         } else {
+            errorLabel.text = ""
             return true
         }
     }

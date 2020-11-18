@@ -501,23 +501,27 @@ class EditCategoryAnnoucementViewController: UIViewController {
         if casaBttn.isSelected {
             categoriaSelecionada = "Casa"
         } else if docesBttn.isSelected {
-            categoriaSelecionada = "Coces"
+            categoriaSelecionada = "Doces"
         } else if roupasBttn.isSelected {
             categoriaSelecionada = "Roupas"
         } else if festaBttn.isSelected {
             categoriaSelecionada = "Festa"
+        } else if comidasBttn.isSelected {
+            categoriaSelecionada = "Comida"
         } else if decoracaoBttn.isSelected {
-            categoriaSelecionada = "Decoracao"
+            categoriaSelecionada = "Decoração"
         } else if acessoriosBttn.isSelected {
-            categoriaSelecionada = "Acessorio"
+            categoriaSelecionada = "Acessórios"
         } else if salgadosBttn.isSelected {
             categoriaSelecionada = "Salgados"
         } else if cosmeticosBttn.isSelected {
             categoriaSelecionada = "Cosmeticos"
         } else if educacaoBttn.isSelected {
-            categoriaSelecionada = "Educacao"
+            categoriaSelecionada = "Educaçao"
         } else if papelariaBttn.isSelected {
             categoriaSelecionada = "Papelaria"
+        } else if saudeBttn.isSelected {
+            categoriaSelecionada = "Saúde"
         }
     }
     

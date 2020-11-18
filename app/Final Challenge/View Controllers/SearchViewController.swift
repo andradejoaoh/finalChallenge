@@ -150,7 +150,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let trackRect = sliderProximity.trackRect(forBounds: sliderProximity.frame)
         let thumbRect = sliderProximity.thumbRect(forBounds: sliderProximity.bounds, trackRect: trackRect, value: sliderProximity.value)
         self.sliderLabel.center = CGPoint(x: thumbRect.midX, y: self.sliderLabel.center.y)
-        arrayRecentes = ["casa","doces","roupas","festa","comidas","decorações","acessórios","salgados","cosméticos","educação","papelaria","saúde"]
+        arrayRecentes = ["Casa","Doces","Roupas","Festa","Comidas","Decorações","Acessórios","Salgados","Cosméticos","Educação","Papelaria","Saúde"]
     }
     
     func setupCollectionView(){
@@ -231,10 +231,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if sliderProximity.value == 1 {
             self.sliderLabel.text = "500 m"
         }
-//        let trackRect = sliderProximity.trackRect(forBounds: sliderProximity.frame)
-//        let thumbRect = sliderProximity.thumbRect(forBounds: sliderProximity.bounds, trackRect: trackRect, value: sliderProximity.value)
-//
-//        self.sliderLabel.center = CGPoint(x: thumbRect.midX, y: self.sliderLabel.center.y)
     }
     
     @IBAction func casaActionButton(_ sender: Any) {
@@ -385,11 +381,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        if searchBar.text == "" {
-//            searchBar.text = arrayRecentes[indexPath.row+1]
-//        } else {
-//            searchBar.text = filteredArray[indexPath.row]
-//        }
         
         let cell = tableView.cellForRow(at: indexPath)
         searchBar.text = cell?.textLabel?.text

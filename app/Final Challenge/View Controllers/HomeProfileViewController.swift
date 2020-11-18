@@ -9,6 +9,9 @@
 import UIKit
 
 class HomeProfileViewController: UIViewController, UITextFieldDelegate{
+    
+    @IBOutlet weak var errorLabel: UILabel!
+    
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
@@ -26,6 +29,7 @@ class HomeProfileViewController: UIViewController, UITextFieldDelegate{
         if DatabaseHandler.isUserLoggedIn() {
             transitionToProfile()
         }
+        errorLabel.text = ""
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
         self.hideKeyboardWhenTappedAround()
@@ -82,10 +86,14 @@ class HomeProfileViewController: UIViewController, UITextFieldDelegate{
     
     func validateFields() -> String? {
         //Cheeck if fields are filled in
-        if emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+        if emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+            errorLabel.text = "Preencha o campo de email"
+            return "Preencha todos os campos."
+        } else if passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            errorLabel.text = "Preencha o campo de senha"
             return "Preencha todos os campos."
         }
+        errorLabel.text = ""
         return nil
     }
     

@@ -12,7 +12,8 @@ import UIKit
 
 class SignUpViewControllerName: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-
+    @IBOutlet weak var errorLabel: UILabel!
+    
     @IBOutlet weak var nameTextField: UITextField!
     
     @IBOutlet weak var AvanceButton: UIButton!
@@ -33,6 +34,7 @@ class SignUpViewControllerName: UIViewController, UIImagePickerControllerDelegat
         // Do any additional setup after loading the view.
         setDelegateForTextFields()
         setupStyleForElements()
+        errorLabel.text = ""
         self.hideKeyboardWhenTappedAround()
 
     }
@@ -44,9 +46,11 @@ class SignUpViewControllerName: UIViewController, UIImagePickerControllerDelegat
     
     
     func validateFields() -> Bool? {
-        if nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+        if nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            errorLabel.text = "Preencha o campo de nome da loja/marca"
             return false
         } else {
+            errorLabel.text = ""
             return true
         }
        

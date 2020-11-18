@@ -12,6 +12,7 @@ import UIKit
 
 class SignUpViewControllerCategoria: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
    
+    @IBOutlet weak var errorLabel: UILabel!
     
     var fullname = String()
     var bio = String()
@@ -82,7 +83,7 @@ class SignUpViewControllerCategoria: UIViewController, UIImagePickerControllerDe
         setupStyleForElements()
         self.scrollView.isScrollEnabled = false
         self.hideKeyboardWhenTappedAround()
-        
+        errorLabel.text = ""
         arraySelectedState = [casaBttn.isSelected, docesBttn.isSelected, roupasBttn.isSelected, festaBttn.isSelected, comidasBttn.isSelected, decoracaoBttn.isSelected, acessoriosBttn.isSelected, salgadosBttn.isSelected, cosmeticosBttn.isSelected, educacaoBttn.isSelected, papelariaBttn.isSelected, saudeBttn.isSelected]
         
     }
@@ -522,25 +523,29 @@ class SignUpViewControllerCategoria: UIViewController, UIImagePickerControllerDe
     
     func gravaCategory(){
         if casaBttn.isSelected {
-            categoriaSelecionada = "casa"
+            categoriaSelecionada = "Casa"
         } else if docesBttn.isSelected {
-            categoriaSelecionada = "doces"
+            categoriaSelecionada = "Doces"
         } else if roupasBttn.isSelected {
-            categoriaSelecionada = "roupas"
+            categoriaSelecionada = "Roupas"
         } else if festaBttn.isSelected {
-            categoriaSelecionada = "festa"
+            categoriaSelecionada = "Festa"
+        } else if comidasBttn.isSelected {
+            categoriaSelecionada = "Comida"
         } else if decoracaoBttn.isSelected {
-            categoriaSelecionada = "decoracao"
+            categoriaSelecionada = "Decoração"
         } else if acessoriosBttn.isSelected {
-            categoriaSelecionada = "acessorio"
+            categoriaSelecionada = "Acessórios"
         } else if salgadosBttn.isSelected {
-            categoriaSelecionada = "salgados"
+            categoriaSelecionada = "Salgados"
         } else if cosmeticosBttn.isSelected {
-            categoriaSelecionada = "cosmeticos"
+            categoriaSelecionada = "Cosmeticos"
         } else if educacaoBttn.isSelected {
-            categoriaSelecionada = "educacao"
+            categoriaSelecionada = "Educaçao"
         } else if papelariaBttn.isSelected {
-            categoriaSelecionada = "papelaria"
+            categoriaSelecionada = "Papelaria"
+        } else if saudeBttn.isSelected {
+            categoriaSelecionada = "Saúde"
         }
         
     }
@@ -562,28 +567,24 @@ class SignUpViewControllerCategoria: UIViewController, UIImagePickerControllerDe
             destinationController.categoria = categoriaSelecionada
         } else {}
         
-            //let destinationController = segue.destination as! XXXXXX
-            //destinationController.email = emailTextField.text!
-            //destinationController.senha = passwordTextField.text!
+            
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "unwindToImagePerfil" {
             return true
         } else if (identifier == "segueToInfoPessoais" || identifier == "swipeSegueToInfoPessoais") && (casaBttn.isSelected == false && docesBttn.isSelected == false && roupasBttn.isSelected == false && festaBttn.isSelected == false && comidasBttn.isSelected == false && decoracaoBttn.isSelected == false && acessoriosBttn.isSelected == false && salgadosBttn.isSelected == false && cosmeticosBttn.isSelected == false && educacaoBttn.isSelected == false && papelariaBttn.isSelected == false && saudeBttn.isSelected == false) {
+            errorLabel.text = "Selecione uma categoria"
             return false
         } else {
             gravaCategory()
+            errorLabel.text = ""
             return true
         }
     }
     
     
-    //segueToInfoPessoais
     
-    //swipeSegueToInfoPessoais
-    
-    //unwindToImagePerfil
 
     
 }

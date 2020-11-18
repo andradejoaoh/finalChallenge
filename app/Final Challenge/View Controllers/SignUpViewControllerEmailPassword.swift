@@ -11,6 +11,9 @@ import UIKit
 
 class SignUpViewControllerEmailPassword: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    
+    @IBOutlet weak var errorLabel: UILabel!
+    
     @IBOutlet weak var pageControl: UIPageControl!
     
     @IBOutlet weak var emailTextField: UITextField!
@@ -26,7 +29,7 @@ class SignUpViewControllerEmailPassword: UIViewController, UIImagePickerControll
         // Do any additional setup after loading the view.
         setDelegateForTextFields()
         setupStyleForElements()
-        
+        errorLabel.text = ""
         self.hideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -65,8 +68,11 @@ class SignUpViewControllerEmailPassword: UIViewController, UIImagePickerControll
     
     func validateFields() -> Bool? {
         //Check if fields are filled in
-        if emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+        if emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            errorLabel.text = "Preencha o campo de email"
+            return false
+        } else if passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            errorLabel.text = "Preencha o campo de senha"
             return false
         } else {
             return true
