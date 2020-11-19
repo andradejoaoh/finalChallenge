@@ -20,6 +20,8 @@ class SearchBairroTableViewController: UIViewController, UITableViewDelegate, UI
     var valuesBairrosTest = [String]()
     
 
+    var bairroSelected = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -104,6 +106,18 @@ class SearchBairroTableViewController: UIViewController, UITableViewDelegate, UI
        return bairrosSectionTitles
    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)!
+        bairroSelected = cell.textLabel?.text ?? ""
+        performSegue(withIdentifier: "unwindToSearchViewController", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "unwindToSearchViewController" {
+            let destinationController =  segue.destination as! SearchViewController
+            destinationController.bairroSelected = bairroSelected
+        }
+    }
     
     //SEARCH BAR
     
@@ -124,7 +138,7 @@ class SearchBairroTableViewController: UIViewController, UITableViewDelegate, UI
         self.tableViewBairro.reloadData()
     }
 
+    //unwindToSearchViewController
     
-
 }
    

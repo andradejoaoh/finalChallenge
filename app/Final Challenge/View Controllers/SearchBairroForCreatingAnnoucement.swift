@@ -111,9 +111,9 @@ class SearchBairroForCreatingAnnoucement: UIViewController, UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)!
-        print(cell.textLabel?.text ?? "Bairro não informado")
+        print(cell.textLabel?.text ?? "")
         
-        bairroSelected = cell.textLabel?.text ?? "Bairro não informado"
+        bairroSelected = cell.textLabel?.text ?? ""
         performSegue(withIdentifier: "unwindToCreateAnnoucement", sender: self)
     }
     

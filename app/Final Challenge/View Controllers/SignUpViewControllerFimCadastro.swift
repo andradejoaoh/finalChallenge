@@ -68,9 +68,6 @@ class SignUpViewControllerFimCadastro: UIViewController, UIImagePickerController
         
         guard let imageData = image.image?.jpegData(compressionQuality: 0.5) else { return }
         
-        //FALTA: fazer mais uma pagina de sign up com fullname e bio
-        
-        //FALTAM COLOCAR: check de permissão de uso de telefone, check de permissao de uso de localizacao.
 
         // Create the user
         DatabaseHandler.signUpWithEmail(email: email, password: password, address: adress, CEP: CEP, fullname: fullname, bio: bio, categoria: categoria, numeroEndereco: numeroEndereco, facebook: facebook, site: site, instagram: instagram, telegram: telegram, checkLocation: checkLocation, checkTelefone: checkTelefone, storeName: storeName, phone: phone, imageData: imageData) { (result) in

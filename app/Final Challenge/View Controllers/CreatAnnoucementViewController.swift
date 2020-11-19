@@ -9,29 +9,13 @@
 import UIKit
 import CoreLocation
 
-/*
- 
- Telefone e email do usuário.
- O resto foi criado.
- 
- Campos oficiais:
- 
- Imagem
- Nome do anuncio
- Descrição do anuncio
- Categoria do anuncio
- Preco do anuncio
- Tempo do anuncio
- Bairro do anuncio
- Switch do telefone (usuario)
- Switch do email (usuario)
- 
- */
-
 
 class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UITextViewDelegate{
     
     var annoucementImage: Data?
+    
+    
+    @IBOutlet weak var errorLabel: UILabel!
     
     
     @IBOutlet weak var annoucementNameTextField: UITextField!
@@ -55,13 +39,12 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        errorLabel.text = ""
         self.annoucementNameTextField.delegate = self
         self.annoucementDescriptionTextView.delegate = self
         
         placeholderForTextView()
         
-        setupStyleForElements()
         self.hideKeyboardWhenTappedAround()
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -133,23 +116,28 @@ class CreateAnnoucementViewController: UIViewController, UITextFieldDelegate, UI
     func validateFields() -> String? {
         //Check if fields are filled in
         if annoucementNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+            errorLabel.text = "Preencha corretamente o nome"
             return "Preencha corretamente o nome"
         } else if annoucementDescriptionTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            errorLabel.text = "Preencha corretamente a descrição"
             return "preencha corretamente a descricao"
-        } else if annoucementPriceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
-            return "preencha corretamente o preco"
+        } else if annoucementPriceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            errorLabel.text = "Preencha corretamente o preço"
+            return "preencha corretamente o preço"
         } else if annoucementTime == 0 {
+            errorLabel.text = "Preencha corretamente o tempo"
             return "preencha corretamente o tempo"
         } else if annoucementBairro == "" {
+            errorLabel.text = "Preencha corretamente o bairro"
             return "preencha corretamente o bairro"
         } else if annoucementCategory == "" {
-            return "Preencha todos as categorias"
+            errorLabel.text = "Preencha corretamente a categoria"
+            return "Preencha corretamente a categoria"
         }
+        errorLabel.text = ""
         return nil
     }
     
-    func setupStyleForElements(){
-    }
     
     @IBAction func unwindCreateAnnoucement(segue:UIStoryboardSegue) {
         print(annoucementBairro)

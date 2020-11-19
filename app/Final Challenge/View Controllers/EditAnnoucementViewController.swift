@@ -12,6 +12,7 @@ class EditAnnoucementViewController:  UIViewController, UITextFieldDelegate, UIN
     
     var annoucement: Annoucement?
         
+    @IBOutlet weak var errorLabel: UILabel!
     
     @IBOutlet weak var editBttnOutlet: UIButton!
     
@@ -19,7 +20,6 @@ class EditAnnoucementViewController:  UIViewController, UITextFieldDelegate, UIN
 
     @IBOutlet weak var annoucementDescriptionTextView: UITextView!
     
-    //@IBOutlet weak var annoucementLocationTextField: UITextField!
     var annoucementCategory:String = ""
     
     @IBOutlet weak var annoucementPriceTextField: UITextField!
@@ -34,6 +34,7 @@ class EditAnnoucementViewController:  UIViewController, UITextFieldDelegate, UIN
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        errorLabel.text = ""
         styleElements()
         self.hideKeyboardWhenTappedAround()
     }
@@ -44,8 +45,6 @@ class EditAnnoucementViewController:  UIViewController, UITextFieldDelegate, UIN
         annoucementDescriptionTextView.text = annoucement?.description
         annoucementCategory = annoucement?.category ?? ""
         annoucementPriceTextField.text = String(annoucement?.price ?? 0)
-        //annoucementTime = annoucement?.expirationDate APAGAR
-        //annoucementBairro = annoucement?.location ?? "" APAGAR
         
         if annoucement?.telefoneCheck == true{
             annoucementTelefoneSwitch.isOn = true
@@ -61,7 +60,6 @@ class EditAnnoucementViewController:  UIViewController, UITextFieldDelegate, UIN
     }
     
     func styleElements(){
-        
         editBttnOutlet.backgroundColor = UIColor(named: "button")
         editBttnOutlet.layer.cornerRadius = 15
     }
@@ -105,25 +103,20 @@ class EditAnnoucementViewController:  UIViewController, UITextFieldDelegate, UIN
     
     func validateFields() -> String? {
         if annoucementNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+            errorLabel.text = "Preencha corretamente o nome"
             return "Preencha corretamente o nome"
         } else if annoucementDescriptionTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            return "preencha corretamente a descricao"
-        } else if annoucementPriceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
-            return "preencha corretamente o preco"
+            errorLabel.text = "Preencha corretamente a descrição"
+            return "Preencha corretamente a descricao"
+        } else if annoucementPriceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            errorLabel.text = "Preencha corretamente o preço"
+            return "preencha corretamente o preço"
         } else if annoucementCategory == "" {
-            return "Preencha todos as categorias"
+            errorLabel.text = "Preencha corretamente a categoria"
+            return "Preencha corretamente a categoria"
         }
+        errorLabel.text = ""
         return nil
-    }
-    
-    
-    
-    @IBAction func unwindEditBairroAnnoucement(segue:UIStoryboardSegue) {
-        print(annoucementBairro)
-    }
-    
-    @IBAction func unwindEditAnnoucementFromHoras(segue:UIStoryboardSegue) {
-        print(annoucementTime)
     }
     
     @IBAction func unwindEditAnnoucementFromCategory(segue:UIStoryboardSegue) {

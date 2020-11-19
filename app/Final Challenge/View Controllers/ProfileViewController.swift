@@ -137,6 +137,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imagePicker.delegate = self
+        navigationController?.setNavigationBarHidden(false, animated: true)
         setupElementsViewDidLoad()
         setupElementsInCollectionView()
         DatabaseHandler.readAnnoucements { (result) in
