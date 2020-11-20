@@ -569,19 +569,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || strings.contains(searchBar.text ?? ""){
         } else {
-            //arrayUD.append("teste")
             
             // Read/Get Array of Strings
             strings = userDefaults.stringArray(forKey: "myKey") ?? []
-
             // Append String to Array of Strings
             strings.append(searchBar.text!)
-
             // Write/Set Array of Strings
             userDefaults.set(strings, forKey: "myKey")
             
-            //strings.append(searchBar.text!)
-            //arrayUserDefaults.set(arrayUD, forKey: "savedRecentSearchArray")
         }
         heigthOfTableSearchViewConstraint.constant = 0.0
         heightOfCategoriesView.constant = 150.0

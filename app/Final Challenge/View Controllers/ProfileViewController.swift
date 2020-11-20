@@ -158,6 +158,14 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         setupView()
     }
     
+    
+    @IBAction func editProfileAction(_ sender: Any) {
+        performSegue(withIdentifier: "segueToEditProfileViewController", sender: self)
+    }
+    
+    
+    
+    
     func setupView() {
         if let user = self.userProfile {
             self.title = user.userStoreName
@@ -397,9 +405,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
         self.annoucementImage = image.jpegData(compressionQuality: 0.8)
-        //self.dismiss(animated: true, completion: nil)
-
-//        self.image = image
         
         self.dismiss(animated: false, completion: {                 self.performSegue(withIdentifier: "segueCreateAnnoucementView", sender: self)})
         
@@ -533,6 +538,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             if let annoucementViewController = segue.destination as? AnnoucementViewController {
                     annoucementViewController.annoucement = annoucements[selectedAnnoucement]
             }
+        }
+        
+        if segue.identifier == "segueToEditProfileViewController"{
+            let destinationViewController = segue.destination as! EditProfileViewController
+            //destinationViewController
         }
         
     }

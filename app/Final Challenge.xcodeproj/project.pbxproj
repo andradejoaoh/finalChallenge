@@ -52,6 +52,7 @@
 		6DDE6131255B02390082C20C /* SignUpViewControllerName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE6130255B02390082C20C /* SignUpViewControllerName.swift */; };
 		6DDE6135255C633E0082C20C /* SignUpViewControllerBemVindo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE6134255C633E0082C20C /* SignUpViewControllerBemVindo.swift */; };
 		6DDE6139255C66330082C20C /* SignUpViewControllerImagemPerfil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE6138255C66320082C20C /* SignUpViewControllerImagemPerfil.swift */; };
+		6DE6E3B62568549E00248FF5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE6E3B52568549D00248FF5 /* EditProfileViewController.swift */; };
 		6DEE52E52561A14B00A3C62B /* TimeAnnoucementForCreatingAnnoucement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEE52E42561A14B00A3C62B /* TimeAnnoucementForCreatingAnnoucement.swift */; };
 		6DEE52E82561AED600A3C62B /* CategoryAnnoucementForCreatingAnnoucement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEE52E72561AED600A3C62B /* CategoryAnnoucementForCreatingAnnoucement.swift */; };
 		6DEE52EB2562F39900A3C62B /* EditCategoryAnnoucementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEE52EA2562F39900A3C62B /* EditCategoryAnnoucementViewController.swift */; };
@@ -106,6 +107,7 @@
 		6DDE6130255B02390082C20C /* SignUpViewControllerName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewControllerName.swift; sourceTree = "<group>"; };
 		6DDE6134255C633E0082C20C /* SignUpViewControllerBemVindo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewControllerBemVindo.swift; sourceTree = "<group>"; };
 		6DDE6138255C66320082C20C /* SignUpViewControllerImagemPerfil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewControllerImagemPerfil.swift; sourceTree = "<group>"; };
+		6DE6E3B52568549D00248FF5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		6DEE52E42561A14B00A3C62B /* TimeAnnoucementForCreatingAnnoucement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAnnoucementForCreatingAnnoucement.swift; sourceTree = "<group>"; };
 		6DEE52E72561AED600A3C62B /* CategoryAnnoucementForCreatingAnnoucement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAnnoucementForCreatingAnnoucement.swift; sourceTree = "<group>"; };
 		6DEE52EA2562F39900A3C62B /* EditCategoryAnnoucementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryAnnoucementViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				6D57A405255DBDFA00A74147 /* SignUpViewControllerFimCadastro.swift */,
 				612E82F52501609F002C4435 /* LoginViewController.swift */,
 				612E82F7250160B7002C4435 /* ProfileViewController.swift */,
+				6DE6E3B52568549D00248FF5 /* EditProfileViewController.swift */,
 				614A3E75250812B3003A24F1 /* CreatAnnoucementViewController.swift */,
 				6D57A40A255EF37200A74147 /* SearchBairroForCreatingAnnoucement.swift */,
 				6DEE52E42561A14B00A3C62B /* TimeAnnoucementForCreatingAnnoucement.swift */,
@@ -365,6 +368,7 @@
 				6D482CDF2530E67C00D8E753 /* AnnoucementPortifolioCell.swift in Sources */,
 				6DEE52E52561A14B00A3C62B /* TimeAnnoucementForCreatingAnnoucement.swift in Sources */,
 				6D57A40F255F075F00A74147 /* SignUpViewFullNameBio.swift in Sources */,
+				6DE6E3B62568549E00248FF5 /* EditProfileViewController.swift in Sources */,
 				614A3E7825081B1F003A24F1 /* FeedViewController.swift in Sources */,
 				6DCD0BB52551F55A00E2DE51 /* HeaderSearchCollectionView.swift in Sources */,
 				61BF922A24FD8F1400A8A8BE /* AppDelegate.swift in Sources */,
