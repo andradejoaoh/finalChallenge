@@ -80,14 +80,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var papelariaBttnControl:Bool = false
     var saudeBttnControl:Bool = false
     
-    var arrayRecentes = [String]()
-    var defaults = UserDefaults.standard
-    var recentArrayUserDefaults = [String]()
-    
-    
-    
-    var filteredArray = [String]()
-    
     @IBOutlet weak var bairroSelectedLabel: UILabel!
     
     var recenteSelected = String()
@@ -95,6 +87,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     
+    var filteredArray = [String]()
+    // Access Shared Defaults Object
+    let userDefaults = UserDefaults.standard
+
+    var strings = [String]()
+    
+
     
     
     let searchCollectionView: UICollectionView = {
@@ -126,10 +125,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         setup()
         setupCollectionView()
         
-        defaults.set(arrayRecentes, forKey: "SavedRecentStringArray")
-        recentArrayUserDefaults = defaults.stringArray(forKey: "SavedRecentStringArray") ?? [String]()
-        arrayRecentes = recentArrayUserDefaults
-        //recentArrayUserDefaults.append("teste")
+        // Read/Get Array of Strings
+        strings = userDefaults.stringArray(forKey: "myKey") ?? []
+
+        // Append String to Array of Strings
+        //strings.append("Four")
+
+        // Write/Set Array of Strings
+        userDefaults.set(strings, forKey: "myKey")
+        
         
         DatabaseHandler.readAnnoucements { (result) in
             switch result {
@@ -393,9 +397,19 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //TABLE VIEW FUNCTIONS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        
+        // Read/Get Array of Strings
+        strings = userDefaults.stringArray(forKey: "myKey") ?? []
+
+        // Append String to Array of Strings
+        //strings.append("Four")
+
+        // Write/Set Array of Strings
+        userDefaults.set(strings, forKey: "myKey")
+        
         if searchBar.text == "" {
-            arrayRecentes = recentArrayUserDefaults
-            return arrayRecentes.count
+            return strings.count
         } else {
             return filteredArray.count
         }
@@ -404,8 +418,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HardConstants.TableView.searchCell, for: indexPath)
         if searchBar.text == "" {
-            arrayRecentes = recentArrayUserDefaults
-            cell.textLabel?.text = arrayRecentes[indexPath.row]
+            //arrayRecentes = recentArrayUserDefaults
+            cell.textLabel?.text = strings[indexPath.row]
         } else {
             cell.textLabel?.text = filteredArray[indexPath.row]
         }
@@ -524,11 +538,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //SEARCH BAR FUNCTIONS
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredArray = []
-        arrayRecentes = recentArrayUserDefaults
+        
         if searchText == "" {
-            filteredArray = arrayRecentes
+            filteredArray = strings
         } else {
-            for arraySearch in arrayRecentes {
+            for arraySearch in strings {
                 if arraySearch.lowercased().contains(searchText.lowercased()) {
                     filteredArray.append(arraySearch)
                 }
@@ -538,13 +552,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.text = ""
         heigthOfTableSearchViewConstraint.constant = heightOfViewConstraint.constant
         heightOfCategoriesView.constant = 0.0
         heightOfExpandableViewConstraint.constant = 0.0
         heightOfBairrosView.constant = 0.0
         heightOfProximityView.constant = 0.0
         heightOfProximityExpandableViewConstraint.constant = 0.0
-        
+        self.tableViewSearch.reloadData()
         self.view.setNeedsUpdateConstraints()
         self.view.layoutIfNeeded()
     }
@@ -552,10 +567,21 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || arrayRecentes.contains(searchBar.text ?? ""){
+        if searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || strings.contains(searchBar.text ?? ""){
         } else {
-            recentArrayUserDefaults.append(searchBar.text!)
-            arrayRecentes = recentArrayUserDefaults
+            //arrayUD.append("teste")
+            
+            // Read/Get Array of Strings
+            strings = userDefaults.stringArray(forKey: "myKey") ?? []
+
+            // Append String to Array of Strings
+            strings.append(searchBar.text!)
+
+            // Write/Set Array of Strings
+            userDefaults.set(strings, forKey: "myKey")
+            
+            //strings.append(searchBar.text!)
+            //arrayUserDefaults.set(arrayUD, forKey: "savedRecentSearchArray")
         }
         heigthOfTableSearchViewConstraint.constant = 0.0
         heightOfCategoriesView.constant = 150.0
@@ -565,7 +591,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         heightOfProximityExpandableViewConstraint.constant = 0.0
         self.view.setNeedsUpdateConstraints()
         self.view.layoutIfNeeded()
-        searchBar.resignFirstResponder()//FAZER RELOAD
+        searchBar.resignFirstResponder()//FAZER RELOAD da table view
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
