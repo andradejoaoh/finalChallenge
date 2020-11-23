@@ -52,17 +52,24 @@ class AnnoucementViewController: UIViewController, UIActionSheetDelegate {
             annoucementImage.image = UIImage(data: annoucement.imageData ?? Data())
             categoryLabel.text = annoucement.category
             annoucementPrice.text = String("R$ \(annoucement.price!)")
-            let range = DateInterval(start: Date(), end: annoucement.expirationDate ?? Date())
-            if range.duration > 3600{
-                let hours = Int(range.duration/3600)
-                let minutes = Int((range.duration.truncatingRemainder(dividingBy: 3600)/60))
-                diponibilityLabel.text = "Disponível por \(hours) horas e \(minutes) minutos"
-            } else if range.duration > 100 && range.duration < 3600 {
-                let minutes = Int((range.duration.truncatingRemainder(dividingBy: 3600)/60))
-                diponibilityLabel.text = "Disponível por \(minutes) minutos"
-            } else {
-                diponibilityLabel.text = "Informações sobre disponibilidade não encontradas"
+            
+            if let expirationDate = annoucement.expirationDate {
+                if expirationDate > Date() {
+                    let range = DateInterval(start: Date(), end: expirationDate)
+                    if range.duration > 3600{
+                        let hours = Int(range.duration/3600)
+                        let minutes = Int((range.duration.truncatingRemainder(dividingBy: 3600)/60))
+                        diponibilityLabel.text = "Disponível por \(hours) horas e \(minutes) minutos"
+                    } else if range.duration > 100 && range.duration < 3600 {
+                        let minutes = Int((range.duration.truncatingRemainder(dividingBy: 3600)/60))
+                        diponibilityLabel.text = "Disponível por \(minutes) minutos"
+                    }
+                } else {
+                    diponibilityLabel.text = "Informações sobre disponibilidade não encontradas"
+                }
             }
+            
+             
             if let lat = annoucement.lat, let long = annoucement.long {
                 let distance = LocationHandler.shared.getDistance(from: (lat, long))
                 if distance > 1000 {

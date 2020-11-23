@@ -93,6 +93,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     var strings = [String]()
     
+    var filteredAnnoucements = [Annoucement]()
+    
 
     
     
@@ -142,20 +144,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 print(error)
             case let .success(annoucements):
                 self.annoucements = annoucements
+                self.filteredAnnoucements = annoucements
             }
         }
         // Do any additional setup after loading the view.
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.comeFromPaid = false
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        searchCollectionView.reloadData()
-    }
-    
-    
     
     func setup(){
         
@@ -185,6 +178,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let backItem = UIBarButtonItem()
                 backItem.title = "Voltar"
                 navigationItem.backBarButtonItem = backItem
+        } else if segue.identifier == HardConstants.Storyboard.searchToAnnoucementSegue {
+            if let annoucementViewController = segue.destination as? AnnoucementViewController {
+                annoucementViewController.annoucement = annoucements[selectedAnnoucement ?? 0]
+            }
         }
     }
     
@@ -398,14 +395,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //TABLE VIEW FUNCTIONS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        
-        // Read/Get Array of Strings
         strings = userDefaults.stringArray(forKey: "myKey") ?? []
 
-        // Append String to Array of Strings
-        //strings.append("Four")
-
-        // Write/Set Array of Strings
         userDefaults.set(strings, forKey: "myKey")
         
         if searchBar.text == "" {
@@ -428,23 +419,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {//DESELECT
-//
-//        let cell = tableView.cellForRow(at: indexPath)
-//        searchBar.text = cell?.textLabel?.text
-//
-//        heigthOfTableSearchViewConstraint.constant = 0.0
-//        heightOfCategoriesView.constant = 150.0
-//        heightOfExpandableViewConstraint.constant = 0.0
-//        heightOfBairrosView.constant = 50.0
-//        heightOfProximityView.constant = 50.0
-//        heightOfProximityExpandableViewConstraint.constant = 0.0
-//
-//
-//        self.view.setNeedsUpdateConstraints()
-//        self.view.layoutIfNeeded()
-//        searchBar.resignFirstResponder()
-//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {//SELECT
         let cell = tableView.cellForRow(at: indexPath)!
@@ -469,13 +443,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //COLLECTION VIEW FUNCTIONS
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return annoucements.count
+        return filteredAnnoucements.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HardConstants.CollectionView.searchAnnoucementCell, for: indexPath) as? AnnoucementSearchCell else { return UICollectionViewCell()}
         cell.layer.cornerRadius = 10
-        let annoucement = annoucements[indexPath.item]
+        let annoucement = filteredAnnoucements[indexPath.item]
         
         annoucement.didLoadImage = { [weak cell, weak self] imageData in
             cell?.imageAnnoucement.image = UIImage(data: annoucement.imageData ?? Data())
@@ -483,17 +457,16 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self?.searchCollectionView.reloadItems(at: [indexPath])
             
         }
-        //TODO: essa celula não retorna
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedAnnoucement = indexPath.item
-        performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
+        performSegue(withIdentifier: HardConstants.Storyboard.searchToAnnoucementSegue, sender: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout: WaterfallLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let annoucementImage = UIImage(data: annoucements[indexPath.item].imageData ?? Data()) else {
+        guard let annoucementImage = UIImage(data: filteredAnnoucements[indexPath.item].imageData ?? Data()) else {
             return CGSize(width: 200, height: 200)
         }
         return CGSize(width: (annoucementImage.size.width), height: (annoucementImage.size.height))
@@ -502,7 +475,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     func collectionViewCell(_ announcementNumber: Int) {
         self.selectedAnnoucement = announcementNumber
-        self.comeFromPaid = true
         performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
     }
     
@@ -591,14 +563,19 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if searchBar.text == "" {
+            filteredAnnoucements = annoucements
             heigthOfTableSearchViewConstraint.constant = 0.0
             heightOfCategoriesView.constant = 150.0
             heightOfExpandableViewConstraint.constant = 0.0
             heightOfBairrosView.constant = 50.0
             heightOfProximityView.constant = 50.0
             heightOfProximityExpandableViewConstraint.constant = 0.0
+            searchCollectionView.reloadData()
             self.view.setNeedsUpdateConstraints()
             self.view.layoutIfNeeded()
+        } else {
+            filteredAnnoucements = annoucements.filter { $0.annoucementName.contains(searchBar.text ?? "") || $0.category.contains(searchBar.text ?? "")}
+            searchCollectionView.reloadData()
         }
     }
     

@@ -44,6 +44,7 @@
 		6D8A66FB250BF17F0093F889 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D8A66FA250BF17F0093F889 /* GoogleService-Info.plist */; };
 		6D8A66FD250C06EF0093F889 /* StyleElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A66FC250C06EF0093F889 /* StyleElements.swift */; };
 		6D952B202525103300365772 /* WaterFallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D952B1F2525103300365772 /* WaterFallLayout.swift */; };
+		6DB6EEAD256C259C0016F683 /* EditCategoryProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6EEAC256C259C0016F683 /* EditCategoryProfileViewController.swift */; };
 		6DCB67CF252E629900154C87 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCB67CE252E629800154C87 /* PresentationController.swift */; };
 		6DCD0BB1254C866000E2DE51 /* SearchBairroTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCD0BB0254C866000E2DE51 /* SearchBairroTableViewController.swift */; };
 		6DCD0BB52551F55A00E2DE51 /* HeaderSearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCD0BB42551F55900E2DE51 /* HeaderSearchCollectionView.swift */; };
@@ -99,6 +100,7 @@
 		6D8A66FA250BF17F0093F889 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6D8A66FC250C06EF0093F889 /* StyleElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleElements.swift; sourceTree = "<group>"; };
 		6D952B1F2525103300365772 /* WaterFallLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterFallLayout.swift; sourceTree = "<group>"; };
+		6DB6EEAC256C259C0016F683 /* EditCategoryProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryProfileViewController.swift; sourceTree = "<group>"; };
 		6DCB67CE252E629800154C87 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		6DCD0BB0254C866000E2DE51 /* SearchBairroTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBairroTableViewController.swift; sourceTree = "<group>"; };
 		6DCD0BB42551F55900E2DE51 /* HeaderSearchCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSearchCollectionView.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				612E82F52501609F002C4435 /* LoginViewController.swift */,
 				612E82F7250160B7002C4435 /* ProfileViewController.swift */,
 				6DE6E3B52568549D00248FF5 /* EditProfileViewController.swift */,
+				6DB6EEAC256C259C0016F683 /* EditCategoryProfileViewController.swift */,
 				614A3E75250812B3003A24F1 /* CreatAnnoucementViewController.swift */,
 				6D57A40A255EF37200A74147 /* SearchBairroForCreatingAnnoucement.swift */,
 				6DEE52E42561A14B00A3C62B /* TimeAnnoucementForCreatingAnnoucement.swift */,
@@ -364,6 +367,7 @@
 				614A3E7425080FFC003A24F1 /* Annoucement.swift in Sources */,
 				6D482CE52530E7CA00D8E753 /* HeaderPerfilCollectionView.swift in Sources */,
 				6DEE52EB2562F39900A3C62B /* EditCategoryAnnoucementViewController.swift in Sources */,
+				6DB6EEAD256C259C0016F683 /* EditCategoryProfileViewController.swift in Sources */,
 				6DDE6131255B02390082C20C /* SignUpViewControllerName.swift in Sources */,
 				6D482CDF2530E67C00D8E753 /* AnnoucementPortifolioCell.swift in Sources */,
 				6DEE52E52561A14B00A3C62B /* TimeAnnoucementForCreatingAnnoucement.swift in Sources */,

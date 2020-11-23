@@ -35,9 +35,36 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBOutlet weak var imagemPerfil: UIImageView!
     
+    
+    @IBOutlet weak var nameMarcaTextField: UITextField!
+    
+    @IBOutlet weak var namePerfilTextField: UITextField!
+    
+
+    @IBOutlet weak var categoryButtonOutlet: UIButton!
+    
+    
+    @IBOutlet weak var nameAdressTextField: UITextField!
+    
+    @IBOutlet weak var numberAdressTextField: UITextField!
+    
+    @IBOutlet weak var siteTextField: UITextField!
+    
+    @IBOutlet weak var instagramTextField: UITextField!
+    
+    @IBOutlet weak var facebookTextField: UITextField!
+    
+    @IBOutlet weak var telegramTextField: UITextField!
+    
+    @IBOutlet weak var heightOfViewLinks: NSLayoutConstraint!//131
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    var expandableViewLinksControl: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        setupStyleForElements()
         self.hideKeyboardWhenTappedAround()
     }
 
@@ -59,15 +86,50 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    @IBAction func buttonToLinksAction(_ sender: Any) {
+        if expandableViewLinksControl == false {
+            UIView.animate(withDuration: 0.3) {
+                self.scrollView.isScrollEnabled = true
+                self.heightOfViewLinks.constant = 131.0
+                self.view.setNeedsUpdateConstraints()
+                //self.verTudoButtonOutlet.setTitle("Minimizar", for: .normal)
+                self.view.layoutIfNeeded()
+            }
+            expandableViewLinksControl = true
+        } else {
+            UIView .animate(withDuration: 0.3) {
+                self.heightOfViewLinks.constant = 0.0
+                self.view.setNeedsUpdateConstraints()
+                //self.verTudoButtonOutlet.setTitle("Ver tudo", for: .normal)
+                self.view.layoutIfNeeded()
+            }
+            scrollView.setContentOffset(.zero, animated: true)
+            expandableViewLinksControl = false
+            self.scrollView.isScrollEnabled = false
+        }
+    }
+    
     //style for elements
     func setupStyleForElements(){
+        scrollView.isScrollEnabled = false
+        imagemPerfil.layer.cornerRadius = 35
     }
     
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         return true
     }
-
+    
+    @IBAction func unwindToEditProfile(segue:UIStoryboardSegue) {
+        print(categoria)
+        categoryButtonOutlet.setTitle(categoria, for: .normal)
+    }
+    
+    
+    @IBAction func sairContaAction(_ sender: Any) {
+    }
+    
 }
 
 
