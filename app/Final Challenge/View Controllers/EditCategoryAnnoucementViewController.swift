@@ -507,7 +507,7 @@ class EditCategoryAnnoucementViewController: UIViewController {
         } else if festaBttn.isSelected {
             categoriaSelecionada = "Festa"
         } else if comidasBttn.isSelected {
-            categoriaSelecionada = "Comida"
+            categoriaSelecionada = "Comidas"
         } else if decoracaoBttn.isSelected {
             categoriaSelecionada = "Decoração"
         } else if acessoriosBttn.isSelected {
@@ -515,9 +515,9 @@ class EditCategoryAnnoucementViewController: UIViewController {
         } else if salgadosBttn.isSelected {
             categoriaSelecionada = "Salgados"
         } else if cosmeticosBttn.isSelected {
-            categoriaSelecionada = "Cosmeticos"
+            categoriaSelecionada = "Cosméticos"
         } else if educacaoBttn.isSelected {
-            categoriaSelecionada = "Educaçao"
+            categoriaSelecionada = "Educação"
         } else if papelariaBttn.isSelected {
             categoriaSelecionada = "Papelaria"
         } else if saudeBttn.isSelected {

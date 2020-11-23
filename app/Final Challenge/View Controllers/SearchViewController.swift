@@ -95,7 +95,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var filteredAnnoucements = [Annoucement]()
     
-
+    var annoucementFilter = AnnoucementFilter(name: nil, neighborhood: nil, categories: nil)
+    
+    var categoryFilter: [String]? = []
     
     
     let searchCollectionView: UICollectionView = {
@@ -268,125 +270,172 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if casaBttnControl == false {
             casaBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedCasa"), for: .normal)
             casaBttnControl = true
+            categoryFilter?.append("Casa")
         } else {
             casaBttn.setBackgroundImage(#imageLiteral(resourceName: "Casa"), for: .normal)
             casaBttnControl = false
+            categoryFilter?.removeAll { $0 == "Casa" }
         }
+        searchFilter()
     }
     
     @IBAction func docesActionButton(_ sender: Any) {
         if docesBttnControl == false {
             docesBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedDoces"), for: .normal)
             docesBttnControl = true
+            categoryFilter?.append("Doces")
+
         } else {
             docesBttn.setBackgroundImage(#imageLiteral(resourceName: "Doces"), for: .normal)
             docesBttnControl = false
+            categoryFilter?.removeAll { $0 == "Doces" }
         }
+        searchFilter()
     }
     
     @IBAction func roupasActionButton(_ sender: Any) {
         if roupasBttnControl == false {
             roupasBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedRoupas"), for: .normal)
             roupasBttnControl = true
+            categoryFilter?.append("Roupas")
         } else {
             roupasBttn.setBackgroundImage(#imageLiteral(resourceName: "Roupas"), for: .normal)
             roupasBttnControl = false
+            categoryFilter?.removeAll { $0 == "Roupas" }
         }
+        searchFilter()
     }
     
     @IBAction func festaActionButton(_ sender: Any) {
         if festaBttnControl == false {
             festaBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedFesta"), for: .normal)
             festaBttnControl = true
+            categoryFilter?.append("Festa")
         } else {
             festaBttn.setBackgroundImage(#imageLiteral(resourceName: "Festa"), for: .normal)
             festaBttnControl = false
+            categoryFilter?.removeAll { $0 == "Festa" }
         }
+        searchFilter()
     }
     
     @IBAction func comidasActionButton(_ sender: Any) {
         if comidasBttnControl == false {
             comidasBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedComidas"), for: .normal)
             comidasBttnControl = true
+            categoryFilter?.append("Comidas")
         } else {
             comidasBttn.setBackgroundImage(#imageLiteral(resourceName: "Comidas"), for: .normal)
             comidasBttnControl = false
+            categoryFilter?.removeAll { $0 == "Comidas" }
         }
+        searchFilter()
     }
     
     @IBAction func decoracaoActionButton(_ sender: Any) {
         if decorationBttnControl == false {
             decoracaoBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedDecoracao"), for: .normal)
             decorationBttnControl = true
+            categoryFilter?.append("Decoração")
         } else {
             decoracaoBttn.setBackgroundImage(#imageLiteral(resourceName: "Decoração"), for: .normal)
             decorationBttnControl = false
+            categoryFilter?.removeAll { $0 == "Decoração" }
         }
+        searchFilter()
     }
     @IBAction func acessoriosActionButton(_ sender: Any) {
         if acessorioBttnControl == false {
             acessoriosBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedAcessórios"), for: .normal)
             acessorioBttnControl = true
+            categoryFilter?.append("Acessórios")
         } else {
             acessoriosBttn.setBackgroundImage(#imageLiteral(resourceName: "Acessórios"), for: .normal)
             acessorioBttnControl = false
+            categoryFilter?.removeAll { $0 == "Acessórios" }
         }
+        searchFilter()
     }
     
     @IBAction func salgadosActionButton(_ sender: Any) {
         if salgadosBttnControl == false {
             salgadosBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedSalgados"), for: .normal)
             salgadosBttnControl = true
+            categoryFilter?.append("Salgados")
         } else {
             salgadosBttn.setBackgroundImage(#imageLiteral(resourceName: "Salgados"), for: .normal)
             salgadosBttnControl = false
+            categoryFilter?.removeAll { $0 == "Salgados" }
         }
+        searchFilter()
     }
     
     @IBAction func cosmeticosActionButton(_ sender: Any) {
         if cosmeticosBttnControl == false {
             cosmeticosBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedCosméticos"), for: .normal)
             cosmeticosBttnControl = true
+            categoryFilter?.append("Cosméticos")
         } else {
             cosmeticosBttn.setBackgroundImage(#imageLiteral(resourceName: "Cosméticos"), for: .normal)
             cosmeticosBttnControl = false
+            categoryFilter?.removeAll { $0 == "Cosméticos" }
         }
+        searchFilter()
     }
     
     @IBAction func educacaoActionButton(_ sender: Any) {
         if educacaoBttnControl == false {
             educacaoBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedEducação"), for: .normal)
             educacaoBttnControl = true
+            categoryFilter?.append("Educação")
         } else {
             educacaoBttn.setBackgroundImage(#imageLiteral(resourceName: "Educação"), for: .normal)
             educacaoBttnControl = false
+            categoryFilter?.removeAll { $0 == "Educação" }
         }
+        searchFilter()
     }
     
     @IBAction func papelariaActionButton(_ sender: Any) {
         if papelariaBttnControl == false {
             papelariaBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedPapelaria"), for: .normal)
             papelariaBttnControl = true
+            categoryFilter?.append("Papelaria")
         } else {
             papelariaBttn.setBackgroundImage(#imageLiteral(resourceName: "Papelaria"), for: .normal)
             papelariaBttnControl = false
+            categoryFilter?.removeAll { $0 == "Papelaria" }
         }
+        searchFilter()
     }
     
     @IBAction func saudeActionButton(_ sender: Any) {
         if saudeBttnControl == false {
             saudeBttn.setBackgroundImage(#imageLiteral(resourceName: "SelectedSaúde"), for: .normal)
             saudeBttnControl = true
+            categoryFilter?.append("Saúde")
         } else {
             saudeBttn.setBackgroundImage(#imageLiteral(resourceName: "Saúde"), for: .normal)
             saudeBttnControl = false
+            categoryFilter?.removeAll { $0 == "Saúde" }
         }
+        searchFilter()
+    }
+    
+   
+    
+    func searchFilter() {
+        annoucementFilter.categories = categoryFilter
+        filteredAnnoucements = annoucements.filter(annoucementFilter: annoucementFilter)
+        searchCollectionView.reloadData()
     }
     
     
     @IBAction func unwindToSearchViewController(segue:UIStoryboardSegue) {
         print(bairroSelected)
         bairroSelectedLabel.text = bairroSelected
+        annoucementFilter.neighborhood = bairroSelected
+        searchFilter()
     }
     
     
@@ -426,8 +475,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         recenteSelected = cell.textLabel?.text ?? ""
         searchBar.text = recenteSelected
+                
+        annoucementFilter.name = searchBar.text ?? ""
+        filteredAnnoucements = annoucements.filter(annoucementFilter: annoucementFilter)
+        searchCollectionView.reloadData()
         
         heigthOfTableSearchViewConstraint.constant = 0.0
+        verTudoButtonOutlet.setTitle("Ver tudo", for: .normal)
         heightOfCategoriesView.constant = 150.0
         heightOfExpandableViewConstraint.constant = 0.0
         heightOfBairrosView.constant = 50.0
@@ -436,6 +490,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.view.setNeedsUpdateConstraints()
         self.view.layoutIfNeeded()
         searchBar.resignFirstResponder()
+        
     }
     
     
@@ -563,21 +618,29 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if searchBar.text == "" {
-            filteredAnnoucements = annoucements
+            
             heigthOfTableSearchViewConstraint.constant = 0.0
             heightOfCategoriesView.constant = 150.0
+            verTudoButtonOutlet.setTitle("Ver tudo", for: .normal)
             heightOfExpandableViewConstraint.constant = 0.0
             heightOfBairrosView.constant = 50.0
             heightOfProximityView.constant = 50.0
             heightOfProximityExpandableViewConstraint.constant = 0.0
-            searchCollectionView.reloadData()
+            
             self.view.setNeedsUpdateConstraints()
             self.view.layoutIfNeeded()
+            
+            annoucementFilter.name = nil
+            filteredAnnoucements = annoucements.filter(annoucementFilter: annoucementFilter)
+            searchCollectionView.reloadData()
+
         } else {
-            filteredAnnoucements = annoucements.filter { $0.annoucementName.contains(searchBar.text ?? "") || $0.category.contains(searchBar.text ?? "")}
+            annoucementFilter.name = searchBar.text ?? ""
+            filteredAnnoucements = annoucements.filter(annoucementFilter: annoucementFilter)
             searchCollectionView.reloadData()
         }
     }
+    
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         heigthOfTableSearchViewConstraint.constant = 0.0
