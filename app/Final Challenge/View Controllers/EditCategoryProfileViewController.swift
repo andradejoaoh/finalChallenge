@@ -533,11 +533,9 @@ class EditCategoryProfileViewController: UIViewController {
         if segue.identifier == "unwindToProfileEdit" {
             let destinationController =  segue.destination as! EditProfileViewController
             destinationController.categoria = categoriaSelecionada
-           
         }
     }
     
-    //unwindToProfileEdit
    
     
 

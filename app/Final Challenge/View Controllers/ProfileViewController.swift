@@ -23,6 +23,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     let imagePicker = UIImagePickerController()
     var annoucementImage: Data?
     
+    var imageReceivedFromEdited = UIImageView()
+    
     
     let profileCollectionView: UICollectionView = {
         let layout = WaterfallLayout()
@@ -35,7 +37,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         return cv
     }()
     
-    let imagePerfil: UIImageView = {
+    var imagePerfil: UIImageView = {
         let image = UIImageView(image: #imageLiteral(resourceName: "placeholder3"))
         image.frame = CGRect(x: 0, y: 0, width: 52, height: 52)
         image.layer.cornerRadius = image.frame.size.width/2
@@ -542,9 +544,24 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         if segue.identifier == "segueToEditProfileViewController"{
             let destinationViewController = segue.destination as! EditProfileViewController
-            //destinationViewController
+            destinationViewController.userProfile = userProfile
+            destinationViewController.image = imagePerfil.image ?? UIImage()
+            destinationViewController.fullname = userProfile?.userName ?? ""
+            destinationViewController.nameStore = userProfile?.userStoreName ?? ""
+            destinationViewController.categoria = userProfile?.userCategory ?? ""
+            destinationViewController.endereco = userProfile?.userAddress ?? ""
+            destinationViewController.telefone = userProfile?.userPhone ?? ""
+            destinationViewController.linkSite = userProfile?.userSite ?? ""
+            destinationViewController.linkInstagram = userProfile?.userInstagram ?? ""
+            destinationViewController.linkFacebook = userProfile?.userFacebook ?? ""
+            destinationViewController.linkTelegram = userProfile?.userTelegram ?? ""
         }
         
+    }
+    
+    @IBAction func unwindToProfile(segue:UIStoryboardSegue) {
+        imagePerfil.image = imageReceivedFromEdited.image
+        viewWillAppear(true)
     }
     
     func collectionViewCell(_ announcementNumber: Int) {

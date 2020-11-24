@@ -8,19 +8,19 @@
 
 import Foundation
 class User: Codable {
-    let userName: String
+    var userName: String
     let userEmail: String
     let userID: String
-    let userFacebook: String?
+    var userFacebook: String?
     let userBio: String
-    let userSite: String?
-    let userStoreName: String
-    let userPhone: String
-    let userCategory: String
-    let userAddress: String
+    var userSite: String?
+    var userStoreName: String
+    var userPhone: String
+    var userCategory: String
+    var userAddress: String
     let userNumberAddress: String
-    let userInstagram: String?
-    let userTelegram: String?
+    var userInstagram: String?
+    var userTelegram: String?
     let userCheckLocation: Bool
     let userCheckTelefone: Bool
     let userCEP: String

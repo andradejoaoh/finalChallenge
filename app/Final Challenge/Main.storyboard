@@ -1412,7 +1412,19 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iID-EG-y5y">
                                                 <rect key="frame" x="0.0" y="498" width="414" height="302"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CYJ-AN-rHu">
+                                                        <rect key="frame" x="207" y="16" width="0.0" height="0.0"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" systemColor="systemRedColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
                                                 <color key="backgroundColor" name="profileBackground"/>
+                                                <constraints>
+                                                    <constraint firstItem="CYJ-AN-rHu" firstAttribute="centerX" secondItem="iID-EG-y5y" secondAttribute="centerX" id="WYY-XW-Nn1"/>
+                                                    <constraint firstItem="CYJ-AN-rHu" firstAttribute="top" secondItem="iID-EG-y5y" secondAttribute="top" constant="16" id="bPs-6e-jVP"/>
+                                                </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z6C-eZ-EbM" userLabel="ViewSairConta">
                                                 <rect key="frame" x="0.0" y="454" width="414" height="44"/>
@@ -1480,10 +1492,17 @@
                             <constraint firstItem="Vc4-H4-Pyo" firstAttribute="leading" secondItem="YOR-ol-GSD" secondAttribute="leading" id="onw-TX-LZl"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="rfH-2z-OQQ"/>
+                    <navigationItem key="navigationItem" id="rfH-2z-OQQ">
+                        <barButtonItem key="rightBarButtonItem" title="Salvar" id="cU3-7T-LVQ">
+                            <connections>
+                                <action selector="saveEditProfileAction:" destination="jKH-IM-T6d" id="5aa-PV-l42"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="414" height="900"/>
                     <connections>
                         <outlet property="categoryButtonOutlet" destination="Bm4-Wv-vbx" id="Nf4-mj-yel"/>
+                        <outlet property="errorLabel" destination="CYJ-AN-rHu" id="daG-2a-Eo3"/>
                         <outlet property="facebookTextField" destination="fsI-BK-Ymq" id="bHw-bl-IQQ"/>
                         <outlet property="heightOfViewLinks" destination="nfe-Pb-1eS" id="D09-XF-YBg"/>
                         <outlet property="imagemPerfil" destination="Tqd-4a-uAT" id="RnC-aB-R7Q"/>
@@ -1491,13 +1510,15 @@
                         <outlet property="nameAdressTextField" destination="DbQ-mL-Cta" id="zPq-Pw-sUW"/>
                         <outlet property="nameMarcaTextField" destination="YpD-An-bun" id="2PD-ne-gHs"/>
                         <outlet property="namePerfilTextField" destination="C6u-3n-Nrg" id="Vbv-U6-4x4"/>
-                        <outlet property="numberAdressTextField" destination="BaT-n3-XFr" id="Vqo-Hm-yk3"/>
+                        <outlet property="numberContactTextField" destination="BaT-n3-XFr" id="1ii-qu-xjh"/>
                         <outlet property="scrollView" destination="Vc4-H4-Pyo" id="rEa-Vu-dyf"/>
                         <outlet property="siteTextField" destination="3uF-wF-tiH" id="pA2-b6-cLH"/>
                         <outlet property="telegramTextField" destination="eNf-Gv-20t" id="WeO-yQ-Np3"/>
+                        <segue destination="d2B-Ch-p7w" kind="unwind" identifier="unwindToMainProfile" unwindAction="unwindToProfileWithSegue:" id="kvF-EG-cEY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6uj-mp-lRE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="d2B-Ch-p7w" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5594.202898550725" y="-32.8125"/>
         </scene>

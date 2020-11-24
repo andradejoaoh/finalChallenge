@@ -168,6 +168,46 @@ class DatabaseHandler {
         }
     }
     
+    static func editProfile(imageData: Data? ,userID: String, storeName: String, fullName: String, category: String, localization: String, contact: String, site: String, instagram: String, facebook: String, telegram: String, completion: @escaping (Result<String,Error>) -> Void){
+        
+        let storage = Storage.storage(url: HardConstants.Database.storageURL)
+        let storageReference = storage.reference()
+        let profileImageReference = storageReference.child("profilePictures/\(userID)")
+        
+        if let imageData = imageData {
+            let uploadTask = profileImageReference.putData(imageData, metadata: nil) { (metadata, error) in
+                guard error == nil else {
+                    //Show Error while uploading image
+                    return completion(.failure(error!))
+                }
+                profileImageReference.downloadURL { (url, error) in
+                    if error != nil {
+                        //Show error while downloading image
+                        return completion(.failure(error!))
+                    }
+                }
+            }
+            uploadTask.resume()
+        }
+        
+        let database = Firestore.firestore()
+        database.collection("users").document(userID).updateData(
+            ["store_name": storeName,
+             "full_name": fullName,
+             "category": category,
+             "address": localization,
+             "phone": contact,
+             "site": site,
+             "instagram": instagram,
+             "facebook": facebook,
+             "telegram": telegram]) { (error) in
+            if error != nil {
+                completion(.failure(error!))
+            }
+            completion(.success("Uptaded annoucement sucessfully"))
+        }
+    }
+    
     
     static func readAnnoucements(completion: @escaping (Result<[Annoucement],Error>) -> Void){
         let database = Firestore.firestore()
