@@ -8,6 +8,7 @@
 
 import Foundation
 class User: Codable {
+    var imageData: Data?
     var userName: String
     let userEmail: String
     let userID: String
@@ -26,6 +27,7 @@ class User: Codable {
     let userCEP: String
     
     enum CodingKeys: String, CodingKey {
+        case imageData = "image_data"
         case userName = "full_name"
         case userEmail = "email"
         case userID = "uid"
