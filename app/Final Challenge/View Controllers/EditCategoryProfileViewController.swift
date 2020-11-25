@@ -532,7 +532,7 @@ class EditCategoryProfileViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "unwindToProfileEdit" {
             let destinationController =  segue.destination as! EditProfileViewController
-            destinationController.categoria = categoriaSelecionada
+            destinationController.userProfile?.userCategory = categoriaSelecionada
         }
     }
     

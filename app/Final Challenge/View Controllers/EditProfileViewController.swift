@@ -13,18 +13,7 @@ import UIKit
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     
-    var userProfile: User!
-    
-    var fullname = String()
-    var nameStore = String()
-    var image = UIImage()
-    var categoria = String()
-    var endereco = String()
-    var telefone = String()
-    var linkSite = String()
-    var linkInstagram = String()
-    var linkFacebook = String()
-    var linkTelegram = String()
+    var userProfile: User?
     
     
     let imagePicker = UIImagePickerController()
@@ -60,15 +49,18 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     var expandableViewLinksControl: Bool = false
     
-    var lastImage = UIImage()
+    var lastImage: Data?
+    
+    var profileImage = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         errorLabel.text = ""
-        lastImage = image
         imagePicker.delegate = self
         setupStyleForElements()
         self.hideKeyboardWhenTappedAround()
+        guard let user = userProfile else { return }
+        lastImage = user.imageData
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -86,6 +78,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
         self.imagemPerfil.image = image
+        guard let user = userProfile else { return }
+        user.imageData = image.jpegData(compressionQuality: 0.5)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -118,17 +112,19 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         scrollView.isScrollEnabled = false
         imagemPerfil.layer.cornerRadius = 35
         
+        if let user = userProfile {
+            imagemPerfil.image = UIImage(data: user.imageData ?? Data())
+            nameMarcaTextField.text = user.userStoreName
+            namePerfilTextField.text = user.userName
+            categoryButtonOutlet.setTitle(user.userCategory, for: .normal)
+            nameAdressTextField.text = user.userAddress
+            numberContactTextField.text = user.userPhone
+            siteTextField.text = user.userSite
+            instagramTextField.text = user.userInstagram
+            facebookTextField.text = user.userFacebook
+            telegramTextField.text = user.userTelegram
+        }
         
-        imagemPerfil.image = image
-        nameMarcaTextField.text = nameStore
-        namePerfilTextField.text = fullname
-        categoryButtonOutlet.setTitle(categoria, for: .normal)
-        nameAdressTextField.text = endereco
-        numberContactTextField.text = telefone
-        siteTextField.text = linkSite
-        instagramTextField.text = linkInstagram
-        facebookTextField.text = linkFacebook
-        telegramTextField.text = linkTelegram
     }
     
     func validateFields() -> String? {
@@ -155,8 +151,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func unwindToEditProfile(segue:UIStoryboardSegue) {
-        print(categoria)
-        categoryButtonOutlet.setTitle(categoria, for: .normal)
+        guard let user = userProfile else { return }
+        categoryButtonOutlet.setTitle(user.userCategory, for: .normal)
     }
     
     
@@ -174,9 +170,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     
     @IBAction func saveEditProfileAction(_ sender: Any) {
-        
-        image = imagemPerfil.image ?? UIImage()
-                
+        guard let user = userProfile else { return }
         if validateFields() != nil {
             //show error label
         } else {
@@ -184,7 +178,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 
                 let storeName = nameMarcaTextField.text!
                 let fullName = namePerfilTextField.text!
-                let category = categoria
+                let category = user.userCategory
                 let localization = nameAdressTextField.text!
                 let contact = numberContactTextField.text!
                 let site = siteTextField.text ?? ""
@@ -192,7 +186,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 let facebook = facebookTextField.text ?? ""
                 let telegram = telegramTextField.text ?? ""
                 
-                if lastImage == image {
+                if lastImage == self.imagemPerfil.image?.jpegData(compressionQuality: 1) {
                     DatabaseHandler.editProfile(imageData: nil, userID: userID, storeName: storeName, fullName: fullName, category: category, localization: localization, contact: contact, site: site, instagram: instagram, facebook: facebook, telegram: telegram){ (result) in
                         switch result {
                         case let .failure(error):
@@ -200,24 +194,21 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                             print(error)
                         case .success:
                             
-                            self.userProfile.userStoreName = storeName
-                            self.userProfile.userName = fullName
-                            self.userProfile.userCategory = category
-                            self.userProfile.userAddress = localization
-                            self.userProfile.userPhone = contact
-                            self.userProfile.userSite = site
-                            self.userProfile.userInstagram = instagram
-                            self.userProfile.userFacebook = facebook
-                            self.userProfile.userTelegram = telegram
+                            user.userStoreName = storeName
+                            user.userName = fullName
+                            user.userCategory = category
+                            user.userAddress = localization
+                            user.userPhone = contact
+                            user.userSite = site
+                            user.userInstagram = instagram
+                            user.userFacebook = facebook
+                            user.userTelegram = telegram
                             
                             
-                            //talvez uma perform segue aqui
-                            self.performSegue(withIdentifier: "unwindToMainProfile", sender: self)
-                            //self.dismiss(animated: true, completion: nil)
                         }
                     }
                 } else {
-                    let imageData = image.jpegData(compressionQuality: 0.5)
+                    let imageData = user.imageData
                     DatabaseHandler.editProfile(imageData: imageData, userID: userID, storeName: storeName, fullName: fullName, category: category, localization: localization, contact: contact, site: site, instagram: instagram, facebook: facebook, telegram: telegram) { (result) in
                         switch result {
                         case let .failure(error):
@@ -226,34 +217,35 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                         case .success:
                             //self.userProfile
                             
-                            self.userProfile.userStoreName = storeName
-                            self.userProfile.userName = fullName
-                            self.userProfile.userCategory = category
-                            self.userProfile.userAddress = localization
-                            self.userProfile.userPhone = contact
-                            self.userProfile.userSite = site
-                            self.userProfile.userInstagram = instagram
-                            self.userProfile.userFacebook = facebook
-                            self.userProfile.userTelegram = telegram
+                            user.userStoreName = storeName
+                            user.userName = fullName
+                            user.userCategory = category
+                            user.userAddress = localization
+                            user.userPhone = contact
+                            user.userSite = site
+                            user.userInstagram = instagram
+                            user.userFacebook = facebook
+                            user.userTelegram = telegram
                             
-                            self.performSegue(withIdentifier: "unwindToMainProfile", sender: self)
+                            //self.performSegue(withIdentifier: "unwindToMainProfile", sender: self)
                             //talvez uma perform segue aqui
-                            //self.dismiss(animated: true, completion: nil)
+                            
                         }
                     }
                 }
+                self.navigationController?.popViewController(animated: true)
             }
             
         }
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "unwindToMainProfile" {
-            let destinationController =  segue.destination as! ProfileViewController
-            destinationController.imageReceivedFromEdited.image = imagemPerfil.image
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "unwindToMainProfile" {
+//            let destinationController =  segue.destination as! ProfileViewController
+//            destinationController.imageReceivedFromEdited.image = imagemPerfil.image
+//        }
+//    }
     
 }
 

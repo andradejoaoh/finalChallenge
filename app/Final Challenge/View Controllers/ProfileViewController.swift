@@ -155,8 +155,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         setupView()
     }
     
@@ -170,6 +170,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     func setupView() {
         if let user = self.userProfile {
+            self.imagePerfil.image = UIImage(data: user.imageData ?? Data())
             self.title = user.userStoreName
             self.perfilNameLabel.text = user.userStoreName
             self.descriptionLabel.text = user.userBio
@@ -182,20 +183,14 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 sairButtonProvisorio.isHidden = false
                 createAnnoucementButton.isHidden = false
             }
-            DatabaseHandler.getProfileImage(userID: user.userID) { result in
-                switch result {
-                case let .success(data):
-                    self.imagePerfil.image = UIImage(data: data)
-                case let .failure(error):
-                    print(error)
-                }
-            }
+            
         } else {
             guard let currentUser = DatabaseHandler.getCurrentUser() else { return }
             DatabaseHandler.getData(for: currentUser) { (result) in
                 switch result {
                 case let .success(user):
                     self.userProfile = user
+                    self.getProfileImage(userID: user.userID)
                     self.setupView()
                 case let .failure(error):
                     print(error)
@@ -203,6 +198,18 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             }
         }
         
+    }
+    
+    func getProfileImage(userID: String) {
+        DatabaseHandler.getProfileImage(userID: userID) { result in
+            switch result {
+            case let .success(data):
+                self.userProfile?.imageData = data
+                self.imagePerfil.image = UIImage(data: data)
+            case let .failure(error):
+                print(error)
+            }
+        }
     }
     
     
@@ -460,7 +467,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             selectedAnnoucement = indexPath.item
-            performSegue(withIdentifier: HardConstants.Storyboard.annoucementSegue, sender: self)
+            performSegue(withIdentifier: HardConstants.Storyboard.fromProfileToAnnoucementSegue, sender: self)
         }
     }
     
@@ -544,24 +551,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         if segue.identifier == "segueToEditProfileViewController"{
             let destinationViewController = segue.destination as! EditProfileViewController
             destinationViewController.userProfile = userProfile
-            destinationViewController.image = imagePerfil.image ?? UIImage()
-            destinationViewController.fullname = userProfile?.userName ?? ""
-            destinationViewController.nameStore = userProfile?.userStoreName ?? ""
-            destinationViewController.categoria = userProfile?.userCategory ?? ""
-            destinationViewController.endereco = userProfile?.userAddress ?? ""
-            destinationViewController.telefone = userProfile?.userPhone ?? ""
-            destinationViewController.linkSite = userProfile?.userSite ?? ""
-            destinationViewController.linkInstagram = userProfile?.userInstagram ?? ""
-            destinationViewController.linkFacebook = userProfile?.userFacebook ?? ""
-            destinationViewController.linkTelegram = userProfile?.userTelegram ?? ""
+            destinationViewController.profileImage = self.imagePerfil
         }
         
     }
     
-    @IBAction func unwindToProfile(segue:UIStoryboardSegue) {
-        imagePerfil.image = imageReceivedFromEdited.image
-        viewWillAppear(true)
-    }
+//    @IBAction func unwindToProfile(segue:UIStoryboardSegue) {
+//        imagePerfil.image = imageReceivedFromEdited.image
+//        viewWillAppear(true)
+//        setupView()
+//    }
     
     func collectionViewCell(_ announcementNumber: Int) {
         self.selectedAnnoucement = announcementNumber
