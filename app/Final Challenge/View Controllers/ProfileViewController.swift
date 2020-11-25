@@ -424,10 +424,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     @objc func redesSociaisButtonTapped() -> Void {
-        guard let userSite = userProfile?.userFacebook else { return }
-        if let url = URL(string: userSite) {
-            UIApplication.shared.open(url)
-        }
+        guard let user = self.userProfile else { return }
+        let contactAlert = ContactHandler.createSocialController(to: user)
+        self.present(contactAlert, animated: true, completion: nil)
     }
     
     @objc func createAnnoucementButtonTapped() -> Void {
