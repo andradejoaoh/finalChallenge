@@ -67,6 +67,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var saudeBttn: UIButton!
     
+    
+    @IBOutlet weak var cleanBairroBttnOutlet: UIButton!
+    
+    @IBOutlet weak var buttonToCompleteBairroOutlet: UIButton!
+    
     var casaBttnControl:Bool = false
     var docesBttnControl:Bool = false
     var roupasBttnControl:Bool = false
@@ -83,7 +88,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var bairroSelectedLabel: UILabel!
     
     var recenteSelected = String()
-    var bairroSelected = String()
+    var bairroSelected: String?
     
     
     
@@ -156,6 +161,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         
+        
+        if bairroSelectedLabel.text == "" || bairroSelected == nil{
+            buttonToCompleteBairroOutlet.isHidden = false
+            cleanBairroBttnOutlet.isHidden = true
+        } else {
+            buttonToCompleteBairroOutlet.isHidden = true
+            cleanBairroBttnOutlet.isHidden = false
+        }
+       
         tableViewSearch.delegate = self
         tableViewSearch.dataSource = self
         searchBar.delegate = self
@@ -431,11 +445,36 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
+    @IBAction func cleanBairroBttnAction(_ sender: Any) {
+        bairroSelectedLabel.text = ""
+        bairroSelected = nil
+        
+        annoucementFilter.neighborhood = bairroSelected
+        searchFilter()
+        
+        if bairroSelectedLabel.text == "" || bairroSelected == nil{
+            buttonToCompleteBairroOutlet.isHidden = false
+            cleanBairroBttnOutlet.isHidden = true
+        } else {
+            buttonToCompleteBairroOutlet.isHidden = true
+            cleanBairroBttnOutlet.isHidden = false
+        }
+    }
+    
+    
     @IBAction func unwindToSearchViewController(segue:UIStoryboardSegue) {
         print(bairroSelected)
         bairroSelectedLabel.text = bairroSelected
         annoucementFilter.neighborhood = bairroSelected
         searchFilter()
+        
+        if bairroSelectedLabel.text == "" || bairroSelected == nil{
+            buttonToCompleteBairroOutlet.isHidden = false
+            cleanBairroBttnOutlet.isHidden = true
+        } else {
+            buttonToCompleteBairroOutlet.isHidden = true
+            cleanBairroBttnOutlet.isHidden = false
+        }
     }
     
     
@@ -643,6 +682,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
         heigthOfTableSearchViewConstraint.constant = 0.0
         heightOfCategoriesView.constant = 150.0
         heightOfExpandableViewConstraint.constant = 0.0
@@ -652,4 +692,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.view.setNeedsUpdateConstraints()
         self.view.layoutIfNeeded()
     }
+    
+    
 }

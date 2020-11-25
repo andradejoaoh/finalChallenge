@@ -40,6 +40,7 @@ class SignUpViewControllerBemVindo: UIViewController, UIImagePickerControllerDel
     func setupStyleForElements(){
         avanceButton.backgroundColor = UIColor(named: "button")
         avanceButton.layer.cornerRadius = 15
+        avanceButton.isHidden = true
         
     }
     

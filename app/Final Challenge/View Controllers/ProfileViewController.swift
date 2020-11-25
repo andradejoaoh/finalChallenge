@@ -135,13 +135,19 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         button.frame.size.width = 50
         return button
     }()
+    
+    @IBOutlet weak var editBttnOutlet: UIBarButtonItem!
+    
        
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Perfil"
+        self.tabBarItem.title = "Perfil"
         self.imagePicker.delegate = self
         navigationController?.setNavigationBarHidden(false, animated: true)
         setupElementsViewDidLoad()
         setupElementsInCollectionView()
+        setupElementsNotFixed()
         DatabaseHandler.readAnnoucements { (result) in
             switch result {
             case let .failure(error):
@@ -152,7 +158,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             }
         }
     }
-    
+  
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -177,9 +183,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             self.categoryLabel.text = user.userName
             
             if user.userID != DatabaseHandler.getCurrentUser() {
+                editBttnOutlet.isEnabled = false
+                editBttnOutlet.title = ""
                 sairButtonProvisorio.isHidden = true
                 createAnnoucementButton.isHidden = true
             } else {
+                editBttnOutlet.isEnabled = true
+                editBttnOutlet.title = "Editar"
                 sairButtonProvisorio.isHidden = false
                 createAnnoucementButton.isHidden = false
             }
@@ -197,7 +207,22 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 }
             }
         }
-        
+        self.title = "Perfil"
+        self.tabBarItem.title = "Perfil"
+    }
+    
+    func setupElementsNotFixed(){
+        if userProfile?.userID != DatabaseHandler.getCurrentUser() {
+            editBttnOutlet.isEnabled = false
+            editBttnOutlet.title = ""
+            sairButtonProvisorio.isHidden = true
+            createAnnoucementButton.isHidden = true
+        } else {
+            editBttnOutlet.isEnabled = true
+            editBttnOutlet.title = "Editar"
+            sairButtonProvisorio.isHidden = false
+            createAnnoucementButton.isHidden = false
+        }
     }
     
     func getProfileImage(userID: String) {
@@ -211,6 +236,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             }
         }
     }
+    
+    
     
     
     func createAlertController() -> UIAlertController {
@@ -305,7 +332,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         sairButtonProvisorio.widthAnchor.constraint(equalToConstant: CGFloat(50)).isActive = true
         
         createAnnoucementButton.translatesAutoresizingMaskIntoConstraints = false
-        createAnnoucementButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10).isActive = true
+        //createAnnoucementButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10).isActive = true
+        createAnnoucementButton.bottomAnchor.constraint(equalTo: self.profileCollectionView.bottomAnchor, constant: (self.view.frame.height)*0.44).isActive = true
         createAnnoucementButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
         createAnnoucementButton.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
         createAnnoucementButton.widthAnchor.constraint(equalToConstant: CGFloat(self.view.frame.size.width * 0.90)).isActive = true
@@ -557,11 +585,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         
     }
     
-//    @IBAction func unwindToProfile(segue:UIStoryboardSegue) {
-//        imagePerfil.image = imageReceivedFromEdited.image
-//        viewWillAppear(true)
-//        setupView()
-//    }
     
     func collectionViewCell(_ announcementNumber: Int) {
         self.selectedAnnoucement = announcementNumber

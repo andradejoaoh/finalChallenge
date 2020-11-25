@@ -515,6 +515,15 @@
                                                         <color key="textColor" name="text"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZd-j5-M4U">
+                                                        <rect key="frame" x="86" y="15.5" width="20" height="19"/>
+                                                        <state key="normal" backgroundImage="xmark.circle.fill" catalog="system">
+                                                            <color key="titleColor" systemColor="systemRedColor"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="cleanBairroBttnAction:" destination="4yb-ks-gcD" eventType="touchUpInside" id="Qf2-WK-mxq"/>
+                                                        </connections>
+                                                    </button>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="rga-WW-bJL">
                                                         <rect key="frame" x="385" y="14" width="13" height="22"/>
                                                         <constraints>
@@ -522,8 +531,8 @@
                                                             <constraint firstAttribute="height" constant="22" id="FVu-Av-xuh"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TiL-F3-7g1">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TiL-F3-7g1">
+                                                        <rect key="frame" x="106" y="0.0" width="308" height="50"/>
                                                         <size key="titleShadowOffset" width="-1" height="0.0"/>
                                                         <connections>
                                                             <segue destination="G0E-FT-dU1" kind="show" identifier="segueSearchToBairroSearch" id="nCA-Qy-ewD"/>
@@ -545,21 +554,33 @@
                                                         <color key="textColor" name="text"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EMU-BC-CAK">
+                                                        <rect key="frame" x="0.0" y="0.0" width="106" height="49"/>
+                                                        <connections>
+                                                            <segue destination="G0E-FT-dU1" kind="show" id="gDV-l1-C8p"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstItem="TiL-F3-7g1" firstAttribute="leading" secondItem="XlV-Wb-WR5" secondAttribute="leading" id="6QA-nL-mhU"/>
                                                     <constraint firstItem="Ye7-pS-xZE" firstAttribute="centerY" secondItem="XlV-Wb-WR5" secondAttribute="centerY" id="AZz-Pa-ttv"/>
                                                     <constraint firstItem="1BT-Rm-7IE" firstAttribute="leading" secondItem="XlV-Wb-WR5" secondAttribute="leading" constant="16" id="Anp-UU-HAU"/>
                                                     <constraint firstItem="rga-WW-bJL" firstAttribute="centerY" secondItem="XlV-Wb-WR5" secondAttribute="centerY" id="Dkk-dD-Hj1"/>
+                                                    <constraint firstItem="TiL-F3-7g1" firstAttribute="leading" secondItem="EMU-BC-CAK" secondAttribute="trailing" id="E5a-Kc-K3V"/>
+                                                    <constraint firstItem="EMU-BC-CAK" firstAttribute="leading" secondItem="XlV-Wb-WR5" secondAttribute="leading" id="EHK-gv-XF5"/>
                                                     <constraint firstAttribute="trailing" secondItem="rga-WW-bJL" secondAttribute="trailing" constant="16" id="ErB-5z-qxg"/>
                                                     <constraint firstAttribute="trailing" secondItem="wyf-9h-axt" secondAttribute="trailing" id="I9s-aL-JHs"/>
+                                                    <constraint firstItem="TiL-F3-7g1" firstAttribute="leading" secondItem="yZd-j5-M4U" secondAttribute="trailing" id="MhB-X2-eY1"/>
+                                                    <constraint firstItem="EMU-BC-CAK" firstAttribute="top" secondItem="XlV-Wb-WR5" secondAttribute="top" id="Qmn-nJ-0FS"/>
                                                     <constraint firstAttribute="bottom" secondItem="TiL-F3-7g1" secondAttribute="bottom" id="SFg-4Q-pfV"/>
+                                                    <constraint firstItem="yZd-j5-M4U" firstAttribute="leading" secondItem="1BT-Rm-7IE" secondAttribute="trailing" constant="16" id="WIA-Sn-1dO"/>
                                                     <constraint firstItem="1BT-Rm-7IE" firstAttribute="centerY" secondItem="XlV-Wb-WR5" secondAttribute="centerY" id="Zs9-2O-xcR"/>
                                                     <constraint firstAttribute="trailing" secondItem="TiL-F3-7g1" secondAttribute="trailing" id="afN-CS-a3p"/>
                                                     <constraint firstItem="TiL-F3-7g1" firstAttribute="top" secondItem="XlV-Wb-WR5" secondAttribute="top" id="aqr-sa-THA"/>
                                                     <constraint firstAttribute="height" constant="50" id="b6Y-eS-iYt"/>
+                                                    <constraint firstItem="wyf-9h-axt" firstAttribute="top" secondItem="EMU-BC-CAK" secondAttribute="bottom" id="clc-bz-BhR"/>
                                                     <constraint firstItem="wyf-9h-axt" firstAttribute="leading" secondItem="XlV-Wb-WR5" secondAttribute="leading" constant="16" id="eWG-yF-ylx"/>
+                                                    <constraint firstItem="yZd-j5-M4U" firstAttribute="centerY" secondItem="XlV-Wb-WR5" secondAttribute="centerY" id="tm5-2j-ffm"/>
                                                     <constraint firstItem="rga-WW-bJL" firstAttribute="leading" secondItem="Ye7-pS-xZE" secondAttribute="trailing" constant="32" id="vbV-wP-vWa"/>
                                                     <constraint firstAttribute="bottom" secondItem="wyf-9h-axt" secondAttribute="bottom" id="w9Z-co-rVI"/>
                                                 </constraints>
@@ -707,7 +728,9 @@
                         <outlet property="ExpandableView" destination="uUN-AV-mf7" id="Jj6-Fj-bQU"/>
                         <outlet property="acessoriosBttn" destination="zCG-uq-amC" id="NTo-hU-Uxj"/>
                         <outlet property="bairroSelectedLabel" destination="Ye7-pS-xZE" id="lG5-4I-flG"/>
+                        <outlet property="buttonToCompleteBairroOutlet" destination="EMU-BC-CAK" id="Fen-SG-0mu"/>
                         <outlet property="casaBttn" destination="W2U-Ni-Wxr" id="JVg-Mo-w14"/>
+                        <outlet property="cleanBairroBttnOutlet" destination="yZd-j5-M4U" id="x0B-EM-xpC"/>
                         <outlet property="comidasBttn" destination="Hvl-li-nxk" id="NAm-7L-v1s"/>
                         <outlet property="cosmeticosBttn" destination="whG-f9-fjt" id="GTK-IE-oFr"/>
                         <outlet property="decoracaoBttn" destination="HdQ-VB-R3o" id="2GJ-LU-JTu"/>
@@ -1025,6 +1048,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editBttnOutlet" destination="oDw-ID-ptP" id="puf-iG-IPK"/>
                         <segue destination="0dW-8G-m0F" kind="showDetail" identifier="profileShowAnnoucement" id="qcg-AS-AZk"/>
                         <segue destination="Eyz-d1-qOs" kind="show" identifier="segueCreateAnnoucementView" id="egt-zX-hdA"/>
                     </connections>
@@ -3073,15 +3097,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLU-pJ-WFa">
-                                <rect key="frame" x="16" y="233" width="382" height="72"/>
+                                <rect key="frame" x="16" y="233" width="382" height="90"/>
                                 <string key="text">Desejamos a você muito crescimento para sua empresa!
-Você pode avançar e explorar os recursos da plataforma ou então continuar seu cadastro.</string>
+Continue o cadastro da sua empresa para poder postar anúncios e aproveitar todas as funcionalidades da plataforma!</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" name="text"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQQ-sz-rbU">
-                                <rect key="frame" x="139" y="361" width="136" height="30"/>
+                                <rect key="frame" x="139" y="379" width="136" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="136" id="jss-uI-7FU"/>
                                     <constraint firstAttribute="height" constant="30" id="o1M-rt-Xwo"/>
@@ -3091,7 +3115,7 @@ Você pode avançar e explorar os recursos da plataforma ou então continuar seu
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7AH-y1-xIs">
-                                <rect key="frame" x="139" y="407" width="136" height="30"/>
+                                <rect key="frame" x="139" y="425" width="136" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="136" id="6XO-VY-MvU"/>
                                     <constraint firstAttribute="height" constant="30" id="Wpa-uv-Kv0"/>
@@ -4170,11 +4194,11 @@ Agora explore a plataforma e boas vendas!</string>
             </objects>
             <point key="canvasLocation" x="11132" y="-725"/>
         </scene>
-        <!--Profile-->
+        <!--Perfil-->
         <scene sceneID="5xe-Gi-BnM">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1hY-Lo-cRc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="EIf-za-BxS"/>
+                    <tabBarItem key="tabBarItem" title="Perfil" image="person.fill" catalog="system" id="EIf-za-BxS"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QjN-oF-rRr">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -5507,6 +5531,7 @@ Agora explore a plataforma e boas vendas!</string>
         <segue reference="qEK-8a-QZG"/>
         <segue reference="riO-UY-M8r"/>
         <segue reference="qcg-AS-AZk"/>
+        <segue reference="nCA-Qy-ewD"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="button"/>
     <resources>
