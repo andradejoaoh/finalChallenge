@@ -34,7 +34,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGk-2Q-QtO">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="336"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crie uma conta no Produba e aumente suas vendas!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tq8-OX-fIz">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crie uma conta no Bairrista e aumente suas vendas!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tq8-OX-fIz">
                                         <rect key="frame" x="16" y="139.5" width="382" height="57.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" name="textButton"/>
@@ -54,6 +54,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="SCE-c4-d8V"/>
                                 </constraints>
+                                <color key="textColor" name="text"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -62,6 +63,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="GPP-u1-vzr"/>
                                 </constraints>
+                                <color key="textColor" name="text"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -71,7 +73,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Não possui uma conta?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Gy-Ba-P4G">
                                         <rect key="frame" x="0.0" y="0.0" width="177.5" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" name="text"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQ8-Fe-kyR">
@@ -1034,7 +1036,7 @@
             <objects>
                 <viewController storyboardIdentifier="profileViewController" id="bxg-Er-exs" customClass="ProfileViewController" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A0K-bS-KwT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="YQu-An-jBy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1062,11 +1064,11 @@
             <objects>
                 <viewController id="jKH-IM-T6d" customClass="EditProfileViewController" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0pZ-Uc-uBE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="846"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vc4-H4-Pyo">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="846"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="812"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iNd-mB-8h7">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="800"/>
@@ -1162,6 +1164,7 @@
                                                             <constraint firstAttribute="width" constant="213" id="aPf-Y8-yvP"/>
                                                             <constraint firstAttribute="height" constant="44" id="pI8-Db-Yut"/>
                                                         </constraints>
+                                                        <color key="textColor" name="text"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -1178,6 +1181,7 @@
                                                             <constraint firstAttribute="width" constant="213" id="6Nj-VP-8rh"/>
                                                             <constraint firstAttribute="height" constant="44" id="lLu-vZ-uGG"/>
                                                         </constraints>
+                                                        <color key="textColor" name="text"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -1209,6 +1213,7 @@
                                                             <constraint firstAttribute="width" constant="213" id="X6V-j9-iAS"/>
                                                             <constraint firstAttribute="height" constant="44" id="XgN-En-hXF"/>
                                                         </constraints>
+                                                        <color key="textColor" name="text"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -1225,6 +1230,7 @@
                                                             <constraint firstAttribute="width" constant="213" id="If1-aO-eXk"/>
                                                             <constraint firstAttribute="height" constant="44" id="nSJ-JZ-eZh"/>
                                                         </constraints>
+                                                        <color key="textColor" name="text"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -1241,6 +1247,7 @@
                                                             <constraint firstAttribute="width" constant="213" id="3QT-UO-NaT"/>
                                                             <constraint firstAttribute="height" constant="44" id="Fgg-Bo-R6p"/>
                                                         </constraints>
+                                                        <color key="textColor" name="text"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -1369,6 +1376,7 @@
                                                             <constraint firstAttribute="height" constant="44" id="bYn-mT-7FU"/>
                                                             <constraint firstAttribute="width" constant="213" id="mVT-3X-uHP"/>
                                                         </constraints>
+                                                        <color key="textColor" name="text"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -1385,6 +1393,7 @@
                                                             <constraint firstAttribute="width" constant="213" id="Ep2-IV-ZFW"/>
                                                             <constraint firstAttribute="height" constant="44" id="VY1-Pl-aM3"/>
                                                         </constraints>
+                                                        <color key="textColor" name="text"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -1394,6 +1403,7 @@
                                                             <constraint firstAttribute="height" constant="44" id="BlN-D1-WSf"/>
                                                             <constraint firstAttribute="width" constant="213" id="ame-iJ-mKe"/>
                                                         </constraints>
+                                                        <color key="textColor" name="text"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -1551,11 +1561,11 @@
             <objects>
                 <viewController id="nSZ-f6-wa7" customClass="CategoryAnnoucementForCreatingAnnoucement" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GGX-bl-1WH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="646"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qh-S2-cz4">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="646"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="612"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bMt-Pd-nm3">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
@@ -1933,11 +1943,11 @@
             <objects>
                 <viewController storyboardIdentifier="createAnnoucement" id="Eyz-d1-qOs" customClass="CreateAnnoucementViewController" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i4m-v5-7G1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="646"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="paM-bJ-g4v">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="646"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="563"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="URS-0N-wRL">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
@@ -2885,6 +2895,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="vgM-3a-7V5"/>
                                 </constraints>
+                                <color key="textColor" name="text"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -2893,6 +2904,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="CAG-2H-IJf"/>
                                 </constraints>
+                                <color key="textColor" name="text"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -3000,6 +3012,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Q4J-pL-ifm"/>
                                 </constraints>
+                                <color key="textColor" name="text"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -3090,7 +3103,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bem vindo ao Produba!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YF-JU-rb0">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bem vindo ao Bairrista!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YF-JU-rb0">
                                 <rect key="frame" x="16" y="188" width="382" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" name="text"/>
@@ -3652,7 +3665,7 @@ Continue o cadastro da sua empresa para poder postar anúncios e aproveitar toda
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="whA-MU-Vlc">
-                                                <rect key="frame" x="207" y="370" width="0.0" height="0.0"/>
+                                                <rect key="frame" x="207" y="386" width="0.0" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" systemColor="systemRedColor"/>
                                                 <nil key="highlightedColor"/>
@@ -3677,7 +3690,7 @@ Continue o cadastro da sua empresa para poder postar anúncios e aproveitar toda
                                             <constraint firstItem="DNK-g0-wwP" firstAttribute="top" secondItem="kry-QB-0DO" secondAttribute="bottom" constant="16" id="azm-ML-9hu"/>
                                             <constraint firstItem="DNK-g0-wwP" firstAttribute="leading" secondItem="m3a-SQ-Am6" secondAttribute="leading" constant="16" id="ddU-I3-B8s"/>
                                             <constraint firstItem="ZWE-Xz-bGo" firstAttribute="top" secondItem="j2G-Fp-q9o" secondAttribute="bottom" id="eO4-9O-sd5"/>
-                                            <constraint firstItem="whA-MU-Vlc" firstAttribute="top" secondItem="ZWE-Xz-bGo" secondAttribute="bottom" constant="50" id="fXR-QU-BYM"/>
+                                            <constraint firstItem="whA-MU-Vlc" firstAttribute="top" secondItem="4bJ-aF-wfy" secondAttribute="bottom" constant="16" id="hkk-v4-Xsh"/>
                                             <constraint firstItem="j2G-Fp-q9o" firstAttribute="leading" secondItem="m3a-SQ-Am6" secondAttribute="leading" id="jgM-9F-MrG"/>
                                             <constraint firstItem="kry-QB-0DO" firstAttribute="top" secondItem="rzX-zI-UkC" secondAttribute="bottom" constant="15" id="qPO-1V-aNN"/>
                                             <constraint firstItem="kry-QB-0DO" firstAttribute="leading" secondItem="m3a-SQ-Am6" secondAttribute="leading" constant="16" id="sNe-tF-5bK"/>
@@ -3744,7 +3757,7 @@ Continue o cadastro da sua empresa para poder postar anúncios e aproveitar toda
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="8809" y="-725"/>
+            <point key="canvasLocation" x="8808.6956521739139" y="-725.22321428571422"/>
         </scene>
         <!--Sign Up View Controller Pessoal Info-->
         <scene sceneID="wJx-F0-zR8">
@@ -3784,6 +3797,7 @@ Forneça também um telefone para contato.</string>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="1C1-ya-wNh"/>
                                                 </constraints>
+                                                <color key="textColor" name="text"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -3792,6 +3806,7 @@ Forneça também um telefone para contato.</string>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="yqp-6o-eO8"/>
                                                 </constraints>
+                                                <color key="textColor" name="text"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -3822,6 +3837,7 @@ Forneça também um telefone para contato.</string>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="dBx-dg-izg"/>
                                                 </constraints>
+                                                <color key="textColor" name="text"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -3864,6 +3880,7 @@ Forneça também um telefone para contato.</string>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="mrE-rv-hGQ"/>
                                                 </constraints>
+                                                <color key="textColor" name="text"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -4006,6 +4023,7 @@ Preencha apenas as redes que desejar associar ao seu perfil. </string>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="wN9-Nc-gHQ"/>
                                                 </constraints>
+                                                <color key="textColor" name="text"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -4014,6 +4032,7 @@ Preencha apenas as redes que desejar associar ao seu perfil. </string>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="4rM-uG-eZq"/>
                                                 </constraints>
+                                                <color key="textColor" name="text"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -4022,6 +4041,7 @@ Preencha apenas as redes que desejar associar ao seu perfil. </string>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="KrY-W6-Qis"/>
                                                 </constraints>
+                                                <color key="textColor" name="text"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -4030,6 +4050,7 @@ Preencha apenas as redes que desejar associar ao seu perfil. </string>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="WMm-AZ-8qE"/>
                                                 </constraints>
+                                                <color key="textColor" name="text"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -4258,11 +4279,11 @@ Agora explore a plataforma e boas vendas!</string>
             <objects>
                 <viewController id="g3y-8F-AJX" customClass="SearchBairroForCreatingAnnoucement" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m4u-00-H7p">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pm7-TA-NXQ">
-                                <rect key="frame" x="0.0" y="56" width="414" height="752"/>
+                                <rect key="frame" x="0.0" y="144" width="414" height="669"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="bairroCell" id="fyk-YS-Xdj">
@@ -4276,7 +4297,7 @@ Agora explore a plataforma e boas vendas!</string>
                                 </prototypes>
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pMT-yF-Blp">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                         </subviews>
@@ -4309,25 +4330,25 @@ Agora explore a plataforma e boas vendas!</string>
             <objects>
                 <viewController id="VlL-JZ-Sxe" customClass="TimeAnnoucementForCreatingAnnoucement" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Fs-4D-aZt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YxK-EL-x5P" userLabel="Separator">
-                                <rect key="frame" x="16" y="115" width="398" height="1"/>
+                                <rect key="frame" x="16" y="203" width="398" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="5Ai-I5-IVI"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Us-Iw-oPx">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="70"/>
                                 <color key="backgroundColor" name="backgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="oBa-y8-6Mu"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cZ6-Vw-zGf">
-                                <rect key="frame" x="0.0" y="71" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="159" width="414" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 horas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pml-8F-zgM">
                                         <rect key="frame" x="16" y="11.5" width="382" height="21"/>
@@ -4354,21 +4375,21 @@ Agora explore a plataforma e boas vendas!</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wNT-xN-o5e" userLabel="Separator">
-                                <rect key="frame" x="0.0" y="70" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="158" width="414" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="vl0-qI-x3a"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wnF-OH-HQ4" userLabel="Separator">
-                                <rect key="frame" x="16" y="160" width="398" height="1"/>
+                                <rect key="frame" x="16" y="248" width="398" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="cSX-re-lO8"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hIT-8Y-DuC">
-                                <rect key="frame" x="0.0" y="116" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="204" width="414" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6 horas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8y-6J-i34">
                                         <rect key="frame" x="16" y="11.5" width="382" height="21"/>
@@ -4395,7 +4416,7 @@ Agora explore a plataforma e boas vendas!</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WeP-XJ-rXM">
-                                <rect key="frame" x="0.0" y="161" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="249" width="414" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8 horas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F77-Jm-fcT">
                                         <rect key="frame" x="16" y="11.5" width="382" height="21"/>
@@ -4421,14 +4442,14 @@ Agora explore a plataforma e boas vendas!</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2GU-g5-i88" userLabel="Separator">
-                                <rect key="frame" x="16" y="205" width="398" height="1"/>
+                                <rect key="frame" x="16" y="293" width="398" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="csZ-vh-qC0"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IS4-xi-2ua">
-                                <rect key="frame" x="0.0" y="206" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="294" width="414" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 horas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIO-Ih-Z7r">
                                         <rect key="frame" x="16" y="11.5" width="382" height="21"/>
@@ -4454,14 +4475,14 @@ Agora explore a plataforma e boas vendas!</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Fp-q2-wt1" userLabel="Separator">
-                                <rect key="frame" x="16" y="250" width="398" height="1"/>
+                                <rect key="frame" x="16" y="338" width="398" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="dx2-ej-ba9"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQD-Qt-TfN">
-                                <rect key="frame" x="0.0" y="251" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="339" width="414" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16 horas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0j-cP-tYv">
                                         <rect key="frame" x="16" y="11.5" width="382" height="21"/>
@@ -4487,14 +4508,14 @@ Agora explore a plataforma e boas vendas!</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6l-bP-4NE" userLabel="Separator">
-                                <rect key="frame" x="16" y="295" width="398" height="1"/>
+                                <rect key="frame" x="16" y="383" width="398" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="ln8-cR-TFG"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ll1-Eu-KT3">
-                                <rect key="frame" x="0.0" y="296" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="384" width="414" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 dia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvI-4M-0zW">
                                         <rect key="frame" x="16" y="11.5" width="382" height="21"/>
@@ -4520,14 +4541,14 @@ Agora explore a plataforma e boas vendas!</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgY-qG-foo" userLabel="Separator">
-                                <rect key="frame" x="16" y="340" width="398" height="1"/>
+                                <rect key="frame" x="16" y="428" width="398" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="1zs-JE-STc"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJM-pj-V0c">
-                                <rect key="frame" x="0.0" y="341" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="429" width="414" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 dias" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qNk-dO-DaC">
                                         <rect key="frame" x="16" y="11.5" width="382" height="21"/>
@@ -4553,14 +4574,14 @@ Agora explore a plataforma e boas vendas!</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AiW-0O-Pum" userLabel="Separator">
-                                <rect key="frame" x="16" y="385" width="398" height="1"/>
+                                <rect key="frame" x="16" y="473" width="398" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="439-A1-uiA"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MSv-8B-WCL">
-                                <rect key="frame" x="0.0" y="386" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="474" width="414" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 dias" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="765-Rb-0ea">
                                         <rect key="frame" x="16" y="11.5" width="382" height="21"/>
@@ -4586,14 +4607,14 @@ Agora explore a plataforma e boas vendas!</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="evI-Pb-Wd5" userLabel="Separator">
-                                <rect key="frame" x="16" y="430" width="398" height="1"/>
+                                <rect key="frame" x="16" y="518" width="398" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="nBo-Ud-YWz"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJs-k7-wrm">
-                                <rect key="frame" x="0.0" y="431" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="519" width="414" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 semana" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GBr-Hz-iaB">
                                         <rect key="frame" x="16" y="11.5" width="382" height="21"/>
@@ -4619,14 +4640,14 @@ Agora explore a plataforma e boas vendas!</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kod-42-rLn" userLabel="Separator">
-                                <rect key="frame" x="16" y="475" width="398" height="1"/>
+                                <rect key="frame" x="16" y="563" width="398" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="tqc-Qp-MQ3"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i5e-rM-CD2">
-                                <rect key="frame" x="0.0" y="476" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="564" width="414" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 semanas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hq-EQ-cU3">
                                         <rect key="frame" x="16" y="11.5" width="382" height="21"/>
@@ -4652,14 +4673,14 @@ Agora explore a plataforma e boas vendas!</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WjX-f0-k7z" userLabel="Separator">
-                                <rect key="frame" x="0.0" y="520" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="608" width="414" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="59c-0a-3rE"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d9B-L3-VqO">
-                                <rect key="frame" x="0.0" y="521" width="414" height="287"/>
+                                <rect key="frame" x="0.0" y="609" width="414" height="204"/>
                                 <color key="backgroundColor" name="backgroundColor"/>
                             </view>
                         </subviews>
@@ -5142,11 +5163,11 @@ Agora explore a plataforma e boas vendas!</string>
             <objects>
                 <viewController id="ZbJ-ou-Qji" customClass="EditCategoryProfileViewController" customModule="Final_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j0j-bj-YaQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="646"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ild-Ew-4F4">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="646"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="612"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INv-2b-d0F">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
@@ -5529,7 +5550,7 @@ Agora explore a plataforma e boas vendas!</string>
         <segue reference="Tgy-Uk-I0S"/>
         <segue reference="0Wn-mr-AdT"/>
         <segue reference="qEK-8a-QZG"/>
-        <segue reference="riO-UY-M8r"/>
+        <segue reference="rzC-Qm-dnH"/>
         <segue reference="qcg-AS-AZk"/>
         <segue reference="nCA-Qy-ewD"/>
     </inferredMetricsTieBreakers>

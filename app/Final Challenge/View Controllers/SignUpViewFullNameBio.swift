@@ -65,20 +65,11 @@ class SignUpViewControllerFullNameBio: UIViewController, UIImagePickerController
         AvanceButton.layer.cornerRadius = 15
         pageControl.currentPage = 0
         bioTextView.layer.borderWidth = 1
-        bioTextView.layer.borderColor = #colorLiteral(red: 0.8235294118, green: 0.8235294118, blue: 0.8235294118, alpha: 1)
+        
+        bioTextView.layer.borderColor = CGColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
         bioTextView.layer.cornerRadius = 5
     }
-    
-    //hide keyboard function
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        if textField == fullNameTextField {
-//            textField.resignFirstResponder()
-//            passwordTextField.becomeFirstResponder()
-//        } else if textField == passwordTextField {
-//            textField.resignFirstResponder()
-//        }
-//        return true
-//    }
+
     
     
     func validateFields() -> Bool? {
